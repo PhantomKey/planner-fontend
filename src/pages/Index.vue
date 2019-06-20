@@ -7,8 +7,10 @@
 
 <template>
   <div class="content">
+    <br>
     <p> This is a front page </p>
     <login-button></login-button>
+    <br>
     <p> </p>
     <register-button></register-button>
   </div>

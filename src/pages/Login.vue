@@ -1,12 +1,15 @@
 <template>
   <!-- Default form login -->
   <form class="content">
+    <br>
     <p>Sign in</p>
     <p for="defaultFormLoginEmailEx" class="grey-text">Your email/ Username </p>
     <input type="email" id="defaultFormLoginEmailEx" class="form-control"/>
     <br/>
     <p for="defaultFormLoginPasswordEx" class="grey-text">Your password </p>
     <input type="password" id="defaultFormLoginPasswordEx" class="form-control"/>
+    <br>
+    <p></p>
     <div class="text-center mt-4">
       <button class="btn btn-indigo" type="submit">Login</button>
     </div>
