@@ -1,7 +1,7 @@
 <template>
   <!-- Default form register -->
   <form>
-    <p class="h4 text-center mb-4">Sign up</p>
+    <p>Sign up</p>
     <p for="defaultFormRegisterNameEx" class="grey-text">Your name</p>
     <input type="text" id="defaultFormRegisterNameEx" class="form-control"/>
     <br/>

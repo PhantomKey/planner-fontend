@@ -1,7 +1,7 @@
 <template>
   <!-- Default form login -->
   <form>
-    <p class="h4 text-center mb-4">Sign in</p>
+    <p>Sign in</p>
     <p for="defaultFormLoginEmailEx" class="grey-text">Your email </p>
     <input type="email" id="defaultFormLoginEmailEx" class="form-control"/>
     <br/>
