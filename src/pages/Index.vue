@@ -1,17 +1,9 @@
 <template>
   <div>
     <p> This is a front page </p>
-    <q-btn
-      color="secondary"
-      style="width:200px;"
-      @click="$router.push('/login')"
-    >Login</q-btn>
+    <login-button></login-button>
     <p> </p>
-    <q-btn
-      color="secondary"
-      style="width:200px;"
-      @click="$router.push('/register')"
-    >Register</q-btn>
+    <register-button></register-button>
   </div>
 </template>
 
@@ -19,7 +11,14 @@
 </style>
 
 <script>
+import LoginButton from '../components/LoginButton.vue'
+import RegisterButton from '../components/RegisterButton.vue'
 export default {
-  name: 'PageIndex'
+  name: 'PageIndex',
+  components: {
+    'login-button': LoginButton,
+    'register-button': RegisterButton
+  }
+
 }
 </script>
