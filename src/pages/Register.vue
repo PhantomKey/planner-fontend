@@ -1,6 +1,6 @@
 <template>
   <!-- Default form register -->
-  <form>
+  <form class="content">
     <p>Sign up</p>
     <p for="defaultFormRegisterNameEx" class="grey-text">Your name</p>
     <input type="text" id="defaultFormRegisterNameEx" class="form-control"/>
@@ -19,9 +19,3 @@
   </form>
   <!-- Default form register -->
 </template>
-
-<style>
-</style>
-
-<script>
-</script>

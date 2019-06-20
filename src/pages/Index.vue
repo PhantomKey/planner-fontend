@@ -1,14 +1,18 @@
+<style>
+.content {
+  max-width: 230px;
+  margin: auto;
+}
+</style>
+
 <template>
-  <div>
+  <div class="content">
     <p> This is a front page </p>
     <login-button></login-button>
     <p> </p>
     <register-button></register-button>
   </div>
 </template>
-
-<style>
-</style>
 
 <script>
 import LoginButton from '../components/LoginButton.vue'

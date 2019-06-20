@@ -1,6 +1,6 @@
 <template>
   <!-- Default form login -->
-  <form>
+  <form class="content">
     <p>Sign in</p>
     <p for="defaultFormLoginEmailEx" class="grey-text">Your email/ Username </p>
     <input type="email" id="defaultFormLoginEmailEx" class="form-control"/>
@@ -13,8 +13,3 @@
   </form>
   <!-- Default form login -->
 </template>
-
-<style>
-</style>
-<script>
-</script>
