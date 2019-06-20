@@ -2,7 +2,7 @@
   <!-- Default form login -->
   <form>
     <p>Sign in</p>
-    <p for="defaultFormLoginEmailEx" class="grey-text">Your email/Username </p>
+    <p for="defaultFormLoginEmailEx" class="grey-text">Your email/ Username </p>
     <input type="email" id="defaultFormLoginEmailEx" class="form-control"/>
     <br/>
     <p for="defaultFormLoginPasswordEx" class="grey-text">Your password </p>

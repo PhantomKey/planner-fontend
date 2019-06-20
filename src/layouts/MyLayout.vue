@@ -16,7 +16,7 @@
           Trip Planner
         </q-toolbar-title>
 
-        <div>Trip planner</div>
+        <div><home-button></home-button></div>
       </q-toolbar>
     </q-header>
 
@@ -83,13 +83,16 @@
 
 <script>
 import { openURL } from 'quasar'
-
+import HomeButton from '../components/HomeButton.vue'
 export default {
   name: 'MyLayout',
   data () {
     return {
       leftDrawerOpen: this.$q.platform.is.desktop
     }
+  },
+  components: {
+    'home-button': HomeButton
   },
   methods: {
     openURL
