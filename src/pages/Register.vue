@@ -2,16 +2,16 @@
   <!-- Default form register -->
   <form>
     <p class="h4 text-center mb-4">Sign up</p>
-    <label for="defaultFormRegisterNameEx" class="grey-text">Your name</label>
+    <p for="defaultFormRegisterNameEx" class="grey-text">Your name</p>
     <input type="text" id="defaultFormRegisterNameEx" class="form-control"/>
     <br/>
-    <label for="defaultFormRegisterEmailEx" class="grey-text">Your email</label>
+    <p for="defaultFormRegisterEmailEx" class="grey-text">Your email</p>
     <input type="email" id="defaultFormRegisterEmailEx" class="form-control"/>
     <br/>
-    <label for="defaultFormRegisterConfirmEx" class="grey-text">Confirm your email</label>
+    <p for="defaultFormRegisterConfirmEx" class="grey-text">Confirm your email</p>
     <input type="email" id="defaultFormRegisterConfirmEx" class="form-control"/>
     <br/>
-    <label for="defaultFormRegisterPasswordEx" class="grey-text">Your password</label>
+    <p for="defaultFormRegisterPasswordEx" class="grey-text">Your password</p>
     <input type="password" id="defaultFormRegisterPasswordEx" class="form-control"/>
     <div class="text-center mt-4">
       <button class="btn btn-unique" type="submit">Register</button>
