@@ -1,9 +1,15 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
+import * as VueGoogleMaps from 'vue2-google-maps'
 import routes from './routes'
 
 Vue.use(VueRouter)
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: 'AIzaSyBtCVI0Cl_7MItIss_EwJHl5MaS_Q_YTng',
+    libraries: 'places' // necessary for places input
+  }
+})
 
 /*
  * If not building with SSR mode, you can
