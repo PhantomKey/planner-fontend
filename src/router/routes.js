@@ -20,6 +20,13 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/Register.vue') }
     ]
+  },
+  {
+    path: '/planner',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Planner.vue') }
+    ]
   }
 ]
 
