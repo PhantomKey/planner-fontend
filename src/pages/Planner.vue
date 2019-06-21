@@ -1,143 +1,87 @@
 <template>
-    <div>
-        <h1>Your Plan</h1>
-    <div class="month">
-    <ul>
-        <li class="prev">&#10094;</li>
-        <li class="next">&#10095;</li>
-        <li>
-        August<br>
-        <span style="font-size:18px">2017</span>
-        </li>
-    </ul>
+<div class="main-content">
+    <div class="month month--feb" style="--color:#db7a7a;">February</div>
+    <div class="date" style="--color:#db7f7a;">1</div>
+    <div class="date" style="--color:#db847a;">2</div>
+    <div class="date" style="--color:#db8d7a;">3</div>
+    <div class="date" style="--color:#db8d7a;">4</div>
+    <div class="date" style="--color:#db917a;">5</div>
+    <div class="date" style="--color:#db967a;">6</div>
+    <div class="date" style="--color:#db9a7a;">7</div>
+    <div class="date" style="--color:#db9a7a;">8</div>
+    <div class="date" style="--color:#db9f7a;">9</div>
+    <div class="date" style="--color:#dba37a;">10</div>
+    <div class="date" style="--color:#dba87a;">11</div>
+    <div class="date" style="--color:#dbac7a;">12</div>
+    <div class="date" style="--color:#dbb07a;">13</div>
+    <div class="date" style="--color:#dbb57a;">14</div>
+    <div class="date" style="--color:#dbbe7a;">15</div>
+    <div class="date" style="--color:#dbc27a;">16</div>
+    <div class="date" style="--color:#dbc77a;">17</div>
+    <div class="date" style="--color:#dbd07a;">18</div>
+    <div class="date" style="--color:#dbd47a;">19</div>
+    <div class="date" style="--color:#dbd97a;">20</div>
+    <div class="date" style="--color:#d9db7a;">21</div>
+    <div class="date" style="--color:#d0db7a;">22</div>
+    <div class="date" style="--color:#cbdb7a;">23</div>
+    <div class="date" style="--color:#c7db7a;">24</div>
+    <div class="date" style="--color:#c2db7a;">25</div>
+    <div class="date" style="--color:#bedb7a;">26</div>
+    <div class="date" style="--color:#b9db7a;">27</div>
+    <div class="date" style="--color:#b5db7a;">28</div>
+    <div class="month month--mar" style="--color:#b0db7a;">March</div>
+    <div class="date" style="--color:#acdb7a;">1</div>
+    <div class="date" style="--color:#a7db7a;">2</div>
+    <div class="date" style="--color:#a3db7a;">3</div>
+    <div class="date" style="--color:#9adb7a;">4</div>
+    <div class="date" style="--color:#96db7a;">5</div>
+    <div class="date" style="--color:#91db7a;">6</div>
+    <div class="date" style="--color:#8ddb7a;">7</div>
+    <div class="date" style="--color:#88db7a;">8</div>
+    <div class="date" style="--color:#7fdb7a;">9</div>
+    <div class="date" style="--color:#7bdb7a;">10</div>
+    <div class="date" style="--color:#7adb7e;">11</div>
+    <div class="date" style="--color:#7adb82;">12</div>
+    <div class="date" style="--color:#7adb87;">13</div>
+    <div class="date" style="--color:#7adb90;">14</div>
+    <div class="date" style="--color:#7adb9d;">15</div>
+    <div class="date" style="--color:#7adba6;">16</div>
+    <div class="date" style="--color:#7adbaf;">17</div>
+    <div class="date" style="--color:#7adbb3;">18</div>
+    <div class="date" style="--color:#7adbb8;">19</div>
+    <div class="date" style="--color:#7adbc1;">20</div>
+    <div class="date" style="--color:#7adbce;">21</div>
+    <div class="date" style="--color:#7adbd3;">22</div>
+    <div class="date" style="--color:#7adbd7;">23</div>
+    <div class="date" style="--color:#7adadb;">24</div>
+    <div class="date" style="--color:#7ad6db;">25</div>
+    <div class="date" style="--color:#7ad1db;">26</div>
+    <div class="date" style="--color:#7acddb;">27</div>
+    <div class="date" style="--color:#7ac8db;">28</div>
+    <div class="date" style="--color:#7ac4db;">29</div>
+    <div class="date" style="--color:#7abfdb;">30</div>
+    <div class="date" style="--color:#7ab6db;">31</div>
+    <div class="month month--title" style="--color:#7ab6db;">you've got plans</div>
+    <div class="explanation" style="--color:#7ab2db;">Part of the <a href="https://codepen.io/collection/DQvYpQ/" target="_blank">CSS Grid collection here</a>.</div>
+    <footer style="--color:#7ab2db;"><a href="https://twitter.com/meowlivia_" target="_blank"><i class="icon-social-twitter icons"></i></a><a href="https://github.com/oliviale" target="_blank"><i class="icon-social-github icons"></i></a><a href="https://dribbble.com/oliviale" target="_blank"><i class="icon-social-dribbble icons"></i></a></footer>
+    <!--more colors: '#7aaddb', '#7aa9db','#7aa5db', '#7a9cdb', '#7a97db', '#7a8edb', '#7a81db', '#7c7adb', '#817adb', '#8a7adb', '#8e7adb', '#977adb', '#9c7adb', '#a57adb', '#a97adb', '#ae7adb', '#b27adb', '#b67adb', '#bb7adb', '#bf7adb', '#c47adb', '#c87adb', '#cd7adb', '#d17adb', '#d67adb', '#da7adb', '#db7ac5', '#db7ac1','#db7ab8','#db7ab3', '#db7aaf', '#db7aaa', '#db7aa6', '#db7aa2', '#db7a9d', '#db7a99', '#db7a94', '#db7a90', '#db7a87', '#db7a82', '#db7a82', '#db7a7a']-->
+    <div class="event event--1">
+        <div class="event__name">Valentines party with Ames ❤️</div>
     </div>
-
-    <ul class="weekdays">
-    <li>Mo</li>
-    <li>Tu</li>
-    <li>We</li>
-    <li>Th</li>
-    <li>Fr</li>
-    <li>Sa</li>
-    <li>Su</li>
-    </ul>
-
-    <ul class="days">
-    <li>1</li>
-    <li>2</li>
-    <li>3</li>
-    <li>4</li>
-    <li>5</li>
-    <li>6</li>
-    <li>7</li>
-    <li>8</li>
-    <li>9</li>
-    <li><span class="active">10</span></li>
-    <li>11</li>
-    <li>12</li>
-    <li>13</li>
-    <li>14</li>
-    <li>15</li>
-    <li>16</li>
-    <li>17</li>
-    <li>18</li>
-    <li>19</li>
-    <li>20</li>
-    <li>21</li>
-    <li>22</li>
-    <li>23</li>
-    <li>24</li>
-    <li>25</li>
-    <li>26</li>
-    <li>27</li>
-    <li>28</li>
-    <li>29</li>
-    <li>30</li>
-    <li>31</li>
-    </ul>
+    <div class="event event--2">
+        <div class="event__name">😎 Die Hard binge weekend 😎</div>
     </div>
+    <div class="event event--3">
+        <div class="event__name">Dinner w/ Gina 💯</div>
+    </div>
+    <div class="event event--4a">
+        <div class="event__name">Charles' Taco...</div>
+    </div>
+    <div class="event event--4b">
+        <div class="event__name">... Food Truck Opening 🌯</div>
+    </div>
+    <div class="event event--5">
+        <div class="event__name">Run-through 🎃</div>
+    </div>
+</div>
 </template>
-
-<style>
-* {box-sizing: border-box;}
-ul {list-style-type: none;}
-body {font-family: Verdana, sans-serif;}
-
-.month {
-  padding: 70px 25px;
-  width: 100%;
-  background: #1abc9c;
-  text-align: center;
-}
-
-.month ul {
-  margin: 0;
-  padding: 0;
-}
-
-.month ul li {
-  color: white;
-  font-size: 20px;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-}
-
-.month .prev {
-  float: left;
-  padding-top: 10px;
-}
-
-.month .next {
-  float: right;
-  padding-top: 10px;
-}
-
-.weekdays {
-  margin: 0;
-  padding: 10px 0;
-  background-color: #ddd;
-}
-
-.weekdays li {
-  display: inline-block;
-  width: 13.6%;
-  color: #666;
-  text-align: center;
-}
-
-.days {
-  padding: 10px 0;
-  background: #eee;
-  margin: 0;
-}
-
-.days li {
-  list-style-type: none;
-  display: inline-block;
-  width: 13.6%;
-  text-align: center;
-  margin-bottom: 5px;
-  font-size:12px;
-  color: #777;
-}
-
-.days li .active {
-  padding: 5px;
-  background: #1abc9c;
-  color: white !important
-}
-
-/* Add media queries for smaller screens */
-@media screen and (max-width:720px) {
-  .weekdays li, .days li {width: 13.1%;}
-}
-
-@media screen and (max-width: 420px) {
-  .weekdays li, .days li {width: 12.5%;}
-  .days li .active {padding: 2px;}
-}
-
-@media screen and (max-width: 290px) {
-  .weekdays li, .days li {width: 12.2%;}
-}
-</style>
