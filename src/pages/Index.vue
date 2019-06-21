@@ -1,12 +1,11 @@
-<style>
-.content {
-  max-width: 230px;
-  margin: auto;
+<style scoped>
+div{
+  text-align:center;
 }
 </style>
 
 <template>
-  <div class="content">
+  <div class="">
     <br>
     <p> This is a front page </p>
     <login-button></login-button>
