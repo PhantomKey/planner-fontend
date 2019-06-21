@@ -10,8 +10,8 @@
     <input type="password" id="defaultFormLoginPasswordEx" class="form-control"/>
     <br>
     <p></p>
-    <div class="text-center mt-4">
-      <button class="btn btn-indigo" type="submit">Login</button>
+    <div class="text-center">
+      <button class="btn btn-primary" type="submit">Login</button>
     </div>
   </form>
   <!-- Default form login -->
