@@ -2,7 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import routes from './routes'
+import VueAxios from 'vue-axios'
+import axios from './axios'
 
+Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 Vue.use(VueGoogleMaps, {
   load: {
@@ -26,7 +29,8 @@ export default function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> publicPath
     mode: process.env.VUE_ROUTER_MODE,
     base: process.env.VUE_ROUTER_BASE
-  })
+  }
+  )
 
   return Router
 }

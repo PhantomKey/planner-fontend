@@ -5,19 +5,20 @@
       <div class="column pic">
       </div>
       <div class="column log">
-        <form>
+        <form @submit.prevent="login">
           <br>
           <h3>Sign in</h3>
-          <p for="defaultFormLoginEmailEx" class="grey-text">Your email/ Username </p>
-          <input type="email" id="defaultFormLoginEmailEx"/>
+          <div class="" v-if="error">{{ error }}</div>
+          <p class="grey-text">Your email/ Username </p>
+          <input type="text" v-model="username"/>
           <br>
           <br>
-          <p for="defaultFormLoginPasswordEx" class="grey-text">Your password </p>
-          <input type="password" id="defaultFormLoginPasswordEx"/>
+          <p class="grey-text">Your password </p>
+          <input type="password" v-model="password"/>
           <br>
           <p></p>
           <div class="text-center">
-            <button class="btn btn-primary" type="submit">Login</button>
+            <button class="btn btn-primary" type="submit" >Login</button>
           </div>
         </form>
       </div>
@@ -25,6 +26,46 @@
 </div>
   <!-- Default form login -->
 </template>
+
+<script>
+export default {
+  name: 'Login',
+  data () {
+    return {
+      username: '',
+      password: '',
+      error: false
+    }
+  },
+  methods: {
+    login () {
+      console.log(this.username)
+      this.$http.post('/api/v1/login', { username: this.username, password: this.password })
+        .then(request => this.loginSuccessful(request))
+        .catch(() => this.loginFailed())
+    },
+    loginSuccessful (req) {
+      if (!req.data.JWTToken) {
+        console.log(req.data)
+        this.loginFailed()
+        console.log('haha')
+        return
+      }
+
+      localStorage.token = req.data.JWTToken
+      this.error = false
+      console.log('haha1')
+      this.$router.replace(this.$route.query.redirect || '/planner')
+    },
+    loginFailed () {
+      console.log('nooo')
+      this.error = 'Login failed!'
+      delete localStorage.token
+    }
+  }
+}
+</script>
+
 <style scoped>
 
 #defaultFormLoginEmailEx #defaultFormLoginPasswordEx{
