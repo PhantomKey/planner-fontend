@@ -4,32 +4,56 @@
     <br>
     <p>Sign up</p>
     <p class="grey-text">Your username</p>
-    <input type="text" id="username"/>
+    <input type="text" v-model="user.username">
     <br>
     <p class="grey-text">Your Firstname</p>
-    <input type="text" id="firstname"/>
+    <input type="text" v-model="user.firstname">
     <br/>
     <p class="grey-text">Your Lastname</p>
-    <input type="text" id="lastname"/>
+    <input type="text" v-model="user.lastname">
     <br>
     <p class="grey-text">Your email</p>
-    <input type="email" id="Email"/>
+    <input type="email" v-model="user.email">
     <br/>
     <p for="defaultFormRegisterPasswordEx" class="grey-text">Your password</p>
-    <input type="password" id="defaultFormRegisterPasswordEx"/>
+    <input type="password" v-model="user.password">
     <br>
     <p class="grey-text">Confirm your password</p>
-    <input type="confirm_password" id="confirm_password"/>
+    <input type="password" v-model="user.cpassword">
     <br>
     <p class="gray-text">Your birthday</p>
-    <input type="date" id="BoD" name="birthday">
+    <input type="date" v-model="user.birthday">
     <p></p>
     <div class="text-center mt-4">
-      <button class="btn btn-unique" type="submit">Register</button>
+      <button class="btn btn-unique" @click="submit" type="submit">Register</button>
     </div>
   </form>
   <!-- Default form register -->
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      user: {
+        username: '',
+        firstname: '',
+        lastname: '',
+        email: '',
+        password: '',
+        cpassword: '',
+        birthday: ''
+      }
+    }
+  },
+  methods: {
+    submit () {
+      console.log(this.user)
+    }
+  }
+}
+</script>
+
 <style scoped>
 form{
   text-align:center
