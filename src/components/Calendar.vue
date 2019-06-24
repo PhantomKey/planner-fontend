@@ -1,352 +1,93 @@
 <template>
-<div class="container">
-
-  <div class="calendar-base">
-
-    <div class="year">2017</div>
-    <!-- year -->
-
-    <div class="triangle-left"></div>
-    <!--triangle -->
-    <div class="triangle-right"></div>
-    <!--  triangle -->
-
-    <div class="months">
-      <span class="month-hover">Jan</span>
-      <span class="month-hover">Feb</span>
-      <span class="month-hover">Mar</span>
-      <strong class="month-color">Apr</strong>
-      <span class="month-hover">May</span>
-      <span class="month-hover">Jun</span>
-      <span class="month-hover">July</span>
-      <span class="month-hover">Aug</span>
-      <span class="month-hover">Sep</span>
-      <span class="month-hover">Oct</span>
-      <span class="month-hover">Nov</span>
-      <span class="month-hover">Dec</span>
-    </div><!-- months -->
-    <hr class="month-line" />
-
-    <div class="days">SUN MON TUE WED THU FRI SAT</div>
-    <!-- days -->
-
-    <div class="num-dates">
-
-      <div class="first-week"><span class="grey">26 27 28 29 30 31</span> 01</div>
-      <!-- first week -->
-      <div class="second-week">02 03 04 05 06 07 08</div>
-      <!-- week -->
-      <div class="third-week"> 09 10 11 12 13 14 15</div>
-      <!-- week -->
-      <div class="fourth-week"> 16 17 18 19 20 21 22</div>
-      <!-- week -->
-      <div class="fifth-week"> 23 24 25 26 <strong class="white">27</strong> 28 29</div>
-      <!-- week -->
-      <div class="sixth-week"> 30 <span class="grey">01 02 03 04 05 06</span></div>
-      <!-- week -->
-    </div>
-    <!-- num-dates -->
-    <div class="event-indicator"></div>
-    <!-- event-indicator -->
-    <div class="active-day"></div>
-    <!-- active-day -->
-    <div class="event-indicator two"></div>
-    <!-- event-indicator -->
-
+<div class="main-content">
+  <div class="month month--feb" style="--color:#db7a7a;">February</div>
+  <div class="date" style="--color:#db7f7a;">1</div>
+  <div class="date" style="--color:#db847a;">2</div>
+  <div class="date" style="--color:#db8d7a;">3</div>
+  <div class="date" style="--color:#db8d7a;">4</div>
+  <div class="date" style="--color:#db917a;">5</div>
+  <div class="date" style="--color:#db967a;">6</div>
+  <div class="date" style="--color:#db9a7a;">7</div>
+  <div class="date" style="--color:#db9a7a;">8</div>
+  <div class="date" style="--color:#db9f7a;">9</div>
+  <div class="date" style="--color:#dba37a;">10</div>
+  <div class="date" style="--color:#dba87a;">11</div>
+  <div class="date" style="--color:#dbac7a;">12</div>
+  <div class="date" style="--color:#dbb07a;">13</div>
+  <div class="date" style="--color:#dbb57a;">14</div>
+  <div class="date" style="--color:#dbbe7a;">15</div>
+  <div class="date" style="--color:#dbc27a;">16</div>
+  <div class="date" style="--color:#dbc77a;">17</div>
+  <div class="date" style="--color:#dbd07a;">18</div>
+  <div class="date" style="--color:#dbd47a;">19</div>
+  <div class="date" style="--color:#dbd97a;">20</div>
+  <div class="date" style="--color:#d9db7a;">21</div>
+  <div class="date" style="--color:#d0db7a;">22</div>
+  <div class="date" style="--color:#cbdb7a;">23</div>
+  <div class="date" style="--color:#c7db7a;">24</div>
+  <div class="date" style="--color:#c2db7a;">25</div>
+  <div class="date" style="--color:#bedb7a;">26</div>
+  <div class="date" style="--color:#b9db7a;">27</div>
+  <div class="date" style="--color:#b5db7a;">28</div>
+  <div class="month month--mar" style="--color:#b0db7a;">March</div>
+  <div class="date" style="--color:#acdb7a;">1</div>
+  <div class="date" style="--color:#a7db7a;">2</div>
+  <div class="date" style="--color:#a3db7a;">3</div>
+  <div class="date" style="--color:#9adb7a;">4</div>
+  <div class="date" style="--color:#96db7a;">5</div>
+  <div class="date" style="--color:#91db7a;">6</div>
+  <div class="date" style="--color:#8ddb7a;">7</div>
+  <div class="date" style="--color:#88db7a;">8</div>
+  <div class="date" style="--color:#7fdb7a;">9</div>
+  <div class="date" style="--color:#7bdb7a;">10</div>
+  <div class="date" style="--color:#7adb7e;">11</div>
+  <div class="date" style="--color:#7adb82;">12</div>
+  <div class="date" style="--color:#7adb87;">13</div>
+  <div class="date" style="--color:#7adb90;">14</div>
+  <div class="date" style="--color:#7adb9d;">15</div>
+  <div class="date" style="--color:#7adba6;">16</div>
+  <div class="date" style="--color:#7adbaf;">17</div>
+  <div class="date" style="--color:#7adbb3;">18</div>
+  <div class="date" style="--color:#7adbb8;">19</div>
+  <div class="date" style="--color:#7adbc1;">20</div>
+  <div class="date" style="--color:#7adbce;">21</div>
+  <div class="date" style="--color:#7adbd3;">22</div>
+  <div class="date" style="--color:#7adbd7;">23</div>
+  <div class="date" style="--color:#7adadb;">24</div>
+  <div class="date" style="--color:#7ad6db;">25</div>
+  <div class="date" style="--color:#7ad1db;">26</div>
+  <div class="date" style="--color:#7acddb;">27</div>
+  <div class="date" style="--color:#7ac8db;">28</div>
+  <div class="date" style="--color:#7ac4db;">29</div>
+  <div class="date" style="--color:#7abfdb;">30</div>
+  <div class="date" style="--color:#7ab6db;">31</div>
+  <div class="month month--title" style="--color:#7ab6db;">you've got plans</div>
+  <div class="explanation" style="--color:#7ab2db;">Part of the <a href="https://codepen.io/collection/DQvYpQ/" target="_blank">CSS Grid collection here</a>.</div>
+  <footer style="--color:#7ab2db;"><a href="https://twitter.com/meowlivia_" target="_blank"><i class="icon-social-twitter icons"></i></a><a href="https://github.com/oliviale" target="_blank"><i class="icon-social-github icons"></i></a><a href="https://dribbble.com/oliviale" target="_blank"><i class="icon-social-dribbble icons"></i></a></footer>
+  <!--more colors: '#7aaddb', '#7aa9db','#7aa5db', '#7a9cdb', '#7a97db', '#7a8edb', '#7a81db', '#7c7adb', '#817adb', '#8a7adb', '#8e7adb', '#977adb', '#9c7adb', '#a57adb', '#a97adb', '#ae7adb', '#b27adb', '#b67adb', '#bb7adb', '#bf7adb', '#c47adb', '#c87adb', '#cd7adb', '#d17adb', '#d67adb', '#da7adb', '#db7ac5', '#db7ac1','#db7ab8','#db7ab3', '#db7aaf', '#db7aaa', '#db7aa6', '#db7aa2', '#db7a9d', '#db7a99', '#db7a94', '#db7a90', '#db7a87', '#db7a82', '#db7a82', '#db7a7a']-->
+  <div class="event event--1">
+      <div class="event__name">Valentines party with Ames ❤️</div>
   </div>
-  <!-- calendar-base -->
-  <div class="calendar-left">
-
-    <div class="hamburger">
-      <div class="burger-line"></div>
-      <!-- burger-line -->
-      <div class="burger-line"></div>
-      <!-- burger-line -->
-      <div class="burger-line"></div>
-      <!-- burger-line -->
-    </div>
-    <!-- hamburger -->
-
-    <div class="num-date">27</div>
-    <!--num-date -->
-    <div class="day">THURSDAY</div>
-    <!--day -->
-    <div class="current-events">Current Events
-      <br/>
-      <ul>
-        <li>Day 09 Daily CSS Image</li>
-      </ul>
-      <span class="posts">See post events</span></div>
-    <!--current-events -->
-
-    <div class="create-event">Create an Event</div>
-    <!-- create-event -->
-    <hr class="event-line" />
-    <div class="add-event"><span class="add">+</span></div>
-    <!-- add-event -->
-
+  <div class="event event--2">
+      <div class="event__name">😎 Die Hard binge weekend 😎</div>
   </div>
-  <!-- calendar-left -->
-
+  <div class="event event--3">
+      <div class="event__name">Dinner w/ Gina 💯</div>
+  </div>
+  <div class="event event--4a">
+      <div class="event__name">Charles' Taco...</div>
+  </div>
+  <div class="event event--4b">
+      <div class="event__name">... Food Truck Opening 🌯</div>
+  </div>
+  <div class="event event--5">
+      <div class="event__name">Run-through 🎃</div>
+  </div>
 </div>
-<!-- container -->
 </template>
 
 <script>
 </script>
 
 <style>
-body {
-  width: 50%;
-  margin: 100px auto;
-  background-color: lightgray;
-  font-family: 'Kanit', sans-serif;
-}
-
-.calendar-base {
-  width: 900px;
-  height: 500px;
-  border-radius: 20px;
-  background-color: white;
-  position: relative;
-  z-index: -1;
-  color: black;
-}
-
-.year {
-  color: #E8E8E8;
-  font-size: 30px;
-  float: right;
-  position: relative;
-  right: 75px;
-  top: 20px;
-  font-weight: bold;
-}
-
-.triangle-left {
-  width: 0;
-  height: 0;
-  border-top: 5px solid transparent;
-  border-right: 10px solid #E8E8E8;
-  border-bottom: 5px solid transparent;
-  float: right;
-  position: relative;
-  right: 90px;
-  top: 36px;
-}
-
-.triangle-right {
-  width: 0;
-  height: 0;
-  border-top: 5px solid transparent;
-  border-left: 10px solid #E8E8E8;
-  border-bottom: 5px solid transparent;
-  float: right;
-  position: relative;
-  left: 20px;
-  top: 36px;
-}
-.triangle-left:hover{
-  border-right: 10px solid#2ECC71;
-}
-.triangle-right:hover{
-  border-left: 10px solid#2ECC71;
-}
-
-.month-color {
-  color: #27AE60;
-}
-.month-hover:hover{
-  color:#27e879 !important;
-}
-
-.months {
-  color: #AAAAAA;
-  position: relative;
-  left: 350px;
-  top: 90px;
-  word-spacing: 10px;
-}
-
-.month-line {
-  border-color: #E8E8E8;
-  position: relative;
-  top: 85px;
-  width: 57%;
-  left: 178px;
-}
-
-.days {
-  color: #AAAAAA;
-  position: relative;
-  font-size: 18px;
-  left: 355px;
-  top: 80px;
-  word-spacing: 35px;
-  font-weight: 600;
-}
-
-.num-dates {
-  float: right;
-  position: relative;
-  top: 110px;
-  right: 50px;
-  z-index: 1;
-}
-
-.first-week {
-  margin-bottom: 25px;
-  word-spacing: 55px;
-}
-
-.second-week {
-  margin-bottom: 25px;
-  word-spacing: 53px;
-}
-
-.third-week {
-  margin-bottom: 25px;
-  word-spacing: 58px;
-}
-
-.fourth-week {
-  margin-bottom: 25px;
-  word-spacing: 58px;
-}
-
-.fifth-week {
-  margin-bottom: 25px;
-  word-spacing: 56px;
-}
-
-.sixth-week {
-  margin-bottom: 25px;
-  word-spacing: 55px;
-}
-
-.active-day {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  background-color: #2ECC71;
-  position: relative;
-  top: 295px;
-  left: 661px;
-}
-
-.white {
-  color: white;
-}
-
-.event-indicator {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background-color: #2980B9;
-  position: relative;
-  top: 304px;
-  left: 695px;
-}
-
-.two {
-  position: relative;
-  top: 168px;
-  left: 535px;
-}
-
-.grey {
-  color: #AAAAB1;
-}
-
-.calendar-left {
-  width: 300px;
-  height: 500px;
-  border-radius: 20px 0px 0px 20px;
-  background-color: #2ECC71;
-  position: relative;
-  z-index: -1;
-  bottom: 500px;
-  color: white;
-}
-
-.hamburger {
-  position: relative;
-  top: 25px;
-  left: 25px;
-}
-
-.burger-line:hover, .hamburger:hover{
-  background-color:#27e879 !important;
-}
-
-.burger-line {
-  width: 25px;
-  height: 3px;
-  background-color: white;
-  border-radius: 15%;
-  margin-bottom: 3px;
-}
-
-.num-date {
-  font-size: 150px;
-  width: 50%;
-  margin: 0 auto;
-  font-weight: 700;
-}
-
-.day {
-  width: 50%;
-  margin: 0px auto;
-  font-size: 30px;
-  position: relative;
-  bottom: 60px;
-}
-
-.current-events {
-  font-size: 15px;
-  position: relative;
-  margin-left: 25px;
-  bottom: 30px;
-}
-
-.posts {
-  text-decoration: underline dotted;
-}
-.posts:hover{
-  color:#27e879 !important;
-}
-
-.create-event {
-  font-size: 18px;
-  position: relative;
-  margin-top: 30px;
-  margin-left: 25px;
-}
-
-.event-line {
-  width: 90%;
-}
-
-.add-event {
-  width: 20px;
-  height: 20px;
-  padding: 0px;
-  border-radius: 50%;
-  border: solid white 2px;
-  position: relative;
-  bottom: 42px;
-  left: 260px;
-}
-
-.add {
-  font-size: 25px;
-  position: relative;
-  left: 4px;
-  bottom: 10px;
-}
-
-.add:hover, .create-event:hover, .add-event:hover{
-  color:#27e879 !important;
-  border-color: #27e879 !important;
-}
 </style>
