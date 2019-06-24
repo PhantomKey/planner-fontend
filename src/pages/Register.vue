@@ -24,6 +24,8 @@
       <br>
       <p class="gray-text">Your birthday</p>
       <input type="date" v-model="user.birthday">
+      <p class="gray-text">Gender</p>
+      <input type="radio" name="Gender" id="Gender" value=m v-model="user.gender"> male <input type="radio" name="Gender" id="gender" value=f v-model="user.gender"> female
       <p></p>
       <div class="text-center mt-4">
         <button class="btn btn-unique" @click="submit" type="submit">Register</button>
@@ -44,18 +46,37 @@ export default {
         email: '',
         password: '',
         cpassword: '',
-        birthday: ''
+        birthday: '',
+        gender: ''
       }
     }
   },
   methods: {
     submit () {
-      this.checkpassword()
+      if (this.checkpassword()) {
+        console.log(this.username)
+        this.$http.post('register/', { username: this.username, firstname: this.firstname, lastname: this.lastname, password: this.password, email: this.email, dob: this.birthday, gender: this.gender })
+          .then(request => this.registersucess(request))
+          .catch(() => this.registerFailed())
+      }
       console.log(this.user)
+    },
+    registersucess (req) {
+      if (req.data.code === 201) {
+        console.log('success')
+        alert('success')
+        this.$router.replace(this.$route.query.redirect || '/index')
+      } else {
+        this.registerFailed()
+      }
+    },
+    registerFailed () {
+      console.log('Register Fail')
     },
     checkpassword () {
       if (this.user.password !== this.user.cpassword) {
         alert('password not match')
+        return false
       }
     }
   }
