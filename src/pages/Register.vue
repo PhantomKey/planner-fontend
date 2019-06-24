@@ -48,7 +48,20 @@ export default {
   },
   methods: {
     submit () {
+      this.checkpassword()
       console.log(this.user)
+    },
+    checkpassword () {
+      if (this.user.password.length !== this.user.cpassword.length) {
+        alert('password not match')
+      } else {
+        for (var i = 0; i < this.user.password.length; i++) {
+          if (this.user.password[i] !== this.user.cpassword[i]) {
+            alert('password not match')
+            break
+          }
+        }
+      }
     }
   }
 }
