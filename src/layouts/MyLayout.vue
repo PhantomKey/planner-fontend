@@ -6,7 +6,7 @@
           flat
           dense
           round
-          @click="leftDrawerOpen = !leftDrawerOpen"
+          @click="status = !status"
           aria-label="Menu"
         >
           <q-icon name="menu" />
@@ -19,6 +19,7 @@
       </q-toolbar>
     </q-header>
      <q-drawer
+      v-if='status'
       v-model="leftDrawerOpen"
       bordered
       content-class="bg-grey-2"
@@ -27,7 +28,7 @@
         <q-item-label header>Essential Links</q-item-label>
         <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
           <q-item-section avatar>
-            <q-icon name="school" />
+            <q-icon name="school"/>
           </q-item-section>
           <q-item-section>
             <q-item-label>Docs</q-item-label>
@@ -85,7 +86,8 @@ export default {
   name: 'MyLayout',
   data () {
     return {
-      leftDrawerOpen: this.$q.platform.is.desktop
+      leftDrawerOpen: this.$q.platform.is.desktop,
+      status: false
     }
   },
   components: {
