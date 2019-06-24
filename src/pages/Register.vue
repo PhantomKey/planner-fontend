@@ -78,7 +78,7 @@ h3{
   margin-top: 5%;
   margin-bottom: 5%;
   width: 50rem;
-  height: 35rem;
+  height: auto;
   border-radius: 20px;
   border-style: hidden;
   box-shadow: 5px 10px 8px 10px #888888;
