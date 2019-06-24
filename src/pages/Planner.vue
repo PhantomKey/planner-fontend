@@ -83,5 +83,17 @@
     <div class="event event--5">
         <div class="event__name">Run-through 🎃</div>
     </div>
+    <logout-button></logout-button>
 </div>
+
 </template>
+
+<script>
+import LogoutButton from '../components/LogoutButton.vue'
+export default {
+  name: 'Planner',
+  components: {
+    'logout-button': LogoutButton
+  }
+}
+</script>
