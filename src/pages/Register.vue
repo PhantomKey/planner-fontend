@@ -1,7 +1,7 @@
 <template>
   <!-- Default form register -->
   <div class="box">
-    <form class="">
+    <form class="" @submit.prevent="submit">
       <br>
       <h3>Sign up</h3>
       <p class="grey-text">Your username</p>
@@ -28,7 +28,7 @@
       <input type="radio" name="Gender" id="Gender" value=m v-model="user.gender"> male <input type="radio" name="Gender" id="gender" value=f v-model="user.gender"> female
       <p></p>
       <div class="text-center mt-4">
-        <button class="btn btn-unique" @click="submit" type="submit">Register</button>
+        <button class="btn btn-unique" type="submit">Register</button>
       </div>
     </form>
   </div>
@@ -54,19 +54,22 @@ export default {
   methods: {
     submit () {
       if (this.checkpassword()) {
-        console.log(this.username)
-        this.$http.post('register/', { username: this.username, firstname: this.firstname, lastname: this.lastname, password: this.password, email: this.email, dob: this.birthday, gender: this.gender })
+        console.log(this.user.username)
+        this.$http.post('/register/', { username: this.user.username, firstname: this.user.firstname, lastname: this.user.lastname, password: this.user.password, email: this.user.email, dob: this.user.birthday, gender: this.user.gender })
           .then(request => this.registersucess(request))
           .catch(() => this.registerFailed())
       }
       console.log(this.user)
     },
     registersucess (req) {
+      console.log('woohoo')
+      console.log(req.data)
       if (req.data.code === 201) {
         console.log('success')
         alert('success')
-        this.$router.replace(this.$route.query.redirect || '/index')
+        this.$router.replace(this.$route.query.redirect || '/')
       } else {
+        console.log('wtf')
         this.registerFailed()
       }
     },
@@ -74,10 +77,12 @@ export default {
       console.log('Register Fail')
     },
     checkpassword () {
+      console.log('haha')
       if (this.user.password !== this.user.cpassword) {
         alert('password not match')
         return false
       }
+      return true
     }
   }
 }
