@@ -15,8 +15,9 @@
     <input type="text" name="lastname" id="lastname">
     <p>Age</p>
     <input type="text" name="age" id="age">
-    <p>gender</p>
-    <!-- <input type="radio" name="gender" value="0"> Male <input type="radio" name="gender" value="1"> Female -->
+    <p>Gender</p>
+    <input type="radio" name="Gender" id="Gender" value=m> male <input type="radio" name="Gender" id="gender" value=f> female
+    <p></p>
     <q-btn
       color="secondary"
       style="width:200px;"
