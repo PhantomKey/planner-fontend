@@ -8,18 +8,11 @@
         <form @submit.prevent="login">
           <br>
           <h3>Sign in</h3>
-          <div class="" v-if="error">{{ error }}</div>
-          <p class="grey-text">Your email/ Username </p>
-          <input type="text" v-model="username"/>
-          <br>
-          <br>
-          <p class="grey-text">Your password </p>
-          <input type="password" v-model="password"/>
-          <br>
-          <p></p>
-          <div class="text-center">
-            <button class="btn btn-primary" type="submit" >Login</button>
-          </div>
+          <div class="" v-if="error" style="color:red">{{ error }}</div>
+          <input class="data" type="text" v-model="username" placeholder="username" style="margin-top:1rem"/>
+          <input class="data" type="password" v-model="password" placeholder="password" style="margin-top:2rem"/>
+          <button type="submit" class="btn btn-round color-1">Login</button>
+          <p class="register">Don't have account?<span @click="$router.push('/Register')"> Register Free!! </span></p>
         </form>
       </div>
     </div>
@@ -68,8 +61,10 @@ export default {
 
 <style scoped>
 
-#defaultFormLoginEmailEx #defaultFormLoginPasswordEx{
-  text-align: left;
+input{
+  float: left;
+  margin-left: 2.5rem;
+  display: block;
 }
 p{
   text-align: left;
@@ -101,7 +96,7 @@ h3{
   width: 50%;
   padding-top: 2rem;
   padding-bottom: 2rem;
-  /* text-align:center; */
+  text-align:center;
   clear: both;
 }
 .row{
@@ -112,5 +107,74 @@ h3{
   border-bottom-left-radius: 20px;
   width: 50%;
   background-color: bisque;
+}
+/* textbox */
+.data{
+  width: 300px;
+  height: 50px;
+  background:#F2F1EF;
+  border: none;
+  font-size: 10pt;
+  float: left;
+  color: #2b303b;
+  padding-left: 45px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  display: block;
+
+  -webkit-transition: background .55s ease;
+  -moz-transition: background .55s ease;
+  -ms-transition: background .55s ease;
+  -o-transition: background .55s ease;
+  transition: background .55s ease;
+}
+.data::-webkit-input-placeholder {
+   color: #65737e;
+}
+.data:-moz-placeholder { /* Firefox 18- */
+   color: #65737e;
+}
+.data::-moz-placeholder {  /* Firefox 19+ */
+   color: #65737e;
+}
+.data:hover, .data:focus, .data:active{
+    outline:none;
+    background: #ffffff;
+}
+/* button style */
+.btn {
+  margin-top: 2.5rem;
+  border: none;
+  color: white;
+  overflow: hidden;
+  padding: 0;
+  text-transform: uppercase;
+  width: 250px;
+  height: 40px;
+  position: relative;
+}
+.btn.color-1 {
+  background-color: #426FC5;
+}
+.btn-round {
+  border-radius: 10em;
+}
+/* register */
+.register{
+  display: block;
+  margin-left: 4.5rem;
+  margin-top: 2rem;
+}
+.register>span{
+  text-decoration: underline;
+  -webkit-transition: color .55s ease;
+  -moz-transition: color .55s ease;
+  -ms-transition: color .55s ease;
+  -o-transition: color .55s ease;
+  transition: color .55s ease;
+}
+.register>span:hover{
+  color:#00897b;
 }
 </style>
