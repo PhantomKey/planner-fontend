@@ -2,17 +2,15 @@
 <div class="main-content">
   <div v-if="isLogin()">
     <div id="calendar">
-    <calendar-view
-      :show-date="showDate"
-      class="theme-default holiday-us-traditional holiday-us-official"
-    >
-      <calendar-view-header
-        slot="header"
-        slot-scope="{ headerProps }"
-        :header-props="headerProps"
-        @input="setShowDate"
-      />
-    </calendar-view>
+  		<calendar-view
+  			:show-date="showDate"
+  			class="theme-default holiday-us-traditional holiday-us-official">
+  			<calendar-view-header
+  				slot="header"
+  				slot-scope="t"
+  				:header-props="t.headerProps"
+  				@input="setShowDate" />
+  		</calendar-view>
   </div>
     <logout-button></logout-button>
   </div>
@@ -26,8 +24,9 @@
 <script>
 import LogoutButton from '../components/LogoutButton.vue'
 import Error404 from './Error404.vue'
-import CalendarView from '../components/CalendarView.vue'
-import CalendarViewHeader from '../components/CalendarViewHeader.vue'
+import { CalendarView, CalendarViewHeader } from "vue-simple-calendar"
+	require("vue-simple-calendar/static/css/default.css")
+	require("vue-simple-calendar/static/css/holidays-us.css")
 export default {
   name: 'Planner',
   components: {
@@ -57,15 +56,16 @@ export default {
 }
 </script>
 
-<style lang="scss">
-div#calendar {
-	font-family: 'Avenir', Helvetica, Arial, sans-serif;
-	color: #2c3e50;
-	display: flex;
-	height: 87vh;
-	width: 87vw;
-	margin-left: 6vw;
-	margin-left: auto;
-	margin-right: auto;
-}
+<style>
+#calendar {
+		font-family: 'Avenir', Helvetica, Arial, sans-serif;
+		color: #2c3e50;
+		height: 67vh;
+		width: 90vw;
+		margin-left: auto;
+		margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+	}
 </style>
