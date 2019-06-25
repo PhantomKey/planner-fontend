@@ -52,7 +52,7 @@ export default {
     },
     loginFailed () {
       console.log('nooo')
-      this.error = 'Login failed!'
+      this.error = 'Username or password incorrect'
       delete localStorage.token
     }
   }
