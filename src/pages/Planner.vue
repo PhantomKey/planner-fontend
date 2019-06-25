@@ -1,10 +1,11 @@
 <template>
 <div class="main-content">
-  <div @click="isLogin">
+  <div v-if="isLogin()">
     <calendar></calendar>
-  </div>
-  <div>
     <logout-button></logout-button>
+  </div>
+  <div v-else>
+    <error-404></error-404>
   </div>
 </div>
 
@@ -13,22 +14,24 @@
 <script>
 import Calendar from '../components/Calendar.vue'
 import LogoutButton from '../components/LogoutButton.vue'
+import Error404 from './Error404.vue'
 export default {
   name: 'Planner',
   components: {
     'calendar': Calendar,
-    'logout-button': LogoutButton
+    'logout-button': LogoutButton,
+    'error-404': Error404
   },
   methods: {
     isLogin () {
-      // if (localStorage.token) {
-      //   console.log('woohoo')
-      //   return true
-      // } else {
-      //   console.log('nooo')
-      //   return false
-      // }
       console.log(localStorage.token)
+      if (localStorage.token) {
+        console.log('woohoo')
+        return true
+      } else {
+        console.log('nooo')
+        return false
+      }
     }
   }
 }
