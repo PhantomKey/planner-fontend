@@ -35,7 +35,7 @@
             </div>
             <div class="set" style="margin-top:2rem;">
               <p class="gray-text">Your birthday</p>
-              <input type="date" v-model="user.birthday" placeholder="">
+              <input class="data"  style="margin-top:-0.3rem;" type="date" v-model="user.birthday" placeholder="birthday">
             </div>
           </div>
           <div class="column">
@@ -43,8 +43,17 @@
               <input class="data" type="password" v-model="user.cpassword" placeholder="confirm password" style="margin-left:2rem;">
             </div>
              <div class="set" style="margin-top:2rem;">
-                <p class="gray-text">Gender</p>
-                <input type="radio" name="Gender" id="Gender" value=m v-model="user.gender"> male <input type="radio" name="Gender" id="gender" value=f v-model="user.gender"> female
+                <p class="gray-text" style="margin-left:2rem;">Gender</p>
+                <div class="cntr">
+                  <label for="male" class="radio">
+                    <input name="rdo" class="hidden" type="radio" id="male" value=m v-model="user.gender">
+                    <span class="label"><p>male</p></span>
+                  </label>
+                  <label for="female" class="radio">
+                    <input name="rdo" class="hidden" type="radio" id="female" value=f v-model="user.gender">
+                    <span style="margin-left:4rem;" class="label"><p>female</p></span>
+                  </label>
+                </div>
               </div>
           </div>
         </div>
@@ -52,6 +61,7 @@
       <div class="btnlayout">
             <button type="submit" class="btn">Register</button>
       </div>
+      <p style="text-align:center;margin-top:1rem;margin-left:0rem;padding-left:0px" class="login">Have account?  <span @click="$router.push('/Login')">Sign in</span></p>
     </form>
   </div>
   <!-- Default form register -->
@@ -121,8 +131,9 @@ export default {
 }
 p{
   text-align: left;
-  font-size: 1rem;
-  margin-left: 2rem;
+  font-size: 10pt;
+  color: #2b303b;
+  padding-left: 45px;
 }
 h3{
   margin-top: 1rem;
@@ -210,5 +221,69 @@ form{
 }
 .btnlayout{
   text-align: center;
+}
+.login>span{
+  background-color: transparent;
+  text-decoration: underline;
+  -webkit-transition: color .55s ease;
+  -moz-transition: color .55s ease;
+  -ms-transition: color .55s ease;
+  -o-transition: color .55s ease;
+  transition: color .55s ease;
+}
+.login>span:hover{
+  color: #2ecc71;
+  shadow: 0 5px 15px rgba(145, 92, 182, .4);
+}
+.radio {
+  position: relative;
+  cursor: pointer;
+  line-height: 20px;
+  font-size: 14px;
+  margin: 15px;
+}
+.radio .label {
+  position: relative;
+  display: block;
+  float: left;
+  margin-right: 10px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #c8ccd4;
+  border-radius: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+.radio .label:after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background: #225cff;
+  transform: scale(0);
+  transition: all 0.2s ease;
+  opacity: 0.08;
+  pointer-events: none;
+}
+.radio:hover .label:after {
+  transform: scale(3.6);
+}
+input[type="radio"]:checked + .label {
+  border-color: #225cff;
+}
+input[type="radio"]:checked + .label:after {
+  transform: scale(1);
+  transition: all 0.2s cubic-bezier(0.35, 0.9, 0.4, 0.9);
+  opacity: 1;
+}
+.cntr {
+  margin-top: 0.5rem;
+  position:absolute;
+  margin-left: 2rem; 
+}
+.hidden {
+  display: none;
 }
 </style>
