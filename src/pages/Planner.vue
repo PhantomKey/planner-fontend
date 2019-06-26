@@ -1,7 +1,7 @@
 <template>
 <div class="main-content">
   <div v-if="isLogin()">
-    <div id="calendar">
+    <div id="calendar" class="bg-planner">
   		<calendar-view
   			:show-date="showDate"
   			class="theme-default"
@@ -14,7 +14,7 @@
   				@input="setShowDate" />
   		</calendar-view>
     </div>
-    <div class="box">
+    <div class="box bg-planner">
       <div class="field">
         <label class="label">Name</label>
         <div class="control">
@@ -139,4 +139,7 @@ div#calendar {
 		margin-left: auto;
 		margin-right: auto;
   }
+.bg-planner {
+  background-color: white;
+}
 </style>
