@@ -100,13 +100,7 @@ export default {
     },
     showAllActivity () {
       this.$http.get('/activity/view_all_activity/1', { jwttoken: localStorage.token})
-    },
-    clickAddActivity () {
-      this.$http.post('/activity/createactivity/1', { activity_name: this.newActivityTitle,
-        start_date: this.newActivityStartDate, start_time: this.newActivityStartTime,
-        end_date: this.newActivityEndDate, end_time: this.newActivityEndTime,
-        description: this.newActivityDescription, jwttoken: localStorage.token})
-			this.events.push({
+      this.events.push({
 				startDate: this.newActivityStartDate,
         startTime: this.newActivityStartTime,
 				endDate: this.newActivityEndDate,
@@ -114,6 +108,16 @@ export default {
 				title: this.newActivityTitle,
         description: this.newActivityDescription
 			})
+    },
+    clickAddActivity () {
+      console.log(this.newActivityStartDate)
+      this.$http.post('/activity/createactivity/1', { activity_name: this.newActivityTitle,
+        start_date: this.newActivityStartDate, start_time: this.newActivityStartTime,
+        end_date: this.newActivityEndDate, end_time: this.newActivityEndTime,
+        description: this.newActivityDescription, jwttoken: localStorage.token})
+        .then(request => this.addactivitySuccess(request))
+        .catch(() => this.addactivityFailed())
+      showAllActivity()
     }
   }
 }
