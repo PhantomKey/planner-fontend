@@ -9,8 +9,14 @@
           <br>
           <h3>Sign in</h3>
           <div class="" v-if="error" style="color:red">{{ error }}</div>
-          <input class="data" type="text" v-model="username" placeholder="username" style="margin-top:1rem"/>
-          <input class="data" type="password" v-model="password" placeholder="password" style="margin-top:2rem"/>
+          <div class="container-1">
+            <span class="icon" style="margin-top:0.3rem"><i class="fa fa-user" aria-hidden="true"></i></span>
+            <input class="data" type="text" v-model="username" placeholder="username" style="margin-top:1rem"/>
+          </div>
+          <div class="container-1">
+            <span class="icon" style="margin-top:1.3rem;"><i class="fas fa-key"></i></span>
+            <input class="data" type="password" v-model="password" placeholder="password" style="margin-top:2rem"/>
+          </div>
           <button type="submit" class="btn btn-round color-1">Login</button>
           <p class="register">Don't have account? <span @click="$router.push('/Register')">Register </span></p>
         </form>
@@ -177,4 +183,24 @@ h3{
 .register>span:hover{
   color:#00897b;
 }
+/* __________________ */
+.container-1{
+  margin-top: 1rem;
+  width: 300px;
+  height: 50px;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+}
+.container-1 .icon{
+  position: absolute !important;
+  top: 50%;
+  margin-left: -5.6rem;
+  z-index: 1;
+  color: #4f5b66;
+}
+.container-1 input#search:hover, .container-1 input#search:focus, .container-1 input#search:active{
+    outline:none;
+    background: #ffffff;
+  }
 </style>
