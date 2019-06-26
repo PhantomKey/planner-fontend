@@ -4,7 +4,7 @@
     <div id="calendar">
   		<calendar-view
   			:show-date="showDate"
-  			class="theme-default holiday-us-traditional holiday-us-official"
+  			class="theme-default"
         :events='events'
         :height="'7em'">
   			<calendar-view-header
@@ -13,6 +13,45 @@
   				:header-props="t.headerProps"
   				@input="setShowDate" />
   		</calendar-view>
+    </div>
+    <div class="box">
+      <div class="field">
+        <label class="label">Title</label>
+        <div class="control">
+          <input v-model="newActivityTitle" class="input" type="text">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Start date</label>
+        <div class="control">
+          <input v-model="newActivityStartDate" class="input" type="date">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Start time</label>
+        <div class="control">
+          <input v-model="newActivityStartTime" class="input" type="time">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">End date</label>
+        <div class="control">
+          <input v-model="newActivityEndDate" class="input" type="date">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">End time</label>
+        <div class="control">
+          <input v-model="newActivityEndTime" class="input" type="time">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Description</label>
+        <div class="control">
+          <input v-model="newActivityDescription" class="input" type="text">
+        </div>
+      </div>
+      <button class="button is-info" @click="clickAddActivity">Add Activity</button>
     </div>
     <logout-button></logout-button>
   </div>
@@ -42,12 +81,6 @@ export default {
     return {
             showDate: new Date() ,
             events: [
-              {
-                id: 'e1',
-                startDate: '2019-06-25',
-                endDate: '2019-06-26',
-                title: 'eiei'
-              }
             ]
           }
   },
@@ -64,6 +97,23 @@ export default {
     },
     setShowDate (d) {
       this.showDate = d
+    },
+    showAllActivity () {
+      this.$http.get('/activity/view_all_activity/1', { jwttoken: localStorage.token})
+    },
+    clickAddActivity () {
+      this.$http.post('/activity/createactivity/1', { activity_name: this.newActivityTitle,
+        start_date: this.newActivityStartDate, start_time: this.newActivityStartTime,
+        end_date: this.newActivityEndDate, end_time: this.newActivityEndTime,
+        description: this.newActivityDescription, jwttoken: localStorage.token})
+			this.events.push({
+				startDate: this.newActivityStartDate,
+        startTime: this.newActivityStartTime,
+				endDate: this.newActivityEndDate,
+        endTime: this.newActivityEndTime,
+				title: this.newActivityTitle,
+        description: this.newActivityDescription
+			})
     }
   }
 }
