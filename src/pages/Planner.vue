@@ -1,7 +1,7 @@
 <template>
 <div class="main-content">
   <div v-if="isLogin()">
-    <div id="calendar">
+    <div id="calendar" class="bg-planner">
   		<calendar-view
   			:show-date="showDate"
   			class="theme-default"
@@ -14,44 +14,32 @@
   				@input="setShowDate" />
   		</calendar-view>
     </div>
-    <div class="box">
+    <div class="box bg-planner">
       <div class="field">
-        <label class="label">Title</label>
+        <label class="label">Name</label>
         <div class="control">
-          <input v-model="newActivityTitle" class="input" type="text">
+          <input v-model="newPlannerName" class="input" type="text">
         </div>
       </div>
       <div class="field">
         <label class="label">Start date</label>
         <div class="control">
-          <input v-model="newActivityStartDate" class="input" type="date">
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">Start time</label>
-        <div class="control">
-          <input v-model="newActivityStartTime" class="input" type="time">
+          <input v-model="newPlannerStartDate" class="input" type="date">
         </div>
       </div>
       <div class="field">
         <label class="label">End date</label>
         <div class="control">
-          <input v-model="newActivityEndDate" class="input" type="date">
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">End time</label>
-        <div class="control">
-          <input v-model="newActivityEndTime" class="input" type="time">
+          <input v-model="newPlannerEndDate" class="input" type="date">
         </div>
       </div>
       <div class="field">
         <label class="label">Description</label>
         <div class="control">
-          <input v-model="newActivityDescription" class="input" type="text">
+          <input v-model="newPlannerDescription" class="input" type="text">
         </div>
       </div>
-      <button class="button is-info" @click="clickAddActivity">Add Activity</button>
+      <button class="button is-info" @click="clickAddPlanner">Add Planner</button>
     </div>
     <logout-button></logout-button>
   </div>
@@ -98,26 +86,27 @@ export default {
     setShowDate (d) {
       this.showDate = d
     },
-    showAllActivity () {
-      this.$http.get('/activity/view_all_activity/1', { jwttoken: localStorage.token})
-      this.events.push({
-				startDate: this.newActivityStartDate,
-        startTime: this.newActivityStartTime,
-				endDate: this.newActivityEndDate,
-        endTime: this.newActivityEndTime,
-				title: this.newActivityTitle,
-        description: this.newActivityDescription
-			})
+    clickAddPlanner () {
+      this.$http.post('/planner/create_planner', { planner_name: this.newPlannerName,
+        first_date: this.newPlannerStartDate, last_date: this.newPlannerEndDate,
+        description: this.newPlannerDescription, jwttoken: localStorage.token})
+        .then(this.showAllPlanner())
     },
-    clickAddActivity () {
-      console.log(this.newActivityStartDate)
-      this.$http.post('/activity/createactivity/1', { activity_name: this.newActivityTitle,
-        start_date: this.newActivityStartDate, start_time: this.newActivityStartTime,
-        end_date: this.newActivityEndDate, end_time: this.newActivityEndTime,
-        description: this.newActivityDescription, jwttoken: localStorage.token})
-        .then(request => this.addactivitySuccess(request))
-        .catch(() => this.addactivityFailed())
-      showAllActivity()
+    showAllPlanner () {
+      this.$http.post('/planner/view_all_planner', { jwttoken: localStorage.token})
+      .then(value => this.showAllPlannerOnCalendar(value))
+    },
+    showAllPlannerOnCalendar (value) {
+      for (var i in value['data']['name']){
+        console.log(value['data']['startdate'][i])
+        this.events.push({
+          title: value['data']['name'][i],
+          startDate: '2019-06-26',
+          endDate: '2019-06-28'
+          // startDate: value['data']['startdate'][i],
+          // endDate: value['data']['enddate'][i]
+        })
+      }
     }
   }
 }
@@ -150,4 +139,7 @@ div#calendar {
 		margin-left: auto;
 		margin-right: auto;
   }
+.bg-planner {
+  background-color: white;
+}
 </style>
