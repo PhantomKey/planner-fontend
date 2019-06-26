@@ -9,6 +9,10 @@
           <br>
           <h3>Sign in</h3>
           <div class="" v-if="error" style="color:red">{{ error }}</div>
+          <div class="container-1">
+            <span class="icon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+            <input type="search" id="search" placeholder="Search..." />
+          </div>
           <input class="data" type="text" v-model="username" placeholder="username" style="margin-top:1rem"/>
           <input class="data" type="password" v-model="password" placeholder="password" style="margin-top:2rem"/>
           <button type="submit" class="btn btn-round color-1">Login</button>
