@@ -9,7 +9,7 @@ Vue.use(VueAxios, axios)
 Vue.use(VueRouter)
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyBtCVI0Cl_7MItIss_EwJHl5MaS_Q_YTng',
+    key: 'AIzaSyC__7lgBJUMUlN5OJElttwdsTr9_nc8t5w',
     libraries: 'places' // necessary for places input
   }
 })
