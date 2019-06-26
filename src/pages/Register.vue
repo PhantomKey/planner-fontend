@@ -68,7 +68,7 @@
       <div class="btnlayout" style="margin-top:2rem">
             <button type="submit" class="btn">Register</button>
       </div>
-      <p style="text-align:center;margin-top:1rem;margin-left:0rem;padding-left:0px" class="login">Have account?  <span @click="$router.push('/Login')">Sign in</span></p>
+      <p style="text-align:center;margin-top:1rem;margin-left:0rem;padding-left:0px" class="login">Have account?  <span @click="$router.push('/Login')" style="cursor:pointer;">Sign in</span></p>
     </form>
   </div>
   <!-- Default form register -->

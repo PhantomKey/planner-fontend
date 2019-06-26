@@ -18,7 +18,7 @@
             <input class="data" type="password" v-model="password" placeholder="password" style="margin-top:2rem"/>
           </div>
           <button type="submit" class="btn btn-round color-1">Login</button>
-          <p class="register">Don't have account? <span @click="$router.push('/Register')">Register </span></p>
+          <p class="register">Don't have account? <span @click="$router.push('/Register')" style="cursor:pointer;">Register </span></p>
         </form>
       </div>
     </div>
