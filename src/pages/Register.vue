@@ -5,12 +5,10 @@
       <h3>Sign up</h3>
       <div style="text-align:center;display:inline-block;margin-top:-4rem;">
         <div class="row">
-            <div class="column">
               <div class="set">
                 <span class="icon" style="margin-left:-8rem;"><i class="fas fa-user"></i></span>
-                <input class="data" type="text" v-model="user.username" placeholder="username">
+                <input class="data" style="width:631.5px;" type="text" v-model="user.username" placeholder="username">
               </div>
-            </div>
         </div>
         <div class="row">
           <div class="column">
@@ -29,7 +27,7 @@
         <div class="row">
           <div class="set">
             <span class="icon" style="margin-left:-8rem;"><i class="fas fa-envelope"></i></span>
-            <input class="data" type="email" v-model="user.email" placeholder="Email: Example@xxx.com">
+            <input class="data" style="width:631.5px;" type="email" v-model="user.email" placeholder="Email: Example@xxx.com">
           </div>
         </div>
         <div class="row">
@@ -40,7 +38,7 @@
             </div>
             <div class="set" style="margin-top:2rem;">
               <span class="icon" style="margin-left:-8rem;margin-top:3.3rem;"><i class="fas fa-calendar-alt"></i></span>
-              <p class="gray-text" style="margin-top:2rem;">Your birthday</p>
+              <p class="gray-text" style="margin-top:2rem;">Date of birth</p>
               <input class="data"  style="margin-top:-0.3rem;" type="date" v-model="user.birthday" placeholder="birthday">
             </div>
           </div>
@@ -168,6 +166,7 @@ h3{
   text-decoration: underline cornflowerblue;
 }
 .box{
+  background-color: bisque;
   margin-left: auto;
   margin-right: auto;
   margin-top: 1%;
