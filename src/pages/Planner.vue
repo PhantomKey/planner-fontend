@@ -68,6 +68,10 @@ export default {
   data: function () {
     return {
             showDate: new Date() ,
+            newPlannerName: "",
+            newPlannerStartDate: "",
+            newPlannerEndDate: "",
+            newPlannerDescription: "",
             events: [
             ]
           }
