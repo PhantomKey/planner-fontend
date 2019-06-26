@@ -3,6 +3,9 @@
   <div class=box>
     <div class=row>
       <div class="column pic">
+        <div class="container">
+          <div style=" color:black;vertical-align:middle;margin-top:50%;">“The world is a book and those who do not travel read only one page.”</div>
+        </div>
       </div>
       <div class="column log">
         <form @submit.prevent="login">
@@ -82,6 +85,7 @@ h3{
   text-decoration: underline cornflowerblue;
 }
 .box{
+  background-color: bisque;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5%;
@@ -109,10 +113,11 @@ h3{
   height: 100%;
 }
 .pic{
+  background-image: url("/assets/beach.jpg");
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   width: 50%;
-  background-color: bisque;
+  background-color:bisque;
 }
 /* textbox */
 .data{
@@ -203,4 +208,15 @@ h3{
     outline:none;
     background: #ffffff;
   }
+.container {
+  height:100%;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+img { 
+  height:162%;
+  width: 100%;
+  vertical-align: mididle;
+}
 </style>
