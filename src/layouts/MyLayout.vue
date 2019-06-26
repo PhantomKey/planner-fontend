@@ -100,4 +100,7 @@ export default {
 </script>
 
 <style>
+  body { 
+       background-image: url("/assets/sunset.jpg");
+  }
 </style>

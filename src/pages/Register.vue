@@ -3,46 +3,51 @@
   <div class="box">
     <form class="horizontal" @submit.prevent="submit">
       <h3>Sign up</h3>
-      <div style="text-align:center;display:inline-block;margin-top:-2rem;">
+      <div style="text-align:center;display:inline-block;margin-top:-4rem;">
         <div class="row">
-            <div class="column">
               <div class="set">
-                <input class="data" type="text" v-model="user.username" placeholder="username">
+                <span class="icon" style="margin-left:-8rem;"><i class="fas fa-user"></i></span>
+                <input class="data" style="width:631.5px;" type="text" v-model="user.username" placeholder="username">
               </div>
-            </div>
         </div>
         <div class="row">
           <div class="column">
             <div class="set">
+              <span class="icon" style="margin-left:-8rem;"><i class="fas fa-user"></i></span>
                 <input class="data" type="text" v-model="user.firstname" placeholder="Firstname">
             </div>
           </div>
           <div class="column">
             <div class="set">
+              <span class="icon"><i class="fas fa-user"></i></span>
               <input class="data" type="text" v-model="user.lastname" placeholder="Lastname" style="margin-left:2rem;">
             </div>
           </div>
         </div>
         <div class="row">
           <div class="set">
-            <input class="data" type="email" v-model="user.email" placeholder="Email: Example@xxx.com">
+            <span class="icon" style="margin-left:-8rem;"><i class="fas fa-envelope"></i></span>
+            <input class="data" style="width:631.5px;" type="email" v-model="user.email" placeholder="Email: Example@xxx.com">
           </div>
         </div>
         <div class="row">
           <div class="column">
             <div class="set">
+              <span class="icon" style="margin-left:-8rem;"><i class="fas fa-lock"></i></span>
               <input class="data" type="password" v-model="user.password" placeholder="password">
             </div>
             <div class="set" style="margin-top:2rem;">
-              <p class="gray-text">Your birthday</p>
+              <span class="icon" style="margin-left:-8rem;margin-top:3.3rem;"><i class="fas fa-calendar-alt"></i></span>
+              <p class="gray-text" style="margin-top:2rem;">Date of birth</p>
               <input class="data"  style="margin-top:-0.3rem;" type="date" v-model="user.birthday" placeholder="birthday">
             </div>
           </div>
           <div class="column">
             <div class="set">
+              <span class="icon"><i class="fas fa-lock"></i></span>
               <input class="data" type="password" v-model="user.cpassword" placeholder="confirm password" style="margin-left:2rem;">
             </div>
-             <div class="set" style="margin-top:2rem;">
+             <div class="set" style="margin-top:4rem;">
                 <p class="gray-text" style="margin-left:2rem;">Gender</p>
                 <div class="cntr">
                   <label for="male" class="radio">
@@ -58,10 +63,10 @@
           </div>
         </div>
       </div>
-      <div class="btnlayout">
+      <div class="btnlayout" style="margin-top:2rem">
             <button type="submit" class="btn">Register</button>
       </div>
-      <p style="text-align:center;margin-top:1rem;margin-left:0rem;padding-left:0px" class="login">Have account?  <span @click="$router.push('/Login')">Sign in</span></p>
+      <p style="text-align:center;margin-top:1rem;margin-left:0rem;padding-left:0px" class="login">Have account?  <span @click="$router.push('/Login')" style="cursor:pointer;">Sign in</span></p>
     </form>
   </div>
   <!-- Default form register -->
@@ -128,6 +133,26 @@ export default {
 }
 .set{
   display: inline-block;
+  margin-top: 1.5rem;
+  width: 300px;
+  height: 50px;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+}
+.set .icon{
+  position: absolute !important;
+  top: 50%;
+  z-index: 1;
+  color: #4f5b66;
+}
+.set input#search:hover, .container-1 input#search:focus, .container-1 input#search:active{
+    outline:none;
+    background: #ffffff;
+  }
+.icon{
+  margin-top:1.3rem;
+  margin-left: -6rem; 
 }
 p{
   text-align: left;
@@ -141,6 +166,7 @@ h3{
   text-decoration: underline cornflowerblue;
 }
 .box{
+  background-color: bisque;
   margin-left: auto;
   margin-right: auto;
   margin-top: 1%;

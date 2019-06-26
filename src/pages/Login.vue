@@ -3,16 +3,25 @@
   <div class=box>
     <div class=row>
       <div class="column pic">
+        <div class="container">
+          <div style=" color:black;vertical-align:middle;margin-top:50%;">“The world is a book and those who do not travel read only one page.”</div>
+        </div>
       </div>
       <div class="column log">
         <form @submit.prevent="login">
           <br>
           <h3>Sign in</h3>
           <div class="" v-if="error" style="color:red">{{ error }}</div>
-          <input class="data" type="text" v-model="username" placeholder="username" style="margin-top:1rem"/>
-          <input class="data" type="password" v-model="password" placeholder="password" style="margin-top:2rem"/>
+          <div class="container-1">
+            <span class="icon" style="margin-top:0.3rem"><i class="fa fa-user" aria-hidden="true"></i></span>
+            <input class="data" type="text" v-model="username" placeholder="username" style="margin-top:1rem"/>
+          </div>
+          <div class="container-1">
+            <span class="icon" style="margin-top:1.3rem;"><i class="fas fa-key"></i></span>
+            <input class="data" type="password" v-model="password" placeholder="password" style="margin-top:2rem"/>
+          </div>
           <button type="submit" class="btn btn-round color-1">Login</button>
-          <p class="register">Don't have account? <span @click="$router.push('/Register')">Register </span></p>
+          <p class="register">Don't have account? <span @click="$router.push('/Register')" style="cursor:pointer;">Register </span></p>
         </form>
       </div>
     </div>
@@ -76,6 +85,7 @@ h3{
   text-decoration: underline cornflowerblue;
 }
 .box{
+  background-color: bisque;
   margin-left: auto;
   margin-right: auto;
   margin-top: 5%;
@@ -103,10 +113,11 @@ h3{
   height: 100%;
 }
 .pic{
+  background-image: url("/assets/beach.jpg");
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
   width: 50%;
-  background-color: bisque;
+  background-color:bisque;
 }
 /* textbox */
 .data{
@@ -176,5 +187,36 @@ h3{
 }
 .register>span:hover{
   color:#00897b;
+}
+/* __________________ */
+.container-1{
+  margin-top: 1rem;
+  width: 300px;
+  height: 50px;
+  vertical-align: middle;
+  white-space: nowrap;
+  position: relative;
+}
+.container-1 .icon{
+  position: absolute !important;
+  top: 50%;
+  margin-left: -5.6rem;
+  z-index: 1;
+  color: #4f5b66;
+}
+.container-1 input#search:hover, .container-1 input#search:focus, .container-1 input#search:active{
+    outline:none;
+    background: #ffffff;
+  }
+.container {
+  height:100%;
+  position: relative;
+  text-align: center;
+  color: white;
+}
+img { 
+  height:162%;
+  width: 100%;
+  vertical-align: mididle;
 }
 </style>
