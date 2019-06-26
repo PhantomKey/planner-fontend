@@ -35,22 +35,22 @@
             <q-item-label caption>quasar.dev</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://github.com/quasarframework/">
+        <q-item clickable tag="a" target="_blank" href="https://github.com/PhantomKey/planner-frontend/">
           <q-item-section avatar>
             <q-icon name="code" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Github</q-item-label>
-            <q-item-label caption>github.com/quasarframework</q-item-label>
+            <q-item-label>Github (frontend)</q-item-label>
+            <q-item-label caption>github.com</q-item-label>
           </q-item-section>
         </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://chat.quasar.dev">
+        <q-item clickable tag="a" target="_blank" href="https://github.com/juinut/planner-backend">
           <q-item-section avatar>
-            <q-icon name="chat" />
+            <q-icon name="code" />
           </q-item-section>
           <q-item-section>
-            <q-item-label>Discord Chat Channel</q-item-label>
-            <q-item-label caption>chat.quasar.dev</q-item-label>
+            <q-item-label>Github (backend)</q-item-label>
+            <q-item-label caption>github.com</q-item-label>
           </q-item-section>
         </q-item>
         <q-item clickable tag="a" target="_blank" href="https://forum.quasar.dev">
@@ -101,6 +101,6 @@ export default {
 
 <style>
   body { 
-       background-image: url("/assets/sunset.jpg");
+       background-image : url("/assets/sunset.jpg");
   }
 </style>
