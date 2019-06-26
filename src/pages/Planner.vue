@@ -39,7 +39,7 @@
           <input v-model="newPlannerDescription" class="input" type="text">
         </div>
       </div>
-      <button class="button is-info" @click="clickAddPlanner">Add Planner</button>
+      <button class="button is-info" @click="clickAddPlanner()+showAllPlanner()">Add Planner</button>
     </div>
     <logout-button></logout-button>
   </div>
@@ -68,9 +68,16 @@ export default {
   data: function () {
     return {
             showDate: new Date() ,
+            newPlannerName: "",
+            newPlannerStartDate: "",
+            newPlannerEndDate: "",
+            newPlannerDescription: "",
             events: [
             ]
           }
+  },
+  beforeMount(){
+    this.showAllPlanner()
   },
   methods: {
     isLogin () {
@@ -90,23 +97,23 @@ export default {
       this.$http.post('/planner/create_planner', { planner_name: this.newPlannerName,
         first_date: this.newPlannerStartDate, last_date: this.newPlannerEndDate,
         description: this.newPlannerDescription, jwttoken: localStorage.token})
-        .then(this.showAllPlanner())
     },
     showAllPlanner () {
       this.$http.post('/planner/view_all_planner', { jwttoken: localStorage.token})
       .then(value => this.showAllPlannerOnCalendar(value))
     },
     showAllPlannerOnCalendar (value) {
+      this.clearAllPlanner()
       for (var i in value['data']['name']){
-        console.log(value['data']['startdate'][i])
         this.events.push({
           title: value['data']['name'][i],
-          startDate: '2019-06-26',
-          endDate: '2019-06-28'
-          // startDate: value['data']['startdate'][i],
-          // endDate: value['data']['enddate'][i]
+          startDate: new Date(value['data']['startdate'][i]),
+          endDate: new Date(value['data']['enddate'][i])
         })
       }
+    },
+    clearAllPlanner () {
+      this.events.splice(0,this.events.length)
     }
   }
 }
