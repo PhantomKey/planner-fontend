@@ -22,6 +22,13 @@ const routes = [
     ]
   },
   {
+    path: '/home',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/Home.vue') }
+    ]
+  },
+  {
     path: '/planner',
     component: () => import('layouts/MyLayout.vue'),
     children: [

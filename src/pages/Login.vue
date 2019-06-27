@@ -57,7 +57,7 @@ export default {
       localStorage.token = req.data.JWTToken
       this.error = false
       console.log('haha1')
-      this.$router.replace(this.$route.query.redirect || '/planner')
+      this.$router.replace(this.$route.query.redirect || '/Home')
     },
     loginFailed () {
       console.log('nooo')
@@ -214,7 +214,7 @@ h3{
   text-align: center;
   color: white;
 }
-img { 
+img {
   height:162%;
   width: 100%;
   vertical-align: mididle;
