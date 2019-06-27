@@ -36,6 +36,13 @@ const routes = [
     ]
   },
   {
+    path: '/planner/:id',
+    component: () => import('layouts/MyLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/SpecificPlanner.vue') }
+    ]
+  },
+  {
     path: '/addFriends',
     component: () => import('layouts/MyLayout.vue'),
     children: [
