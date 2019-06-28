@@ -6,20 +6,18 @@
     <h2>Add new Member</h2>
     <br>
     <p>Firstname</p>
-    <input v-model="Firstname" class="input" type="text">
-    <p>Lastname</p>
-    <input v-model="Lastname" class="input" type="text">
-    <p>Birthday</p>
-    <input v-model="Birthday" class="input" type="date">
+    <input type="text" name="firstname" id="firstname">
+    <p>lastname</p>
+    <input type="text" name="lastname" id="lastname">
+    <p>Age</p>
+    <input type="text" name="age" id="age">
     <p>Gender</p>
-    <input v-model="Gender" type="radio" value=m> male <input v-model="Gender" type="radio" value=f> female
-    <p></p>
-    <q-btn color="secondary" class="button is-info" @click="ClickAddMember()">Add Member</q-btn>
+    <input type="radio" name="Gender" id="Gender" value=m> male <input type="radio" name="Gender" id="gender" value=f> female
     <p></p>
     <q-btn
       color="secondary"
       style="width:200px;"
-      @click="$router.push('/home')"
+      @click="$router.push('/Home')"
     >Go back</q-btn>
   </div>
   </div>
@@ -33,30 +31,10 @@
 import Error404 from './Error404.vue'
 
 export default {
-    data () {
-    return {
-        Firstname: '',
-        Lastname: '',
-        Birthday: '',
-        Gender: ''
-      }
-  },
   components:{
     'error-404': Error404
   },
   methods: {
-    ClickAddMember () {
-      console.log(this.$data)
-      this.$http.post('/api/v1/create_member', {firstname: this.Firstname,
-      lastname: this.Lastname,dob:this.Birthday,gender:this.Gender}).then((value) => this.check(value))
-    },
-    check (req) {
-      console.log(req.data)
-      if(req.data)
-        console.log('fffd')
-      else
-        console.log('kyy')
-    },
     isLogin () {
       return localStorage.token ? true: false
       // if (localStorage.token) {
