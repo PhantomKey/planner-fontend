@@ -36,31 +36,31 @@ export default {
     return {
       username: '',
       password: '',
-      error: false
+      error: false,
     }
   },
   methods: {
     login () {
       console.log(this.username)
       this.$http.post('/api/v1/login', { username: this.username, password: this.password })
-        .then(request => this.loginSuccessful(request))
-        .catch(() => this.loginFailed())
+        .then((request) => this.loginSuccessful(request))
+        .catch((err) => this.loginFailed(err))
     },
     loginSuccessful (req) {
-      if (!req.data.JWTToken) {
-        console.log(req.data)
+      if (!req.data || !req.data.JWTToken) {
         this.loginFailed()
-        console.log('haha')
+        console.log('cannot find token login failed')
         return
       }
+      console.log('login success with',req.data)
 
       localStorage.token = req.data.JWTToken
       this.error = false
-      console.log('haha1')
+      console.log('storing token into local storage')
       this.$router.replace(this.$route.query.redirect || '/Home')
     },
-    loginFailed () {
-      console.log('nooo')
+    loginFailed (err) {
+      console.log('login unsuccess',err)
       this.error = 'Username or password incorrect'
       delete localStorage.token
     }

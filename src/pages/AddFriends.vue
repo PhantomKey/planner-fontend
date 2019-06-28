@@ -36,14 +36,12 @@ export default {
   },
   methods: {
     isLogin () {
-      console.log(localStorage.token)
-      if (localStorage.token) {
-        console.log('woohoo')
-        return true
-      } else {
-        console.log('nooo')
-        return false
-      }
+      return localStorage.token ? true: false
+      // if (localStorage.token) {
+      //   return true
+      // } else {
+      //   return false
+      // }
     }
 }
 }
