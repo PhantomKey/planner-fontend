@@ -42,7 +42,8 @@ export default {
     },
     isYourPlanner() {
       var planner_id = this.getUrlVars()["planner_id"]
-      this.$http.post ('/planner/view_planner/'+planner_id, {jwttoken: localStorage.token})
+      console.log(planner_id)
+      this.$http.get ('/planner/view_planner/'+planner_id)
       .then(value => console.log(value))
       // var returnactivitylist = this.$http.get('/planner/planner_id='+planner_id+
       // '/view_all_activity', {jwttoken: localStorage.token})

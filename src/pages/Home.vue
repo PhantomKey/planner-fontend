@@ -96,10 +96,10 @@ export default {
     clickAddPlanner () {
       this.$http.post('/planner/create_planner', { planner_name: this.newPlannerName,
         first_date: this.newPlannerStartDate, last_date: this.newPlannerEndDate,
-        description: this.newPlannerDescription, jwttoken: localStorage.token})
+        description: this.newPlannerDescription})
     },
     showAllPlanner () {
-      this.$http.post('/planner/view_all_planner', { jwttoken: localStorage.token})
+      this.$http.get('/planner/view_all_planner')
       .then(value => this.showAllPlannerOnCalendar(value))
     },
     showAllPlannerOnCalendar (value) {
