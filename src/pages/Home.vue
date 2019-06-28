@@ -58,7 +58,7 @@ import CalendarViewHeader from "../components/CalendarViewHeader.vue"
 // 	require("vue-simple-calendar/static/css/default.css")
 // 	require("vue-simple-calendar/static/css/holidays-us.css")
 export default {
-  name: 'Planner',
+  name: 'Home',
   components: {
     'logout-button': LogoutButton,
     'error-404': Error404,
