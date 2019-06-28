@@ -1,6 +1,7 @@
 <template>
 <div class="main-content">
   <div v-if="authenfunction()">
+    <h1>authorised</h1>
     <logout-button></logout-button>
   </div>
   <div v-else>
@@ -27,7 +28,7 @@ export default {
     authenfunction() {
       this.isLogin()
       this.isYourPlanner()
-      return this.isLogin() || this.isYourPlanner()
+      return this.isLogin()&&this.isYourPlanner()
     },
     isLogin() {
       if (localStorage.token) {
@@ -37,18 +38,29 @@ export default {
       }
     },
     isYourPlanner() {
-      var planner_id = this.getPlannerIDfromURL()
-      console.log(planner_id)
-      this.$http.get ('/planner/view_planner/planner_id='+planner_id).then(value => console.log(value))
+      var planner_id = this.getParameterByName('plannerid')
+      this.$http.get ('/planner/checkplannerbelongging/planner_id='+planner_id)
+      .then(function(data,status,headers,config) {
+        console.log(data['data']['result'])
+        if(data['data']['result'] = true){
+          return true;
+        }
+        else {
+          return false;
+        }
+      })
+
       // var returnactivitylist = this.$http.get('/planner/planner_id='+planner_id+
       // '/view_all_activity', {jwttoken: localStorage.token})
     },
-    getPlannerIDfromURL() {
-      const urlParams = new URLSearchParams(window.location.search);
-      console.log(window.location.search)
-      const myParam = urlParams.get("planner_id");
-      console.log(myParam)
-      return myParam
+    getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
     }
   }
 }
