@@ -96,6 +96,9 @@ export default {
   methods: {
     openURL,
     home () {
+      if (localStorage.token){
+        $router.push('/home')
+      }
       $router.push('/')
     }
   }
