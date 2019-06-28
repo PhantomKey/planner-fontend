@@ -1,14 +1,9 @@
 <template>
+<div v-if="isLogin()">
 <div class ="box">
-  <div class="fixed-center text-center">
-    <p>
-      <img
-        src="~assets/sad.jpg"
-        style="width:30vw;max-width:150px;"
-      >
-    </p>
-    <p class="text-faded">Sorry, nothing here...<strong>(404)</strong></p>
-    <h2>New Member</h2>
+  <div class="text-center">
+    <br>
+    <h2>Add new Member</h2>
     <br>
     <p>Firstname</p>
     <input type="text" name="firstname" id="firstname">
@@ -26,7 +21,33 @@
     >Go back</q-btn>
   </div>
   </div>
+  </div>
+  <div v-else>
+    <error-404></error-404>
+  </div>
 </template>
+
+<script>
+import Error404 from './Error404.vue'
+
+export default {
+  components:{
+    'error-404': Error404
+  },
+  methods: {
+    isLogin () {
+      console.log(localStorage.token)
+      if (localStorage.token) {
+        console.log('woohoo')
+        return true
+      } else {
+        console.log('nooo')
+        return false
+      }
+    }
+}
+}
+</script>
 
 <style>
 .box{
