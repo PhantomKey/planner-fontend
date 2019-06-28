@@ -11,7 +11,7 @@
         >
           <q-icon name="menu" />
         </q-btn>
-        <q-toolbar-title>
+        <q-toolbar-title @click="home" style="cursor:pointer;">
           Trip Planner
         </q-toolbar-title>
 
@@ -94,7 +94,13 @@ export default {
     'add-friend': AddFriend
   },
   methods: {
-    openURL
+    openURL,
+    home () {
+      if (localStorage.token){
+        $router.push('/home')
+      }
+      $router.push('/')
+    }
   }
 }
 </script>
