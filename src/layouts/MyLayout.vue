@@ -11,11 +11,11 @@
         >
           <q-icon name="menu" />
         </q-btn>
-        <q-toolbar-title>
+        <q-toolbar-title @click="home" style="cursor:pointer;">
           Trip Planner
         </q-toolbar-title>
 
-        <div><add-friend></add-friend></div>
+        <div v-if='token'><add-friend></add-friend></div>
       </q-toolbar>
     </q-header>
      <q-drawer
@@ -80,21 +80,58 @@
 </template>
 
 <script>
-import { openURL } from 'quasar'
+import { openURL, colors } from 'quasar'
 import AddFriend from '../components/AddFriend.vue'
 export default {
   name: 'MyLayout',
   data () {
     return {
       leftDrawerOpen: this.$q.platform.is.desktop,
-      status: false
+      status: false,
+      token:false
     }
   },
   components: {
     'add-friend': AddFriend
   },
   methods: {
-    openURL
+    openURL,
+    home () {
+      if (localStorage.token){
+        console.log('have token')
+        this.$router.push('/Home')
+      }else{ 
+        console.log('no token')
+        this.$router.push('/')
+      }
+    },
+    checktoken () {
+      if (localStorage.token){
+        console.log('have token')
+        this.token = true
+      }else{ 
+        console.log('no token')
+        this.token = false
+      }
+    }
+  },
+  created :function() {
+    if (localStorage.token){
+      console.log('have token')
+      this.token = true
+    }else{ 
+      console.log('no token')
+      this.token = false
+    }
+  },
+  updated :function() {
+    if (localStorage.token){
+      console.log('have token')
+      this.token = true
+    }else{ 
+      console.log('no token')
+      this.token = false
+    }
   }
 }
 </script>
