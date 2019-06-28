@@ -117,7 +117,7 @@ export default {
       this.events.splice(0,this.events.length)
     },
     onClickEvent(e) {
-			this.$router.replace(this.$route.query.redirect || '/Planner/'+e.id)
+			this.$router.replace(this.$route.query.redirect || '/planner/planner_id='+e.id+'/view_all_activity')
 		}
   }
 }

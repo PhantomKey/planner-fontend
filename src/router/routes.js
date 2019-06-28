@@ -29,7 +29,7 @@ const routes = [
     ]
   },
   {
-    path: '/planner/:id',
+    path: '/planner/planner_id=:id/view_all_activity',
     component: () => import('layouts/MyLayout.vue'),
     children: [
       { path: '', component: () => import('pages/Planner.vue') }
