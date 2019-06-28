@@ -15,7 +15,7 @@
           Trip Planner
         </q-toolbar-title>
 
-        <div><home-button></home-button></div>
+        <div><add-friend></add-friend></div>
       </q-toolbar>
     </q-header>
      <q-drawer
@@ -81,7 +81,7 @@
 
 <script>
 import { openURL } from 'quasar'
-import HomeButton from '../components/HomeButton.vue'
+import AddFriend from '../components/AddFriend.vue'
 export default {
   name: 'MyLayout',
   data () {
@@ -91,7 +91,7 @@ export default {
     }
   },
   components: {
-    'home-button': HomeButton
+    'add-friend': AddFriend
   },
   methods: {
     openURL
