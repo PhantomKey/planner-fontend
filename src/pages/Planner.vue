@@ -1,6 +1,6 @@
 <template>
 <div class="main-content">
-  <div v-if="isLogin() + isYourPlanner()">
+  <div v-if="authenfunction()">
     <logout-button></logout-button>
   </div>
   <div v-else>
@@ -24,6 +24,12 @@ export default {
   //         }
   // },
   methods: {
+    authenfunction() {
+      this.isLogin()
+      this.isYourPlanner()
+      console.log('hahah')
+      return this.isLogin() || this.isYourPlanner()
+    },
     isLogin() {
       console.log(localStorage.token)
       if (localStorage.token) {
@@ -36,7 +42,10 @@ export default {
     },
     isYourPlanner() {
       var planner_id = this.getUrlVars()["planner_id"]
-      this.$http.get('/planner/planner_id='+planner_id+'/view_all_activity', {jwttoken: localStorage.token})
+      this.$http.post ('/planner/view_planner/'+planner_id, {jwttoken: localStorage.token})
+      .then(value => console.log(value))
+      // var returnactivitylist = this.$http.get('/planner/planner_id='+planner_id+
+      // '/view_all_activity', {jwttoken: localStorage.token})
     },
     getUrlVars() {
       var vars = {};
