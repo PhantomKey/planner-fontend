@@ -12,7 +12,7 @@
 
     </div>
     <br>
-    <gmap-map
+    <gmap-map 
       :center="center"
       :zoom="12"
       style="width:100%;  height: 400px;"
@@ -21,7 +21,8 @@
         :key="index"
         v-for="(m, index) in markers"
         :position="m.position"
-        @click="center=m.position"
+        <!-- @click="center=m.position" -->
+        @click="this.placeMarker()"
       ></gmap-marker>
     </gmap-map>
   </div>
@@ -69,7 +70,13 @@ export default {
           lng: position.coords.longitude
         }
       })
-    }
+    },
+    placeMarker (location) {
+    var marker = new google.maps.Marker({
+        position: location, 
+        map: map
+    });
+}
   }
 }
 </script>
