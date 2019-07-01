@@ -51,18 +51,13 @@ export default {
     },
     check (req) {
       console.log(req.data)
-      if(req.data)
-        console.log('fffd')
-      else
-        console.log('kyy')
     },
     isLogin () {
       console.log(localStorage.token)
       if (localStorage.token) {
-        console.log('woohoo')
         return true
       } else {
-        console.log('nooo')
+        console.log('not log in')
         return false
       }
     }
