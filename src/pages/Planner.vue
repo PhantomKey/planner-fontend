@@ -1,7 +1,7 @@
 <template>
 <div class="main-content">
   <div v-if="authenfunction()">
-    
+
     <logout-button></logout-button>
   </div>
   <div v-else>
@@ -19,11 +19,16 @@ export default {
     'logout-button': LogoutButton,
     'error-404': Error404
   },
-  // data: function () {
-  //   return {
-  //
-  //         }
-  // },
+  data: function () {
+    return {
+            activities: [
+
+            ]
+          }
+  },
+  beforeMount(){
+    this.getAllActivitiesinPlanner()
+  },
   methods: {
     authenfunction() {
       return this.isLogin()&&this.isYourPlanner()
@@ -45,6 +50,26 @@ export default {
         }
       })
       return check
+    },
+    getAllActivitiesinPlanner(){
+      var planner_id = this.getParameterByName('plannerid')
+      this.$http.get ('/plannerid='+planner_id+'/view_all_activity')
+      .then(value => this.showAllActivitiesonScreen(value))
+    },
+    showAllActivitiesonScreen(value){
+      console.log(value)
+      this.clearAllActivityData()
+      for (var i in value['data']['id']){
+        this.events.push({
+          title: value['data']['name'][i],
+          startDate: new Date(value['data']['startdate'][i]),
+          endDate: new Date(value['data']['enddate'][i]),
+          id: value['data']['id'][i]
+        })
+      }
+    },
+    clearAllActivityData (){
+      this.activities.splice(0,this.activities.length)
     },
     getParameterByName(name, url) {
       if (!url) url = window.location.href;
