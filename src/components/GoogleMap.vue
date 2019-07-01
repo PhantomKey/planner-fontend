@@ -12,9 +12,9 @@
 
     </div>
     <br>
-    <gmap-map 
+    <gmap-map ref="example"
       :center="center"
-      :zoom="12"
+      :zoom=this.zoom
       style="width:100%;  height: 400px;"
       @click="addMarker"
     >
@@ -36,6 +36,7 @@ export default {
       // default to Montreal to keep it simple
       // change this to whatever makes sense
       center: { lat: 45.508, lng: -73.587 },
+      zoom:12,
       markers: [],
       places: [],
       currentPlace: null
@@ -52,7 +53,6 @@ export default {
       this.currentPlace = place
     },
     addMarker () {
-      console.log('Mark')
       if (this.currentPlace) {
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
@@ -60,8 +60,16 @@ export default {
         }
         this.markers.push({ position: marker })
         this.places.push(this.currentPlace)
-        this.center = marker
+        this.$refs.example.$mapPromise.then((map) => {
+          map.panTo(marker)
+        })
         this.currentPlace = null
+
+        // this.zoom=17
+        // this.$refs.map.zoom = 20
+        // if(this.$refs.map.zoom ===20){
+        //   console.log('zoom = 20')
+        // }
       }
     },
     geolocate: function () {
@@ -74,7 +82,7 @@ export default {
     },
     placeMarker (location) {
     var marker = new google.maps.Marker({
-        position: location, 
+        position: location,
         map: map
     });
 }
