@@ -1,7 +1,7 @@
 <template>
 <div class="main-content">
   <div v-if="authenfunction()">
-    <h1>authorised</h1>
+    
     <logout-button></logout-button>
   </div>
   <div v-else>
@@ -26,8 +26,6 @@ export default {
   // },
   methods: {
     authenfunction() {
-      this.isLogin()
-      this.isYourPlanner()
       return this.isLogin()&&this.isYourPlanner()
     },
     isLogin() {
@@ -37,21 +35,16 @@ export default {
         return false
       }
     },
-    isYourPlanner() {
+    async isYourPlanner() {
       var planner_id = this.getParameterByName('plannerid')
-      this.$http.get ('/planner/checkplannerbelongging/planner_id='+planner_id)
+      var check = false
+      await this.$http.get ('/planner/checkplannerbelongging/planner_id='+planner_id)
       .then(function(data,status,headers,config) {
-        console.log(data['data']['result'])
-        if(data['data']['result'] = true){
-          return true;
-        }
-        else {
-          return false;
+        if(data['data']['result'] == true){
+          check = true
         }
       })
-
-      // var returnactivitylist = this.$http.get('/planner/planner_id='+planner_id+
-      // '/view_all_activity', {jwttoken: localStorage.token})
+      return check
     },
     getParameterByName(name, url) {
       if (!url) url = window.location.href;
