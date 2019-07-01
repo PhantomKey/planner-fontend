@@ -14,8 +14,8 @@
         <q-toolbar-title @click="home" style="cursor:pointer;">
           Trip Planner
         </q-toolbar-title>
-
-        <div v-if='token'><add-friend></add-friend></div>
+        <button class="button is-info" @click="showAllFriends()">Genfriend(test)</button>
+        <div v-if="isLogin()"><add-friend></add-friend></div>
       </q-toolbar>
     </q-header>
      <q-drawer
@@ -24,54 +24,23 @@
       bordered
       content-class="bg-grey-2"
     >
-      <q-list>
-        <q-item-label header>Essential Links</q-item-label>
-        <q-item clickable tag="a" target="_blank" href="https://quasar.dev">
+      <q-item-label header>Your Friend</q-item-label>
+      <div v-if="isLogin()">
+      <q-list v-for="i in friendlist">
+        <q-item clickable tag="a" target="_blank" href="https://google.com">
           <q-item-section avatar>
             <q-icon name="school"/>
           </q-item-section>
           <q-item-section>
-            <q-item-label>Docs</q-item-label>
-            <q-item-label caption>quasar.dev</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://github.com/PhantomKey/planner-frontend/">
-          <q-item-section avatar>
-            <q-icon name="code" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Github (frontend)</q-item-label>
-            <q-item-label caption>github.com</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://github.com/juinut/planner-backend">
-          <q-item-section avatar>
-            <q-icon name="code" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Github (backend)</q-item-label>
-            <q-item-label caption>github.com</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://forum.quasar.dev">
-          <q-item-section avatar>
-            <q-icon name="record_voice_over" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Forum</q-item-label>
-            <q-item-label caption>forum.quasar.dev</q-item-label>
-          </q-item-section>
-        </q-item>
-        <q-item clickable tag="a" target="_blank" href="https://twitter.com/quasarframework">
-          <q-item-section avatar>
-            <q-icon name="rss_feed" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Twitter</q-item-label>
-            <q-item-label caption>@quasarframework</q-item-label>
+            <q-item-label>{{i}}</q-item-label>
+            <q-item-label caption>Your mom</q-item-label>
           </q-item-section>
         </q-item>
       </q-list>
+      </div>
+      <div v-else>
+        You must log in to use this feature.
+      </div>
     </q-drawer>
     <q-page-container>
       <router-view />
@@ -86,6 +55,7 @@ export default {
   name: 'MyLayout',
   data () {
     return {
+      friendlist:[],
       leftDrawerOpen: this.$q.platform.is.desktop,
       status: false,
       token:false
@@ -105,14 +75,33 @@ export default {
     },
     checktoken () {
       this.token = localStorage.token ? true: false
-    }
-  },
+    },
   created :function() {
     this.checktoken()
   },
   updated :function() {
     this.checktoken()
-  }
+  },
+  showAllFriends () {
+      this.$http.get('/api/v1/member')
+      .then(value=>this.alertval(value))
+  },
+  alertval (value) {
+    this.friendlist=[]
+    for(var i in value['data']['members'])
+      this.friendlist.push(value['data']['members'][i])
+  },
+  isLogin () {
+    console.log(localStorage.token)
+    if (localStorage.token) {
+      console.log('woohoo')
+      return true
+    } else {
+      console.log('nooo')
+      return false
+    }
+}
+}
 }
 </script>
 
