@@ -12,10 +12,11 @@
 
     </div>
     <br>
-    <gmap-map
+    <gmap-map 
       :center="center"
       :zoom="12"
       style="width:100%;  height: 400px;"
+      @click="addMarker"
     >
       <gmap-marker
         :key="index"
@@ -51,6 +52,7 @@ export default {
       this.currentPlace = place
     },
     addMarker () {
+      console.log('Mark')
       if (this.currentPlace) {
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
@@ -69,7 +71,13 @@ export default {
           lng: position.coords.longitude
         }
       })
-    }
+    },
+    placeMarker (location) {
+    var marker = new google.maps.Marker({
+        position: location, 
+        map: map
+    });
+}
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
 <div class="main-content">
   <div v-if="authenfunction()">
-    <h1>authorised</h1>
+    <schedule></schedule>
     <logout-button></logout-button>
   </div>
   <div v-else>
@@ -13,21 +13,26 @@
 <script>
 import LogoutButton from '../components/LogoutButton.vue'
 import Error404 from './Error404.vue'
+import Schedule from '../components/Schedule.vue'
 export default {
   name: 'Planner',
   components: {
     'logout-button': LogoutButton,
-    'error-404': Error404
+    'error-404': Error404,
+    'schedule': Schedule
   },
-  // data: function () {
-  //   return {
-  //
-  //         }
-  // },
+  data: function () {
+    return {
+            activities: [
+
+            ]
+          }
+  },
+  beforeMount(){
+    this.getAllActivitiesinPlanner()
+  },
   methods: {
     authenfunction() {
-      this.isLogin()
-      this.isYourPlanner()
       return this.isLogin()&&this.isYourPlanner()
     },
     isLogin() {
@@ -37,21 +42,38 @@ export default {
         return false
       }
     },
-    isYourPlanner() {
+    async isYourPlanner() {
       var planner_id = this.getParameterByName('plannerid')
-      this.$http.get ('/planner/checkplannerbelongging/planner_id='+planner_id)
+      var check = false
+      await this.$http.get ('/planner/checkplannerbelongging/planner_id='+planner_id)
       .then(function(data,status,headers,config) {
-        console.log(data['data']['result'])
-        if(data['data']['result'] = true){
-          return true;
-        }
-        else {
-          return false;
+        if(data['data']['result'] == true){
+          check = true
         }
       })
-
-      // var returnactivitylist = this.$http.get('/planner/planner_id='+planner_id+
-      // '/view_all_activity', {jwttoken: localStorage.token})
+      return check
+    },
+    getAllActivitiesinPlanner(){
+      var planner_id = this.getParameterByName('plannerid')
+      this.$http.get ('/planner/plannerid='+planner_id+'/view_all_activity')
+      .then(value => this.showAllActivitiesonScreen(value))
+    },
+    showAllActivitiesonScreen(value){
+      console.log(value)
+      this.clearAllActivityData()
+      for (var i in value['data']['id']){
+        this.activities.push({
+          name: value['data']['name'][i],
+          startDateTime: new Date(value['data']['startdatetime'][i]),
+          endDateTime: new Date(value['data']['enddatetime'][i]),
+          id: value['data']['id'][i],
+          servicetypeID: value['data']['servicetypeID'][i],
+          locationID: value['data']['locationID'][i]
+        })
+      }
+    },
+    clearAllActivityData (){
+      this.activities.splice(0,this.activities.length)
     },
     getParameterByName(name, url) {
       if (!url) url = window.location.href;
