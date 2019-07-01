@@ -68,7 +68,7 @@ export default {
 }
 </script>
 
-<style>
+<style scope>
 .cd-schedule__group > ul {
   position: relative;
   padding: 0 var(--component-padding);
@@ -119,7 +119,7 @@ export default {
     .cd-schedule__event {
       position: absolute;
       z-index: 3;
-      width: calc(100% + 2px); // top position and height will be set using js
+      width: calc(100% + 2px); /*top position and height will be set using js*/
       left: -1px;
     }
   }
