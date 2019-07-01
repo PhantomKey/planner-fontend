@@ -53,7 +53,7 @@ export default {
     },
     getAllActivitiesinPlanner(){
       var planner_id = this.getParameterByName('plannerid')
-      this.$http.get ('/plannerid='+planner_id+'/view_all_activity')
+      this.$http.get ('/planner/plannerid='+planner_id+'/view_all_activity')
       .then(value => this.showAllActivitiesonScreen(value))
     },
     showAllActivitiesonScreen(value){
