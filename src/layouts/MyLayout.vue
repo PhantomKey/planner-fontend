@@ -98,40 +98,20 @@ export default {
     openURL,
     home () {
       if (localStorage.token){
-        console.log('have token')
         this.$router.push('/Home')
       }else{ 
-        console.log('no token')
         this.$router.push('/')
       }
     },
     checktoken () {
-      if (localStorage.token){
-        console.log('have token')
-        this.token = true
-      }else{ 
-        console.log('no token')
-        this.token = false
-      }
+      this.token = localStorage.token ? true: false
     }
   },
   created :function() {
-    if (localStorage.token){
-      console.log('have token')
-      this.token = true
-    }else{ 
-      console.log('no token')
-      this.token = false
-    }
+    this.checktoken()
   },
   updated :function() {
-    if (localStorage.token){
-      console.log('have token')
-      this.token = true
-    }else{ 
-      console.log('no token')
-      this.token = false
-    }
+    this.checktoken()
   }
 }
 </script>
