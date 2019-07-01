@@ -1,7 +1,7 @@
 <template>
 <div class="main-content">
   <div v-if="authenfunction()">
-
+    <schedule></schedule>
     <logout-button></logout-button>
   </div>
   <div v-else>
@@ -13,11 +13,13 @@
 <script>
 import LogoutButton from '../components/LogoutButton.vue'
 import Error404 from './Error404.vue'
+import Schedule from '../components/Schedule.vue'
 export default {
   name: 'Planner',
   components: {
     'logout-button': LogoutButton,
-    'error-404': Error404
+    'error-404': Error404,
+    'schedule': Schedule
   },
   data: function () {
     return {
@@ -60,11 +62,13 @@ export default {
       console.log(value)
       this.clearAllActivityData()
       for (var i in value['data']['id']){
-        this.events.push({
-          title: value['data']['name'][i],
-          startDate: new Date(value['data']['startdate'][i]),
-          endDate: new Date(value['data']['enddate'][i]),
-          id: value['data']['id'][i]
+        this.activities.push({
+          name: value['data']['name'][i],
+          startDateTime: new Date(value['data']['startdatetime'][i]),
+          endDateTime: new Date(value['data']['enddatetime'][i]),
+          id: value['data']['id'][i],
+          servicetypeID: value['data']['servicetypeID'][i],
+          locationID: value['data']['locationID'][i]
         })
       }
     },
