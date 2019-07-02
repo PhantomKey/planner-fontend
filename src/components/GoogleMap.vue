@@ -16,7 +16,7 @@
       :center="center"
       :zoom=this.zoom
       style="width:100%;  height: 400px;"
-      @click="addMarker"
+      v-on:click="addMarkerByClick"
     >
       <gmap-marker
         :key="index"
@@ -39,7 +39,9 @@ export default {
       zoom:12,
       markers: [],
       places: [],
-      currentPlace: null
+      currentPlace: null,
+      geocoder :new google.maps.Geocoder,
+      inforwindow : new google.maps.InfoWindow
     }
   },
 
@@ -58,6 +60,8 @@ export default {
           lat: this.currentPlace.geometry.location.lat(),
           lng: this.currentPlace.geometry.location.lng()
         }
+        console.log(this.currentPlace)
+        this.clearAllMarkers()
         this.markers.push({ position: marker })
         this.places.push(this.currentPlace)
         this.$refs.example.$mapPromise.then((map) => {
@@ -66,13 +70,29 @@ export default {
         this.zoom = 16
         await this.$emit('e', this.zoom)
         this.currentPlace = null
-
-        // this.zoom=17
-        // this.$refs.map.zoom = 20
-        // if(this.$refs.map.zoom ===20){
-        //   console.log('zoom = 20')
-        // }
       }
+    },
+    addMarkerByClick: async function (event) {
+        var latlng = event.latLng;
+        const marker = {
+          lat: event.latLng.lat(),
+          lng: event.latLng.lng()
+        }
+
+
+
+        this.clearAllMarkers()
+        this.markers.push({ position: marker })
+        this.zoom = 16
+        await this.$refs.example.$mapPromise.then((map) => {
+          map.panTo(marker)
+          map.zoom = 16
+          this.$emit('e', map.zoom)
+          if(event.placeId){
+            console.log(map)
+          }
+        })
+        this.$emit('e', this.zoom)
     },
     geolocate: function () {
       navigator.geolocation.getCurrentPosition(position => {
@@ -87,7 +107,12 @@ export default {
         position: location,
         map: map
     });
-}
+  },
+    clearAllMarkers (){
+      if(this.markers.length>0) {
+        this.markers = []
+      }
+    }
   }
 }
 </script>
