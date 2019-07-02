@@ -83,7 +83,12 @@ export default {
           map.panTo(marker)
           map.setZoom(16)
           if(event.placeId){
-            axios.post('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + marker.lat + ',' + marker.lng + '&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI')
+            axios.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name,rating,formatted_phone_number&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI',
+            {headers: {
+            'Access-Control-Allow-Origin': '*',
+            'crossDomain': true
+          }})
+            // axios.post('https://maps.googleapis.com/maps/api/place/details/json?placeid='+event.placeId+'&fields=name&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI')
             .then(response => {
             console.log(response.data);
 

@@ -7,7 +7,7 @@ export default axios.create({
   headers: {
     'Content-Type': 'application/json',
     'Authorization': 'JWT ' + localStorage.token,
-    'Access-Control-Allow-Origin': 'http://localhost:5000',
+    'Access-Control-Allow-Origin': '*',
     'crossDomain': true
   }
 })
