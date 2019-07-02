@@ -40,8 +40,6 @@ export default {
       markers: [],
       places: [],
       currentPlace: null,
-      geocoder :new google.maps.Geocoder,
-      inforwindow : new google.maps.InfoWindow
     }
   },
 
@@ -78,21 +76,15 @@ export default {
           lat: event.latLng.lat(),
           lng: event.latLng.lng()
         }
-
-
-
         this.clearAllMarkers()
         this.markers.push({ position: marker })
-        this.zoom = 16
         await this.$refs.example.$mapPromise.then((map) => {
           map.panTo(marker)
-          map.zoom = 16
-          this.$emit('e', map.zoom)
+          map.setZoom(16)
           if(event.placeId){
-            console.log(map)
+
           }
         })
-        this.$emit('e', this.zoom)
     },
     geolocate: function () {
       navigator.geolocation.getCurrentPosition(position => {
