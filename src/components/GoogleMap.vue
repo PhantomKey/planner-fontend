@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: 'GoogleMap',
   data () {
@@ -82,7 +83,14 @@ export default {
           map.panTo(marker)
           map.setZoom(16)
           if(event.placeId){
+            axios.post('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + marker.lat + ',' + marker.lng + '&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI')
+            .then(response => {
+            console.log(response.data);
 
+            })
+            .catch(e => {
+            console.log(e)
+      })
           }
         })
     },
