@@ -52,7 +52,7 @@ export default {
     setPlace (place) {
       this.currentPlace = place
     },
-    addMarker () {
+    async addMarker () {
       if (this.currentPlace) {
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
@@ -63,6 +63,8 @@ export default {
         this.$refs.example.$mapPromise.then((map) => {
           map.panTo(marker)
         })
+        this.zoom = 16
+        await this.$emit('e', this.zoom)
         this.currentPlace = null
 
         // this.zoom=17
