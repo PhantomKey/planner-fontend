@@ -48,6 +48,7 @@ export default {
       console.log(this.$data)
       this.$http.post('/api/v1/create_member', {firstname: this.Firstname,
       lastname: this.Lastname,dob:this.Birthday,gender:this.Gender}).then((value) => this.check(value))
+      alert('success')
     },
     check (req) {
       console.log(req.data)

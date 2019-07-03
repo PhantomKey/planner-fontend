@@ -11,11 +11,9 @@
         >
           <q-icon name="menu" />
         </q-btn>
-        <q-toolbar-title @click="home" style="cursor:pointer;">
+        <q-toolbar-title @click="showAllFriends ()" style="cursor:pointer;">
           Trip Planner
         </q-toolbar-title>
-        <button class="button is-info" @click="showAllFriends()">Genfriend(test)</button>
-        <button class="button is-info" @click="deleteMember()">Killhead</button>
         <div v-if="isLogin()"><add-friend></add-friend></div>
       </q-toolbar>
     </q-header>
@@ -27,13 +25,13 @@
     >
       <q-item-label header>Your Friend</q-item-label>
       <div v-if="isLogin()">
-      <q-list v-for="i in friendlist">
-        <q-item clickable tag="a" target="_blank" @click="deleteMember(i.id)">
+      <q-list v-model="friendlist" v-for="i in friendlist">
+        <q-item clickable @click="deleteMember(i.id)">
           <q-item-section avatar>
             <q-icon name="school"/>
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{i.name}}</q-item-label>
+            <q-item-label>{{i.name}}-{{i.id}}</q-item-label>
             <q-item-label caption>Your mom</q-item-label>
           </q-item-section>
         </q-item>
@@ -84,12 +82,11 @@ export default {
     this.checktoken()
   },
   showAllFriends () {
-      this.$http.get('/api/v1/member')
-      .then(value=>this.alertval(value))
-  },
-  alertval (value) {
     this.friendlist=[]
-    console.log(value)
+    this.$http.get('/api/v1/member')
+    .then(value=>this.renderFriends(value))
+  },
+  renderFriends (value) {
     for(var i = 0;i < value['data']['id'].length;i++)
       this.friendlist.push({id:value['data']['id'][i],name:value['data']['members'][i]})
     console.log(this.friendlist)
@@ -106,8 +103,7 @@ export default {
   },
   deleteMember (x) {
     this.$http.delete('/api/v1/delete_member/'+x)
-    alert(x)
-    this.showAllFriends()
+    .then(this.showAllFriends())
   }
 }
 }
