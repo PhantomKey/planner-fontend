@@ -2,6 +2,9 @@
 <div class="main-content">
   <div v-if="authenfunction()">
     <schedule></schedule>
+    <v-flat>
+      <createactivity />
+    </v-flat>
     <logout-button></logout-button>
   </div>
   <div v-else>
@@ -14,12 +17,14 @@
 import LogoutButton from '../components/LogoutButton.vue'
 import Error404 from './Error404.vue'
 import Schedule from '../components/Schedule.vue'
+import CreateActivity from '../components/CreateActivity.vue'
 export default {
   name: 'Planner',
   components: {
     'logout-button': LogoutButton,
     'error-404': Error404,
-    'schedule': Schedule
+    'schedule': Schedule,
+    'createactivity':CreateActivity
   },
   data: function () {
     return {
