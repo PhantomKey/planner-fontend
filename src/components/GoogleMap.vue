@@ -83,7 +83,9 @@ export default {
         await this.$refs.example.$mapPromise.then((map) => {
           map.panTo(marker)
           if(event.placeId){
-            axios.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name,rating,formatted_phone_number&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI',
+            var proxy = 'https://cors-anywhere.herokuapp.com/'
+            var url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+event.placeId+'&fields=name,rating,formatted_phone_number&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI'
+            axios.get(proxy+url,
             {headers: {
             'Access-Control-Allow-Origin': '*',
             'crossDomain': true
