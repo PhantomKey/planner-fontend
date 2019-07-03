@@ -72,6 +72,7 @@ export default {
       }
     },
     addMarkerByClick: async function (event) {
+        this.clearAllMarkers()
         var latlng = event.latLng;
         const marker = {
           lat: event.latLng.lat(),
@@ -81,7 +82,6 @@ export default {
         this.markers.push({ position: marker })
         await this.$refs.example.$mapPromise.then((map) => {
           map.panTo(marker)
-          map.setZoom(16)
           if(event.placeId){
             axios.post('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + marker.lat + ',' + marker.lng + '&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI')
             .then(response => {
@@ -90,9 +90,21 @@ export default {
             })
             .catch(e => {
             console.log(e)
-      })
+            })
           }
         })
+        var mapObject = this.$refs.example.$mapObject.zoom
+        console.log(this.$refs.example)
+        console.log('before if:'+mapObject)
+        console.log(this.$refs.example.$parent.$el.textContent)
+        this.zoom = mapObject
+        if(mapObject !== 16){
+          this.$refs.example.$mapObject.zoom = 16
+          this.zoom=16
+          console.log('in if:'+mapObject)
+        }
+        console.log('out of if:'+mapObject)
+        console.log(event)
     },
     geolocate: function () {
       navigator.geolocation.getCurrentPosition(position => {
