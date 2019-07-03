@@ -15,6 +15,7 @@
           Trip Planner
         </q-toolbar-title>
         <button class="button is-info" @click="showAllFriends()">Genfriend(test)</button>
+        <button class="button is-info" @click="deleteMember()">Killhead</button>
         <div v-if="isLogin()"><add-friend></add-friend></div>
       </q-toolbar>
     </q-header>
@@ -27,7 +28,7 @@
       <q-item-label header>Your Friend</q-item-label>
       <div v-if="isLogin()">
       <q-list v-for="i in friendlist">
-        <q-item clickable tag="a" target="_blank" href="https://google.com">
+        <q-item clickable tag="a" target="_blank">
           <q-item-section avatar>
             <q-icon name="school"/>
           </q-item-section>
@@ -88,6 +89,7 @@ export default {
   },
   alertval (value) {
     this.friendlist=[]
+    console.log(value)
     for(var i in value['data']['members'])
       this.friendlist.push(value['data']['members'][i])
   },
@@ -100,7 +102,12 @@ export default {
       console.log('nooo')
       return false
     }
-}
+  },
+  deleteMember () {
+    this.$http.delete('/api/v1/delete_member/2')
+    alert('delete')
+    this.showAllFriends()
+  }
 }
 }
 </script>
