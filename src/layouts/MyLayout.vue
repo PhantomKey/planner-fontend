@@ -104,7 +104,7 @@ export default {
     }
   },
   deleteMember () {
-    this.$http.delete('/api/v1/delete_member/0')
+    this.$http.delete('/api/v1/delete_member/2')
     alert('delete')
     this.showAllFriends()
   }
