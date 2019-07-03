@@ -85,11 +85,7 @@ export default {
           if(event.placeId){
             var proxy = 'https://cors-anywhere.herokuapp.com/'
             var url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+event.placeId+'&fields=name,rating,formatted_phone_number&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI'
-            axios.get(proxy+url,
-            {headers: {
-            'Access-Control-Allow-Origin': '*',
-            'crossDomain': true
-          }})
+            axios.get(proxy+url)
             // axios.post('https://maps.googleapis.com/maps/api/place/details/json?placeid='+event.placeId+'&fields=name&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI')
             .then(response => {
             console.log(response.data);
