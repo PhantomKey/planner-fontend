@@ -101,16 +101,9 @@ export default {
       return false
     }
   },
-<<<<<<< HEAD
   deleteMember (x) {
     this.$http.delete('/api/v1/delete_member/'+x)
     .then(this.showAllFriends())
-=======
-  deleteMember () {
-    this.$http.delete('/api/v1/delete_member/2')
-    alert('delete')
-    this.showAllFriends()
->>>>>>> 36b1d6fb536f8a88096705d9e2073ddf709acb1a
   }
 }
 }
