@@ -28,12 +28,12 @@
       <q-item-label header>Your Friend</q-item-label>
       <div v-if="isLogin()">
       <q-list v-for="i in friendlist">
-        <q-item clickable tag="a" target="_blank">
+        <q-item clickable tag="a" target="_blank" @click="deleteMember(i.id)">
           <q-item-section avatar>
             <q-icon name="school"/>
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{i}}</q-item-label>
+            <q-item-label>{{i.name}}</q-item-label>
             <q-item-label caption>Your mom</q-item-label>
           </q-item-section>
         </q-item>
@@ -90,8 +90,9 @@ export default {
   alertval (value) {
     this.friendlist=[]
     console.log(value)
-    for(var i in value['data']['members'])
-      this.friendlist.push(value['data']['members'][i])
+    for(var i = 0;i < value['data']['id'].length;i++)
+      this.friendlist.push({id:value['data']['id'][i],name:value['data']['members'][i]})
+    console.log(this.friendlist)
   },
   isLogin () {
     console.log(localStorage.token)
@@ -103,9 +104,9 @@ export default {
       return false
     }
   },
-  deleteMember () {
-    this.$http.delete('/api/v1/delete_member/0')
-    alert('delete')
+  deleteMember (x) {
+    this.$http.delete('/api/v1/delete_member/'+x)
+    alert(x)
     this.showAllFriends()
   }
 }
