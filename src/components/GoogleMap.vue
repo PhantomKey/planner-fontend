@@ -72,6 +72,7 @@ export default {
       }
     },
     addMarkerByClick: async function (event) {
+        this.clearAllMarkers()
         var latlng = event.latLng;
         const marker = {
           lat: event.latLng.lat(),
@@ -81,13 +82,10 @@ export default {
         this.markers.push({ position: marker })
         await this.$refs.example.$mapPromise.then((map) => {
           map.panTo(marker)
-          map.setZoom(16)
           if(event.placeId){
-            axios.get('https://maps.googleapis.com/maps/api/place/details/json?placeid=ChIJN1t_tDeuEmsRUsoyG83frY4&fields=name,rating,formatted_phone_number&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI',
-            {headers: {
-            'Access-Control-Allow-Origin': '*',
-            'crossDomain': true
-          }})
+            var proxy = 'https://cors-anywhere.herokuapp.com/'
+            var url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+event.placeId+'&fields=name,rating,formatted_phone_number&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI'
+            axios.get(proxy+url)
             // axios.post('https://maps.googleapis.com/maps/api/place/details/json?placeid='+event.placeId+'&fields=name&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI')
             .then(response => {
             console.log(response.data);
@@ -95,9 +93,21 @@ export default {
             })
             .catch(e => {
             console.log(e)
-      })
+            })
           }
         })
+        var mapObject = this.$refs.example.$mapObject.zoom
+        console.log(this.$refs.example)
+        console.log('before if:'+mapObject)
+        console.log(this.$refs.example.$parent.$el.textContent)
+        this.zoom = mapObject
+        if(mapObject !== 16){
+          this.$refs.example.$mapObject.zoom = 16
+          this.zoom=16
+          console.log('in if:'+mapObject)
+        }
+        console.log('out of if:'+mapObject)
+        console.log(event)
     },
     geolocate: function () {
       navigator.geolocation.getCurrentPosition(position => {
