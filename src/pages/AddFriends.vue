@@ -32,6 +32,7 @@
 <script>
 import Error404 from './Error404.vue'
 export default {
+    props:['showFriends'],
     data () {
     return {
         Firstname: '',
@@ -44,10 +45,12 @@ export default {
     'error-404': Error404
   },
   methods: {
-    ClickAddMember () {
+    async ClickAddMember () {
       console.log(this.$data)
-      this.$http.post('/api/v1/create_member', {firstname: this.Firstname,
-      lastname: this.Lastname,dob:this.Birthday,gender:this.Gender}).then((value) => this.check(value))
+      let value = await this.$http.post('/api/v1/create_member', {firstname: this.Firstname,
+      lastname: this.Lastname,dob:this.Birthday,gender:this.Gender})
+      this.test()
+      this.check(value)
       alert('success')
     },
     check (req) {
@@ -61,6 +64,9 @@ export default {
         console.log('not log in')
         return false
       }
+    },
+    test(){
+       this.$root.$emit('component1') //like this
     }
 }
 }

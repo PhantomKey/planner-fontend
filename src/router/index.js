@@ -16,11 +16,12 @@ Vue.use(VueGoogleMaps, {
 })
 
 Vue.use(Geocoder, {
-    defaultCountryCode: 'TH', // e.g. 'CA'
-    defaultLanguage:    'en', // e.g. 'en'
-    defaultMode:        'lat-lng', // or 'lat-lng'
-    googleMapsApiKey:   'AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI'
+  defaultCountryCode: 'TH', // e.g. 'CA'
+  defaultLanguage: 'en', // e.g. 'en'
+  defaultMode: 'lat-lng', // or 'lat-lng'
+  googleMapsApiKey: 'AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI'
 });
+
 /*
  * If not building with SSR mode, you can
  * directly export the Router instantiation

@@ -6,7 +6,7 @@
           flat
           dense
           round
-          @click="status = !status"
+          @click="status = !status; showAllFriends();"
           aria-label="Menu"
         >
           <q-icon name="menu" />
@@ -14,7 +14,7 @@
         <q-toolbar-title @click="showAllFriends ()" style="cursor:pointer;">
           Trip Planner
         </q-toolbar-title>
-        <div v-if="isLogin()"><add-friend></add-friend></div>
+        <div v-if="isLogin()"><add-friend :showFriends="showAllFriends"></add-friend></div>
       </q-toolbar>
     </q-header>
      <q-drawer
@@ -52,6 +52,12 @@ import { openURL, colors } from 'quasar'
 import AddFriend from '../components/AddFriend.vue'
 export default {
   name: 'MyLayout',
+  mounted() {
+        this.$root.$on('component1', () => {
+            // your code goes here
+            this.showAllFriends()
+        })
+  },
   data () {
     return {
       friendlist:[],
@@ -60,6 +66,7 @@ export default {
       token:false
     }
   },
+  
   components: {
     'add-friend': AddFriend
   },
@@ -81,10 +88,11 @@ export default {
   updated :function() {
     this.checktoken()
   },
-  showAllFriends () {
+  async showAllFriends () {
     this.friendlist=[]
-    this.$http.get('/api/v1/member')
-    .then(value=>this.renderFriends(value))
+    let value = await this.$http.get('/api/v1/member')
+    this.renderFriends(value)
+    console.log('very good')
   },
   renderFriends (value) {
     for(var i = 0;i < value['data']['id'].length;i++)
@@ -101,9 +109,9 @@ export default {
       return false
     }
   },
-  deleteMember (x) {
-    this.$http.delete('/api/v1/delete_member/'+x)
-    .then(this.showAllFriends())
+  async deleteMember (x) {
+    await this.$http.delete('/api/v1/delete_member/'+x)
+    this.showAllFriends()
   }
 }
 }
