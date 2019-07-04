@@ -1,7 +1,6 @@
 <template>
   <div>
     <div>
-      <h2 style="color:white">Search and add a pin</h2>
       <label>
         <gmap-autocomplete
           @place_changed="setPlace">
