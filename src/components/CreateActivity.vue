@@ -31,10 +31,22 @@
                   </q-input>
                 <!-- </div> -->
                 <q-input ref="input" filled v-model="description" label="Description" style="width:100%"></q-input>
-                <google-map />
+                <div class="row q-gutter-sm">
+                  <p class="text-h6">Add Location: </p>
+                  <q-btn round color="primary" size="sm" icon="add" @click="gmaps=true">
+                  </q-btn>
+                  <q-dialog v-model="gmaps">
+                    <q-card dense style="min-width:70%;max-width:70%">
+                      <google-map></google-map>
+                    </q-card>
+                  </q-dialog>
+                </div>
             </q-card-section>
             <q-card-section position="bottom-right" style="text-align:right">
-                 <q-btn flat dense v-close-popup label="Close" color="negative" style="text-align:right"></q-btn>
+              <div class="q-gutter-sm">
+                <q-btn outline color="primary" label="Create" style="text-align:right"></q-btn>
+                <q-btn v-close-popup label="Cancel" outline color="negative" style="text-align:right"></q-btn>
+              </div>
             </q-card-section>
             </q-card>
         </q-dialog>
@@ -50,6 +62,7 @@ export default{
     data() {
         return {
             icon: false,
+            gmaps: false,
             name: '',
             type: ['Travel','Food','Accommodation'],
             stype:'',
