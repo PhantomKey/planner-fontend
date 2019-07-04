@@ -2,9 +2,7 @@
 <div class="main-content">
   <div v-if="authenfunction()">
     <schedule></schedule>
-    <v-flat>
-      <createactivity />
-    </v-flat>
+      <createactivity></createactivity>
     <logout-button></logout-button>
   </div>
   <div v-else>
