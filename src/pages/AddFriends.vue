@@ -51,7 +51,6 @@ export default {
       lastname: this.Lastname,dob:this.Birthday,gender:this.Gender})
       this.test()
       this.check(value)
-      alert('success')
     },
     check (req) {
       console.log(req.data)

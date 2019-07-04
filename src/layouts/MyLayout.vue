@@ -26,7 +26,7 @@
       <q-item-label header>Your Friend</q-item-label>
       <div v-if="isLogin()">
       <q-list v-model="friendlist" v-for="i in friendlist">
-        <q-item clickable @click="deleteMember(i.id)">
+        <q-item>
           <q-item-section avatar>
             <q-icon name="school"/>
           </q-item-section>
@@ -34,6 +34,9 @@
             <q-item-label>{{i.name}}-{{i.id}}</q-item-label>
             <q-item-label caption>Your mom</q-item-label>
           </q-item-section>
+          <q-btn @click="deleteMember(i.id)">
+            remove
+          </q-btn>
         </q-item>
       </q-list>
       </div>
