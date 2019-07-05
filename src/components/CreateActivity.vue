@@ -97,4 +97,10 @@ export default{
 }
 </script>
 <style>
+.pac-container.pac-logo.hdpi{
+    z-index: 9999 !important;
+}
+.pac-container{
+    z-index: 9999 !important;
+}
 </style>
