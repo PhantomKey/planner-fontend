@@ -11,7 +11,7 @@
         >
           <q-icon name="menu" />
         </q-btn>
-        <q-toolbar-title @click="showAllFriends ()" style="cursor:pointer;">
+        <q-toolbar-title @click="home" style="cursor:pointer;">
           Trip Planner
         </q-toolbar-title>
         <div v-if="isLogin()"><add-friend :showFriends="showAllFriends"></add-friend></div>
