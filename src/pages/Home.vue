@@ -54,9 +54,7 @@ import LogoutButton from '../components/LogoutButton.vue'
 import Error404 from './Error404.vue'
 import CalendarView from "../components/CalendarView.vue"
 import CalendarViewHeader from "../components/CalendarViewHeader.vue"
-// import { CalendarView, CalendarViewHeader } from "vue-simple-calendar"
-// 	require("vue-simple-calendar/static/css/default.css")
-// 	require("vue-simple-calendar/static/css/holidays-us.css")
+
 export default {
   name: 'Home',
   components: {
@@ -76,17 +74,14 @@ export default {
             ]
           }
   },
-  beforeMount(){
+  mounted(){
     this.showAllPlanner()
   },
   methods: {
     isLogin () {
-      console.log(localStorage.token)
       if (localStorage.token) {
-        console.log('woohoo')
         return true
       } else {
-        console.log('nooo')
         return false
       }
     },
@@ -94,26 +89,31 @@ export default {
       this.showDate = d
     },
     clickAddPlanner () {
+      let headers = {'Authorization': 'JWT '+localStorage.token}
       this.$http.post('/planner/create_planner', { planner_name: this.newPlannerName,
         first_date: this.newPlannerStartDate, last_date: this.newPlannerEndDate,
-        description: this.newPlannerDescription})
+        description: this.newPlannerDescription}, {headers})
     },
-    showAllPlanner () {
-      this.$http.get('/planner/view_all_planner')
+    showAllPlanner (){
+      let headers = {'Authorization': 'JWT '+localStorage.token}
+      this.$http.get('/planner/view_all_planner', {headers})
       .then(value => this.showAllPlannerOnCalendar(value))
     },
     showAllPlannerOnCalendar (value) {
       this.clearAllPlanner()
       for (var i in value['data']['id']){
+        console.log('hi in loop')
         this.events.push({
           title: value['data']['name'][i],
           startDate: new Date(value['data']['startdate'][i]),
           endDate: new Date(value['data']['enddate'][i]),
           id: value['data']['id'][i]
         })
+        this.$forceUpdate()
       }
     },
     clearAllPlanner () {
+      console.log('clearallplanner')
       this.events.splice(0,this.events.length)
     },
     onClickEvent(e) {

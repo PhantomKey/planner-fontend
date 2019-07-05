@@ -45,10 +45,11 @@ export default {
         return false
       }
     },
-    async isYourPlanner() {
+    isYourPlanner() {
       var planner_id = this.getParameterByName('plannerid')
       var check = false
-      await this.$http.get ('/planner/checkplannerbelongging/planner_id='+planner_id)
+      let headers = {'Authorization': 'JWT '+localStorage.token}
+      this.$http.get ('/planner/checkplannerbelongging/planner_id='+planner_id, {headers})
       .then(function(data,status,headers,config) {
         if(data['data']['result'] == true){
           check = true
@@ -58,7 +59,8 @@ export default {
     },
     getAllActivitiesinPlanner(){
       var planner_id = this.getParameterByName('plannerid')
-      this.$http.get ('/planner/plannerid='+planner_id+'/view_all_activity')
+      let headers = {'Authorization': 'JWT '+localStorage.token}
+      this.$http.get ('/planner/plannerid='+planner_id+'/view_all_activity', {headers})
       .then(value => this.showAllActivitiesonScreen(value))
     },
     showAllActivitiesonScreen(value){
