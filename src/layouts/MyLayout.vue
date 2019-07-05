@@ -25,7 +25,7 @@
     >
       <q-item-label header>Your Friend</q-item-label>
       <div v-if="isLogin()">
-      <q-list v-model="friendlist" v-for="i in friendlist">
+      <q-list v-model="friendlist" v-for="i in friendlist" :key="i.id">
         <q-item>
           <q-item-section avatar>
             <q-icon name="school"/>
