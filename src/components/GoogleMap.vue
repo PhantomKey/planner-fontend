@@ -1,13 +1,12 @@
 <template>
   <div>
-    <div>
+    <div style="padding-top: 20px;padding-left:20px">
       <label>
         <gmap-autocomplete
           @place_changed="setPlace">
         </gmap-autocomplete>
         <button @click="addMarker">Add</button>
       </label>
-      <br/>
 
     </div>
     <br>

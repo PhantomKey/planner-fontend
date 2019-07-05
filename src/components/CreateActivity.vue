@@ -33,9 +33,9 @@
                 <q-input ref="input" filled v-model="description" label="Description" style="width:100%"></q-input>
                 <div class="row q-gutter-sm">
                   <p class="text-h6">Add Location: </p>
-                  <q-btn round color="primary" size="sm" icon="add" @click="gmaps=true">
+                  <q-btn round color="primary" size="sm" icon="add" @click="gmappopup=true">
                   </q-btn>
-                  <q-dialog v-model="gmaps">
+                  <q-dialog v-model="gmappopup">
                     <q-card dense style="min-width:70%;max-width:70%">
                       <google-map></google-map>
                     </q-card>
@@ -44,7 +44,7 @@
             </q-card-section>
             <q-card-section position="bottom-right" style="text-align:right">
               <div class="q-gutter-sm">
-                <q-btn outline color="primary" label="Create" style="text-align:right"></q-btn>
+                <q-btn outline color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd" v-close-popup="closePopup"></q-btn>
                 <q-btn v-close-popup label="Cancel" outline color="negative" style="text-align:right"></q-btn>
               </div>
             </q-card-section>
@@ -62,7 +62,8 @@ export default{
     data() {
         return {
             icon: false,
-            gmaps: false,
+            gmappopup: false,
+            closePopup: false,
             name: '',
             type: ['Travel','Food','Accommodation'],
             stype:'',
@@ -76,10 +77,23 @@ export default{
             enddate: '',
             endtime: ''
         }
-
-
     },
-
+    methods:{
+      createActivityBackEnd (){
+        if(1){
+          this.closePopup = true
+          this.$q.notify({
+            message: 'Activity created'
+          })
+        }
+        else{
+          this.$q.notify({
+            message: 'Failed to create activity'
+          })
+        }
+        console.log('Failed to create activity')
+      }
+    }
 }
 </script>
 <style>
