@@ -11,7 +11,7 @@
         >
           <q-icon name="menu" />
         </q-btn>
-        <q-toolbar-title @click="showAllFriends ()" style="cursor:pointer;">
+        <q-toolbar-title @click="home" style="cursor:pointer;">
           Trip Planner
         </q-toolbar-title>
         <div v-if="isLogin()"><add-friend :showFriends="showAllFriends"></add-friend></div>
@@ -25,7 +25,7 @@
     >
       <q-item-label header>Your Friend</q-item-label>
       <div v-if="isLogin()">
-      <q-list v-model="friendlist" v-for="i in friendlist">
+      <q-list v-model="friendlist" v-for="i in friendlist" :key="i.id">
         <q-item>
           <q-item-section avatar>
             <q-icon name="school"/>
