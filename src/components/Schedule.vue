@@ -9,17 +9,17 @@
       </q-timeline-entry>
 
 
-      <div v-for="(activity,index) in activities">
-      <q-timeline-entry
+      <!-- <div v-for="(activity,index) in activities"> -->
+      <q-timeline-entry v-for="(activity,index) in activities"
         :title="activity.name"
-        :subtitle="activity.startDateTime"
+        :subtitle="activity.startDateTime.toString()"
         :side="index%2==1 ? 'left' : 'right' "
       >
         <div>
           {{activity.description}}
         </div>
       </q-timeline-entry>
-      </div>
+      <!-- </div> -->
 
       <!--
       <q-timeline-entry
