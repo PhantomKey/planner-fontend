@@ -7,7 +7,6 @@
         </gmap-autocomplete>
         <button @click="addMarker">Add</button>
       </label>
-
     </div>
     <br>
     <gmap-map ref="example"
@@ -28,17 +27,22 @@
 
 <script>
 import axios from 'axios'
+import { request } from 'http';
 export default {
   name: 'GoogleMap',
   data () {
     return {
-      // default to Montreal to keep it simple
-      // change this to whatever makes sense
       center: { lat: 45.508, lng: -73.587 },
       zoom:12,
       markers: [],
       places: [],
       currentPlace: null,
+      placeId:null,
+      loc:{
+        name:'',
+        rating:'',
+        tel:''
+      }
     }
   },
 
@@ -52,6 +56,7 @@ export default {
       this.currentPlace = place
     },
     async addMarker () {
+      
       if (this.currentPlace) {
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
@@ -61,6 +66,11 @@ export default {
         this.clearAllMarkers()
         this.markers.push({ position: marker })
         this.places.push(this.currentPlace)
+        this.loc.name = this.currentPlace.name
+        this.loc.rating = this.currentPlace.rating
+        this.loc.tel = this.currentPlace.formatted_phone_number
+        this.placeId = this.currentPlace.place_id
+        console.log(this.loc.name)
         this.$refs.example.$mapPromise.then((map) => {
           map.panTo(marker)
         })
@@ -70,6 +80,7 @@ export default {
       }
     },
     addMarkerByClick: async function (event) {
+        this.currentPlace = null
         this.clearAllMarkers()
         var latlng = event.latLng;
         const marker = {
@@ -78,34 +89,34 @@ export default {
         }
         this.clearAllMarkers()
         this.markers.push({ position: marker })
-        await this.$refs.example.$mapPromise.then((map) => {
+        this.request_location_name(marker,event)
+        var mapObject = this.$refs.example.$mapObject.zoom
+        this.zoom = mapObject
+        if(mapObject !== 16){
+          this.$refs.example.$mapObject.zoom = 16
+          this.zoom=16
+        }
+    },
+    request_location_name: async function(marker, event) {
+      await this.$refs.example.$mapPromise.then((map) => {
           map.panTo(marker)
           if(event.placeId){
+            this.placeId = null
+            this.placeId = event.placeId
             var proxy = 'https://cors-anywhere.herokuapp.com/'
             var url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+event.placeId+'&fields=name,rating,formatted_phone_number&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI'
             axios.get(proxy+url)
-            // axios.post('https://maps.googleapis.com/maps/api/place/details/json?placeid='+event.placeId+'&fields=name&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI')
             .then(response => {
             console.log(response.data);
-
+            this.loc.name = response.data.result.name
+            this.loc.rating = response.data.result.rating
+            this.loc.tel = response.data.result.formatted_phone_number
             })
             .catch(e => {
             console.log(e)
             })
           }
         })
-        var mapObject = this.$refs.example.$mapObject.zoom
-        console.log(this.$refs.example)
-        console.log('before if:'+mapObject)
-        console.log(this.$refs.example.$parent.$el.textContent)
-        this.zoom = mapObject
-        if(mapObject !== 16){
-          this.$refs.example.$mapObject.zoom = 16
-          this.zoom=16
-          console.log('in if:'+mapObject)
-        }
-        console.log('out of if:'+mapObject)
-        console.log(event)
     },
     geolocate: function () {
       navigator.geolocation.getCurrentPosition(position => {

@@ -10,27 +10,31 @@
                 <div class="text-h6" style="margin:0 auto;">Create New Activity</div>
             </q-card-section>
             <q-card-section class="q-gutter-sm">
-                <q-input ref="input" filled v-model="name" label="Name" style="min-width:100%;max-width:100%"></q-input>
-                <q-select filled v-model="stype" :options="type" label="Type" style="min-width:100%;max-width:100%"></q-select>
+                <q-input ref="input" filled v-model="name" label="Name" style="min-width:100%;max-width:100%"
+                lazy-rules
+                :rules="[ val => val && val.length > 0 || 'Please type something']"></q-input>
+                <q-select filled v-model="stype" :options="type" label="Type" style="min-width:100%;max-width:100%"
+                lazy-rules
+                :rules="[ val => val && val.length > 0 || 'Please select something']"></q-select>
                 <div class="etc" v-if="stype != 'Travel' && stype !=''" style="width:100%">
-                    <q-input filled v-model="text" label="Add location">
+                    <q-input filled v-model="location.in.name" label="Add location" style="min-width:100%;max-width:100%">
                         <template v-slot:append>
                             <q-icon name="place"  @click="gmappopup=true" class="cursor-pointer"></q-icon>
                         </template>
                     </q-input>
                 </div>
-                <div class="travel" v-if="stype == 'Travel'">
+                <div class="travel" v-if="stype == 'Travel'" style="min-width:100%;max-width:100%">
                     <div class="row">
                         <div class="col">
-                            <q-input filled v-model="text" label="Start">
+                            <q-input filled v-model="location.start.name" label="Start">
                                 <template v-slot:append>
                                     <q-icon name="place"  @click="gmappopup=true" class="cursor-pointer"></q-icon>
                                 </template>
                             </q-input>
                         </div>
-                        <div class="col-1"></div>
+                        <div class="col" style="max-width:15px"></div>
                         <div class="col">
-                            <q-input filled v-model="text" label="Stop">
+                            <q-input filled v-model="location.end.name" label="Stop" style="min-width:100%;max-width:100%">
                                 <template v-slot:append>
                                     <q-icon name="place"  @click="gmappopup=true" class="cursor-pointer"></q-icon>
                                 </template>
@@ -61,6 +65,9 @@
                   <q-dialog v-model="gmappopup">
                     <q-card dense style="min-width:70%;max-width:70%">
                          <q-btn icon="close" flat round dense v-close-popup style="top:10px;right:5px;position:absolute;"></q-btn>
+                          <q-btn color="deep-orange" class="shadow-16" 
+                          style="position:absolute;right:80px;bottom:23.5px;z-index:9999"
+                          @click="pulllocationdata">Add location</q-btn>
                         <google-map />
                     </q-card>
                   </q-dialog>
@@ -79,6 +86,7 @@
 
 <script>
 import GoogleMap from '../components/GoogleMap.vue'
+import { stat } from 'fs';
 export default{
     components: {
       GoogleMap
@@ -92,8 +100,21 @@ export default{
             type: ['Travel','Food','Accommodation'],
             stype:'',
             location:{
-                start:'',
-                end:'',
+                start:{
+                    name:'',
+                    lat:'',
+                    lng:''
+                },
+                end:{
+                    name:'',
+                    lat:'',
+                    lng:''
+                },
+                in:{
+                    name:'',
+                    lat:'',
+                    lng:''
+                }
             },
             description:'',
             startdate: '',
@@ -116,8 +137,24 @@ export default{
           })
         }
         console.log('Failed to create activity')
-      }
-    }
+      },
+        pulllocationdata(){
+            console.log('OK')
+            console.log(this.GoogleMap.data.loc.name)
+            console.log('Not Error')
+            if(stype == 'Travel'){
+                this.location.start.name = this.GoogleMap.data.loc.name
+                this.location.start.lat = this.GoogleMap.data.markers[0].lat
+                this.location.start.lng = this.GoogleMap.data.markers[0].lng
+            }
+            else if(stype != 'Travel' && stype != null){
+                this.location.in.name = this.GoogleMap.data.loc.name
+                this.location.in.lat = this.GoogleMap.data.markers[0].lat
+                this.location.in.lng = this.GoogleMap.data.markers[0].lng
+            }
+        }
+    },
+    
 }
 </script>
 <style>
