@@ -93,7 +93,8 @@ export default {
   },
   async showAllFriends () {
     this.friendlist=[]
-    let value = await this.$http.get('/api/v1/member')
+    let headers = {'Authorization': 'JWT '+localStorage.token}
+    let value = await this.$http.get('/api/v1/member',{headers})
     this.renderFriends(value)
     console.log('very good')
   },
@@ -105,10 +106,9 @@ export default {
   isLogin () {
     console.log(localStorage.token)
     if (localStorage.token) {
-      console.log('woohoo')
       return true
     } else {
-      console.log('nooo')
+      this.friendlist=[]
       return false
     }
   },
