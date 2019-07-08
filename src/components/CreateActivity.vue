@@ -12,6 +12,32 @@
             <q-card-section class="q-gutter-sm">
                 <q-input ref="input" filled v-model="name" label="Name" style="min-width:100%;max-width:100%"></q-input>
                 <q-select filled v-model="stype" :options="type" label="Type" style="min-width:100%;max-width:100%"></q-select>
+                <div class="etc" v-if="stype != 'Travel' && stype !=''" style="width:100%">
+                    <q-input filled v-model="text" label="Add location">
+                        <template v-slot:append>
+                            <q-icon name="place"  @click="gmappopup=true" class="cursor-pointer"></q-icon>
+                        </template>
+                    </q-input>
+                </div>
+                <div class="travel" v-if="stype == 'Travel'">
+                    <div class="row">
+                        <div class="col">
+                            <q-input filled v-model="text" label="Start">
+                                <template v-slot:append>
+                                    <q-icon name="place"  @click="gmappopup=true" class="cursor-pointer"></q-icon>
+                                </template>
+                            </q-input>
+                        </div>
+                        <div class="col-1"></div>
+                        <div class="col">
+                            <q-input filled v-model="text" label="Stop">
+                                <template v-slot:append>
+                                    <q-icon name="place"  @click="gmappopup=true" class="cursor-pointer"></q-icon>
+                                </template>
+                            </q-input>
+                        </div>
+                    </div>
+                </div>
                 <!-- <div class="row q-col-gutter-sm q-gutter-sm" style="min-width:100%;max-width:100%"> -->
                   <q-input filled v-model="startdate" type="date" label="Start Date" stack-label style="width:100%">
                     <template v-slot:prepend>
@@ -32,9 +58,6 @@
                 <!-- </div> -->
                 <q-input ref="input" filled v-model="description" label="Description" style="width:100%"></q-input>
                 <div class="row q-gutter-sm">
-                  <p class="text-h6">Add Location: </p>
-                  <q-btn round color="primary" size="sm" icon="add" @click="gmappopup=true">
-                  </q-btn>
                   <q-dialog v-model="gmappopup">
                     <q-card dense style="min-width:70%;max-width:70%">
                       <google-map></google-map>
