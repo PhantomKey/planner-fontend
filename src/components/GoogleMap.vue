@@ -59,7 +59,6 @@ export default {
         lng: this.markers[0].position.lng,
         placeid: this.placeId
       }
-      console.log(val)
       this.$emit('onAdd',val)
     },
     setPlace (place) {
@@ -72,12 +71,10 @@ export default {
           lat: this.currentPlace.geometry.location.lat(),
           lng: this.currentPlace.geometry.location.lng()
         }
-        console.log(this.currentPlace)
         this.clearAllMarkers()
         this.markers.push({ position: marker })
         this.places.push(this.currentPlace)
         this.placeId = this.currentPlace.place_id
-        console.log(this.loc.name)
         this.$refs.example.$mapPromise.then((map) => {
           map.panTo(marker)
         })
