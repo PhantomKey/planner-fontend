@@ -14,6 +14,7 @@
       :zoom=this.zoom
       style="width:100%;  height: 400px;"
       v-on:click="addMarkerByClick"
+      @sType="setType"
     >
       <gmap-marker
         :key="index"
@@ -32,12 +33,16 @@
 
 export default {
   name: 'GoogleMap',
+  props:{
+      smtype: String
+  },
   data () {
     return {
       center: { lat: 45.508, lng: -73.587 },
       zoom:12,
       markers: [],
       places: [],
+      type:null,
       currentPlace: null,
       placeId:null,
     }
@@ -45,19 +50,20 @@ export default {
 
   mounted () {
     this.geolocate()
-    this.$root.$on('component1', () => {
-        // your code goes here
-        this.addMarkerByClick()
-    })
   },
 
   methods: {
     // receives a place object via the autocomplete component
+    setType (val) {
+      this.type = val
+      console.log('type: '+val)
+    },
     onAddClick() {
       var val = {
         lat: this.markers[0].position.lat,
         lng: this.markers[0].position.lng,
-        placeid: this.placeId
+        placeid: this.placeId,
+        type:this.smtype
       }
       this.$emit('onAdd',val)
     },

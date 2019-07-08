@@ -16,19 +16,19 @@
                 <q-select filled v-model="stype" :options="type" label="Type" style="min-width:100%;max-width:100%"
                 lazy-rules
                 :rules="[ val => val && val.length > 0 || 'Please select something']"></q-select>
-                <div class="etc" v-if="stype != 'Travel' && stype !=''" style="width:100%">
+                <div class="etc" v-if="stype != 'Travel' &&  stype != 'Travel1' &&  stype != 'Travel2' && stype !=''" style="width:100%">
                     <q-input filled v-model="location.in.name" label="Add location" style="min-width:100%;max-width:100%">
                         <template v-slot:append>
                             <q-icon name="place"  @click="gmappopup=true" class="cursor-pointer"></q-icon>
                         </template>
                     </q-input>
                 </div>
-                <div class="travel" v-if="stype == 'Travel'" style="min-width:100%;max-width:100%">
+                <div class="travel" v-if="stype == 'Travel' || stype == 'Travel1'|| stype=='Travel2'" style="min-width:100%;max-width:100%">
                     <div class="row">
                         <div class="col">
                             <q-input filled v-model="location.start.name" label="Start">
                                 <template v-slot:append>
-                                    <q-icon name="place"  @click="gmappopup=true" class="cursor-pointer"></q-icon>
+                                    <q-icon name="place"  @click="gmappopup=true,stype='Travel1'" class="cursor-pointer"></q-icon>
                                 </template>
                             </q-input>
                         </div>
@@ -36,7 +36,7 @@
                         <div class="col">
                             <q-input filled v-model="location.end.name" label="Stop" style="min-width:100%;max-width:100%">
                                 <template v-slot:append>
-                                    <q-icon name="place"  @click="gmappopup=true" class="cursor-pointer"></q-icon>
+                                    <q-icon name="place"  @click="gmappopup=true,stype='Travel2'" class="cursor-pointer"></q-icon>
                                 </template>
                             </q-input>
                         </div>
@@ -65,7 +65,7 @@
                   <q-dialog v-model="gmappopup">
                     <q-card dense style="min-width:70%;max-width:70%">
                          <q-btn icon="close" flat round dense v-close-popup style="top:10px;right:5px;position:absolute;"></q-btn>
-                        <google-map  @onAdd="handlelocationAdd"/>
+                        <google-map  :smtype="stype" @onAdd="handlelocationAdd"/>
                         <!-- <google-map @onAdd="handlelocalotion2Add" /> -->
                     </q-card>
                   </q-dialog>
@@ -156,15 +156,33 @@ export default{
         handlelocationAdd(val) {
           console.log("val :",val)
           this.gmappopup = false
-          this.request_location_name(val.placeid)
+          var type = val.type
+          if(type == 'Travel1'){
+            this.location.start.lat = val.lat
+            this.location.start.lng = val.lng
+          }else if(type == 'Travel2'){
+            this.location.end.lat = val.lat
+            this.location.end.lng = val.lng
+          }else{
+            this.location.in.lat = val.lat
+            this.location.in.lng = val.lng
+          }
+          this.request_location_name(val.placeid,type)
         },
-        request_location_name: async function(placeId) {
+
+        request_location_name: async function(placeId,type) {
           console.log(placeId)
           var proxy = 'https://cors-anywhere.herokuapp.com/'
           var url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+placeId+'&fields=name&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI'
           axios.get(proxy+url)
           .then(response => {
-            this.location.in.name = response.data.result.name
+            if(type == 'Travel1'){
+              this.location.start.name = response.data.result.name
+            }else if(type == 'Travel2'){
+              this.location.end.name = response.data.result.name
+            }else{
+              this.location.in.name = response.data.result.name
+            }
           })
           .catch(e => {
           console.log(e)
