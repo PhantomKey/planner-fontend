@@ -1,6 +1,6 @@
 <template>
-<div style="background-color: #92a8d1;left:50%" class="centered" >
-  <div class="q-px-lg q-pb-md">
+<div style="background-color: #92a8d1;left:50%" class="centered margin-hunsa" >
+  <div class="q-px-lg q-pb-md" >
     <q-timeline :layout="layout" color="secondary">
       <q-timeline-entry heading>
         Timeline heading
@@ -9,7 +9,7 @@
       </q-timeline-entry>
 
       <q-timeline-entry
-        title="Event Title"
+        :title="activities[0].name"
         subtitle="February 22, 1986"
         side="left"
       >
@@ -84,16 +84,50 @@
       </q-timeline-entry>
     </q-timeline>
   </div>
+  <h5>{{activities[0].name}}</h5>
 </div>
 </template>
 
 <script>
 export default {
+  data: function () {
+    return {
+            activities:[]
+          }
+  },
   computed: {
     layout () {
       return this.$q.screen.lt.sm ? 'dense' : (this.$q.screen.lt.md ? 'comfortable' : 'loose')
     }
-  }
+  },
+  beforeMount() {
+    this.showAllActivity()
+  },
+  methods: {
+    async showAllActivity (){
+      let headers = {'Authorization': 'JWT '+localStorage.token}
+      const data = await this.$http.get('/planner/plannerid=1/view_all_activity', {headers})
+      console.log(data.data)
+      this.showAllActivitiesonScreen(data)
+    },
+    showAllActivitiesonScreen(value){
+      this.clearAllActivityData()
+      for (var i in value['data']['id']){
+        this.activities.push({
+          name: value['data']['name'][i],
+          startDateTime: new Date(value['data']['startdatetime'][i]),
+          endDateTime: new Date(value['data']['enddatetime'][i]),
+          id: value['data']['id'][i],
+          servicetypeID: value['data']['servicetypeID'][i],
+          locationID: value['data']['locationID'][i],
+          description: value['data']['description'][i]
+        })
+      }
+    },
+    clearAllActivityData (){
+      this.activities.splice(0,this.activities.length)
+    }
+  },
 }
 </script>
 
@@ -104,5 +138,8 @@ export default {
   left: 50%;
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
+}
+.margin-hunsa{
+  margin-top:5%
 }
 </style>
