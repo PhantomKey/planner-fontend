@@ -46,7 +46,7 @@ export default {
         return false
       }
     },
-    isYourPlanner() {
+    async isYourPlanner() {
       var planner_id = this.getParameterByName('plannerid')
       var checkplanner = false
       let headers = {'Authorization': 'JWT '+localStorage.token}
