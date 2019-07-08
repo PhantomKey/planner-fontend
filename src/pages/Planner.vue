@@ -1,9 +1,14 @@
 <template>
 <div class="main-content">
-  <div v-if="authenfunction">
-    <schedule></schedule>
-      <createactivity></createactivity>
-    <logout-button></logout-button>
+  <div v-if="isLogin">
+    <div v-if="checkplanner">
+      <schedule></schedule>
+        <createactivity></createactivity>
+      <logout-button></logout-button>
+    </div>
+    <div v-else>
+      <error-404></error-404>
+    </div>
   </div>
   <div v-else>
     <error-404></error-404>
@@ -24,28 +29,49 @@ export default {
     'schedule': Schedule,
     'createactivity':CreateActivity
   },
+  checkplannerbeforecreate: false,
   data: function () {
     return {
             activities: [
 
-            ]
+            ],
+            checkplanner: this.$options.checkplannerbeforecreate
           }
   },
   beforeMount(){
     this.getAllActivitiesinPlanner()
+    this.authenfunction()
+  },
+  async beforeCreate(){
+    var url = window.location.href
+    var name = 'plannerid'
+    name = name.replace(/[\[\]]/g, '\\$&')
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)')
+    var results = regex.exec(url)
+    var returnvalue = null
+    if (!results) returnvalue = null;
+    if (!results[2]) returnvalue = '';
+    returnvalue = decodeURIComponent(results[2].replace(/\+/g, ' '))
+    var res = false
+    let headers = {'Authorization': 'JWT '+localStorage.token}
+    var promise = await this.$http.get('/planner/checkplannerbelonging/planner_id='+returnvalue, {headers})
+    .then(function(value){
+      if(value['data']['result'] == true){
+          res = true
+        }
+    })
+    if(res) {
+      this.$options.checkplannerbeforecreate = true
+      // this.$emit(true, 'this.$options.checkplannerbeforecreate')
+    }
+    console.log(this.$options.checkplannerbeforecreate)
   },
   created(){
     this.authenfunction()
   },
   methods: {
-    authenfunction() {
-      var check = false
-      this.isYourPlanner().then(function(value){
-        if(value==true){
-          check=true
-        }
-      })
-      return this.isLogin()&&check
+    async authenfunction() {
+      this.isYourPlanner()
     },
     isLogin() {
       if (localStorage.token) {
@@ -64,13 +90,11 @@ export default {
             res = true
           }
       })
-      return res
+      if(res) {
+        this.checkplanner = true
+      }
+      return this.checkplanner
     },
-    //   this.isYourPlannerTwo(res)
-    // },
-    // isYourPlannerTwo(res) {
-    //   return res
-    // },
     getAllActivitiesinPlanner(){
       var planner_id = this.getParameterByName('plannerid')
       let headers = {'Authorization': 'JWT '+localStorage.token}
