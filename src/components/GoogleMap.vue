@@ -22,12 +22,14 @@
         @click="center=m.position"
       ></gmap-marker>
     </gmap-map>
+    <q-btn color="deep-orange" class="shadow-16"
+    style="position:absolute;right:80px;bottom:23.5px;z-index:9999"
+    @click="onAddClick">Add location</q-btn>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-import { request } from 'http';
+
 export default {
   name: 'GoogleMap',
   data () {
@@ -38,25 +40,33 @@ export default {
       places: [],
       currentPlace: null,
       placeId:null,
-      loc:{
-        name:'',
-        rating:'',
-        tel:''
-      }
     }
   },
 
   mounted () {
     this.geolocate()
+    this.$root.$on('component1', () => {
+        // your code goes here
+        this.addMarkerByClick()
+    })
   },
 
   methods: {
     // receives a place object via the autocomplete component
+    onAddClick() {
+      var val = {
+        lat: this.markers[0].position.lat,
+        lng: this.markers[0].position.lng,
+        placeid: this.placeId
+      }
+      console.log(val)
+      this.$emit('onAdd',val)
+    },
     setPlace (place) {
       this.currentPlace = place
     },
     async addMarker () {
-      
+      this.placeId = null
       if (this.currentPlace) {
         const marker = {
           lat: this.currentPlace.geometry.location.lat(),
@@ -66,9 +76,6 @@ export default {
         this.clearAllMarkers()
         this.markers.push({ position: marker })
         this.places.push(this.currentPlace)
-        this.loc.name = this.currentPlace.name
-        this.loc.rating = this.currentPlace.rating
-        this.loc.tel = this.currentPlace.formatted_phone_number
         this.placeId = this.currentPlace.place_id
         console.log(this.loc.name)
         this.$refs.example.$mapPromise.then((map) => {
@@ -80,7 +87,11 @@ export default {
       }
     },
     addMarkerByClick: async function (event) {
+        this.placeId = null
         this.currentPlace = null
+        if(event.placeId){
+          this.placeId = event.placeId
+        }
         this.clearAllMarkers()
         var latlng = event.latLng;
         const marker = {
@@ -89,34 +100,16 @@ export default {
         }
         this.clearAllMarkers()
         this.markers.push({ position: marker })
-        this.request_location_name(marker,event)
+        this.$refs.example.$mapPromise.then((map) => {
+          map.panTo(marker)
+        })
+        // await this.request_location_name(marker,event)
         var mapObject = this.$refs.example.$mapObject.zoom
         this.zoom = mapObject
         if(mapObject !== 16){
           this.$refs.example.$mapObject.zoom = 16
           this.zoom=16
         }
-    },
-    request_location_name: async function(marker, event) {
-      await this.$refs.example.$mapPromise.then((map) => {
-          map.panTo(marker)
-          if(event.placeId){
-            this.placeId = null
-            this.placeId = event.placeId
-            var proxy = 'https://cors-anywhere.herokuapp.com/'
-            var url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+event.placeId+'&fields=name,rating,formatted_phone_number&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI'
-            axios.get(proxy+url)
-            .then(response => {
-            console.log(response.data);
-            this.loc.name = response.data.result.name
-            this.loc.rating = response.data.result.rating
-            this.loc.tel = response.data.result.formatted_phone_number
-            })
-            .catch(e => {
-            console.log(e)
-            })
-          }
-        })
     },
     geolocate: function () {
       navigator.geolocation.getCurrentPosition(position => {
