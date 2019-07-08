@@ -60,7 +60,8 @@
                 <div class="row q-gutter-sm">
                   <q-dialog v-model="gmappopup">
                     <q-card dense style="min-width:70%;max-width:70%">
-                      <google-map></google-map>
+                         <q-btn icon="close" flat round dense v-close-popup style="top:10px;right:5px;position:absolute;"></q-btn>
+                        <google-map />
                     </q-card>
                   </q-dialog>
                 </div>

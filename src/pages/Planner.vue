@@ -28,7 +28,7 @@ export default {
     return {
             activities: [
 
-            ]
+            ],
           }
   },
   beforeMount(){
@@ -36,6 +36,7 @@ export default {
   },
   methods: {
     authenfunction() {
+      console.log(this.isYourPlanner())
       return this.isLogin()&&this.isYourPlanner()
     },
     isLogin() {
@@ -47,16 +48,20 @@ export default {
     },
     isYourPlanner() {
       var planner_id = this.getParameterByName('plannerid')
-      var check = false
+      var checkplanner = false
       let headers = {'Authorization': 'JWT '+localStorage.token}
-      this.$http.get ('/planner/checkplannerbelongging/planner_id='+planner_id, {headers})
-      .then(function(data,status,headers,config) {
-        if(data['data']['result'] == true){
-          check = true
-        }
-      })
-      console.log(test)
-      return check
+      var response = this.$http.get ('/planner/checkplannerbelongging/planner_id='+planner_id)
+      // .then ((response) =>{
+      //   if(response.data.result){
+      //     checkplanner= true
+      //   }
+      // })
+      if (response.data.result){
+        checkplanner = true
+      }
+      // console.log(response)
+      // console.log(checkplanner)
+      return checkplanner
     },
     getAllActivitiesinPlanner(){
       var planner_id = this.getParameterByName('plannerid')
@@ -65,7 +70,6 @@ export default {
       .then(value => this.showAllActivitiesonScreen(value))
     },
     showAllActivitiesonScreen(value){
-      console.log(value)
       this.clearAllActivityData()
       for (var i in value['data']['id']){
         this.activities.push({

@@ -102,7 +102,6 @@ export default {
     showAllPlannerOnCalendar (value) {
       this.clearAllPlanner()
       for (var i in value['data']['id']){
-        console.log('hi in loop')
         this.events.push({
           title: value['data']['name'][i],
           startDate: new Date(value['data']['startdate'][i]),
@@ -113,7 +112,6 @@ export default {
       }
     },
     clearAllPlanner () {
-      console.log('clearallplanner')
       this.events.splice(0,this.events.length)
     },
     onClickEvent(e) {
