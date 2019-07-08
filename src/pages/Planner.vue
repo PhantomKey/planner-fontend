@@ -48,12 +48,13 @@ export default {
     async isYourPlanner() {
       var planner_id = this.getParameterByName('plannerid')
       var check = false
-      await this.$http.get ('/planner/checkplannerbelongging/planner_id='+planner_id)
+      let test = await this.$http.get ('/planner/checkplannerbelongging/planner_id='+planner_id)
       .then(function(data,status,headers,config) {
         if(data['data']['result'] == true){
           check = true
         }
       })
+      console.log(test)
       return check
     },
     getAllActivitiesinPlanner(){
