@@ -65,10 +65,8 @@
                   <q-dialog v-model="gmappopup">
                     <q-card dense style="min-width:70%;max-width:70%">
                          <q-btn icon="close" flat round dense v-close-popup style="top:10px;right:5px;position:absolute;"></q-btn>
-                          <q-btn color="deep-orange" class="shadow-16" 
-                          style="position:absolute;right:80px;bottom:23.5px;z-index:9999"
-                          @click="pulllocationdata">Add location</q-btn>
-                        <google-map />
+                        <google-map  @onAdd="handlelocationAdd"/>
+                        <!-- <google-map @onAdd="handlelocalotion2Add" /> -->
                     </q-card>
                   </q-dialog>
                 </div>
@@ -86,10 +84,12 @@
 
 <script>
 import GoogleMap from '../components/GoogleMap.vue'
+import axios from 'axios'
+import { request } from 'http';
 import { stat } from 'fs';
 export default{
     components: {
-      GoogleMap
+      'GoogleMap': GoogleMap
     },
     data() {
         return {
@@ -140,21 +140,37 @@ export default{
       },
         pulllocationdata(){
             console.log('OK')
-            console.log(this.GoogleMap.data.loc.name)
+            console.log(this)
             console.log('Not Error')
-            if(stype == 'Travel'){
+            if(this.stype == 'Travel'){
                 this.location.start.name = this.GoogleMap.data.loc.name
                 this.location.start.lat = this.GoogleMap.data.markers[0].lat
                 this.location.start.lng = this.GoogleMap.data.markers[0].lng
             }
-            else if(stype != 'Travel' && stype != null){
+            else if(this.stype != 'Travel' && this.stype != null){
                 this.location.in.name = this.GoogleMap.data.loc.name
                 this.location.in.lat = this.GoogleMap.data.markers[0].lat
                 this.location.in.lng = this.GoogleMap.data.markers[0].lng
             }
+        },
+        handlelocationAdd(val) {
+          console.log("val :",val)
+          this.gmappopup = false
+          this.request_location_name(val.placeid)
+        },
+        request_location_name: async function(placeId) {
+          console.log(placeId)
+          var proxy = 'https://cors-anywhere.herokuapp.com/'
+          var url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+placeId+'&fields=name&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI'
+          axios.get(proxy+url)
+          .then(response => {
+            this.location.in.name = response.data.result.name
+          })
+          .catch(e => {
+          console.log(e)
+          })
         }
-    },
-    
+    }
 }
 </script>
 <style>
