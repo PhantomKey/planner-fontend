@@ -150,6 +150,6 @@ export default {
   transform: translate(-50%, -50%);
 }
 .margin-hunsa{
-  margin-top:5%
+  margin-top:10%
 }
 </style>
