@@ -105,8 +105,9 @@ export default {
   },
   methods: {
     async showAllActivity (){
+      var planner_id = this.getParameterByName('plannerid')
       let headers = {'Authorization': 'JWT '+localStorage.token}
-      const data = await this.$http.get('/planner/plannerid=1/view_all_activity', {headers})
+      const data = await this.$http.get('/planner/plannerid='+planner_id+'/view_all_activity', {headers})
       console.log(data.data)
       this.showAllActivitiesonScreen(data)
     },
@@ -123,6 +124,15 @@ export default {
           description: value['data']['description'][i]
         })
       }
+    },
+    getParameterByName(name, url) {
+      if (!url) url = window.location.href;
+      name = name.replace(/[\[\]]/g, '\\$&');
+      var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+          results = regex.exec(url);
+      if (!results) return null;
+      if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
     },
     clearAllActivityData (){
       this.activities.splice(0,this.activities.length)
