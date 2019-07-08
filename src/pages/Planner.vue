@@ -1,6 +1,6 @@
 <template>
 <div class="main-content">
-  <div v-if="authenfunction()">
+  <div v-if="authenfunction">
     <schedule></schedule>
       <createactivity></createactivity>
     <logout-button></logout-button>
@@ -28,16 +28,24 @@ export default {
     return {
             activities: [
 
-            ],
+            ]
           }
   },
   beforeMount(){
     this.getAllActivitiesinPlanner()
   },
+  created(){
+    this.authenfunction()
+  },
   methods: {
     authenfunction() {
-      console.log(this.isYourPlanner())
-      return this.isLogin()&&this.isYourPlanner()
+      var check = false
+      this.isYourPlanner().then(function(value){
+        if(value==true){
+          check=true
+        }
+      })
+      return this.isLogin()&&check
     },
     isLogin() {
       if (localStorage.token) {
@@ -46,23 +54,23 @@ export default {
         return false
       }
     },
-    isYourPlanner() {
+    async isYourPlanner() {
+      var res = false
       var planner_id = this.getParameterByName('plannerid')
-      var checkplanner = false
       let headers = {'Authorization': 'JWT '+localStorage.token}
-      var response = this.$http.get ('/planner/checkplannerbelongging/planner_id='+planner_id)
-      // .then ((response) =>{
-      //   if(response.data.result){
-      //     checkplanner= true
-      //   }
-      // })
-      if (response.data.result){
-        checkplanner = true
-      }
-      // console.log(response)
-      // console.log(checkplanner)
-      return checkplanner
+      var promise = await this.$http.get('/planner/checkplannerbelonging/planner_id='+planner_id, {headers})
+      .then(function(value){
+        if(value['data']['result'] == true){
+            res = true
+          }
+      })
+      return res
     },
+    //   this.isYourPlannerTwo(res)
+    // },
+    // isYourPlannerTwo(res) {
+    //   return res
+    // },
     getAllActivitiesinPlanner(){
       var planner_id = this.getParameterByName('plannerid')
       let headers = {'Authorization': 'JWT '+localStorage.token}
