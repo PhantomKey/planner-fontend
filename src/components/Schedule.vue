@@ -84,7 +84,7 @@
       </q-timeline-entry>
     </q-timeline>
   </div>
-  <h5>{{activities[0].name}}</h5>
+  <h5>{{activities}}</h5>
 </div>
 </template>
 

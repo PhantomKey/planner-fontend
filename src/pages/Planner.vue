@@ -1,7 +1,7 @@
 <template>
 <div class="main-content">
-  <div v-if="isLogin">
-    <div v-if="checkplanner">
+  <div v-if="loadingfinish">
+    <div v-if="checkplanner&&isLogin">
       <schedule></schedule>
         <createactivity></createactivity>
       <logout-button></logout-button>
@@ -11,7 +11,6 @@
     </div>
   </div>
   <div v-else>
-    <error-404></error-404>
   </div>
 </div>
 </template>
@@ -30,12 +29,13 @@ export default {
     'createactivity':CreateActivity
   },
   checkplannerbeforecreate: false,
+  loadingfinishbeforecreate: false,
   data: function () {
     return {
             activities: [
-
             ],
-            checkplanner: this.$options.checkplannerbeforecreate
+            checkplanner: this.$options.checkplannerbeforecreate,
+            loadingfinish: this.$options.loadingfinishbeforecreate
           }
   },
   beforeMount(){
@@ -60,9 +60,10 @@ export default {
           res = true
         }
     })
+    this.$options.loadingfinishbeforecreate = true
+    console.log(this.$options.loadingfinishbeforecreate)
     if(res) {
       this.$options.checkplannerbeforecreate = true
-      // this.$emit(true, 'this.$options.checkplannerbeforecreate')
     }
     console.log(this.$options.checkplannerbeforecreate)
   },
@@ -90,6 +91,7 @@ export default {
             res = true
           }
       })
+      this.loadingfinish = true
       if(res) {
         this.checkplanner = true
       }
