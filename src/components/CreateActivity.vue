@@ -94,6 +94,7 @@ import axios from 'axios'
 import { request } from 'http';
 import { stat } from 'fs';
 import { constants } from 'crypto';
+import { arch, type } from 'os';
 export default{
     components: {
       'GoogleMap': GoogleMap
@@ -161,15 +162,15 @@ export default{
         if (!results[2]) return '';
       return decodeURIComponent(results[2].replace(/\+/g, ' '));
       },
-      getType(type){
-        for(var i; i < type.lenght();i++){
-          if(type == type[i]){
-            return i
+      getType(stype) {
+        for(var i = 0; i < this.type.length ;i++){
+          if(stype == this.type[i]){
+            return i+1
           }
         }
       },
-      jsonbodyetc(type){
-        let data = JSON.stringify({
+      jsonbodyetc(atype) {
+        var datas = JSON.stringify({
           activity_name: this.name,
           start_time: this.starttime,
           start_date: this.startdate,
@@ -179,10 +180,10 @@ export default{
           description: this.description,
           in: this.location.in
         })
-        return data
+        return datas
       },
-      jsonbodyt(type){
-          let data = JSON.stringify({
+      jsonbodyt(atype) {
+          var datas = JSON.stringify({
           activity_name: this.name,
           start_time: this.starttime,
           start_date: this.startdate,
@@ -193,74 +194,81 @@ export default{
           start: this.location.start,
           stop: this.location.end
         })
-        return data
+        return datas
       },
       createActivityBackEnd (){
         var planner_id = this.getParameterByName('plannerid')
         let headers = {'Authorization': 'JWT '+localStorage.token,
                         'Content-Type': 'application/json'}
-        if(stype == 'Travel'){
-          let data = this.jsonbodyt(stype)
+        var dtype = this.stype
+        var type = this.getType(dtype)
+        if(type == 1){
+          var datas = this.jsonbodyt(type)
         }else{
-          let data = this.jsonbodyetc(stype)
+          var datas = this.jsonbodyetc(type)
         }
-        this.$http.post('/planner/plannerid='+planner_id+'/create_activity',data,{headers})
+        this.$http.post('/planner/plannerid='+planner_id+'/create_activity',datas,{headers}).then((request) => this.checkreq(request))
+        .catch((err) => this.reqFailed(err))
       },
-        handlelocationAdd(val) {
-          this.gmappopup = false
-          var type = val.type
-          this.field = {
-              in:true,
-              start:true,
-              stop:true,
-            }
+      checkreq(req){
+      },
+      reqFailed(req){
+      },
+      handlelocationAdd(val) {
+        this.gmappopup = false
+        var type = val.type
+        this.field = {
+            in:true,
+            start:true,
+            stop:true,
+          }
+        if(type == 'Travel1'){
+          this.location.start.name = null
+          this.location.start.lat = val.lat
+          this.location.start.lng = val.lng
+        }else if(type == 'Travel2'){
+          this.location.end.name = null
+          this.location.end.lat = val.lat
+          this.location.end.lng = val.lng
+        }else{
+          this.location.in.name = null
+          this.location.in.lat = val.lat
+          this.location.in.lng = val.lng
+        }
+        if(val.placeid){
+          this.request_location_name(val.placeid,type)
+        }else{
           if(type == 'Travel1'){
             this.location.start.name = null
-            this.location.start.lat = val.lat
-            this.location.start.lng = val.lng
+            this.field.start = false
           }else if(type == 'Travel2'){
             this.location.end.name = null
-            this.location.end.lat = val.lat
-            this.location.end.lng = val.lng
+            this.field.stop = false
           }else{
             this.location.in.name = null
-            this.location.in.lat = val.lat
-            this.location.in.lng = val.lng
+            this.field.in = false
           }
-          if(val.placeid){
-            this.request_location_name(val.placeid,type)
-          }else{
-            if(type == 'Travel1'){
-              this.location.start.name = null
-              this.field.start = false
-            }else if(type == 'Travel2'){
-              this.location.end.name = null
-              this.field.stop = false
-            }else{
-              this.location.in.name = null
-              this.field.in = false
-            }
-          }
-        },
-
-        request_location_name: async function(placeId,type) {
-          var proxy = 'https://cors-anywhere.herokuapp.com/'
-          var url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+placeId+'&fields=name&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI'
-          axios.get(proxy+url)
-          .then(response => {
-            if(type == 'Travel1'){
-              this.location.start.name = response.data.result.name
-            }else if(type == 'Travel2'){
-              this.location.end.name = response.data.result.name
-            }else{
-              this.location.in.name = response.data.result.name
-            }
-          })
-          .catch(e => {
-          console.log(e)
-          })
         }
-    }
+      },
+
+      request_location_name: async function(placeId,type) {
+        var proxy = 'https://cors-anywhere.herokuapp.com/'
+        var url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+placeId+'&fields=name&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI'
+        axios.get(proxy+url)
+        .then(response => {
+          if(type == 'Travel1'){
+            this.location.start.name = response.data.result.name
+          }else if(type == 'Travel2'){
+            this.location.end.name = response.data.result.name
+          }else{
+            this.location.in.name = response.data.result.name
+          }
+        })
+        .catch(e => {
+        console.log(e)
+        })
+      }
+  }
 }
 </script>
 <style>
