@@ -19,7 +19,7 @@
                 <div class="etc" v-if="stype != 'Travel' &&  stype != 'Travel1' &&  stype != 'Travel2' && stype !=''" style="width:100%">
                     <q-input filled v-model="location.in.name" label="Add location" style="min-width:100%;max-width:100%">
                         <template v-slot:append>
-                            <q-icon name="place"  @click="gmappopup=true" class="cursor-pointer"></q-icon>
+                            <q-icon name="place"  @click="gmappopup=true, ptype=stype" class="cursor-pointer"></q-icon>
                         </template>
                     </q-input>
                 </div>
@@ -28,7 +28,7 @@
                         <div class="col">
                             <q-input filled v-model="location.start.name" label="Start">
                                 <template v-slot:append>
-                                    <q-icon name="place"  @click="gmappopup=true,stype='Travel1'" class="cursor-pointer"></q-icon>
+                                    <q-icon name="place"  @click="gmappopup=true, ptype='Travel1'" class="cursor-pointer"></q-icon>
                                 </template>
                             </q-input>
                         </div>
@@ -36,7 +36,7 @@
                         <div class="col">
                             <q-input filled v-model="location.end.name" label="Stop" style="min-width:100%;max-width:100%">
                                 <template v-slot:append>
-                                    <q-icon name="place"  @click="gmappopup=true,stype='Travel2'" class="cursor-pointer"></q-icon>
+                                    <q-icon name="place"  @click="gmappopup=true, ptype='Travel2'" class="cursor-pointer"></q-icon>
                                 </template>
                             </q-input>
                         </div>
@@ -65,7 +65,7 @@
                   <q-dialog v-model="gmappopup">
                     <q-card dense style="min-width:70%;max-width:70%">
                          <q-btn icon="close" flat round dense v-close-popup style="top:10px;right:5px;position:absolute;"></q-btn>
-                        <google-map  :smtype="stype" @onAdd="handlelocationAdd"/>
+                        <google-map  :smtype="ptype" @onAdd="handlelocationAdd"/>
                         <!-- <google-map @onAdd="handlelocalotion2Add" /> -->
                     </q-card>
                   </q-dialog>
@@ -99,6 +99,7 @@ export default{
             name: '',
             type: ['Travel','Food','Accommodation'],
             stype:'',
+            ptype:'',
             location:{
                 start:{
                     name:'',
