@@ -100,6 +100,7 @@ export default{
             type: ['Travel','Food','Accommodation'],
             stype:'',
             ptype:'',
+            indextype:['Travel1','Travel2','Food','Accommodation'],
             location:{
                 start:{
                     name:'',
@@ -125,35 +126,60 @@ export default{
         }
     },
     methods:{
-      createActivityBackEnd (){
-        if(1){
-          this.closePopup = true
-          this.$q.notify({
-            message: 'Activity created'
-          })
-        }
-        else{
-          this.$q.notify({
-            message: 'Failed to create activity'
-          })
-        }
-        console.log('Failed to create activity')
+      getParameterByName(name, url) {
+        if (!url) url = window.location.href;
+        name = name.replace(/[\[\]]/g, '\\$&');
+        var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+        if (!results) return null;
+        if (!results[2]) return '';
+      return decodeURIComponent(results[2].replace(/\+/g, ' '));
       },
-        pulllocationdata(){
-            console.log('OK')
-            console.log(this)
-            console.log('Not Error')
-            if(this.stype == 'Travel'){
-                this.location.start.name = this.GoogleMap.data.loc.name
-                this.location.start.lat = this.GoogleMap.data.markers[0].lat
-                this.location.start.lng = this.GoogleMap.data.markers[0].lng
-            }
-            else if(this.stype != 'Travel' && this.stype != null){
-                this.location.in.name = this.GoogleMap.data.loc.name
-                this.location.in.lat = this.GoogleMap.data.markers[0].lat
-                this.location.in.lng = this.GoogleMap.data.markers[0].lng
-            }
-        },
+      getType(type){
+        for(var i; i < type.lenght();i++){
+          if(type == type[i]){
+            return i
+          }
+        }
+      },
+      jsonbodyetc(type){
+        let data = JSON.stringify({
+          activity_name: this.name,
+          start_time: this.starttime,
+          start_date: this.startdate,
+          end_date: this.enddate,
+          end_time: this.endtime,
+          type: atype,
+          description: this.description,
+          in: this.location.in
+        })
+        return data
+      },
+      jsonbodyt(type){
+          let data = JSON.stringify({
+          activity_name: this.name,
+          start_time: this.starttime,
+          start_date: this.startdate,
+          end_date: this.enddate,
+          end_time: this.endtime,
+          type: atype,
+          description: this.description,
+          start: this.location.start,
+          stop: this.location.end
+        })
+        return data
+      },
+      createActivityBackEnd (){
+        var planner_id = this.getParameterByName('plannerid')
+        let headers = {'Authorization': 'JWT '+localStorage.token,
+                        'Content-Type': 'application/json'}
+        if(stype == 'Travel'){
+          let data = this.jsonbodyt(stype)
+        }else{
+          let data = this.jsonbodyetc(stype)
+        }
+        this.$http.post('/planner/plannerid='+planner_id+'/create_activity',data,{headers})
+      },
         handlelocationAdd(val) {
           console.log("val :",val)
           this.gmappopup = false
