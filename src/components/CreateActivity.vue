@@ -258,9 +258,11 @@ export default{
         .then(response => {
           if(type == 'Travel1'){
             this.location.start.name = response.data.result.name
-          }else if(type == 'Travel2'){
+          }
+          else if(type == 'Travel2'){
             this.location.end.name = response.data.result.name
-          }else{
+          }
+          else{
             this.location.in.name = response.data.result.name
           }
         })
