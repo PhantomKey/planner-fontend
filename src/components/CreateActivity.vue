@@ -17,7 +17,9 @@
                 lazy-rules
                 :rules="[ val => val && val.length > 0 || 'Please select something']"></q-select>
                 <div class="etc" v-if="stype != 'Travel' &&  stype != 'Travel1' &&  stype != 'Travel2' && stype !=''" style="width:100%">
-                    <q-input filled v-model="location.in.name" label="Add location" style="min-width:100%;max-width:100%">
+                    <q-input filled v-model="location.in.name" label="Add location" style="min-width:100%;max-width:100%"
+                    error-message="Not found location name. Please type something"
+                    :error="!checketc">
                         <template v-slot:append>
                             <q-icon name="place"  @click="gmappopup=true, ptype=stype" class="cursor-pointer"></q-icon>
                         </template>
@@ -26,7 +28,9 @@
                 <div class="travel" v-if="stype == 'Travel' || stype == 'Travel1'|| stype=='Travel2'" style="min-width:100%;max-width:100%">
                     <div class="row">
                         <div class="col">
-                            <q-input filled v-model="location.start.name" label="Start">
+                            <q-input filled v-model="location.start.name" label="Start"
+                              error-message="Not found location name. Please type something"
+                              :error="!checks">
                                 <template v-slot:append>
                                     <q-icon name="place"  @click="gmappopup=true, ptype='Travel1'" class="cursor-pointer"></q-icon>
                                 </template>
@@ -34,7 +38,9 @@
                         </div>
                         <div class="col" style="max-width:15px"></div>
                         <div class="col">
-                            <q-input filled v-model="location.end.name" label="Stop" style="min-width:100%;max-width:100%">
+                            <q-input filled v-model="location.end.name" label="Stop" style="min-width:100%;max-width:100%"
+                              error-message="Not found location name. Please type something"
+                              :error="!checke">
                                 <template v-slot:append>
                                     <q-icon name="place"  @click="gmappopup=true, ptype='Travel2'" class="cursor-pointer"></q-icon>
                                 </template>
@@ -87,9 +93,24 @@ import GoogleMap from '../components/GoogleMap.vue'
 import axios from 'axios'
 import { request } from 'http';
 import { stat } from 'fs';
+import { constants } from 'crypto';
 export default{
     components: {
       'GoogleMap': GoogleMap
+    },
+    computed:{
+      checketc(){
+        if(this.location.in.name || this.field.in) return true
+        else return false
+      },
+      checks(){
+        if(this.location.start.name || this.field.start) return true
+        else return false
+      },
+      checke(){
+        if(this.location.end.name || this.field.stop) return true
+        else return false
+      }
     },
     data() {
         return {
@@ -122,7 +143,12 @@ export default{
             startdate: '',
             starttime: '',
             enddate: '',
-            endtime: ''
+            endtime: '',
+            field:{
+              in:true,
+              start:true,
+              stop:true,
+            }
         }
     },
     methods:{
@@ -181,24 +207,43 @@ export default{
         this.$http.post('/planner/plannerid='+planner_id+'/create_activity',data,{headers})
       },
         handlelocationAdd(val) {
-          console.log("val :",val)
           this.gmappopup = false
           var type = val.type
+          this.field = {
+              in:true,
+              start:true,
+              stop:true,
+            }
           if(type == 'Travel1'){
+            this.location.start.name = null
             this.location.start.lat = val.lat
             this.location.start.lng = val.lng
           }else if(type == 'Travel2'){
+            this.location.end.name = null
             this.location.end.lat = val.lat
             this.location.end.lng = val.lng
           }else{
+            this.location.in.name = null
             this.location.in.lat = val.lat
             this.location.in.lng = val.lng
           }
-          this.request_location_name(val.placeid,type)
+          if(val.placeid){
+            this.request_location_name(val.placeid,type)
+          }else{
+            if(type == 'Travel1'){
+              this.location.start.name = null
+              this.field.start = false
+            }else if(type == 'Travel2'){
+              this.location.end.name = null
+              this.field.stop = false
+            }else{
+              this.location.in.name = null
+              this.field.in = false
+            }
+          }
         },
 
         request_location_name: async function(placeId,type) {
-          console.log(placeId)
           var proxy = 'https://cors-anywhere.herokuapp.com/'
           var url = 'https://maps.googleapis.com/maps/api/place/details/json?placeid='+placeId+'&fields=name&key=AIzaSyBMgDcxdxe2KBb6wFj1BlnbWhk3nCvnYhI'
           axios.get(proxy+url)
