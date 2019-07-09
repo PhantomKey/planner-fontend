@@ -79,7 +79,7 @@
             </q-card-section>
             <q-card-section position="bottom-right" style="text-align:right">
               <div class="q-gutter-sm">
-                <q-btn outline color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd" v-close-popup="closePopup"></q-btn>
+                <q-btn outline color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd" v-close-popup></q-btn>
                 <q-btn v-close-popup label="Cancel" outline color="negative" style="text-align:right"></q-btn>
               </div>
             </q-card-section>
