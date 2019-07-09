@@ -14,7 +14,10 @@
         <q-toolbar-title @click="home" style="cursor:pointer;">
           Trip Planner
         </q-toolbar-title>
-        <div v-if="isLogin()"><add-friend :showFriends="showAllFriends"></add-friend></div>
+        <div v-if="isLogin()" class="q-gutter-sm">
+          <add-friend :showFriends="showAllFriends"></add-friend>
+          <logout-button></logout-button>
+        </div>
       </q-toolbar>
     </q-header>
      <q-drawer
@@ -53,6 +56,7 @@
 <script>
 import { openURL, colors } from 'quasar'
 import AddFriend from '../components/AddFriend.vue'
+import LogoutButton from '../components/LogoutButton.vue'
 export default {
   name: 'MyLayout',
   mounted() {
@@ -69,16 +73,17 @@ export default {
       token:false
     }
   },
-  
+
   components: {
-    'add-friend': AddFriend
+    'add-friend': AddFriend,
+    'logout-button': LogoutButton
   },
   methods: {
     openURL,
     home () {
       if (localStorage.token){
         this.$router.push('/Home')
-      }else{ 
+      }else{
         this.$router.push('/')
       }
     },
@@ -121,7 +126,7 @@ export default {
 </script>
 
 <style>
-  body { 
+  body {
        background-image : url("/assets/sunset.jpg");
   }
 </style>

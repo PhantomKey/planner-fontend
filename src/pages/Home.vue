@@ -41,7 +41,6 @@
       </div>
       <button class="button is-info" @click="clickAddPlanner()+showAllPlanner()">Add Planner</button>
     </div>
-    <logout-button></logout-button>
   </div>
   <div v-else>
     <error-404></error-404>
@@ -50,7 +49,6 @@
 </template>
 
 <script>
-import LogoutButton from '../components/LogoutButton.vue'
 import Error404 from './Error404.vue'
 import CalendarView from "../components/CalendarView.vue"
 import CalendarViewHeader from "../components/CalendarViewHeader.vue"
@@ -58,7 +56,6 @@ import CalendarViewHeader from "../components/CalendarViewHeader.vue"
 export default {
   name: 'Home',
   components: {
-    'logout-button': LogoutButton,
     'error-404': Error404,
     'calendar-view': CalendarView,
     'calendar-view-header': CalendarViewHeader

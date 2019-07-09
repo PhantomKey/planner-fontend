@@ -1,20 +1,25 @@
 <template>
-<div style="background-color: #92a8d1;left:50%" class="centered margin-hunsa" >
-  <div class="q-px-lg q-pb-md" >
+<div style="background-color: #92a8d1;left:50%" class="centered" >
+  <div class="q-px-lg q-pb-md" v-for="date in uniqDate">
     <q-timeline :layout="layout" color="secondary">
-      <q-timeline-entry heading v-for="date in uniqDate">
+      <q-timeline-entry heading>
         {{date}}
-        <br>
       </q-timeline-entry>
-      <q-timeline-entry v-for="(activity,index) in activities"
-        :title="activity.name"
-        :subtitle="activity.startTime.toString()"
-        :side="'left'"
-      >
-        <div>
-          {{activity.description}}
+      <div v-for="(activity,index) in activities">
+        <div v-if="activity.startDate==date">
+          <q-timeline-entry
+            :title="activity.name"
+            :subtitle="activity.startTime.concat(' - ',activity.endTime)"
+            :side="'right'"
+          >
+            <div>
+              {{activity.description}}
+              <br>
+              <br>
+            </div>
+          </q-timeline-entry>
         </div>
-      </q-timeline-entry>
+    </div>
     </q-timeline>
   </div>
 </div>
@@ -100,12 +105,10 @@ export default {
 <style>
 .centered {
   position: absolute;
-  top: 60%;
+  top: 54%;
   left: 50%;
+  width: 40%;
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
-}
-.margin-hunsa{
-  margin-top:50%
 }
 </style>
