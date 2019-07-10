@@ -4,7 +4,7 @@
     <div class=row>
       <div class="column pic">
         <div class="container">
-          <div style=" color:black;vertical-align:middle;margin-top:50%;">“The world is a book and those who do not travel read only one page.”</div>
+          <div style=" color:black;vertical-align:middle;margin-top:50%;">“lol”</div>
         </div>
       </div>
       <div class="column log">
