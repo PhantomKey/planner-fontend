@@ -14,7 +14,7 @@
           >
             <div>
               {{activity.description}}
-              <br>
+              <br
               <br>
             </div>
           </q-timeline-entry>
@@ -29,9 +29,17 @@
 import uniq from 'lodash/uniq'
 
 export default {
+  props: {
+    scheduleData: {
+      type: Array,
+      default: () => []
+    }
+  },
   data: function () {
     return {
-            activities:[]
+            activities:[],
+            show: true,
+            listen:[]
           }
   },
   computed: {
@@ -40,22 +48,25 @@ export default {
     },
     uniqDate () {
       return uniq(this.activities.map(p => p.startDate))
-   }
+    },
+    rerender(){
+      console.log('render')
+      this.listen=this.$prop.scheduleData
+      this.showAllActivity()
+    }
   },
   beforeMount() {
     this.showAllActivity()
   },
-  watch: {
-    'message': function () {
-      this.showAllActivity()
-    }
-  },
   methods: {
+    // recreatePage(){
+    //   console.log('recreatePage')
+    //   this.showAllActivity()
+    // },
     async showAllActivity (){
       var planner_id = this.getParameterByName('plannerid')
       let headers = {'Authorization': 'JWT '+localStorage.token}
       const data = await this.$http.get('/planner/plannerid='+planner_id+'/view_all_activity', {headers})
-      console.log(data.data)
       this.showAllActivitiesonScreen(data)
     },
     showAllActivitiesonScreen(value){
@@ -89,7 +100,6 @@ export default {
           description: value['data']['description'][i]
         })
       }
-      console.log(this.activities)
     },
     getParameterByName(name, url) {
       if (!url) url = window.location.href;

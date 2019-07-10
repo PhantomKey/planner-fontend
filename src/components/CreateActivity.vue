@@ -154,7 +154,6 @@ export default{
     },
     methods:{
       emitToPlanner(){
-        console.log('emitting')
         this.$emit('refreshSchedule')
       },
       getParameterByName(name, url) {
