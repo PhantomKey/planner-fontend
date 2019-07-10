@@ -71,12 +71,14 @@ export default {
   },
   methods: {
     createArray(indexs){
-      var data = {
-        index:indexs,
-        status:false
+      if(this.activityarray.length != this.activities.length){
+        var data = {
+          index:indexs,
+          status:false
+        }
+        this.activityarray.push(data)
+        console.log('this is array'+this.activityarray)
       }
-      this.activityarray.push(data)
-      console.log(this.activityarray)
     },
     setfalse(){
       console.log('set false')
