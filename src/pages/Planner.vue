@@ -3,7 +3,7 @@
     <div v-if="loadingfinish">
       <div v-if="checkplanner&&isLogin">
         <schedule></schedule>
-        <createactivity></createactivity>
+        <createactivity @refreshSchedule="refreshPage" message="refreshThis"></createactivity>
       </div>
       <div v-else>
         <error-404></error-404>
@@ -24,6 +24,9 @@ export default {
     'error-404': Error404,
     'schedule': Schedule,
     'createactivity':CreateActivity
+  },
+  props: {
+    message: String
   },
   checkplannerbeforecreate: false,
   loadingfinishbeforecreate: false,
@@ -70,6 +73,9 @@ export default {
   methods: {
     async authenfunction() {
       this.isYourPlanner()
+    },
+    refreshPage () {
+
     },
     isLogin() {
       if (localStorage.token) {

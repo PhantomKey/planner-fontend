@@ -45,6 +45,11 @@ export default {
   beforeMount() {
     this.showAllActivity()
   },
+  watch: {
+    'message': function () {
+      this.showAllActivity()
+    }
+  },
   methods: {
     async showAllActivity (){
       var planner_id = this.getParameterByName('plannerid')
@@ -58,19 +63,19 @@ export default {
       for (var i in value['data']['id']){
         var returnstartdatetime = new Date(value['data']['startdatetime'][i])
         var returnenddatetime =  new Date(value['data']['enddatetime'][i])
-        var startDate = returnstartdatetime.getDate().toString()
-        var startMonth = (returnstartdatetime.getMonth()+1).toString()
-        var startYear = returnstartdatetime.getFullYear().toString()
-        var startHour = returnstartdatetime.getHours().toString()
+        var startDate = returnstartdatetime.getUTCDate().toString()
+        var startMonth = (returnstartdatetime.getUTCMonth()+1).toString()
+        var startYear = returnstartdatetime.getUTCFullYear().toString()
+        var startHour = returnstartdatetime.getUTCHours().toString()
         startHour = ("0" + startHour).slice(-2)
-        var startMinute = returnstartdatetime.getMinutes().toString()
+        var startMinute = returnstartdatetime.getUTCMinutes().toString()
         startMinute = ("0" + startMinute).slice(-2)
-        var endDate = returnenddatetime.getDate().toString()
-        var endMonth = (returnenddatetime.getMonth()+1).toString()
-        var endYear = returnenddatetime.getFullYear().toString()
-        var endHour = returnenddatetime.getHours().toString()
+        var endDate = returnenddatetime.getUTCDate().toString()
+        var endMonth = (returnenddatetime.getUTCMonth()+1).toString()
+        var endYear = returnenddatetime.getUTCFullYear().toString()
+        var endHour = returnenddatetime.getUTCHours().toString()
         endHour = ("0" + endHour).slice(-2)
-        var endMinute = returnenddatetime.getMinutes().toString()
+        var endMinute = returnenddatetime.getUTCMinutes().toString()
         endMinute = ("0" + endMinute).slice(-2)
         this.activities.push({
           name: value['data']['name'][i],
