@@ -34,8 +34,8 @@
             <q-icon name="school"/>
           </q-item-section>
           <q-item-section>
-            <q-item-label>{{i.name}}-{{i.id}}</q-item-label>
-            <q-item-label caption>Your mom</q-item-label>
+            <q-item-label>{{i.name}}</q-item-label>
+            <q-item-label caption>Your friend</q-item-label>
           </q-item-section>
           <q-btn @click="deleteMember(i.id)">
             remove
