@@ -2,8 +2,8 @@
   <div>
     <div v-if="loadingfinish">
       <div v-if="checkplanner&&isLogin">
-        <schedule></schedule>
-        <createactivity @refreshSchedule="refreshPage" message="refreshThis"></createactivity>
+        <schedule :scheduleData="refreshToken"></schedule>
+        <createactivity @refreshSchedule="refreshPage"></createactivity>
       </div>
       <div v-else>
         <error-404></error-404>
@@ -25,9 +25,6 @@ export default {
     'schedule': Schedule,
     'createactivity':CreateActivity
   },
-  props: {
-    message: String
-  },
   checkplannerbeforecreate: false,
   loadingfinishbeforecreate: false,
   data: function () {
@@ -35,7 +32,8 @@ export default {
             activities: [
             ],
             checkplanner: this.$options.checkplannerbeforecreate,
-            loadingfinish: this.$options.loadingfinishbeforecreate
+            loadingfinish: this.$options.loadingfinishbeforecreate,
+            refreshToken: [0]
           }
   },
   beforeMount(){
@@ -75,7 +73,8 @@ export default {
       this.isYourPlanner()
     },
     refreshPage () {
-
+      this.refreshToken.push(this.refreshToken[(this.refreshToken.length)-1]+1)
+      console.log(this.refreshToken)
     },
     isLogin() {
       if (localStorage.token) {
