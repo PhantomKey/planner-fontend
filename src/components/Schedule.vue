@@ -11,6 +11,8 @@
             :title="activity.name"
             :subtitle="activity.startTime.concat(' - ',activity.endTime)"
             :side="'right'"
+            @click="icon = true"
+            style="cursor: pointer"
           >
             <div>
               {{activity.description}}
@@ -21,6 +23,20 @@
         </div>
     </div>
     </q-timeline>
+    <q-dialog v-model="icon">
+            <q-card dense style="min-width:50%;max-width:50%">
+            <q-card-section class="row items-center">
+                <div class="text-h6" style="margin:0 auto;" label="activity.name"></div>
+            </q-card-section>
+
+            <q-card-section position="bottom-right" style="text-align:right">
+              <div class="q-gutter-sm">
+                <q-btn outline color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd() + emitToPlanner()" v-close-popup></q-btn>
+                <q-btn v-close-popup label="Cancel" outline color="negative" style="text-align:right"></q-btn>
+              </div>
+            </q-card-section>
+            </q-card>
+        </q-dialog>
   </div>
 </div>
 </template>
@@ -125,5 +141,6 @@ export default {
   width: 40%;
   /* bring your own prefixes */
   transform: translate(-50%, -50%);
+  margin-top:200px;
 }
 </style>
