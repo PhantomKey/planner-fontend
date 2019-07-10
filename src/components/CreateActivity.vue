@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <q-btn label="New"
-        color="primary"
+    <div class = "centered">
+        <q-btn label="New Activity"
+        color="secondary"
         @click="icon = true">
         </q-btn>
         <q-dialog v-model="icon">
@@ -277,7 +277,12 @@ export default{
   }
 }
 </script>
-<style>
+<style scoped>
+.centered {
+  position: fixed; /* or absolute */
+  top: 13%;
+  left: 66%;
+}
 .pac-container.pac-logo.hdpi{
     z-index: 9999 !important;
 }

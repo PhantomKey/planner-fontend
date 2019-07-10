@@ -7,7 +7,7 @@ div{
 <template>
   <div class="">
     <br>
-    <p> This is a front page </p>
+    <p> Welcome to trip planner </p>
     <login-button></login-button>
     <br>
     <p></p>
