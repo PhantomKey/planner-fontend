@@ -1,5 +1,5 @@
 <template>
-<div style="background-color: #92a8d1;left:50%" class="centered" >
+<div style="background-color: #92a8d1;left:50%">
   <div class="q-px-lg q-pb-md" v-for="date in uniqDate">
     <q-timeline :layout="layout" color="secondary">
       <q-timeline-entry heading>
@@ -18,7 +18,7 @@
           >
             <div>
               {{activity.description}}
-              <br>
+              <br
               <br>
             </div>
           </q-timeline-entry>
@@ -39,11 +39,18 @@ export default {
   components:{
     'specific-activity':SpecificActivity
   },
+  props: ['scheduleData'],
+  watch: {
+    'scheduleData': function() {
+      this.showAllActivity()
+    }
+  },
   data: function () {
     return {
             activities:[],
             icon: false,
-            activityarray:[]
+            activityarray:[],
+            show: true
           }
   },
   computed: {
@@ -52,23 +59,23 @@ export default {
     },
     uniqDate () {
       return uniq(this.activities.map(p => p.startDate))
-   }
+    },
+    // rerender(){
+    //   console.log('render')
+    //   this.listen=this.$prop.scheduleData
+    //   this.showAllActivity()
+    // }
   },
   beforeMount() {
     this.showAllActivity()
   },
-  watch: {
-    'message': function () {
-      this.showAllActivity()
-    }
-  },
   methods: {
-    async createArray(indexs){
+    createArray(indexs){
       var data = {
         index:indexs,
         status:false
       }
-      await this.activityarray.push(data)
+      this.activityarray.push(data)
       console.log(this.activityarray)
     },
     setfalse(){
@@ -79,7 +86,6 @@ export default {
       var planner_id = this.getParameterByName('plannerid')
       let headers = {'Authorization': 'JWT '+localStorage.token}
       const data = await this.$http.get('/planner/plannerid='+planner_id+'/view_all_activity', {headers})
-      console.log(data.data)
       this.showAllActivitiesonScreen(data)
     },
     showAllActivitiesonScreen(value){
@@ -113,7 +119,6 @@ export default {
           description: value['data']['description'][i]
         })
       }
-      console.log(this.activities)
     },
     getParameterByName(name, url) {
       if (!url) url = window.location.href;
