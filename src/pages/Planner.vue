@@ -2,7 +2,7 @@
   <div>
     <div v-if="loadingfinish">
       <div v-if="checkplanner&&isLogin">
-        <schedule :scheduleData="refreshToken"></schedule>
+        <schedule :scheduleData="refreshToken" style="text-align:center"></schedule>
         <createactivity @refreshSchedule="refreshPage"></createactivity>
       </div>
       <div v-else>

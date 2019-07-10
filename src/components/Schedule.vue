@@ -1,12 +1,11 @@
 <template>
-<div style="background-color: #92a8d1;left:50%">
-  <div class="q-px-lg q-pb-md" v-for="date in uniqDate">
+<div style="background-color: #92a8d1;width:30%;position: relative;margin:auto">
+  <div class="q-px-lg q-pb-md" v-for="date in uniqDate" >
     <q-timeline :layout="layout" color="secondary">
       <q-timeline-entry heading>
         {{date}}
       </q-timeline-entry>
       <div v-for="(activity,index) in activities">
-        
         <div v-if="activity.startDate==date" >
         {{createArray(activity.id)}}
           <q-timeline-entry
