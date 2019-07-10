@@ -6,7 +6,9 @@
         {{date}}
       </q-timeline-entry>
       <div v-for="(activity,index) in activities">
-        <div v-if="activity.startDate==date">
+        
+        <div v-if="activity.startDate==date" >
+        {{createArray(activity.id)}}
           <q-timeline-entry
             :title="activity.name"
             :subtitle="activity.startTime.concat(' - ',activity.endTime)"
@@ -20,35 +22,28 @@
               <br>
             </div>
           </q-timeline-entry>
+          <specific-activity v-if="icon" :activity="activity" @close="setfalse"></specific-activity>
         </div>
     </div>
     </q-timeline>
-    <q-dialog v-model="icon">
-            <q-card dense style="min-width:50%;max-width:50%">
-            <q-card-section class="row items-center">
-                <div class="text-h6" style="margin:0 auto;" label="activity.name"></div>
-            </q-card-section>
-            
-            <q-card-section position="bottom-right" style="text-align:right">
-              <div class="q-gutter-sm">
-                <q-btn outline color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd() + emitToPlanner()" v-close-popup></q-btn>
-                <q-btn v-close-popup label="Cancel" outline color="negative" style="text-align:right"></q-btn>
-              </div>
-            </q-card-section>
-            </q-card>
-        </q-dialog>
+    
   </div>
 </div>
 </template>
 
 <script>
 import uniq from 'lodash/uniq'
+import SpecificActivity from './SpecificActivity'
 
 export default {
+  components:{
+    'specific-activity':SpecificActivity
+  },
   data: function () {
     return {
             activities:[],
-            icon: false
+            icon: false,
+            activityarray:[]
           }
   },
   computed: {
@@ -68,6 +63,18 @@ export default {
     }
   },
   methods: {
+    async createArray(indexs){
+      var data = {
+        index:indexs,
+        status:false
+      }
+      await this.activityarray.push(data)
+      console.log(this.activityarray)
+    },
+    setfalse(){
+      console.log('set false')
+      this.icon = false
+    },
     async showAllActivity (){
       var planner_id = this.getParameterByName('plannerid')
       let headers = {'Authorization': 'JWT '+localStorage.token}
