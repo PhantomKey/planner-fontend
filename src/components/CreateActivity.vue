@@ -79,8 +79,8 @@
             </q-card-section>
             <q-card-section position="bottom-right" style="text-align:right">
               <div class="q-gutter-sm">
-                <q-btn outline color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd() + emitToPlanner()" v-close-popup></q-btn>
-                <q-btn v-close-popup label="Cancel" outline color="negative" style="text-align:right"></q-btn>
+                <q-btn outline color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd()" v-close-popup></q-btn>
+                <q-btn v-close-popup label="Cancel" outline color="negative" style="text-align:right" @click="resetData()"></q-btn>
               </div>
             </q-card-section>
             </q-card>
@@ -153,6 +153,9 @@ export default{
         }
     },
     methods:{
+      resetData() {
+        Object.assign(this.$data, this.$options.data.apply(this))
+      },
       emitToPlanner(){
         this.$emit('refreshSchedule')
       },
@@ -199,7 +202,7 @@ export default{
         })
         return datas
       },
-      createActivityBackEnd (){
+       async createActivityBackEnd (){
         var planner_id = this.getParameterByName('plannerid')
         let headers = {'Authorization': 'JWT '+localStorage.token,
                         'Content-Type': 'application/json'}
@@ -210,8 +213,10 @@ export default{
         }else{
           var datas = this.jsonbodyetc(type)
         }
-        this.$http.post('/planner/plannerid='+planner_id+'/create_activity',datas,{headers}).then((request) => this.checkreq(request))
+        await this.$http.post('/planner/plannerid='+planner_id+'/create_activity',datas,{headers}).then((request) => this.checkreq(request))
         .catch((err) => this.reqFailed(err))
+        this.emitToPlanner()
+        Object.assign(this.$data, this.$options.data.apply(this))
       },
       checkreq(req){
       },

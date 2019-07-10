@@ -1,5 +1,5 @@
 <template>
-<div style="background-color: #92a8d1;left:50%" class="centered" >
+<div style="background-color: #92a8d1;left:50%">
   <div class="q-px-lg q-pb-md" v-for="date in uniqDate">
     <q-timeline :layout="layout" color="secondary">
       <q-timeline-entry heading>
@@ -45,17 +45,17 @@
 import uniq from 'lodash/uniq'
 
 export default {
-  props: {
-    scheduleData: {
-      type: Array,
-      default: () => []
+  props: ['scheduleData'],
+  watch: {
+    'scheduleData': function() {
+      this.showAllActivity()
     }
   },
   data: function () {
     return {
             activities:[],
             show: true,
-            listen:[]
+            icon: false
           }
   },
   computed: {
@@ -65,20 +65,16 @@ export default {
     uniqDate () {
       return uniq(this.activities.map(p => p.startDate))
     },
-    rerender(){
-      console.log('render')
-      this.listen=this.$prop.scheduleData
-      this.showAllActivity()
-    }
+    // rerender(){
+    //   console.log('render')
+    //   this.listen=this.$prop.scheduleData
+    //   this.showAllActivity()
+    // }
   },
   beforeMount() {
     this.showAllActivity()
   },
   methods: {
-    // recreatePage(){
-    //   console.log('recreatePage')
-    //   this.showAllActivity()
-    // },
     async showAllActivity (){
       var planner_id = this.getParameterByName('plannerid')
       let headers = {'Authorization': 'JWT '+localStorage.token}

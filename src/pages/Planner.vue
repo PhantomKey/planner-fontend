@@ -33,7 +33,7 @@ export default {
             ],
             checkplanner: this.$options.checkplannerbeforecreate,
             loadingfinish: this.$options.loadingfinishbeforecreate,
-            refreshToken: [0]
+            refreshToken: 1
           }
   },
   beforeMount(){
@@ -73,7 +73,8 @@ export default {
       this.isYourPlanner()
     },
     refreshPage () {
-      this.refreshToken.push(this.refreshToken[(this.refreshToken.length)-1]+1)
+      this.refreshToken = this.refreshToken+1
+      // this.refreshToken.push(this.refreshToken[(this.refreshToken.length)-1]+1)
       console.log(this.refreshToken)
     },
     isLogin() {
