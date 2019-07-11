@@ -1,7 +1,7 @@
 <template>
 <div>
-    <q-btn rounded 
-    color="primary" 
+    <q-btn rounded
+    color="primary"
     label="Create Service"
     @click="serviceW = true"/>
     <q-dialog v-model="serviceW"> 
@@ -150,7 +150,7 @@ export default{
               this.calcaption = "Calculation price as a total price and spilt to person that use service"
           }else{
               this.calname = 'person'
-              this.calcaption = 'Calculation price as a person spilt by age'  
+              this.calcaption = 'Calculation price as a person spilt by age'
           }
       }
   },

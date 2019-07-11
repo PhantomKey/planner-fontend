@@ -23,9 +23,9 @@
         </div>
     </div>
     </q-timeline>
-    <div>
-      <specific-activity v-if="icon" :activity="openactivity" :doesntmatterkey="doesntmatterkey" @close="setfalse"></specific-activity>
-    </div>
+  </div>
+  <div>
+    <specific-activity v-if="icon" :activity="openactivity" :doesntmatterkey="doesntmatterkey"></specific-activity>
   </div>
 </div>
 </template>
@@ -67,13 +67,9 @@ export default {
   },
   methods: {
     openSpecificActivityPopup(activity){
-      this.doesntmatterkey++
+      this.doesntmatterkey = this.doesntmatterkey + 1
       this.openactivity = activity
       this.icon=true
-    },
-    setfalse(){
-      console.log('set false')
-      this.icon = false
     },
     async showAllActivity (){
       var planner_id = this.getParameterByName('plannerid')
