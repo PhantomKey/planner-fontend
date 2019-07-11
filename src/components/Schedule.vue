@@ -11,7 +11,7 @@
             :title="activity.name"
             :subtitle="activity.startTime.concat(' - ',activity.endTime)"
             :side="'right'"
-            @click="openSpecificActivityPopup(activity.id)"
+            @click="openSpecificActivityPopup(activity)"
             style="cursor: pointer"
           >
             <div>
@@ -23,7 +23,7 @@
     </div>
     </q-timeline>
     <div>
-      <specific-activity v-if="icon" :activityid="openactivityid" @close="setfalse"></specific-activity>
+      <specific-activity v-if="icon" :activity="openactivity" :doesntmatterkey="doesntmatterkey" @close="setfalse"></specific-activity>
     </div>
   </div>
 </div>
@@ -49,7 +49,8 @@ export default {
             icon: false,
             activityarray:[],
             show: true,
-            openactivityid: 0
+            openactivity: {},
+            doesntmatterkey: 1
           }
   },
   computed: {
@@ -59,28 +60,14 @@ export default {
     uniqDate () {
       return uniq(this.activities.map(p => p.startDate))
     },
-    // rerender(){
-    //   console.log('render')
-    //   this.listen=this.$prop.scheduleData
-    //   this.showAllActivity()
-    // }
   },
   beforeMount() {
     this.showAllActivity()
   },
   methods: {
-    // createArray(indexs){
-    //   if(this.activityarray.length != this.activities.length){
-    //     var data = {
-    //       index:indexs,
-    //       status:false
-    //     }
-    //     this.activityarray.push(data)
-    //     console.log('this is array'+this.activityarray)
-    //   }
-    // },
-    openSpecificActivityPopup(activityid){
-      this.openactivityid = activityid
+    openSpecificActivityPopup(activity){
+      this.doesntmatterkey++
+      this.openactivity = activity
       this.icon=true
     },
     setfalse(){

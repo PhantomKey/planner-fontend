@@ -3,7 +3,7 @@
 <q-dialog persistant v-model="icon">
     <q-card dense style="min-width:50%;max-width:50%">
         <q-card-section class="row items-center">
-            <div class="text-h6" style="margin:0 auto;">{{activityid}}</div>
+            <div class="text-h6" style="margin:0 auto;">{{activity.name}}</div>
         </q-card-section>
 
         <q-card-section position="bottom-right" style="text-align:right">
@@ -23,11 +23,22 @@
 <script>
 export default {
     props: {
-        activityid: Number
+      activity: {
+        type: Object
+      },
+      doesntmatterkey: {
+        type: Number,
+        default: 1
+      }
+    },
+    watch: {
+      'doesntmatterkey': function() {
+        this.icon = true
+      }
     },
     data: function () {
         return {
-            icon: true
+            icon: false,
         }
     },
     methods: {
