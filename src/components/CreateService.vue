@@ -5,7 +5,7 @@
     label="Create Service"
     @click="serviceW = true"/>
     <q-dialog v-model="serviceW"> 
-        <q-card flat style="width:600px;max-width:600px;height:600px;max-height:600px">
+        <q-card flat style="width:600px;max-width:600px;height:650px;max-height:650px">
             <q-stepper
             v-model="step"
             header-nav
@@ -18,7 +18,7 @@
                 title="Service setting"
                 icon="all_inclusive"
                 :done="done1"
-                style="min-height: 432px;max-height:432px"
+                style="min-height: 485px;max-height:485px"
                 >
                     <q-card-section class="row items-center" style="padding-top:0px;padding-bottom:32px">
                         <div class="text-h5" style="margin:0 auto">ADD YOUR SERVICE</div>
@@ -48,10 +48,17 @@
                     </q-card-section>
                         <q-slide-transition style="width:100%">
                             <div v-show="!calType" style="width:100%">
-                                <q-card-section dense class="q-gutter-sm" style="padding-bottom:8px">
-                                    <q-input dense filled label="Kid Price" v-model="siglePrice.kid"/>
-                                    <q-input dense filled label="Adult Price" v-model="siglePrice.adult"/>
-                                    <q-input dense filled label="Elderly Price" v-model="siglePrice.elderly" /> 
+                                <q-card-section dense class="q-gutter-sm" style="padding-bottom:0px;">
+                                    <q-input dense filled label="Kid Price" v-model="siglePrice.kid"
+                                    error-message="Require number only"
+                                    :error="!numberK"
+                                    style="padding-bottom:20px"/>
+                                    <q-input dense filled label="Adult Price" v-model="siglePrice.adult"
+                                    error-message="Require number only"
+                                    :error="!numberA"/>
+                                    <q-input dense filled label="Elderly Price" v-model="siglePrice.elderly" 
+                                    error-message="Require number only"
+                                    :error="!numberE"/>
                                 </q-card-section>
                             </div>
                         </q-slide-transition>
@@ -84,7 +91,7 @@
                     Try out different ad text to see what brings in the most customers, and learn how to
                     enhance your ads using features like ad extensions. If you run into any problems with
                     your ads, find out how to tell if they're running and how to resolve approval issues.
-                </q-step>
+                </q-step>n
                 
                 <template v-slot:navigation>
                      <q-card-section position="bottom-right" style="text-align:right;padding-top:8px;right:0px;bottom:0px">
@@ -126,9 +133,9 @@ export default{
         calname:'person',
         calcaption:'Calculation price as a person spilt by age',
         siglePrice:{
-            kid:'',
-            adult:'',
-            elderly:''
+            kid:null,
+            adult:null,
+            elderly:null
         },
         groupPrice:'',
         step:1,
@@ -137,8 +144,27 @@ export default{
         done3:false,
     }
   },
+  computed:{
+    numberK(){
+        return this.checknumber(this.siglePrice.kid)
+    },
+    numberA(){
+        return this.checknumber(this.siglePrice.adult)
+    },
+    numberE(){
+        return this.checknumber(this.siglePrice.elderly)
+    }
+  },
   methods:{
-      resetData() {
+    checknumber(item){
+        if(item){
+            var checkNumber = Number(item)
+            if(checkNumber) return true
+            return false
+        }
+        return true
+    },
+    resetData() {
         Object.assign(this.$data, this.$options.data.apply(this))
       },
       caltypename(){
