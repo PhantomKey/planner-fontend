@@ -4,60 +4,115 @@
     color="primary" 
     label="Create Service"
     @click="serviceW = true"/>
-
     <q-dialog v-model="serviceW"> 
-        <q-card flat style="width:600px;max-width:600px;">
-            <q-card-section class="row items-center" style="padding-top:32px;padding-bottom:32px">
-                <div class="text-h5" style="margin:0 auto">ADD YOUR SERVICE</div>
-            </q-card-section>
-            <q-card-section class="q-gutter-sm">
-                <q-input filled  dense label="service name" v-model="name"/>
-                 <q-list>
-                    <q-item multiline tag="label" v-ripple>
-                        <q-item-section>
-                            <q-item-label>Calculate price as {{calname}}</q-item-label>
-                            <q-item-label caption>{{calcaption}}</q-item-label>
-                        </q-item-section>
-                        <q-item-section avatar>
-                            <q-toggle color="blue" 
-                            v-model="calType" 
-                            val="battery" 
-                            checked-icon="group"
-                            unchecked-icon="person"
-                            keep-color
-                            />
-                        </q-item-section>
-                    </q-item>
-                 </q-list>
-            </q-card-section>
-            <q-card-section style="padding-left:16px;padding-bottom:0px">
-                <div class='text-h6'>Service Price</div>
-            </q-card-section>
-                <q-slide-transition style="width:100%">
-                    <div v-show="!calType" style="width:100%">
-                        <q-card-section dense class="q-gutter-sm">
-                            <q-input dense filled label="Kid Price" v-model="siglePrice.kid"
-                            />
-                            <q-input dense filled label="Adult Price" v-model="siglePrice.adult"/>
-                            <q-input dense filled label="Elderly Price" v-model="siglePrice.elderly" /> 
-                        </q-card-section>
-                    </div>
-                </q-slide-transition>
-                <q-slide-transition>
-                    <div v-show="calType" style="width:100%">
-                        <q-card-section dense class="q-gutter-sm">
-                            <q-input dense filled label="Totle Price" v-model="groupPrice"/>
-                        </q-card-section>
-                    </div>
-                </q-slide-transition>
-                
-            
-            <q-card-section position="bottom-right" style="text-align:right">
-                <div class="q-gutter-sm">
-                    <q-btn outline type="submit" color="primary" label="Create" style="text-align:right" v-close-popup></q-btn>
-                    <q-btn v-close-popup type="reset" label="Cancel" outline color="negative" style="text-align:right" ></q-btn>
-                </div>
-            </q-card-section>
+        <q-card flat style="width:600px;max-width:600px;height:600px;max-height:600px">
+            <q-stepper
+            v-model="step"
+            header-nav
+            ref="stepper"
+            color="primary"
+            animated
+            >
+                <q-step
+                :name="1"
+                title="Service setting"
+                icon="all_inclusive"
+                :done="done1"
+                style="height:524px"
+                >
+                    <q-card-section class="row items-center" style="padding-top:0px;padding-bottom:32px">
+                        <div class="text-h5" style="margin:0 auto">ADD YOUR SERVICE</div>
+                    </q-card-section>
+                    <q-card-section class="q-gutter-sm">
+                        <q-input filled  dense label="service name" v-model="sname"/>
+                        <q-list>
+                            <q-item multiline tag="label" v-ripple>
+                                <q-item-section>
+                                    <q-item-label>Calculate price as {{calname}}</q-item-label>
+                                    <q-item-label caption>{{calcaption}}</q-item-label>
+                                </q-item-section>
+                                <q-item-section avatar>
+                                    <q-toggle color="blue" 
+                                    v-model="calType" 
+                                    val="battery" 
+                                    checked-icon="group"
+                                    unchecked-icon="person"
+                                    keep-color
+                                    />
+                                </q-item-section>
+                            </q-item>
+                        </q-list>
+                    </q-card-section>
+                    <q-card-section style="padding-left:16px;padding-bottom:0px">
+                        <div class='text-h6'>Service Price</div>
+                    </q-card-section>
+                        <q-slide-transition style="width:100%">
+                            <div v-show="!calType" style="width:100%">
+                                <q-card-section dense class="q-gutter-sm">
+                                    <q-input dense filled label="Kid Price" v-model="siglePrice.kid"
+                                    />
+                                    <q-input dense filled label="Adult Price" v-model="siglePrice.adult"/>
+                                    <q-input dense filled label="Elderly Price" v-model="siglePrice.elderly" /> 
+                                </q-card-section>
+                            </div>
+                        </q-slide-transition>
+                        <q-slide-transition>
+                            <div v-show="calType" style="width:100%">
+                                <q-card-section dense class="q-gutter-sm">
+                                    <q-input dense filled label="Totle Price" v-model="groupPrice"/>
+                                </q-card-section>
+                            </div>
+                        </q-slide-transition>
+                    
+                        
+                            <!-- <q-btn outline type="submit" color="primary" label="Create" style="text-align:right" v-close-popup></q-btn> -->
+                        <q-card-section style="right:0px;bottom:0px">
+                            <q-stepper-navigation style="text-align:right">
+                                <div class="q-gutter-sm">
+                                    <q-btn flat v-close-popup type="reset" label="Cancel" color="negative" style="text-align:right" ></q-btn>
+                                    <q-btn @click="() => { done1 = true; step = 2 }" color="primary" label="Continue" style="text-align:right"/>
+                                </div>
+                            </q-stepper-navigation>
+                    </q-card-section>
+                </q-step>
+                <q-step
+                    :name="2"
+                    title="Select Member"
+                    icon="person_add"
+                    :done="done2"
+                >
+                    An ad group contains one or more ads which target a shared set of keywords.
+                    <q-card-section position="bottom-right" style="text-align:right">
+                        <q-stepper-navigation>
+                            <div class="q-gutter-sm">
+                                <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
+                                <q-btn @click="() => { done2 = true; step = 3 }" color="primary" label="Continue" />
+                            </div>
+                        </q-stepper-navigation>
+                    </q-card-section>
+                </q-step>
+
+                <q-step
+                    :name="3"
+                    title="Total price"
+                    icon="attach_money"
+                    :done="done3"
+                >
+                    Try out different ad text to see what brings in the most customers, and learn how to
+                    enhance your ads using features like ad extensions. If you run into any problems with
+                    your ads, find out how to tell if they're running and how to resolve approval issues.
+                    <q-card-section position="bottom-right" style="text-align:right">
+                        <q-stepper-navigation>
+                            <div class="q-gutter-sm">
+                                <q-btn flat @click="step = 2" color="primary" label="Back" class="q-ml-sm" />
+                                <q-btn color="primary" v-close-popup @click="done3 = true, resetData()" label="Finish" />
+                            </div>
+                        </q-stepper-navigation>
+                    </q-card-section>
+                </q-step>
+
+
+            </q-stepper>
         </q-card>
     </q-dialog>
 </div>
@@ -68,7 +123,7 @@ export default{
     data: function () {
     return {
         serviceW: false,
-        name:'',
+        sname:'',
         PriceType:'Single',
         calType: false,
         calname:'person',
@@ -79,9 +134,16 @@ export default{
             elderly:''
         },
         groupPrice:'',
+        step:1,
+        done1:false,    
+        done2:false,
+        done3:false,
     }
   },
   methods:{
+      resetData() {
+        Object.assign(this.$data, this.$options.data.apply(this))
+      },
       caltypename(){
           if(this.calType){
               this.calname = 'group'
@@ -101,5 +163,11 @@ export default{
 }
 </script>
 
-<style>
+<style scoped>
+.q-stepper__step-content{
+    height: 524px !important;
+}
+.q-stepper__step-inner{
+    height: 524px !important;
+}
 </style>
