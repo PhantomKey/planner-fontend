@@ -2,9 +2,15 @@
   <div>
     <div v-if="loadingfinish">
       <div v-if="checkplanner&&isLogin">
-        <createactivity @refreshSchedule="refreshPage"></createactivity>
-        <create-service></create-service>
-        <schedule :scheduleData="refreshToken" style="text-align:center"></schedule>
+        <div class="row">
+          <div class="col-sm-4" style="background-color: #92a8d1;">
+            <schedule :scheduleData="refreshToken" style="text-align:center"></schedule>
+          </div>
+          <div class="col-sm-8" style="background-color: #6F90CE;">
+            <createactivity @refreshSchedule="refreshPage"></createactivity>
+            <create-service></create-service>
+          </div>
+        </div>
       </div>
       <div v-else>
         <error-404></error-404>

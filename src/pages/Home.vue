@@ -89,7 +89,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 @import "../../static/css/default.css";
 @import "../../static/css/holidays-us.css";
 .calendar-view .day .today {

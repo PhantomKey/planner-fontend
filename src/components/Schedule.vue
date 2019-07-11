@@ -1,6 +1,5 @@
 <template>
-
-<div style="background-color: #92a8d1;width:40%;position: relative;margin:auto">
+<div style="background-color: #92a8d1;position: relative;margin:auto">
   <div class="q-px-lg q-pb-md" v-for="date in uniqDate" >
     <q-timeline :layout="layout" color="secondary">
       <q-timeline-entry heading>
@@ -126,13 +125,13 @@ export default {
 </script>
 
 <style>
-.centered {
+/* .centered {
   position: absolute;
   top: 54%;
   left: 50%;
-  width: 40%;
+  width: 40%; */
   /* bring your own prefixes */
-  transform: translate(-50%, -50%);
+  /* transform: translate(-50%, -50%);
   margin-top:200px;
-}
+} */
 </style>

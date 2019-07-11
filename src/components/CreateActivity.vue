@@ -282,10 +282,10 @@ export default{
 }
 </script>
 <style scoped>
-.centered { 
-  position:relative;
+.centered {
+  /* position:relative;
   margin-top:53px;
-  left:66%;
+  left:66%; */
 }
 .pac-container.pac-logo.hdpi{
     z-index: 9999 !important;
