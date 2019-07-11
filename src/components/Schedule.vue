@@ -1,5 +1,6 @@
 <template>
-<div style="background-color: #92a8d1;width:30%;position: relative;margin:auto">
+
+<div style="background-color: #92a8d1;width:40%;position: relative;margin:auto">
   <div class="q-px-lg q-pb-md" v-for="date in uniqDate" >
     <q-timeline :layout="layout" color="secondary">
       <q-timeline-entry heading>
@@ -7,25 +8,24 @@
       </q-timeline-entry>
       <div v-for="(activity,index) in activities">
         <div v-if="activity.startDate==date" >
-        {{createArray(activity.id)}}
           <q-timeline-entry
             :title="activity.name"
             :subtitle="activity.startTime.concat(' - ',activity.endTime)"
             :side="'right'"
-            @click="icon = true"
+            @click="openSpecificActivityPopup(activity)"
             style="cursor: pointer"
           >
             <div>
               {{activity.description}}
               <br>
-              <br>
             </div>
           </q-timeline-entry>
-          <specific-activity v-if="icon" :activity="activity" @close="setfalse"></specific-activity>
         </div>
     </div>
     </q-timeline>
-    
+    <div>
+      <specific-activity v-if="icon" :activity="openactivity" :doesntmatterkey="doesntmatterkey" @close="setfalse"></specific-activity>
+    </div>
   </div>
 </div>
 </template>
@@ -49,7 +49,9 @@ export default {
             activities:[],
             icon: false,
             activityarray:[],
-            show: true
+            show: true,
+            openactivity: {},
+            doesntmatterkey: 1
           }
   },
   computed: {
@@ -59,25 +61,15 @@ export default {
     uniqDate () {
       return uniq(this.activities.map(p => p.startDate))
     },
-    // rerender(){
-    //   console.log('render')
-    //   this.listen=this.$prop.scheduleData
-    //   this.showAllActivity()
-    // }
   },
   beforeMount() {
     this.showAllActivity()
   },
   methods: {
-    createArray(indexs){
-      if(this.activityarray.length != this.activities.length){
-        var data = {
-          index:indexs,
-          status:false
-        }
-        this.activityarray.push(data)
-        console.log('this is array'+this.activityarray)
-      }
+    openSpecificActivityPopup(activity){
+      this.doesntmatterkey++
+      this.openactivity = activity
+      this.icon=true
     },
     setfalse(){
       console.log('set false')

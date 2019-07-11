@@ -31,7 +31,7 @@
                  </q-list>
                  <q-slide-transition>
                     <div v-show="!visible">
-                        
+                    </div>
                 </q-slide-transition>
             </q-card-section>
             <q-card-section position="bottom-right" style="text-align:right">

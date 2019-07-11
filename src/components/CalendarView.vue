@@ -623,7 +623,7 @@ header are in the CalendarViewHeader component.
 	border-width: 1px 1px 0 0;
 }
 
-/* 
+/*
 A bug in Microsoft Edge 41 (EdgeHTML 16) has been reported (#109) where days "disappear" because they are
 wrapping under the next week (despite the "nowrap" on cv-week). This appears to be an issue specifically
 with our metrics and the sticky positioning. I was not able to reproduce this issue in Edge 38, 42, or 44.

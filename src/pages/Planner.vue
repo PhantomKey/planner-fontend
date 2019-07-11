@@ -2,9 +2,12 @@
   <div>
     <div v-if="loadingfinish">
       <div v-if="checkplanner&&isLogin">
-        <schedule :scheduleData="refreshToken" style="text-align:center"></schedule>
         <createactivity @refreshSchedule="refreshPage"></createactivity>
+<<<<<<< HEAD
         <create-service></create-service>
+=======
+        <schedule :scheduleData="refreshToken" style="text-align:center"></schedule>
+>>>>>>> e65f8d0edd15ef310d5a2b364882ac32d066554b
       </div>
       <div v-else>
         <error-404></error-404>
@@ -78,8 +81,6 @@ export default {
     },
     refreshPage () {
       this.refreshToken = this.refreshToken+1
-      // this.refreshToken.push(this.refreshToken[(this.refreshToken.length)-1]+1)
-      console.log(this.refreshToken)
     },
     isLogin() {
       if (localStorage.token) {
