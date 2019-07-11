@@ -49,7 +49,10 @@ module.exports = function (ctx) {
         'QTimelineEntry',
         'QForm',
         'QToggle',
-        'QSlideTransition'    
+        'QSlideTransition',
+        'QStepper',
+        'QStep',
+        'QStepperNavigation'   
       ],
 
       directives: [
