@@ -4,6 +4,7 @@
       <div v-if="checkplanner&&isLogin">
         <schedule :scheduleData="refreshToken" style="text-align:center"></schedule>
         <createactivity @refreshSchedule="refreshPage"></createactivity>
+        <create-service></create-service>
       </div>
       <div v-else>
         <error-404></error-404>
@@ -18,12 +19,15 @@
 import Error404 from './Error404.vue'
 import Schedule from '../components/Schedule.vue'
 import CreateActivity from '../components/CreateActivity.vue'
+import CreateService from '../components/CreateService.vue'
+
 export default {
   name: 'Planner',
   components: {
     'error-404': Error404,
     'schedule': Schedule,
-    'createactivity':CreateActivity
+    'createactivity':CreateActivity,
+    'create-service':CreateService
   },
   checkplannerbeforecreate: false,
   loadingfinishbeforecreate: false,

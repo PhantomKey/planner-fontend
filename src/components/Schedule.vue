@@ -17,7 +17,7 @@
           >
             <div>
               {{activity.description}}
-              <br
+              <br>
               <br>
             </div>
           </q-timeline-entry>

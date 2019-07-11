@@ -46,7 +46,10 @@ module.exports = function (ctx) {
         'QCardActions',
         'QSelect',
         'QTimeline',
-        'QTimelineEntry'
+        'QTimelineEntry',
+        'QForm',
+        'QToggle',
+        'QSlideTransition'    
       ],
 
       directives: [
@@ -89,7 +92,7 @@ module.exports = function (ctx) {
     },
 
     // animations: 'all', // --- includes all animations
-    animations: [],
+    animations: 'all',
 
     ssr: {
       pwa: false
