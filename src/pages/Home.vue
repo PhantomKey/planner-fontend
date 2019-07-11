@@ -5,7 +5,7 @@
   		<calendar-view
   			:show-date="showDate"
   			class="theme-default"
-        :events='events' @click-event="onClickEvent"
+        :events='planners' @click-event="onClickEvent"
         :height="'7em'">
   			<calendar-view-header
   				slot="header"
@@ -14,33 +14,7 @@
   				@input="setShowDate" />
   		</calendar-view>
     </div>
-    <div class="box bg-planner">
-      <div class="field">
-        <label class="label">Name</label>
-        <div class="control">
-          <input v-model="newPlannerName" class="input" type="text">
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">Start date</label>
-        <div class="control">
-          <input v-model="newPlannerStartDate" class="input" type="date">
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">End date</label>
-        <div class="control">
-          <input v-model="newPlannerEndDate" class="input" type="date">
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">Description</label>
-        <div class="control">
-          <input v-model="newPlannerDescription" class="input" type="text">
-        </div>
-      </div>
-      <button class="button is-info" @click="clickAddPlanner()+showAllPlanner()">Add Planner</button>
-    </div>
+    <create-planner @refreshPlanner="refreshPlanner"></create-planner>
   </div>
   <div v-else>
     <error-404></error-404>
@@ -52,22 +26,21 @@
 import Error404 from './Error404.vue'
 import CalendarView from "../components/CalendarView.vue"
 import CalendarViewHeader from "../components/CalendarViewHeader.vue"
+import CreatePlanner from "../components/CreatePlanner"
 
 export default {
   name: 'Home',
   components: {
     'error-404': Error404,
     'calendar-view': CalendarView,
-    'calendar-view-header': CalendarViewHeader
+    'calendar-view-header': CalendarViewHeader,
+    'create-planner': CreatePlanner
   },
   data: function () {
     return {
             showDate: new Date() ,
-            newPlannerName: "",
-            newPlannerStartDate: "",
-            newPlannerEndDate: "",
-            newPlannerDescription: "",
-            events: [
+            refreshToken: 1,
+            planners: [
             ]
           }
   },
@@ -75,6 +48,9 @@ export default {
     this.showAllPlanner()
   },
   methods: {
+    refreshPlanner() {
+      this.refreshToken = this.refreshToken+1
+    },
     isLogin () {
       if (localStorage.token) {
         return true
@@ -85,12 +61,6 @@ export default {
     setShowDate (d) {
       this.showDate = d
     },
-    clickAddPlanner () {
-      let headers = {'Authorization': 'JWT '+localStorage.token}
-      this.$http.post('/planner/create_planner', { planner_name: this.newPlannerName,
-        first_date: this.newPlannerStartDate, last_date: this.newPlannerEndDate,
-        description: this.newPlannerDescription}, {headers})
-    },
     showAllPlanner (){
       let headers = {'Authorization': 'JWT '+localStorage.token}
       this.$http.get('/planner/view_all_planner', {headers})
@@ -99,7 +69,7 @@ export default {
     showAllPlannerOnCalendar (value) {
       this.clearAllPlanner()
       for (var i in value['data']['id']){
-        this.events.push({
+        this.planners.push({
           title: value['data']['name'][i],
           startDate: new Date(value['data']['startdate'][i]),
           endDate: new Date(value['data']['enddate'][i]),
@@ -109,7 +79,7 @@ export default {
       }
     },
     clearAllPlanner () {
-      this.events.splice(0,this.events.length)
+      this.planners.splice(0,this.planners.length)
     },
     onClickEvent(e) {
 			this.$router.replace(this.$route.query.redirect || '/planner/view_all_activity?plannerid='+e.id)
