@@ -39,7 +39,6 @@ export default {
   data: function () {
     return {
             showDate: new Date() ,
-            refreshToken: 1,
             planners: [
             ]
           }
@@ -49,7 +48,7 @@ export default {
   },
   methods: {
     refreshPlanner() {
-      this.refreshToken = this.refreshToken+1
+      this.showAllPlanner()
     },
     isLogin () {
       if (localStorage.token) {
