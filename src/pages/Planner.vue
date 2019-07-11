@@ -2,8 +2,8 @@
   <div>
     <div v-if="loadingfinish">
       <div v-if="checkplanner&&isLogin">
-        <schedule :scheduleData="refreshToken" style="text-align:center"></schedule>
         <createactivity @refreshSchedule="refreshPage"></createactivity>
+        <schedule :scheduleData="refreshToken" style="text-align:center"></schedule>
       </div>
       <div v-else>
         <error-404></error-404>
