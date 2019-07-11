@@ -67,7 +67,7 @@ export default {
   },
   methods: {
     openSpecificActivityPopup(activity){
-      this.doesntmatterkey++
+      this.doesntmatterkey = this.doesntmatterkey + 1
       this.openactivity = activity
       this.icon=true
     },

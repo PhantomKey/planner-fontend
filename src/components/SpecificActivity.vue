@@ -1,6 +1,6 @@
 <template>
 <div>
-<q-dialog persistant v-model="icon">
+<q-dialog persistant v-model="icon" v-if="doesntmatterkey>1">
     <q-card dense style="min-width:50%;max-width:50%">
         <q-card-section class="row items-center">
             <div class="text-h6" style="margin:0 auto;">{{activity.name}}</div>
@@ -16,8 +16,6 @@
     </q-card>
 </q-dialog>
 </div>
-
-
 </template>
 
 <script>
@@ -33,6 +31,7 @@ export default {
     },
     watch: {
       'doesntmatterkey': function() {
+        console.log(this.doesntmatterkey)
         this.icon = true
       }
     },
@@ -41,8 +40,15 @@ export default {
             icon: false,
         }
     },
+    created () {
+      this.setData()
+    },
     methods: {
-
+      setData () {
+        if(this.doesntmatterkey > 1) {
+          this.icon = true
+        }
+      }
     }
 }
 </script>

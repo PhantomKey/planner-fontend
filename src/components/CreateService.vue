@@ -1,11 +1,11 @@
 <template>
 <div>
-    <q-btn rounded 
-    color="primary" 
+    <q-btn rounded
+    color="primary"
     label="Create Service"
     @click="serviceW = true"/>
 
-    <q-dialog v-model="serviceW"> 
+    <q-dialog v-model="serviceW">
         <q-card flat  style="width:600px;max-width:600px;">
             <q-card-section>
                 <div class="text-h5">ADD YOUR SERVICE</div>
@@ -19,9 +19,9 @@
                             <q-item-label caption>{{calcaption}}</q-item-label>
                         </q-item-section>
                         <q-item-section avatar>
-                            <q-toggle color="blue" 
-                            v-model="calType" 
-                            val="battery" 
+                            <q-toggle color="blue"
+                            v-model="calType"
+                            val="battery"
                             checked-icon="group"
                             unchecked-icon="person"
                             keep-color
@@ -30,8 +30,8 @@
                     </q-item>
                  </q-list>
                  <q-slide-transition>
-                    <div v-show="!visible">
-                    </div>
+                    <!-- <div v-show="!visible">
+                    </div> -->
                 </q-slide-transition>
             </q-card-section>
             <q-card-section position="bottom-right" style="text-align:right">
@@ -65,7 +65,7 @@ export default{
               this.calcaption = "Calculation price as a total price and spilt to person that use service"
           }else{
               this.calname = 'person'
-              this.calcaption = 'Calculation price as a person spilt by age'  
+              this.calcaption = 'Calculation price as a person spilt by age'
           }
       }
   },
