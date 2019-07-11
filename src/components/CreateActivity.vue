@@ -1,5 +1,5 @@
 <template>
-    <div class = "centered">
+    <div class="centered">
         <q-btn label="New Activity"
         color="secondary"
         @click="icon = true">
@@ -282,10 +282,10 @@ export default{
 }
 </script>
 <style scoped>
-.centered {
-  position: fixed; /* or absolute */
-  top: 13%;
-  left: 66%;
+.centered { 
+  position:relative;
+  margin-top:53px;
+  left:66%;
 }
 .pac-container.pac-logo.hdpi{
     z-index: 9999 !important;
