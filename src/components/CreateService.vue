@@ -18,7 +18,7 @@
                 title="Service setting"
                 icon="all_inclusive"
                 :done="done1"
-                style="height:524px"
+                style="min-height: 432px;max-height:432px"
                 >
                     <q-card-section class="row items-center" style="padding-top:0px;padding-bottom:32px">
                         <div class="text-h5" style="margin:0 auto">ADD YOUR SERVICE</div>
@@ -48,9 +48,8 @@
                     </q-card-section>
                         <q-slide-transition style="width:100%">
                             <div v-show="!calType" style="width:100%">
-                                <q-card-section dense class="q-gutter-sm">
-                                    <q-input dense filled label="Kid Price" v-model="siglePrice.kid"
-                                    />
+                                <q-card-section dense class="q-gutter-sm" style="padding-bottom:8px">
+                                    <q-input dense filled label="Kid Price" v-model="siglePrice.kid"/>
                                     <q-input dense filled label="Adult Price" v-model="siglePrice.adult"/>
                                     <q-input dense filled label="Elderly Price" v-model="siglePrice.elderly" /> 
                                 </q-card-section>
@@ -63,33 +62,16 @@
                                 </q-card-section>
                             </div>
                         </q-slide-transition>
-                    
-                        
                             <!-- <q-btn outline type="submit" color="primary" label="Create" style="text-align:right" v-close-popup></q-btn> -->
-                        <q-card-section style="right:0px;bottom:0px">
-                            <q-stepper-navigation style="text-align:right">
-                                <div class="q-gutter-sm">
-                                    <q-btn flat v-close-popup type="reset" label="Cancel" color="negative" style="text-align:right" ></q-btn>
-                                    <q-btn @click="() => { done1 = true; step = 2 }" color="primary" label="Continue" style="text-align:right"/>
-                                </div>
-                            </q-stepper-navigation>
-                    </q-card-section>
                 </q-step>
                 <q-step
                     :name="2"
                     title="Select Member"
                     icon="person_add"
                     :done="done2"
+                    style="min-height: 432px;max-height:432px"
                 >
                     An ad group contains one or more ads which target a shared set of keywords.
-                    <q-card-section position="bottom-right" style="text-align:right">
-                        <q-stepper-navigation>
-                            <div class="q-gutter-sm">
-                                <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
-                                <q-btn @click="() => { done2 = true; step = 3 }" color="primary" label="Continue" />
-                            </div>
-                        </q-stepper-navigation>
-                    </q-card-section>
                 </q-step>
 
                 <q-step
@@ -97,20 +79,35 @@
                     title="Total price"
                     icon="attach_money"
                     :done="done3"
+                    style="min-height: 432px;max-height:432px"
                 >
                     Try out different ad text to see what brings in the most customers, and learn how to
                     enhance your ads using features like ad extensions. If you run into any problems with
                     your ads, find out how to tell if they're running and how to resolve approval issues.
-                    <q-card-section position="bottom-right" style="text-align:right">
-                        <q-stepper-navigation>
+                </q-step>
+                
+                <template v-slot:navigation>
+                     <q-card-section position="bottom-right" style="text-align:right;padding-top:8px;right:0px;bottom:0px">
+                        <q-stepper-navigation style="text-align:right" v-if="step === 1">
+                                <div class="q-gutter-sm">
+                                    <q-btn flat v-close-popup type="reset" label="Cancel" color="negative" style="text-align:right" ></q-btn>
+                                    <q-btn @click="() => { done1 = true; step = 2 }" color="primary" label="Continue" style="text-align:right"/>
+                                </div>
+                        </q-stepper-navigation>
+                        <q-stepper-navigation v-if="step == 2">
+                            <div class="q-gutter-sm">
+                                <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
+                                <q-btn @click="() => { done2 = true; step = 3 }" color="primary" label="Continue" />
+                            </div>
+                        </q-stepper-navigation>
+                        <q-stepper-navigation v-if="step == 3">
                             <div class="q-gutter-sm">
                                 <q-btn flat @click="step = 2" color="primary" label="Back" class="q-ml-sm" />
                                 <q-btn color="primary" v-close-popup @click="done3 = true, resetData()" label="Finish" />
                             </div>
                         </q-stepper-navigation>
-                    </q-card-section>
-                </q-step>
-
+                     </q-card-section>
+                </template>
 
             </q-stepper>
         </q-card>
@@ -164,10 +161,4 @@ export default{
 </script>
 
 <style scoped>
-.q-stepper__step-content{
-    height: 524px !important;
-}
-.q-stepper__step-inner{
-    height: 524px !important;
-}
 </style>
