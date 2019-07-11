@@ -7,7 +7,7 @@
         <q-dialog v-model="icon">
             <q-card dense style="min-width:50%;max-width:50%">
             <q-card-section class="row items-center">
-                <div class="text-h6" style="margin:0 auto;">Create New Activity</div>
+                <div class="text-h6" style="margin:0 auto;">CREATE NEW ACTIVITY</div>
             </q-card-section>
             <q-card-section class="q-gutter-sm">
                 <q-input ref="input" filled v-model="name" label="Name" style="min-width:100%;max-width:100%"

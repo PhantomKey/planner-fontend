@@ -76,7 +76,7 @@
                     title="Select Member"
                     icon="person_add"
                     :done="done2"
-                    style="min-height: 432px;max-height:432px"
+                    style="min-height: 485px;max-height:485px"
                 >
                     An ad group contains one or more ads which target a shared set of keywords.
                 </q-step>
@@ -86,7 +86,7 @@
                     title="Total price"
                     icon="attach_money"
                     :done="done3"
-                    style="min-height: 432px;max-height:432px"
+                    style="min-height: 485px;max-height:485px"
                 >
                     Try out different ad text to see what brings in the most customers, and learn how to
                     enhance your ads using features like ad extensions. If you run into any problems with

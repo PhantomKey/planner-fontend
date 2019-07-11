@@ -21,8 +21,7 @@
       </q-toolbar>
     </q-header>
      <q-drawer
-      v-if='status'
-      v-model="leftDrawerOpen"
+      v-model="status"
       bordered
       content-class="bg-grey-2"
     >
