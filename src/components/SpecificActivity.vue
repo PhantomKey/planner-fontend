@@ -3,9 +3,9 @@
 <q-dialog persistant v-model="icon">
     <q-card dense style="min-width:50%;max-width:50%">
         <q-card-section class="row items-center">
-            <div class="text-h6" style="margin:0 auto;">{{activity.name}}</div>
+            <div class="text-h6" style="margin:0 auto;">{{activityid}}</div>
         </q-card-section>
-            
+
         <q-card-section position="bottom-right" style="text-align:right">
             <div class="q-gutter-sm">
                 <q-btn outline color="primary" label="Create" style="text-align:right" @click="" v-close-popup></q-btn>
@@ -23,7 +23,7 @@
 <script>
 export default {
     props: {
-        activity: String
+        activityid: Number
     },
     data: function () {
         return {

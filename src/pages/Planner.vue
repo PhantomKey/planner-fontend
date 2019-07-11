@@ -74,8 +74,6 @@ export default {
     },
     refreshPage () {
       this.refreshToken = this.refreshToken+1
-      // this.refreshToken.push(this.refreshToken[(this.refreshToken.length)-1]+1)
-      console.log(this.refreshToken)
     },
     isLogin() {
       if (localStorage.token) {
