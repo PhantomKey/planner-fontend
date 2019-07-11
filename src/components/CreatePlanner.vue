@@ -1,5 +1,5 @@
 <template>
-    <div class = "centered">
+    <div>
         <q-btn label="New Planner"
         color="secondary"
         @click="openCreatePlanner = true">

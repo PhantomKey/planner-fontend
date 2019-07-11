@@ -14,7 +14,9 @@
   				@input="setShowDate" />
   		</calendar-view>
     </div>
-    <create-planner @refreshPlanner="refreshPlanner"></create-planner>
+    <div class="createplannerbuttondiv">
+      <create-planner @refreshPlanner="refreshPlanner"></create-planner>
+    </div>
   </div>
   <div v-else>
     <error-404></error-404>
@@ -110,11 +112,15 @@ div#calendar {
     font-family: 'Avenir', Helvetica, Arial, sans-serif;
 		color: #2c3e50;
 		height: 67vh;
-		width: 90vw;
+		width: 98%;
 		margin-left: auto;
 		margin-right: auto;
+    margin-top: 1%
   }
 .bg-planner {
   background-color: white;
+}
+.createplannerbuttondiv {
+  margin-top: 1%
 }
 </style>

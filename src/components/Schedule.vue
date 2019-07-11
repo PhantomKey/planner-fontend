@@ -7,25 +7,24 @@
       </q-timeline-entry>
       <div v-for="(activity,index) in activities">
         <div v-if="activity.startDate==date" >
-        {{createArray(activity.id)}}
           <q-timeline-entry
             :title="activity.name"
             :subtitle="activity.startTime.concat(' - ',activity.endTime)"
             :side="'right'"
-            @click="icon = true"
+            @click="openSpecificActivityPopup(activity.id)"
             style="cursor: pointer"
           >
             <div>
               {{activity.description}}
-              <br
               <br>
             </div>
           </q-timeline-entry>
-          <specific-activity v-if="icon" :activity="activity" @close="setfalse"></specific-activity>
         </div>
     </div>
     </q-timeline>
-    
+    <div>
+      <specific-activity v-if="icon" :activityid="openactivityid" @close="setfalse"></specific-activity>
+    </div>
   </div>
 </div>
 </template>
@@ -49,7 +48,8 @@ export default {
             activities:[],
             icon: false,
             activityarray:[],
-            show: true
+            show: true,
+            openactivityid: 0
           }
   },
   computed: {
@@ -69,15 +69,19 @@ export default {
     this.showAllActivity()
   },
   methods: {
-    createArray(indexs){
-      if(this.activityarray.length != this.activities.length){
-        var data = {
-          index:indexs,
-          status:false
-        }
-        this.activityarray.push(data)
-        console.log('this is array'+this.activityarray)
-      }
+    // createArray(indexs){
+    //   if(this.activityarray.length != this.activities.length){
+    //     var data = {
+    //       index:indexs,
+    //       status:false
+    //     }
+    //     this.activityarray.push(data)
+    //     console.log('this is array'+this.activityarray)
+    //   }
+    // },
+    openSpecificActivityPopup(activityid){
+      this.openactivityid = activityid
+      this.icon=true
     },
     setfalse(){
       console.log('set false')
