@@ -1,18 +1,21 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-         <q-btn
-          flat
-          dense
-          round
-          @click="status = !status; showAllFriends();"
-          aria-label="Menu"
-        >
-          <q-icon name="menu" />
-        </q-btn>
-        <q-toolbar-title @click="home" style="cursor:pointer;">
-          Trip Planner
+    <q-header style="background-color: white">
+      <q-toolbar style = "height: 80px">
+        <div style="min-width:33.59px; width:33.59px">
+           <q-btn
+            flat
+            dense
+            round
+            @click="status = !status; showAllFriends();"
+            aria-label="Menu"
+            v-if="isLogin()"
+            >
+            <q-icon name="menu" />
+          </q-btn>
+        </div>
+        <q-toolbar-title @click="home" style="cursor:pointer; color:#e78483;">
+          TRIP PLANNER
         </q-toolbar-title>
         <div v-if="isLogin()" class="q-gutter-sm">
           <add-friend :showFriends="showAllFriends"></add-friend>
@@ -126,6 +129,10 @@ export default {
 
 <style>
   body {
-       background-image : url("/assets/sunset.jpg");
+    background-image: url("/assets/02.jpg");
+    background-repeat: no-repeat;
+    background-size: auto;
+    background-position: center;
+    background-size: cover;
   }
 </style>

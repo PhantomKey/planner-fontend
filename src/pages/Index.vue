@@ -5,15 +5,18 @@ div{
 </style>
 
 <template>
-  <div class="">
-    <br>
+  <div>
+    <!-- <br>
     <p> Welcome to trip planner </p>
     <login-button></login-button>
     <br>
     <p></p>
     <register-button></register-button>
     <br>
-    <p></p>
+    <p></p> -->
+    <div class="text-h2">
+      <b>NEVER STOP TRAVELING</b>
+    </div>
   </div>
 </template>
 
