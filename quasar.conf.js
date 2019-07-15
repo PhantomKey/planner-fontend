@@ -52,7 +52,8 @@ module.exports = function (ctx) {
         'QSlideTransition',
         'QStepper',
         'QStep',
-        'QStepperNavigation'   
+        'QStepperNavigation',
+        'QAvatar'
       ],
 
       directives: [

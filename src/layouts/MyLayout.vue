@@ -15,6 +15,9 @@
           </q-btn>
         </div>
         <q-toolbar-title @click="home" style="cursor:pointer; color:#e78483;">
+          <q-avatar square>
+            <img src="~assets/trip_logo2.png"/>
+          </q-avatar>
           TRIP PLANNER
         </q-toolbar-title>
         <div v-if="isLogin()" class="q-gutter-sm">
