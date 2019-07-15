@@ -1,15 +1,14 @@
 <template>
   <div>
     <body>
-      <div class="text-h2" style="padding-top: 15%">
+      <div class="text-h2" style="padding-top: 12%;margin-left:45rem">
         <b style="color:white">NEVER STOP TRAVELING</b>
       </div>
-      <div class="text-h5" style="color: white; padding-bottom:2%">
+      <div class="text-h5" style="color: white; padding-bottom:2%;margin-left:35rem">
         “To Travel is to Live” – Hans Christian Andersen.
       </div>
-      <div>
-        <login-button></login-button>
-        <register-button></register-button>
+      <div style="display:inline-block">
+        <login-button style="margin-left:23rem;display:inline-block" class="shadow-1"></login-button><register-button class="shadow-2" style="display:inline-block;margin-left:1rem"></register-button>
       </div>
     </body>
   </div>

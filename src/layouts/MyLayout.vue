@@ -14,7 +14,7 @@
             <q-icon name="menu" />
           </q-btn>
         </div>
-        <q-toolbar-title @click="showUserName" style="cursor:pointer; color:#e78483;">
+        <q-toolbar-title @click="home" style="cursor:pointer; color:#e78483;">
           TRIP PLANNER
         </q-toolbar-title>
         <div v-if="isLogin()" class="q-gutter-sm">
