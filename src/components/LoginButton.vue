@@ -7,10 +7,10 @@
           @click="openLoginDialog = true">
     </q-btn>
     <q-dialog v-model="openLoginDialog">
-      <q-card class="dialog" dense style="min-width:40%;max-width:40%;min-height:70%;,max-height:70%;">
+      <img src="~assets/userprofileicon.png" style="max-width:150px; margin-top:-15%;z-index:9999;position:absolute">
+      <q-card class="dialog" dense style="min-width:40%;max-width:40%;min-height:65%;,max-height:65%;">
         <q-card-section class="row justify-center">
-          <h4>Log in to Trip Planner</h4>
-          <img src="~assets/userprofileicon.png" style="max-width:30%;">
+          <h4 style="padding-top:25px">LOGIN TO TRIP PLANER</h4>
           <q-input bg-color="#ffeeef" filled v-model="username" label="Username" style="min-width:90%;max-width:90%;"
           lazy-rules
           :rules="[ val => val && val.length > 0 || '']">
