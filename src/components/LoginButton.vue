@@ -33,12 +33,13 @@
 </template>
 
 <script>
+import { Notify } from 'quasar'
 export default{
   data() {
     return {
       openLoginDialog: false,
       username: '',
-      password: ''
+      password: '',
     }
   },
   methods: {
@@ -57,13 +58,19 @@ export default{
       console.log('login success with',req.data)
 
       localStorage.token = req.data.JWTToken
-      this.error = false
       console.log('storing token into local storage')
       this.$router.replace(this.$route.query.redirect || '/Home')
     },
     loginFailed (err) {
       console.log('login unsuccess',err)
-      this.error = 'Username or password incorrect'
+      Notify.create({
+        message: 'Username or password incorrect',
+        color: 'primary',
+        textColor: 'white',
+        timeout: 3000,
+        position: 'top-right',
+        icon: 'error'
+      })
       delete localStorage.token
     }
   }
