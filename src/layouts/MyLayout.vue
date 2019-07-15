@@ -23,6 +23,7 @@
         <div v-if="isLogin()" class="q-gutter-sm">
           <add-friend :showFriends="showAllFriends"></add-friend>
           <logout-button></logout-button>
+          <profile></profile>
         </div>
       </q-toolbar>
     </q-header>
@@ -63,6 +64,7 @@ import { openURL, colors } from 'quasar'
 import AddFriend from '../components/AddFriend.vue'
 import LogoutButton from '../components/LogoutButton.vue'
 import VueJwtDecode from 'vue-jwt-decode'
+import Profile from '../components/Profile.vue'
 export default {
   name: 'MyLayout',
   mounted() {
@@ -82,7 +84,8 @@ export default {
 
   components: {
     'add-friend': AddFriend,
-    'logout-button': LogoutButton
+    'logout-button': LogoutButton,
+    'profile': Profile
   },
   methods: {
     openURL,

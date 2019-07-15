@@ -19,5 +19,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+q-btn:hover{
+  border-bottom-color: #fa928f;
+}
 </style>
