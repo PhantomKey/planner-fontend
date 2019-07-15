@@ -14,7 +14,7 @@
             <q-icon name="menu" />
           </q-btn>
         </div>
-        <q-toolbar-title @click="home" style="cursor:pointer; color:#e78483;">
+        <q-toolbar-title @click="showUserName" style="cursor:pointer; color:#e78483;">
           TRIP PLANNER
         </q-toolbar-title>
         <div v-if="isLogin()" class="q-gutter-sm">
@@ -59,6 +59,7 @@
 import { openURL, colors } from 'quasar'
 import AddFriend from '../components/AddFriend.vue'
 import LogoutButton from '../components/LogoutButton.vue'
+import VueJwtDecode from 'vue-jwt-decode'
 export default {
   name: 'MyLayout',
   mounted() {
@@ -91,7 +92,7 @@ export default {
     },
     checktoken () {
       this.token = localStorage.token ? true: false
-    },
+  },
   created :function() {
     this.checktoken()
   },
@@ -122,6 +123,13 @@ export default {
   async deleteMember (x) {
     await this.$http.delete('/api/v1/delete_member/'+x)
     this.showAllFriends()
+  },
+  async showUserName(){
+    let user_id= VueJwtDecode.decode(localStorage.token).user_id
+    console.log(user_id)
+    let response = await this.$http.get('/api/v1/user/'+user_id)
+    let username = response.data.user.name
+    console.log(username)
   }
 }
 }
