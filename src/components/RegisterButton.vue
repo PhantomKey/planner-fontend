@@ -1,9 +1,9 @@
 <template>
-<q-btn
-      color="transparent"
+<q-btn outline
+      color="white"
       style="width:150px;"
-      @click="$router.push('/register')"
-    >Register
+      label="Register"
+      @click="$router.push('/register')">
 </q-btn>
 </template>
 

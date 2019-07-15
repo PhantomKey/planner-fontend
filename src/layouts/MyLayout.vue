@@ -136,11 +136,5 @@ export default {
 </script>
 
 <style>
-  body {
-    background-image: url("/assets/02.jpg");
-    background-repeat: no-repeat;
-    background-size: auto;
-    background-position: center;
-    background-size: cover;
-  }
+
 </style>

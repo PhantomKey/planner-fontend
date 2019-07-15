@@ -1,23 +1,17 @@
-<style scoped>
-div{
-  text-align:center;
-}
-</style>
-
 <template>
   <div>
-    <!-- <br>
-    <p> Welcome to trip planner </p>
-    <login-button></login-button>
-    <br>
-    <p></p>
-    <register-button></register-button>
-    <br>
-    <p></p> -->
-    <div class="text-h2" style="margin-top: 15%">
-      <b style="color:white">NEVER STOP TRAVELING</b>
-    </div>
-    <login-button></login-button><register-button></register-button>
+    <body>
+      <div class="text-h2" style="padding-top: 15%">
+        <b style="color:white">NEVER STOP TRAVELING</b>
+      </div>
+      <div class="text-h5" style="color: white; padding-bottom:2%">
+        “To Travel is to Live” – Hans Christian Andersen.
+      </div>
+      <div>
+        <login-button></login-button>
+        <register-button></register-button>
+      </div>
+    </body>
   </div>
 </template>
 
@@ -33,3 +27,21 @@ export default {
 
 }
 </script>
+<style scoped>
+  body {
+    background-image: url("../assets/02.jpg");
+    background-repeat: no-repeat;
+    background-position: 10% 60%;
+    background-size: cover;
+    background-attachment: fixed;
+    position: fixed;
+  }
+  div{
+    text-align:center;
+  }
+  .divider{
+    width:1%;
+    height:auto;
+    display:inline-block;
+  }
+</style>
