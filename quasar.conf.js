@@ -53,7 +53,8 @@ module.exports = function (ctx) {
         'QStepper',
         'QStep',
         'QStepperNavigation',
-        'QAvatar'
+        'QAvatar',
+        'QRadio'
       ],
 
       directives: [

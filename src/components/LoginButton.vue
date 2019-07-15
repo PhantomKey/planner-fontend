@@ -11,14 +11,14 @@
       <q-card class="dialog" dense style="min-width:40%;max-width:40%;min-height:65%;,max-height:65%;">
         <q-card-section class="row justify-center">
           <h4 style="padding-top:25px;color:#161413;">LOGIN TO TRIP PLANNER</h4>
-          <q-input bg-color="#ffeeef" filled v-model="username" label="Username" style="min-width:90%;max-width:90%;"
+          <q-input bg-color="secondary" filled v-model="username" label="Username" style="min-width:90%;max-width:90%;"
           lazy-rules
           :rules="[ val => val && val.length > 0 || '']">
             <template v-slot:prepend>
               <q-icon name="account_box" />
             </template>
           </q-input>
-          <q-input bg-color="#ffeeef" filled type="password" v-model="password" label="Password" style="min-width:90%;max-width:90%"
+          <q-input bg-color="secondary" filled type="password" v-model="password" label="Password" style="min-width:90%;max-width:90%"
           lazy-rules
           :rules="[ val => val && val.length > 0 || '']">
             <template v-slot:prepend>
