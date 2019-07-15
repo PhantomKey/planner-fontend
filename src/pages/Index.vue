@@ -8,7 +8,7 @@
         “To Travel is to Live” – Hans Christian Andersen.
       </div>
       <div style="display:inline-block">
-        <login-button style="margin-left:23rem;display:inline-block" class="shadow-1"></login-button><register-button class="shadow-2" style="display:inline-block;margin-left:1rem"></register-button>
+        <login-button style="margin-left:23rem;display:inline-block" class="shadow-1"></login-button><register-button class="shadow-2" style="display:inline-block;margin-left:1rem" ></register-button>
       </div>
     </body>
   </div>
