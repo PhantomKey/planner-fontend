@@ -64,7 +64,7 @@ export default{
     loginFailed (err) {
       console.log('login unsuccess',err)
       Notify.create({
-        message: 'Username or password incorrect',
+        message: 'Invalid username/password',
         color: 'primary',
         textColor: 'white',
         timeout: 3000,
