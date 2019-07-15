@@ -1,7 +1,9 @@
 <template>
     <div>
-        <q-btn label="New Planner"
-        color="secondary"
+        <q-btn round
+        color="primary"
+        icon="add"
+        style="right:-96%"
         @click="openCreatePlanner = true">
         </q-btn>
         <q-dialog v-model="openCreatePlanner">
@@ -27,7 +29,7 @@
             </q-card-section>
             <q-card-section position="bottom-right" style="text-align:right">
               <div class="q-gutter-sm">
-                <q-btn outline color="primary" label="Create" style="text-align:right" @click="clickAddPlanner()" v-close-popup></q-btn>
+                <q-btn color="primary" class="no-shadow" label="Create" style="text-align:right" @click="clickAddPlanner()" v-close-popup></q-btn>
                 <q-btn v-close-popup label="Cancel" outline color="negative" style="text-align:right" @click="resetData()"></q-btn>
               </div>
             </q-card-section>
