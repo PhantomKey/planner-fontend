@@ -54,7 +54,8 @@ module.exports = function (ctx) {
         'QStep',
         'QStepperNavigation',
         'QAvatar',
-        'QChip'
+        'QChip',
+        'QRadio'
       ],
 
       directives: [
