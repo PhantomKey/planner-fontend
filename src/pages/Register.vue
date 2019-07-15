@@ -152,7 +152,7 @@ export default {
   }
 .icon{
   margin-top:1.3rem;
-  margin-left: -6rem; 
+  margin-left: -6rem;
 }
 p{
   text-align: left;
@@ -307,7 +307,7 @@ input[type="radio"]:checked + .label:after {
 .cntr {
   margin-top: 0.5rem;
   position:absolute;
-  margin-left: 2rem; 
+  margin-left: 2rem;
 }
 .hidden {
   display: none;
