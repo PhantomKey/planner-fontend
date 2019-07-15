@@ -1,7 +1,7 @@
 <template>
 <q-btn
-      color="secondary"
-      style="width:200px;"
+      color="transparent"
+      style="width:150px;"
       @click="$router.push('/login')"
     >Login
 </q-btn>

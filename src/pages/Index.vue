@@ -14,9 +14,10 @@ div{
     <register-button></register-button>
     <br>
     <p></p> -->
-    <div class="text-h2">
-      <b>NEVER STOP TRAVELING</b>
+    <div class="text-h2" style="margin-top: 15%">
+      <b style="color:white">NEVER STOP TRAVELING</b>
     </div>
+    <login-button></login-button><register-button></register-button>
   </div>
 </template>
 
