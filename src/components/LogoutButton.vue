@@ -1,7 +1,7 @@
 <template>
 <q-btn
-      color="secondary"
-      style="width:200px;"
+      flat
+      style="width:100px;color:#9D9A9A"
       @click="logout"
     >Logout
 </q-btn>
