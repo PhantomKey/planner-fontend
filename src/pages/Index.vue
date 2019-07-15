@@ -9,7 +9,6 @@
       </div>
       <div>
         <login-button></login-button>
-        <div class="divider"></div>
         <register-button></register-button>
       </div>
     </body>
