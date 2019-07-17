@@ -133,7 +133,6 @@ export default{
       })
     },
     registerFailedwithoutPOST (err) {
-      console.log(err)
       Notify.create({
         message: 'Failed to create account, '+err,
         color: 'primary',

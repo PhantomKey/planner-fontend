@@ -63,8 +63,6 @@ export default{
         description: this.description}, {headers})
         .then(request => this.AddPlannerSuccessfulwithPOST(request))
         .catch((err) => this.AddPlannerFailedwithoutPOST(err))
-        this.emitToHome()
-        Object.assign(this.$data, this.$options.data.apply(this))
     },
     AddPlannerSuccessfulwithPOST (req) {
       if (req.data.code === 201) {
@@ -77,6 +75,8 @@ export default{
           icon: 'check_circle_outline'
         })
         this.openCreatePlanner = false
+        this.emitToHome()
+        Object.assign(this.$data, this.$options.data.apply(this))
       } else {
         this.AddPlannerFailedwithPOST(req)
       }
