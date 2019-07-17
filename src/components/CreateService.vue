@@ -3,6 +3,8 @@
     <q-btn rounded
     color="primary"
     label="Create Service"
+    style="right:4%;bottom:10%;position:absolute"
+    icon="add"
     @click="serviceW = true"/>
     <q-dialog v-model="serviceW"> 
         <q-card flat style="width:600px;max-width:600px;height:650px;max-height:650px">

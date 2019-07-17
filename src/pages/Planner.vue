@@ -1,14 +1,15 @@
 <template>
+<div>
   <div style="height:100vh">
     <div v-if="loadingfinish" style="height:100%">
       <div v-if="checkplanner&&isLogin" style="height:100%">
         <div class="row" style="height:100%">
-          <div class="col-sm-4" style="background-color: #92a8d1;">
+          <div class="col-sm-4" style="background-color: white;">
             <schedule :scheduleData="refreshToken" style="text-align:center"></schedule>
           </div>
-          <div class="col-sm-8" style="background-color: #6F90CE;">
-            <createactivity @refreshSchedule="refreshPage"></createactivity>
-            <create-service></create-service>
+          <div class="col-sm-8" style="background-color: white">
+ <!--           <createactivity @refreshSchedule="refreshPage"></createactivity>
+            <create-service></create-service> -->
           </div>
         </div>
       </div>
@@ -19,6 +20,11 @@
     <div v-else>
     </div>
   </div>
+  <div>
+    <createactivity @refreshSchedule="refreshPage"></createactivity>
+    <create-service></create-service>
+  </div>
+</div>
 </template>
 
 <script>

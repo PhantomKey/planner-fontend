@@ -1,8 +1,8 @@
 <template>
-<div style="background-color: #92a8d1;position: relative;margin:auto">
+<div style="background-color: white;position: relative;margin:auto;border-right:5px solid #ddd">
   <div class="q-px-lg q-pb-md" v-for="date in uniqDate" >
     <q-timeline :layout="layout" color="secondary">
-      <q-timeline-entry heading>
+      <q-timeline-entry heading style="color: rgb(22, 20, 19)">
         {{date}}
       </q-timeline-entry>
       <div v-for="(activity,index) in activities">
@@ -13,6 +13,7 @@
             :side="'right'"
             @click="openSpecificActivityPopup(activity)"
             style="cursor: pointer"
+            color="warning"
           >
             <div>
               {{activity.description}}
