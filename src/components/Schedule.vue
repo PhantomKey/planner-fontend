@@ -1,6 +1,6 @@
 <template>
 <q-scroll-area style="height:100%">
-  <div style="background-color: white;position: relative;margin:auto;border-right:5px solid #ddd">
+  <div style="background-color: white;position: relative;margin:auto">
     <div class="q-px-lg q-pb-md" v-for="date in uniqDate" >
       <q-timeline :layout="layout" color="secondary">
         <q-timeline-entry heading style="color: rgb(22, 20, 19)">
