@@ -9,7 +9,7 @@
     <q-dialog v-model="openRegisterDialog">
       <q-card class="dialog" dense style="min-width:40%;max-width:40%;min-height:65%;,max-height:65%;">
         <q-card-section class="row justify-center">
-          <h4>SIGN UP TO TRIP PLANNER</h4>
+          <p style="font-size:25px;color:#fa928f">SIGN UP TO TRIP PLANNER</p>
           <q-input bg-color="secondary" filled v-model="user.username" label="Username" style="min-width:90%;max-width:90%;"
           lazy-rules
           :rules="[ val => val && val.length > 0 || '']">
@@ -59,9 +59,18 @@
               <q-icon name="calendar_today" />
             </template>
           </q-input>
+           <!-- <p class="caption">Gender</p>
           <div class="q-gutter-sm">
             <q-radio v-model="user.gender" val="Male" label="Male" />
             <q-radio v-model="user.gender" val="Female" label="Female" />
+          </div> -->
+          <div class="bg-secondary" style="width:90%;border-radius:4px;margin-bottom:4%">
+            <div class="q-my-xs">
+              <q-icon name="fas fa-venus-mars" style="color:#665f60;font-size:20px;margin-left:17px;"/>
+              <span style="font-size:17px;color:#665f60;margin-left:12px;">Gender</span>
+              <q-radio dark v-model="user.gender" val="M" color="primary" label="Male" style="margin-left: 10px"/>
+              <q-radio dark v-model="user.gender" val="F" color="primary" label="Female" style="margin-left: 10px" />
+            </div>
           </div>
           <q-btn label="Sign Up" style="min-width:90%;max-width:90%;background:#fa928f;color:white" @click="signupClicked()"></q-btn>
         </q-card-section>
