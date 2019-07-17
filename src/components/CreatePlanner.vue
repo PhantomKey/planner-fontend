@@ -10,28 +10,26 @@
         <q-dialog v-model="openCreatePlanner" @keyup.enter="clickAddPlanner()">
             <q-card dense style="min-width:50%;max-width:50%">
             <q-card-section class="row items-center">
-              <div class="text-h6" style="margin:0 auto;">Create New Planner</div>
+              <div class="text-h6" style="margin:0 auto;font-size:25px;color:#fa928f">Create New Planner</div>
             </q-card-section>
             <q-card-section class="q-gutter-sm">
-              <q-input ref="input" filled v-model="name" label="Name" style="min-width:100%;max-width:100%"
-              lazy-rules
-              :rules="[ val => val && val.length > 0 || 'Please type something']"></q-input>
-              <q-input filled v-model="startdate" type="date" label="Start Date" stack-label style="width:100%">
+              <q-input bg-color="secondary" ref="input" filled v-model="name" label="Name" style="min-width:100%;max-width:100%"></q-input>
+              <q-input bg-color="secondary" filled v-model="startdate" type="date" label="Start Date" stack-label style="width:100%">
                 <template v-slot:prepend>
                   <q-icon name="event" />
                 </template>
               </q-input>
-              <q-input filled v-model="enddate" type="date" label="Start Date" stack-label style="width:100%">
+              <q-input bg-color="secondary" filled v-model="enddate" type="date" label="Start Date" stack-label style="width:100%">
                 <template v-slot:prepend>
                   <q-icon name="event" />
                 </template>
               </q-input>
-              <q-input ref="input" filled v-model="description" label="Description" style="width:100%"></q-input>
+              <q-input bg-color="secondary" ref="input" filled v-model="description" label="Description" style="width:100%"></q-input>
             </q-card-section>
             <q-card-section position="bottom-right" style="text-align:right">
               <div class="q-gutter-sm">
+                <q-btn v-close-popup flat label="Cancel" outline color="primary" style="text-align:right" @click="resetData()"></q-btn>
                 <q-btn color="primary" class="no-shadow" label="Create" style="text-align:right" @click="clickAddPlanner()"></q-btn>
-                <q-btn v-close-popup label="Cancel" outline color="negative" style="text-align:right" @click="resetData()"></q-btn>
               </div>
             </q-card-section>
           </q-card>
