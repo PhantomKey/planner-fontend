@@ -1,5 +1,5 @@
 <template>
-    <q-chip text-color="black" style="color:black;margin-right:18px;padding-right:100px" @click="open=true" clickable>
+    <q-chip text-color="black" style="color:black;margin-right:18px;padding-right:60px;size:2rem" @click="open=true" clickable>
         <q-avatar>
           <img src="https://cdn.quasar.dev/img/avatar5.jpg">
         </q-avatar>
