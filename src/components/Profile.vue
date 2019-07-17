@@ -1,11 +1,11 @@
 <template>
-    <q-chip text-color="black" style="color:black;margin-right:18px;padding-right:40px" @click="open=true" clickable>
+    <q-chip text-color="black" style="color:black;margin-right:18px;padding-right:100px" @click="open=true" clickable>
         <q-avatar>
           <img src="https://cdn.quasar.dev/img/avatar5.jpg">
         </q-avatar>
         {{name}}
         <q-btn-dropdown :icon-right="null" fab-mini flat :ripple="false" unelevated v-model="open" :label="null" style="position:absolute;right:0px">
-            <q-list dense>
+            <q-list dense style="min-width:120px">
                 <q-item clickable v-close-popup @click="logout()">
                 <q-item-section>
                     <q-item-label>logout</q-item-label>
