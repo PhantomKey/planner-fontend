@@ -1,7 +1,9 @@
 <template>
     <div class="centered">
-        <q-btn label="New Activity"
-        color="secondary"
+        <q-btn rounded label="New Activity"
+        color="primary"
+        icon="add"
+        style="right:16%;bottom:10%;position:absolute"
         @click="icon = true">
         </q-btn>
         <q-dialog v-model="icon">
