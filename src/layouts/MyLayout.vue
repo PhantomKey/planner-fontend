@@ -21,8 +21,9 @@
           TRIP PLANNER
         </q-toolbar-title>
         <div v-if="isLogin()" class="q-gutter-sm">
-          <add-friend :showFriends="showAllFriends"></add-friend>
+          <!-- <add-friend :showFriends="showAllFriends"></add-friend> -->
           <!-- <logout-button></logout-button> -->
+          <friend></friend>
           <profile :name="username"></profile>
         </div>
       </q-toolbar>
@@ -65,6 +66,7 @@ import AddFriend from '../components/AddFriend.vue'
 import LogoutButton from '../components/LogoutButton.vue'
 import VueJwtDecode from 'vue-jwt-decode'
 import Profile from '../components/Profile.vue'
+import Friend from '../components/Friendbutton.vue'
 export default {
   name: 'MyLayout',
   mounted() {
@@ -87,7 +89,8 @@ export default {
   components: {
     'add-friend': AddFriend,
     'logout-button': LogoutButton,
-    'profile': Profile
+    'profile': Profile,
+    'friend':Friend
   },
   methods: {
     openURL,
@@ -146,6 +149,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+friend:hover{
+  border-bottom: 5px solid #fa928f
+}
 </style>

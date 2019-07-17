@@ -3,7 +3,8 @@
         <q-btn round
         color="primary"
         icon="add"
-        style="right:-96%"
+        style="right:-95%;"
+        size="18.5px"
         @click="openCreatePlanner = true">
         </q-btn>
         <q-dialog v-model="openCreatePlanner">
