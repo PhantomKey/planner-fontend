@@ -55,6 +55,7 @@ module.exports = function (ctx) {
         'QStepperNavigation',
         'QAvatar',
         'QChip',
+        'QBtnDropdown',
         'QRadio'
       ],
 

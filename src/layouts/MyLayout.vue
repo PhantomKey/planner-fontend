@@ -22,8 +22,8 @@
         </q-toolbar-title>
         <div v-if="isLogin()" class="q-gutter-sm">
           <add-friend :showFriends="showAllFriends"></add-friend>
-          <logout-button></logout-button>
-          <profile></profile>
+          <!-- <logout-button></logout-button> -->
+          <profile :name="username"></profile>
         </div>
       </q-toolbar>
     </q-header>
@@ -72,13 +72,15 @@ export default {
             // your code goes here
             this.showAllFriends()
         })
+        this.showUserName()
   },
   data () {
     return {
       friendlist:[],
       leftDrawerOpen: this.$q.platform.is.desktop,
       status: false,
-      token:false
+      token:false,
+      username:''
     }
   },
 
@@ -101,6 +103,7 @@ export default {
   },
   created :function() {
     this.checktoken()
+    this.showUserName()
   },
   updated :function() {
     this.checktoken()
@@ -135,7 +138,7 @@ export default {
     console.log(user_id)
     let response = await this.$http.get('/api/v1/user/'+user_id)
     let username = response.data.user.name
-    console.log(username)
+    this.username = username
   }
 }
 }
