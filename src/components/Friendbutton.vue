@@ -21,9 +21,7 @@ export default {
   },
   methods: {
     logout () {
-      console.log('logout')
-      delete localStorage.token
-      this.$router.push('/')
+      this.$router.push('/Friends')
     },
     changeStage(){
       this.style="width80px;color:#D6BAAC"
