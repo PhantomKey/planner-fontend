@@ -102,12 +102,12 @@ export default{
       console.log(this.user)
       if (this.checkpassword()) {
         this.$http.post('/register/', { username: this.user.username, firstname: this.user.firstname, lastname: this.user.lastname, password: this.user.password, email: this.user.email, dob: this.user.dob, gender: this.user.gender })
-          .then(request => this.registersucess(request))
-          .catch(() => this.registerFailed())
+          .then(request => this.registerSuccessfulwithPOST(request))
+          .catch((error) => this.registerFailedwithoutPOST(error))
       }
       console.log(this.user)
     },
-    registersucess (req) {
+    registerSuccessfulwithPOST (req) {
       if (req.data.code === 201) {
         Notify.create({
           message: 'Account created successfully',
@@ -119,12 +119,22 @@ export default{
         })
         this.openRegisterDialog = false
       } else {
-        this.registerFailed(req)
+        this.registerFailedwithPOST(req)
       }
     },
-    registerFailed (req) {
+    registerFailedwithPOST (req) {
       Notify.create({
         message: 'Failed to create account, Reason: '+req.data.message,
+        color: 'primary',
+        textColor: 'white',
+        timeout: 3000,
+        position: 'top-right',
+        icon: 'error'
+      })
+    },
+    registerFailedwithoutPOST (err) {
+      Notify.create({
+        message: 'Failed to create account, '+err,
         color: 'primary',
         textColor: 'white',
         timeout: 3000,
