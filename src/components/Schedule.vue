@@ -2,7 +2,7 @@
 <q-scroll-area style="height:100%">
   <div style="background-color: white;position: relative;margin:auto">
     <div class="q-px-lg q-pb-md" v-for="date in uniqDate" >
-      <q-timeline :layout="dense" color="secondary">
+      <q-timeline :layout="'dense'" color="secondary">
         <q-timeline-entry heading style="color: rgb(22, 20, 19)">
           <span style="font-size:40px">{{date}}</span>
         </q-timeline-entry>

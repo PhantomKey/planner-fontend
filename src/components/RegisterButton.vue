@@ -162,6 +162,6 @@ export default{
 
 <style>
   .dialog {
-    background-color: #fff9f9;
+    background-color: #ffffff;
   }
 </style>

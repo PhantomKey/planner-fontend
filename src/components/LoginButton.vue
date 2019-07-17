@@ -10,7 +10,7 @@
       <img src="~assets/userprofileicon.png" style="max-width:150px; margin-top:-15%;z-index:9999;position:absolute">
       <q-card class="dialog" dense style="min-width:40%;max-width:40%;min-height:65%;,max-height:65%;">
         <q-card-section class="row justify-center">
-          <h4 style="padding-top:25px;color:#161413;">LOGIN TO TRIP PLANNER</h4>
+          <h4 style="padding-top:25px;color:#fa928f;">LOGIN TO TRIP PLANNER</h4>
           <q-input bg-color="secondary" filled v-model="username" label="Username" style="min-width:90%;max-width:90%;"
           lazy-rules
           :rules="[ val => val && val.length > 0 || '']">
@@ -91,6 +91,6 @@ export default{
 
 <style>
   .dialog {
-    background-color: #fff9f9;
+    background-color: #FFFFFF;
   }
 </style>
