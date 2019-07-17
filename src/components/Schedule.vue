@@ -4,7 +4,7 @@
     <div class="q-px-lg q-pb-md" v-for="date in uniqDate" >
       <q-timeline :layout="dense" color="secondary">
         <q-timeline-entry heading style="color: rgb(22, 20, 19)">
-          {{date}}
+          <span style="font-size:40px">{{date}}</span>
         </q-timeline-entry>
         <div v-for="(activity,index) in activities">
           <div v-if="activity.startDate==date" >
