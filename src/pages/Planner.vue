@@ -1,6 +1,6 @@
 <template>
 <div>
-  <div style="height:100vh">
+  <div style="height:80vh">
     <div v-if="loadingfinish" style="height:100%">
       <div v-if="checkplanner&&isLogin" style="height:100%">
         <div class="row" style="height:100%">
