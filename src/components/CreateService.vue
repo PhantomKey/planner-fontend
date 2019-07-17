@@ -99,7 +99,7 @@
                      <q-card-section position="bottom-right" style="text-align:right;padding-top:8px;right:0px;bottom:0px">
                         <q-stepper-navigation style="text-align:right" v-if="step === 1">
                                 <div class="q-gutter-sm">
-                                    <q-btn flat v-close-popup type="reset" label="Cancel" color="negative" style="text-align:right" ></q-btn>
+                                    <q-btn flat v-close-popup type="reset" label="Cancel" color="primary" style="text-align:right" ></q-btn>
                                     <q-btn @click="() => { done1 = true; step = 2 }" color="primary" label="Continue" style="text-align:right"/>
                                 </div>
                         </q-stepper-navigation>
