@@ -24,7 +24,7 @@ export default {
       this.$router.push('/Friends')
     },
     changeStage(){
-      this.style="width80px;color:#D6BAAC"
+      this.style="width80px;color:#fa928f"
     },
     clear(){
       this.style="width80px;color:#9D9A9A"
@@ -40,6 +40,6 @@ div{
   right:180px;
 }
 div:hover{
-  border-bottom: 3px solid  #D6BAAC
+  border-bottom: 3px solid  #fa928f
 }
 </style>
