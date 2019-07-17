@@ -108,24 +108,40 @@ export default{
       console.log(this.user)
     },
     registersucess (req) {
-      console.log('woohoo')
-      console.log(req.data)
       if (req.data.code === 201) {
-        console.log('success')
-        alert('success')
-        this.$router.replace(this.$route.query.redirect || '/')
+        Notify.create({
+          message: 'Account created successfully',
+          color: 'primary',
+          textColor: 'white',
+          timeout: 3000,
+          position: 'top-right',
+          icon: 'check_circle_outline'
+        })
+        this.openRegisterDialog = false
       } else {
-        console.log('wtf')
-        this.registerFailed()
+        this.registerFailed(req)
       }
     },
-    registerFailed () {
-      console.log('Register Fail')
+    registerFailed (req) {
+      Notify.create({
+        message: 'Failed to create account, Reason: '+req.data.message,
+        color: 'primary',
+        textColor: 'white',
+        timeout: 3000,
+        position: 'top-right',
+        icon: 'error'
+      })
     },
     checkpassword () {
-      console.log('haha')
       if (this.user.password !== this.user.confirmpassword) {
-        alert('password not match')
+        Notify.create({
+          message: 'Password does not matched',
+          color: 'primary',
+          textColor: 'white',
+          timeout: 3000,
+          position: 'top-right',
+          icon: 'error'
+        })
         return false
       }
       return true
