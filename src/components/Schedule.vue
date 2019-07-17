@@ -1,33 +1,35 @@
 <template>
-<div style="background-color: white;position: relative;margin:auto;border-right:5px solid #ddd">
-  <div class="q-px-lg q-pb-md" v-for="date in uniqDate" >
-    <q-timeline :layout="layout" color="secondary">
-      <q-timeline-entry heading style="color: rgb(22, 20, 19)">
-        {{date}}
-      </q-timeline-entry>
-      <div v-for="(activity,index) in activities">
-        <div v-if="activity.startDate==date" >
-          <q-timeline-entry
-            :title="activity.name"
-            :subtitle="activity.startTime.concat(' - ',activity.endTime)"
-            :side="'right'"
-            @click="openSpecificActivityPopup(activity)"
-            style="cursor: pointer"
-            color="warning"
-          >
-            <div>
-              {{activity.description}}
-              <br>
-            </div>
-          </q-timeline-entry>
-        </div>
+<q-scroll-area style="height:100%">
+  <div style="background-color: white;position: relative;margin:auto;border-right:5px solid #ddd">
+    <div class="q-px-lg q-pb-md" v-for="date in uniqDate" >
+      <q-timeline :layout="layout" color="secondary">
+        <q-timeline-entry heading style="color: rgb(22, 20, 19)">
+          {{date}}
+        </q-timeline-entry>
+        <div v-for="(activity,index) in activities">
+          <div v-if="activity.startDate==date" >
+            <q-timeline-entry
+              :title="activity.name"
+              :subtitle="activity.startTime.concat(' - ',activity.endTime)"
+              :side="'right'"
+              @click="openSpecificActivityPopup(activity)"
+              style="cursor: pointer"
+              color="warning"
+            >
+              <div>
+                {{activity.description}}
+                <br>
+              </div>
+            </q-timeline-entry>
+          </div>
+      </div>
+      </q-timeline>
     </div>
-    </q-timeline>
+    <div>
+      <specific-activity v-if="icon" :activity="openactivity" :doesntmatterkey="doesntmatterkey"></specific-activity>
+    </div>
   </div>
-  <div>
-    <specific-activity v-if="icon" :activity="openactivity" :doesntmatterkey="doesntmatterkey"></specific-activity>
-  </div>
-</div>
+</q-scroll-area>
 </template>
 
 <script>
