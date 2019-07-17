@@ -6,7 +6,7 @@
         style="right:-96%"
         @click="openCreatePlanner = true">
         </q-btn>
-        <q-dialog v-model="openCreatePlanner">
+        <q-dialog v-model="openCreatePlanner" @keyup.enter="clickAddPlanner()">
             <q-card dense style="min-width:50%;max-width:50%">
             <q-card-section class="row items-center">
               <div class="text-h6" style="margin:0 auto;">Create New Planner</div>
