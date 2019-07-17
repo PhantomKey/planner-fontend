@@ -1,9 +1,10 @@
 <template>
     <div>
-        <q-btn round
+        <q-btn rounded
         color="primary"
         icon="add"
-        style="right:-96%"
+        style="right:-86%"
+        label="Create Planner"
         @click="openCreatePlanner = true">
         </q-btn>
         <q-dialog v-model="openCreatePlanner" @keyup.enter="clickAddPlanner()">
