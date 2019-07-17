@@ -1,6 +1,6 @@
 <template>
     <div>
-        <q-btn round
+        <q-btn rounded
         color="primary"
         icon="add"
         style="right:-95%;"
