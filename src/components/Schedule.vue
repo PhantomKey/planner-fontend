@@ -2,7 +2,7 @@
 <q-scroll-area style="height:100%">
   <div style="background-color: white;position: relative;margin:auto">
     <div class="q-px-lg q-pb-md" v-for="date in uniqDate" >
-      <q-timeline :layout="layout" color="secondary">
+      <q-timeline :layout="dense" color="secondary">
         <q-timeline-entry heading style="color: rgb(22, 20, 19)">
           {{date}}
         </q-timeline-entry>
@@ -21,6 +21,7 @@
                 <br>
               </div>
             </q-timeline-entry>
+            <div></div>
           </div>
       </div>
       </q-timeline>
@@ -53,7 +54,7 @@ export default {
             activityarray:[],
             show: true,
             openactivity: {},
-            doesntmatterkey: 1
+            doesntmatterkey: 1,
           }
   },
   computed: {
