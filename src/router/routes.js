@@ -41,7 +41,14 @@ const routes = [
     children: [
       { path: '', component: () => import('pages/AddFriends.vue') }
     ]
-  }
+  },
+  {
+  path: '/Friends',
+  component: () => import('layouts/MyLayout.vue'),
+  children: [
+    { path: '', component: () => import('pages/FriendList.vue') }
+  ]
+}
 ]
 // Always leave this as last one
 if (process.env.MODE !== 'ssr') {
