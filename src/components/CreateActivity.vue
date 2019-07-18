@@ -18,7 +18,7 @@
                 <q-step
                 :name="1"
                 title="Create Activity"
-                icon="all_inclusive"
+                icon="local_activity"
                 :done="done1"
                 style="min-height: 540px;max-height:540px"
                 >
@@ -94,12 +94,31 @@
                       </div>
                   </q-card-section>
                 </q-step>
+
+                <q-step
+                :name="2"
+                title="Select Friend"
+                icon="person_add"
+                :done="done2"
+                style="min-height: 540px;max-height:540px"
+                >
+
+                </q-step>
+
                   <template v-slot:navigation>
                     <q-card-section position="bottom-right" style="text-align:right;padding-bottom:0px">
-                      <div class="q-gutter-sm">
-                        <q-btn v-close-popup label="Cancel" flat color="primary" style="text-align:right" @click="resetData()"></q-btn>
-                        <q-btn color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd()" v-close-popup></q-btn>
-                      </div>
+                      <q-stepper-navigation style="padding-top:0px">
+                        <div class="q-gutter-sm" v-if="step === 1">
+                          <q-btn v-close-popup label="Cancel" flat color="primary" style="text-align:right" @click="resetData()"></q-btn>
+                          <q-btn @click="() => { done1 = true; step = 2 }" color="primary" label="Continue" style="text-align:right"/>
+                        </div>
+                      </q-stepper-navigation>
+                       <q-stepper-navigation style="padding-top:0px" v-if="step === 2">
+                        <div class="q-gutter-sm">
+                          <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
+                          <q-btn color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd()" v-close-popup></q-btn>
+                        </div>
+                      </q-stepper-navigation>
                     </q-card-section>
                   </template>
               </q-stepper>
