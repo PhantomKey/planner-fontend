@@ -7,121 +7,72 @@
         @click="icon = true">
         </q-btn>
         <q-dialog v-model="icon">
-            <q-card dense flat style="width:600px;max-width:600px;height:680px;max-height:680px">
-              <q-stepper
-              v-model="step"
-              header-nav
-              ref="stepper"
-              color="primary"
-              animated
-              >
-                <q-step
-                :name="1"
-                title="Create Activity"
-                icon="local_activity"
-                :done="done1"
-                style="min-height: 540px;max-height:540px"
-                >
-                  <q-card-section class="row items-center" style="padding-top:0px">
-                      <div class="text-h5" style="margin:0 auto;padding-top:0px">CREATE NEW ACTIVITY</div>
-                  </q-card-section>
-                  <q-card-section class="q-gutter-sm" style="padding-bottom:0px;">
-                      <q-input dense ref="input" filled v-model="name" label="Name" style="min-width:100%;max-width:100%"
-                      lazy-rules
-                      :rules="[ val => val && val.length > 0 || 'Please type something']"></q-input>
-                      <q-select dense filled v-model="stype" :options="type" label="Type" style="min-width:100%;max-width:100%"
-                      lazy-rules
-                      :rules="[ val => val && val.length > 0 || 'Please select something']"></q-select>
-                      <div class="etc" v-if="stype != 'Travel' &&  stype != 'Travel1' &&  stype != 'Travel2' && stype !=''" style="width:100%">
-                          <q-input dense filled v-model="location.in.name" label="Add location" style="min-width:100%;max-width:100%"
-                          error-message="Not found location name. Please type something"
-                          :error="!checketc">
-                              <template v-slot:append>
-                                  <q-icon name="place"  @click="gmappopup=true, ptype=stype" class="cursor-pointer"></q-icon>
-                              </template>
-                          </q-input>
-                      </div>
-                      <div class="travel" v-if="stype == 'Travel' || stype == 'Travel1'|| stype=='Travel2'" style="min-width:100%;max-width:100%">
-                          <div class="row">
-                              <div class="col">
-                                  <q-input dense filled v-model="location.start.name" label="Start"
-                                    error-message="Not found location name. Please type something"
-                                    :error="!checks">
-                                      <template v-slot:append>
-                                          <q-icon name="place"  @click="gmappopup=true, ptype='Travel1'" class="cursor-pointer"></q-icon>
-                                      </template>
-                                  </q-input>
-                              </div>
-                              <div class="col" style="max-width:15px"></div>
-                              <div class="col">
-                                  <q-input dense filled v-model="location.end.name" label="Stop" style="min-width:100%;max-width:100%"
-                                    error-message="Not found location name. Please type something"
-                                    :error="!checke">
-                                      <template v-slot:append>
-                                          <q-icon name="place"  @click="gmappopup=true, ptype='Travel2'" class="cursor-pointer"></q-icon>
-                                      </template>
-                                  </q-input>
-                              </div>
+            <q-card dense flat style="width:50%;max-width:50%;">
+              <q-card-section class="row items-center">
+                  <div class="text-h5" style="margin:0 auto;font-size:25px;">CREATE NEW ACTIVITY</div>
+              </q-card-section>
+              <q-card-section class="q-gutter-sm" style="padding-bottom:0px;">
+                  <q-input bg-color="secondary" dense ref="input" filled v-model="name" label="Name" style="min-width:100%;max-width:100%"></q-input>
+                  <q-select bg-color="secondary" dense filled v-model="stype" :options="type" label="Type" style="min-width:100%;max-width:100%"></q-select>
+                  <div class="etc" v-if="stype != 'Travel' &&  stype != 'Travel1' &&  stype != 'Travel2' && stype !=''" style="width:100%">
+                      <q-input bg-color="secondary" dense filled v-model="location.in.name" label="Add location" style="min-width:100%;max-width:100%">
+                          <template v-slot:append>
+                              <q-icon name="place"  @click="gmappopup=true, ptype=stype" class="cursor-pointer"></q-icon>
+                          </template>
+                      </q-input>
+                  </div>
+                  <div class="travel" v-if="stype == 'Travel' || stype == 'Travel1'|| stype=='Travel2'" style="min-width:100%;max-width:100%">
+                      <div class="row">
+                          <div class="col">
+                              <q-input bg-color="secondary" dense filled v-model="location.start.name" label="Start">
+                                  <template v-slot:append>
+                                      <q-icon name="place"  @click="gmappopup=true, ptype='Travel1'" class="cursor-pointer"></q-icon>
+                                  </template>
+                              </q-input>
+                          </div>
+                          <div class="col" style="max-width:15px"></div>
+                          <div class="col">
+                              <q-input bg-color="secondary" dense filled v-model="location.end.name" label="Stop" style="min-width:100%;max-width:100%">
+                                  <template v-slot:append>
+                                      <q-icon name="place"  @click="gmappopup=true, ptype='Travel2'" class="cursor-pointer"></q-icon>
+                                  </template>
+                              </q-input>
                           </div>
                       </div>
-                      <!-- <div class="row q-col-gutter-sm q-gutter-sm" style="min-width:100%;max-width:100%"> -->
-                        <q-input dense filled v-model="startdate" type="date" label="Start Date" stack-label style="width:100%">
-                          <template v-slot:prepend>
-                            <q-icon name="event" />
-                          </template>
-                        </q-input>
-                        <q-input dense filled v-model="starttime" type="time" label="Start Time" stack-label style="width:100%">
-                        </q-input>
-                      <!-- </div> -->
-                      <!-- <div class="row q-col-gutter-sm q-gutter-sm"> -->
-                        <q-input dense filled v-model="enddate" type="date" label="End Date" stack-label style="width:100%">
-                          <template v-slot:prepend>
-                            <q-icon name="event" />
-                          </template>
-                        </q-input>
-                        <q-input dense filled v-model="endtime" type="time" label="End Time" stack-label style="width:100%">
-                        </q-input>
-                      <!-- </div> -->
-                      <q-input dense ref="input" filled v-model="description" label="Description" style="width:100%"></q-input>
-                      <div class="row q-gutter-sm">
-                        <q-dialog v-model="gmappopup">
-                          <q-card dense style="min-width:70%;max-width:70%">
-                              <q-btn icon="close" flat round dense v-close-popup style="top:10px;right:5px;position:absolute;"></q-btn>
-                              <google-map  :smtype="ptype" @onAdd="handlelocationAdd"/>
-                              <!-- <google-map @onAdd="handlelocalotion2Add" /> -->
-                          </q-card>
-                        </q-dialog>
-                      </div>
-                  </q-card-section>
-                </q-step>
-
-                <q-step
-                :name="2"
-                title="Select Friend"
-                icon="person_add"
-                :done="done2"
-                style="min-height: 540px;max-height:540px"
-                >
-
-                </q-step>
-
-                  <template v-slot:navigation>
-                    <q-card-section position="bottom-right" style="text-align:right;padding-bottom:0px">
-                      <q-stepper-navigation style="padding-top:0px">
-                        <div class="q-gutter-sm" v-if="step === 1">
-                          <q-btn v-close-popup label="Cancel" flat color="primary" style="text-align:right" @click="resetData()"></q-btn>
-                          <q-btn @click="() => { done1 = true; step = 2 }" color="primary" label="Continue" style="text-align:right"/>
-                        </div>
-                      </q-stepper-navigation>
-                       <q-stepper-navigation style="padding-top:0px" v-if="step === 2">
-                        <div class="q-gutter-sm">
-                          <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
-                          <q-btn color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd()" v-close-popup></q-btn>
-                        </div>
-                      </q-stepper-navigation>
-                    </q-card-section>
-                  </template>
-              </q-stepper>
+                  </div>
+                  <!-- <div class="row q-col-gutter-sm q-gutter-sm" style="min-width:100%;max-width:100%"> -->
+                    <q-input bg-color="secondary" dense filled v-model="startdate" type="date" label="Start Date" stack-label style="width:100%">
+                      <template v-slot:prepend>
+                        <q-icon name="event" />
+                      </template>
+                    </q-input>
+                    <q-input bg-color="secondary" dense filled v-model="starttime" type="time" label="Start Time" stack-label style="width:100%">
+                    </q-input>
+                  <!-- </div> -->
+                  <!-- <div class="row q-col-gutter-sm q-gutter-sm"> -->
+                    <q-input bg-color="secondary" dense filled v-model="enddate" type="date" label="End Date" stack-label style="width:100%">
+                      <template v-slot:prepend>
+                        <q-icon name="event" />
+                      </template>
+                    </q-input>
+                    <q-input bg-color="secondary" dense filled v-model="endtime" type="time" label="End Time" stack-label style="width:100%">
+                    </q-input>
+                  <!-- </div> -->
+                  <q-input bg-color="secondary" dense ref="input" filled v-model="description" label="Description" style="width:100%"></q-input>
+                  <div class="row q-gutter-sm">
+                    <q-dialog v-model="gmappopup">
+                      <q-card dense style="min-width:70%;max-width:70%">
+                          <q-btn icon="close" flat round dense v-close-popup style="top:10px;right:5px;position:absolute;"></q-btn>
+                          <google-map  :smtype="ptype" @onAdd="handlelocationAdd"/>
+                          <!-- <google-map @onAdd="handlelocalotion2Add" /> -->
+                      </q-card>
+                    </q-dialog>
+                  </div>
+                </q-card-section>
+                <q-card-section position="bottom-right" style="text-align:right;">
+                  <q-btn v-close-popup label="Cancel" flat color="primary" style="text-align:right" @click="resetData()"></q-btn>
+                  <q-btn color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd()" v-close-popup></q-btn>
+                </q-card-section>
             </q-card>
         </q-dialog>
     </div>
@@ -190,7 +141,7 @@ export default{
               stop:true,
             },
             step:1,
-            done1:false,    
+            done1:false,
             done2:false,
             done3:false,
         }
