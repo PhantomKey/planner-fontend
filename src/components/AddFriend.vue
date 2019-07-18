@@ -1,6 +1,6 @@
 <template>
 <q-btn
-      color="secondary"
+      color="primary"
       style="width:200px;"
       @click="$router.push('/AddFriends')"
     >Add Friend

@@ -1,6 +1,7 @@
 <template>
-      <div v-if="isLogin()">
+      <div>
         <add-friend></add-friend>
+        <q-btn @click="showAllFriends()"></q-btn>
       <q-list v-model="friendlist" v-for="i in friendlist" :key="i.id">
         <q-item>
           <q-item-section avatar>
@@ -16,9 +17,6 @@
         </q-item>
       </q-list>
       </div>
-      <div v-else>
-        You must log in to use this feature.
-      </div>
 </template>
 
 <script>
@@ -30,6 +28,9 @@ import Profile from '../components/Profile.vue'
 import Friend from '../components/Friendbutton.vue'
 export default {
   name: 'MyLayout',
+  created: function () {
+    this.showAllFriends()
+  },
   mounted() {
         this.$root.$on('component1', () => {
             // your code goes here
@@ -83,16 +84,6 @@ export default {
     for(var i = 0;i < value['data']['id'].length;i++)
       this.friendlist.push({id:value['data']['id'][i],name:value['data']['members'][i]})
     console.log(this.friendlist)
-  },
-  isLogin () {
-    console.log(localStorage.token)
-    if (localStorage.token) {
-      this.showUserName()
-      return true
-    } else {
-      this.friendlist=[]
-      return false
-    }
   },
   async deleteMember (x) {
     await this.$http.delete('/api/v1/delete_member/'+x)
