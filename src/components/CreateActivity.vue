@@ -7,11 +7,11 @@
         @click="icon = true">
         </q-btn>
         <q-dialog v-model="icon">
-            <q-card dense flat style="width:50%;max-width:50%;">
-              <q-card-section class="row items-center">
+            <q-card dense flat style="width:45%;max-width:45%;height:80%;max-height:80%">
+              <q-card-section class="row justify-center">
                   <div class="text-h5" style="margin:0 auto;font-size:25px;">CREATE NEW ACTIVITY</div>
               </q-card-section>
-              <q-card-section class="q-gutter-sm" style="padding-bottom:0px;">
+              <q-card-section class="q-gutter-sm" style="padding-bottom:0px;width:95%;margin-left: 8px;margin-right: auto;">
                   <q-input bg-color="secondary" dense ref="input" filled v-model="name" label="Name" style="min-width:100%;max-width:100%"></q-input>
                   <q-select bg-color="secondary" dense filled v-model="stype" :options="type" label="Type" style="min-width:100%;max-width:100%"></q-select>
                   <div class="etc" v-if="stype != 'Travel' &&  stype != 'Travel1' &&  stype != 'Travel2' && stype !=''" style="width:100%">
@@ -69,9 +69,11 @@
                     </q-dialog>
                   </div>
                 </q-card-section>
-                <q-card-section position="bottom-right" style="text-align:right;">
-                  <q-btn v-close-popup label="Cancel" flat color="primary" style="text-align:right" @click="resetData()"></q-btn>
-                  <q-btn color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd()" v-close-popup></q-btn>
+                <q-card-section style="text-align:right;padding-top:50px;right:0px;bottom:0px;margin-right:15px;position:absolute">
+                  <div class="q-gutter-sm">
+                    <q-btn v-close-popup label="Cancel" flat color="primary" style="text-align:right;" @click="resetData()"></q-btn>
+                    <q-btn color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd()"></q-btn>
+                  </div>
                 </q-card-section>
             </q-card>
         </q-dialog>

@@ -12,6 +12,8 @@
             <create-service></create-service> -->
           </div>
         </div>
+        <createactivity @refreshSchedule="refreshPage"></createactivity>
+        <create-service></create-service>
       </div>
       <div v-else>
         <error-404></error-404>
@@ -21,8 +23,6 @@
     </div>
   </div>
   <div>
-    <createactivity @refreshSchedule="refreshPage"></createactivity>
-    <create-service></create-service>
   </div>
 </div>
 </template>

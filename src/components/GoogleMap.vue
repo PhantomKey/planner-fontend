@@ -23,7 +23,7 @@
         @click="center=m.position"
       ></gmap-marker>
     </gmap-map>
-    <q-btn color="deep-orange" class="shadow-16"
+    <q-btn color="primary" class="shadow-16"
     style="position:absolute;right:80px;bottom:23.5px;z-index:9999"
     @click="onAddClick">Add location</q-btn>
   </div>
