@@ -10,49 +10,49 @@
       <q-card class="dialog" dense style="min-width:40%;max-width:40%;min-height:65%;,max-height:65%;">
         <q-card-section class="row justify-center">
           <p style="font-size:25px;color:#fa928f">SIGN UP TO TRIP PLANNER</p>
-          <q-input bg-color="secondary" filled v-model="user.username" label="Username" style="min-width:90%;max-width:90%;"
+          <q-input dense bg-color="secondary" filled v-model="user.username" label="Username" style="min-width:90%;max-width:90%;"
           lazy-rules
           :rules="[ val => val && val.length > 0 || '']">
             <template v-slot:prepend>
               <q-icon name="person" />
             </template>
           </q-input>
-          <q-input bg-color="secondary" filled v-model="user.firstname" label="Firstname" style="min-width:90%;max-width:90%;"
+          <q-input dense bg-color="secondary" filled v-model="user.firstname" label="Firstname" style="min-width:90%;max-width:90%;"
           lazy-rules
           :rules="[ val => val && val.length > 0 || '']">
             <template v-slot:prepend>
               <q-icon name="person" />
             </template>
           </q-input>
-          <q-input bg-color="secondary" filled v-model="user.lastname" label="Lastname" style="min-width:90%;max-width:90%;"
+          <q-input dense bg-color="secondary" filled v-model="user.lastname" label="Lastname" style="min-width:90%;max-width:90%;"
           lazy-rules
           :rules="[ val => val && val.length > 0 || '']">
             <template v-slot:prepend>
               <q-icon name="person" />
             </template>
           </q-input>
-          <q-input bg-color="secondary" filled type="email" v-model="user.email" label="Email" style="min-width:90%;max-width:90%;"
+          <q-input dense bg-color="secondary" filled type="email" v-model="user.email" label="Email" style="min-width:90%;max-width:90%;"
           lazy-rules
           :rules="[ val => val && val.length > 0 || '']">
             <template v-slot:prepend>
               <q-icon name="email" />
             </template>
           </q-input>
-          <q-input bg-color="secondary" filled type="password" v-model="user.password" label="Password" style="min-width:90%;max-width:90%"
+          <q-input dense bg-color="secondary" filled type="password" v-model="user.password" label="Password" style="min-width:90%;max-width:90%"
           lazy-rules
           :rules="[ val => val && val.length > 0 || '']">
             <template v-slot:prepend>
               <q-icon name="lock" />
             </template>
           </q-input>
-          <q-input bg-color="secondary" filled type="password" v-model="user.confirmpassword" label="Confirm Password" style="min-width:90%;max-width:90%"
+          <q-input dense bg-color="secondary" filled type="password" v-model="user.confirmpassword" label="Confirm Password" style="min-width:90%;max-width:90%"
           lazy-rules
           :rules="[ val => val && val.length > 0 || '']">
             <template v-slot:prepend>
               <q-icon name="lock" />
             </template>
           </q-input>
-          <q-input bg-color="secondary" filled type="date" v-model="user.dob" stack-label label="Date of Birth" style="min-width:90%;max-width:90%"
+          <q-input dense bg-color="secondary" filled type="date" v-model="user.dob" stack-label label="Date of Birth" style="min-width:90%;max-width:90%"
           lazy-rules
           :rules="[ val => val && val.length > 0 || '']">
             <template v-slot:prepend>
@@ -64,7 +64,7 @@
             <q-radio v-model="user.gender" val="Male" label="Male" />
             <q-radio v-model="user.gender" val="Female" label="Female" />
           </div> -->
-          <div class="bg-secondary" style="width:90%;border-radius:4px;margin-bottom:4%">
+          <div class="bg-secondary" style="width:90%;border-radius:4px;margin-bottom:4%;height:40px">
             <div class="q-my-xs">
               <q-icon name="fas fa-venus-mars" style="color:#665f60;font-size:20px;margin-left:17px;"/>
               <span style="font-size:17px;color:#665f60;margin-left:12px;">Gender</span>
