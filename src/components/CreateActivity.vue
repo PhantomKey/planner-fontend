@@ -169,7 +169,11 @@ export default{
               in:true,
               start:true,
               stop:true,
-            }
+            },
+            step:1,
+            done1:false,    
+            done2:false,
+            done3:false,
         }
     },
     methods:{
