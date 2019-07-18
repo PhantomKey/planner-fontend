@@ -56,7 +56,7 @@ module.exports = function (ctx) {
         'QChip',
         'QBtnDropdown',
         'QRadio',
-        'QScrollArea'
+        'QScrollArea',
       ],
 
       directives: [

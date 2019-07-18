@@ -49,8 +49,9 @@
                 :done="done2"
                 style="min-height: 485px;max-height:485px"
                 >
-
-                </q-step>
+               
+                    <friend-component></friend-component>
+              </q-step>
 
               <template v-slot:navigation>
                 <q-card-section position="bottom-right" style="text-align:right">
@@ -76,7 +77,11 @@
 </template>
 <script>
 import { Notify } from 'quasar'
+import FriendComponent from './SelectFriendComponent'
 export default{
+  components:{
+    'friend-component':FriendComponent
+  },
   data() {
     return {
       openCreatePlanner: false,
