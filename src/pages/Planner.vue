@@ -10,6 +10,7 @@
           <div class="col-sm-8" style="background-color: white">
  <!--           <createactivity @refreshSchedule="refreshPage"></createactivity>
             <create-service></create-service> -->
+            <TravelMap class="travel-map"/>
           </div>
         </div>
         <createactivity @refreshSchedule="refreshPage"></createactivity>
@@ -32,6 +33,7 @@ import Error404 from './Error404.vue'
 import Schedule from '../components/Schedule.vue'
 import CreateActivity from '../components/CreateActivity.vue'
 import CreateService from '../components/CreateService.vue'
+import TravelMap from "../components/TravelMap.vue";
 
 export default {
   name: 'Planner',
@@ -39,7 +41,8 @@ export default {
     'error-404': Error404,
     'schedule': Schedule,
     'createactivity':CreateActivity,
-    'create-service':CreateService
+    'create-service':CreateService,
+    TravelMap
   },
   checkplannerbeforecreate: false,
   loadingfinishbeforecreate: false,
@@ -148,3 +151,7 @@ export default {
   }
 }
 </script>
+<style lang="scss" scoped>
+.travel-map {
+  height: 400px;
+}
