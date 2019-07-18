@@ -81,7 +81,6 @@ export default{
       }
     },
     AddPlannerFailedwithPOST (req) {
-      console.log(req)
       Notify.create({
         message: 'Failed to create planner, Reason: '+req.data.message,
         color: 'primary',
