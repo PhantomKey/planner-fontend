@@ -1,19 +1,16 @@
 <template>
       <div>
-        <add-friend></add-friend>
-        <q-btn @click="showAllFriends()"></q-btn>
+        <div class="centered">
+          <add-friend></add-friend>
+          <br>
+          <br>
+        </div>
       <q-list v-model="friendlist" v-for="i in friendlist" :key="i.id">
         <q-item>
-          <q-item-section avatar>
-            <q-icon name="school"/>
+          <q-item-section style="background-color:bisque">
+            <q-item-label class="centered2">{{i.name}}</q-item-label>
           </q-item-section>
-          <q-item-section>
-            <q-item-label>{{i.name}}</q-item-label>
-            <q-item-label caption>Your friend</q-item-label>
-          </q-item-section>
-          <q-btn @click="deleteMember(i.id)">
-            remove
-          </q-btn>
+          <q-btn class="centered3" @click="deleteMember(i.id)">remove</q-btn>
         </q-item>
       </q-list>
       </div>
@@ -102,6 +99,19 @@ export default {
 </script>
 
 <style scoped>
+.centered {
+  position:relative;
+  margin-top:40px;
+  left:43%;
+}
+.centered2 {
+  position:relative;
+  left:30%;
+}
+.centered3 {
+  position:relative;
+  right:25%;
+}
 friend:hover{
   border-bottom: 5px solid #fa928f
 }

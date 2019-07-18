@@ -4,9 +4,9 @@
         color="primary"
         icon="add"
         style="left:23%;bottom:10%;position:absolute"
-        @click="icon = true">
+        @click="createActivityPopup = true">
         </q-btn>
-        <q-dialog v-model="icon">
+        <q-dialog v-model="createActivityPopup">
             <q-card dense flat style="width:45%;max-width:45%;height:80%;max-height:80%">
               <q-card-section class="row justify-center">
                   <div class="text-h5" style="margin:0 auto;font-size:25px;">CREATE NEW ACTIVITY</div>
@@ -72,7 +72,7 @@
                 <q-card-section style="text-align:right;padding-top:50px;right:0px;bottom:0px;margin-right:15px;position:absolute">
                   <div class="q-gutter-sm">
                     <q-btn v-close-popup label="Cancel" flat color="primary" style="text-align:right;" @click="resetData()"></q-btn>
-                    <q-btn color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd()"></q-btn>
+                    <q-btn color="primary" label="Create" style="text-align:right" @click="clickAddActivity()"></q-btn>
                   </div>
                 </q-card-section>
             </q-card>
@@ -87,6 +87,7 @@ import { request } from 'http';
 import { stat } from 'fs';
 import { constants } from 'crypto';
 import { arch, type } from 'os';
+import { Notify } from 'quasar'
 export default{
     components: {
       'GoogleMap': GoogleMap
@@ -107,7 +108,7 @@ export default{
     },
     data() {
         return {
-            icon: false,
+            createActivityPopup: false,
             gmappopup: false,
             closePopup: false,
             name: '',
@@ -198,7 +199,7 @@ export default{
         })
         return datas
       },
-       async createActivityBackEnd (){
+       async clickAddActivity (){
         var planner_id = this.getParameterByName('plannerid')
         let headers = {'Authorization': 'JWT '+localStorage.token,
                         'Content-Type': 'application/json'}
@@ -206,17 +207,51 @@ export default{
         var type = this.getType(dtype)
         if(type == 1){
           var datas = this.jsonbodyt(type)
-        }else{
+        }
+        else{
           var datas = this.jsonbodyetc(type)
         }
-        await this.$http.post('/planner/plannerid='+planner_id+'/create_activity',datas,{headers}).then((request) => this.checkreq(request))
-        .catch((err) => this.reqFailed(err))
-        this.emitToPlanner()
-        Object.assign(this.$data, this.$options.data.apply(this))
+        console.log(datas)
+        await this.$http.post('/planner/plannerid='+planner_id+'/create_activity',datas,{headers})
+        .then((request) => this.AddActivitySuccessfulwithPOST(request))
+        .catch((err) => this.AddActivityFailedwithoutPOST(err))
       },
-      checkreq(req){
+      AddActivitySuccessfulwithPOST(req){
+        if (req.data.code === 201) {
+          Notify.create({
+            message: 'Activity created successfully',
+            color: 'primary',
+            textColor: 'white',
+            timeout: 3000,
+            position: 'top-right',
+            icon: 'check_circle_outline'
+          })
+          this.createActivityPopup = false
+          this.emitToPlanner()
+          Object.assign(this.$data, this.$options.data.apply(this))
+        } else {
+          this.AddActivityFailedwithPOST(req)
+        }
       },
-      reqFailed(req){
+      AddActivityFailedwithPOST(req){
+        Notify.create({
+          message: 'Failed to create activity, Reason: '+req.data.message,
+          color: 'primary',
+          textColor: 'white',
+          timeout: 3000,
+          position: 'top-right',
+          icon: 'error'
+        })
+      },
+      AddActivityFailedwithoutPOST(err){
+        Notify.create({
+          message: 'Failed to create activity, '+err,
+          color: 'primary',
+          textColor: 'white',
+          timeout: 3000,
+          position: 'top-right',
+          icon: 'error'
+        })
       },
       handlelocationAdd(val) {
         this.gmappopup = false

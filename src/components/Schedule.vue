@@ -118,7 +118,6 @@ export default {
         break;
       }
       var returnString = MonthString.concat(' ',DateString,', ',YearString)
-      console.log(returnString)
       return returnString
     },
     async showAllActivity (){
@@ -146,17 +145,64 @@ export default {
         endHour = ("0" + endHour).slice(-2)
         var endMinute = returnenddatetime.getUTCMinutes().toString()
         endMinute = ("0" + endMinute).slice(-2)
-        this.activities.push({
-          name: value['data']['name'][i],
-          startDate: startDate.concat('/',startMonth,'/',startYear),
-          startTime: startHour.concat(':',startMinute),
-          endDate: endDate.concat('/',endMonth,'/',endYear),
-          endTime: endHour.concat(':',endMinute),
-          id: value['data']['id'][i],
-          servicetypeID: value['data']['servicetypeID'][i],
-          locationID: value['data']['locationID'][i],
-          description: value['data']['description'][i]
-        })
+        var dateDiff = (returnenddatetime.getUTCDate()-returnstartdatetime.getUTCDate())
+        console.log(dateDiff)
+        if(dateDiff == 0) {
+          this.activities.push({
+            name: value['data']['name'][i],
+            startDate: startDate.concat('/',startMonth,'/',startYear),
+            startTime: startHour.concat(':',startMinute),
+            endDate: endDate.concat('/',endMonth,'/',endYear),
+            endTime: endHour.concat(':',endMinute),
+            id: value['data']['id'][i],
+            servicetypeID: value['data']['servicetypeID'][i],
+            locationID: value['data']['locationID'][i],
+            description: value['data']['description'][i]
+          })
+        }
+        else {
+          this.activities.push({
+            name: value['data']['name'][i],
+            startDate: startDate.concat('/',startMonth,'/',startYear),
+            startTime: startHour.concat(':',startMinute),
+            endDate: startDate.concat('/',startMonth,'/',startYear),
+            endTime: "00:00",
+            id: value['data']['id'][i],
+            servicetypeID: value['data']['servicetypeID'][i],
+            locationID: value['data']['locationID'][i],
+            description: value['data']['description'][i]
+          })
+          for(var j=1;j<dateDiff;j++){
+            var today = new Date(returnstartdatetime)
+            var tmr = new Date(today.setDate(today.getDate()+j))
+            var returnDate = tmr.getUTCDate().toString()
+            var returnMonth = (tmr.getUTCMonth()+1).toString()
+            var returnYear = tmr.getUTCFullYear().toString()
+            var returnValue = returnDate.concat('/',returnMonth,'/',returnYear)
+            this.activities.push({
+              name: value['data']['name'][i],
+              startDate: returnValue,
+              startTime: "00:00",
+              endDate: returnValue,
+              endTime: "00:00",
+              id: value['data']['id'][i],
+              servicetypeID: value['data']['servicetypeID'][i],
+              locationID: value['data']['locationID'][i],
+              description: value['data']['description'][i]
+            })
+          }
+          this.activities.push({
+            name: value['data']['name'][i],
+            startDate: endDate.concat('/',endMonth,'/',endYear),
+            startTime: "00:00",
+            endDate: endDate.concat('/',endMonth,'/',endYear),
+            endTime: endHour.concat(':',endMinute),
+            id: value['data']['id'][i],
+            servicetypeID: value['data']['servicetypeID'][i],
+            locationID: value['data']['locationID'][i],
+            description: value['data']['description'][i]
+          })
+        }
       }
     },
     getParameterByName(name, url) {
@@ -176,13 +222,4 @@ export default {
 </script>
 
 <style>
-/* .centered {
-  position: absolute;
-  top: 54%;
-  left: 50%;
-  width: 40%; */
-  /* bring your own prefixes */
-  /* transform: translate(-50%, -50%);
-  margin-top:200px;
-} */
 </style>
