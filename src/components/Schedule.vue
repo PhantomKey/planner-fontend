@@ -4,7 +4,7 @@
     <div class="q-px-lg q-pb-md" v-for="date in uniqDate" >
       <q-timeline :layout="'dense'" color="secondary">
         <q-timeline-entry heading style="color: rgb(22, 20, 19)">
-          <span style="font-size:40px">{{date}}</span>
+          <span style="font-size:40px">{{convertToMonthString(date)}}</span>
         </q-timeline-entry>
         <div v-for="(activity,index) in activities">
           <div v-if="activity.startDate==date" >
@@ -12,7 +12,6 @@
               :title="activity.name"
               :subtitle="activity.startTime.concat(' - ',activity.endTime)"
               :side="'right'"
-              @click="openSpecificActivityPopup(activity)"
               style="cursor: pointer"
               color="warning"
             >
@@ -62,17 +61,65 @@ export default {
       return this.$q.screen.lt.sm ? 'dense' : (this.$q.screen.lt.md ? 'comfortable' : 'loose')
     },
     uniqDate () {
-      return uniq(this.activities.map(p => p.startDate))
+      var uniqDate = uniq(this.activities.map(p => p.startDate))
+      return uniqDate
     },
   },
   beforeMount() {
     this.showAllActivity()
   },
   methods: {
-    openSpecificActivityPopup(activity){
-      this.doesntmatterkey = this.doesntmatterkey + 1
-      this.openactivity = activity
-      this.icon=true
+    // openSpecificActivityPopup(activity){
+    //   this.doesntmatterkey = this.doesntmatterkey + 1
+    //   this.openactivity = activity
+    //   this.icon=true
+    // },
+    convertToMonthString(inputdate) {
+      var splittedDateString = inputdate.split("/")
+      var DateString = splittedDateString[0]
+      var MonthString
+      var YearString = splittedDateString[2]
+      switch(splittedDateString[1]) {
+        case '1':
+          MonthString = 'January';
+          break;
+        case '2':
+          MonthString = 'February';
+          break;
+        case '3':
+          MonthString = 'March';
+          break;
+        case '4':
+          MonthString = 'April';
+          break;
+        case '5':
+          MonthString = 'May';
+          break;
+        case '6':
+          MonthString = 'June';
+          break;
+        case '7':
+          MonthString = 'July';
+          break;
+        case '8':
+          MonthString = 'August';
+          break;
+        case '9':
+          MonthString = 'September';
+          break;
+        case '10':
+          MonthString = 'October';
+          break;
+        case '11':
+          MonthString = 'November';
+          break;
+        case '12':
+          MonthString = 'December';
+        break;
+      }
+      var returnString = MonthString.concat(' ',DateString,', ',YearString)
+      console.log(returnString)
+      return returnString
     },
     async showAllActivity (){
       var planner_id = this.getParameterByName('plannerid')
