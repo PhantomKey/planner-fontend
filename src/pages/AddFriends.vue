@@ -9,8 +9,12 @@
     <input v-model="Firstname" class="input" type="text">
     <p>Lastname</p>
     <input v-model="Lastname" class="input" type="text">
+<<<<<<< HEAD
+    <p>Age</p>
+=======
     <p>Birthday</p>
-    <input v-model="Birthday" class="input" type="date">
+>>>>>>> 74eb8de59b77b3aafc159cfcd5bec77bb6b88b11
+    <input v-model="Birthday" class="input" type="text">
     <p>Gender</p>
     <input v-model="Gender" type="radio" value=m> male <input v-model="Gender" type="radio" value=f> female
     <p></p>
