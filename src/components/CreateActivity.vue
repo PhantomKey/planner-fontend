@@ -69,9 +69,11 @@
                     </q-dialog>
                   </div>
                 </q-card-section>
-                <q-card-section position="bottom-right" style="text-align:right;margin-right:15px">
-                  <q-btn v-close-popup label="Cancel" flat color="primary" style="text-align:right" @click="resetData()"></q-btn>
-                  <q-btn color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd()" v-close-popup></q-btn>
+                <q-card-section style="text-align:right;padding-top:50px;right:0px;bottom:0px;margin-right:15px;position:absolute">
+                  <div class="q-gutter-sm">
+                    <q-btn v-close-popup label="Cancel" flat color="primary" style="text-align:right;" @click="resetData()"></q-btn>
+                    <q-btn color="primary" label="Create" style="text-align:right" @click="createActivityBackEnd()"></q-btn>
+                  </div>
                 </q-card-section>
             </q-card>
         </q-dialog>
