@@ -7,7 +7,7 @@
         </div>
       <q-list v-model="friendlist" v-for="i in friendlist" :key="i.id">
         <q-item>
-          <q-item-section>
+          <q-item-section style="background-color:bisque">
             <q-item-label class="centered2">{{i.name}}</q-item-label>
           </q-item-section>
           <q-btn class="centered3" @click="deleteMember(i.id)">remove</q-btn>
@@ -110,7 +110,7 @@ export default {
 }
 .centered3 {
   position:relative;
-  right:30%;
+  right:25%;
 }
 friend:hover{
   border-bottom: 5px solid #fa928f
