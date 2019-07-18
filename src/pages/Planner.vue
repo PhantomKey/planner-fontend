@@ -1,16 +1,14 @@
 <template>
 <div>
   <div style="height:80vh">
-    <div v-if="loadingfinish" style="height:100%;margin-left:33.59px">
+    <div v-if="loadingfinish" style="height:100%;">
       <div v-if="checkplanner&&isLogin" style="height:100%">
-        <div class="row" style="height:100%">
+        <div class="row" style="height:100%;margin-left:33.59px;margin-right:33.59px">
           <div class="col-sm-4" style="background-color: white;;border-right:5px solid #ddd">
             <schedule :scheduleData="refreshToken"></schedule>
           </div>
-          <div class="col-sm-8" style="background-color: white">
- <!--           <createactivity @refreshSchedule="refreshPage"></createactivity>
-            <create-service></create-service> -->
-            <TravelMap class="travel-map"/>
+          <div class="col-sm-8" style="background-color: white;">
+            <TravelMap class="travel-map" style="height:100%"/>
           </div>
         </div>
         <createactivity @refreshSchedule="refreshPage"></createactivity>
