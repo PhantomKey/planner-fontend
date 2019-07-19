@@ -48,9 +48,11 @@
                 icon="person_add"
                 :done="done2"
                 style="min-height: 485px;max-height:485px"
-                >
-               
-                    <friend-component></friend-component>
+                > 
+                  <q-card-section class="row items-center" style="padding-bottom:0px">
+                      <div class="text-h5" style="margin:0 auto;color:#fa928f;padding-bottom:0px">SELECT FRIEND</div>
+                  </q-card-section>
+                  <friend-component></friend-component>
               </q-step>
 
               <template v-slot:navigation>
@@ -128,6 +130,7 @@ export default{
       }
     },
     AddPlannerFailedwithPOST (req) {
+      console.log(req)
       Notify.create({
         message: 'Failed to create planner, Reason: '+req.data.message,
         color: 'primary',
