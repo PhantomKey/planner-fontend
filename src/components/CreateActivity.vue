@@ -3,7 +3,7 @@
         <q-btn rounded label="New Activity"
         color="primary"
         icon="add"
-        style="left:23%;bottom:10%;position:absolute"
+        style="left:22%;bottom:10%;position:absolute"
         @click="createActivityPopup = true">
         </q-btn>
         <q-dialog v-model="createActivityPopup">
