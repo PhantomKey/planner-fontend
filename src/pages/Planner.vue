@@ -9,7 +9,6 @@
           </div>
           <div class="col-sm-8" style="background-color: white;">
             <rightSideInPlanner></rightSideInPlanner>
-            <!-- <TravelMap class="travel-map" style="height:100%"/> -->
           </div>
         </div>
         <createactivity @refreshSchedule="refreshPage"></createactivity>
