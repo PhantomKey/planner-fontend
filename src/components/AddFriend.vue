@@ -1,9 +1,9 @@
 <template>
   <div>
     <q-btn outline
-          color="white"
+          color="primary"
           style="width:150px;"
-          label="Register"
+          label="Add member"
           @click="openRegisterDialog = true">
     </q-btn>
     <q-dialog v-model="openRegisterDialog">
@@ -65,6 +65,7 @@ export default{
       lastname: this.Lastname,dob:this.Birthday,gender:this.Gender})
           .then(request => this.registerSuccessfulwithPOST(request))
           .catch((error) => this.registerFailedwithoutPOST(error))
+      this.$root.$emit('component1')  
     },
     registerSuccessfulwithPOST (req) {
       if (req.data.code === 201) {

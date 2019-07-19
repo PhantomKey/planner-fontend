@@ -2,7 +2,7 @@
       <div>
         <div class="centered">
           <div style="display:inline-block">
-            <add-friend class="shadow-2" style="display:inline-block;margin-left:1rem" >Add new member</add-friend>
+            <add-friend class="shadow-2" style="display:inline-block;margin-left:1rem" ></add-friend>
           </div>
           <br>
           <br>
