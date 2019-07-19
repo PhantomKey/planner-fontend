@@ -1,7 +1,9 @@
 <template>
       <div>
         <div class="centered">
-          <add-friend></add-friend>
+          <div style="display:inline-block">
+            <add-friend class="shadow-2" style="display:inline-block;margin-left:1rem" ></add-friend>
+          </div>
           <br>
           <br>
         </div>
