@@ -20,7 +20,7 @@
   <q-card-section>
     <q-scroll-area style="min-height:200px;height:200px">
       <q-list>
-          <q-item multiline tag="label" v-for="contact in searchlist" :key="contact.id" class="q-my-sm" clickable v-ripple>
+          <q-item multiline tag="label" v-for="contact in searchlist" :key="contact.id" class="q-my-sm" clickable v-ripple @click="editFriend(contact.id),contact.selected=!contact.selected">
             <q-item-section avatar top>
               <q-avatar color="primary" text-color="white" class="text-uppercase">{{contact.letter}}</q-avatar>
             </q-item-section>
@@ -31,6 +31,7 @@
             <q-item-section avatar>
                <q-checkbox 
                v-model="contact.selected"
+               @click="editFriend(contact.id)"
                color="accent"/>
             </q-item-section>
           </q-item>
@@ -68,20 +69,31 @@ export default {
             val:false,
             select:true,
             selected:false,
-            count:0
+            count:0,
+            update:0
         }
     },
     watch:{
       selectedlist:{
         deep:true,
         handler(){
-        for(var i = 0;i<this.selectedlist.length;i++){
-              if(!this.selectedlist[i].selected){
-                this.select = true
-                this.selected = false
-                this.selectedlist.splice(i,1)
-                break
-              }
+          if(this.count === this.update){
+            for(var i = 0;i<this.selectedlist.length;i++){
+                if(!this.selectedlist[i].selected){
+                  this.select = true
+                  this.selected = false
+                  for(var j = 0;j<this.friendlist.length;j++){
+                    if(this.friendlist[j].name == this.selectedlist[i].name){
+                      this.friendlist[j].selected = false
+                      break
+                    }
+                  }
+                  this.selectedlist.splice(i,1)
+                  break
+                }
+            }
+          }else{
+            this.update = JSON.parse(JSON.stringify(this.count))
           }
         }
       },
@@ -114,7 +126,7 @@ export default {
           })
           }else{
             if(this.searchf ===''){
-              this.searchlist=this.friendlist
+              this.searchlist=JSON.parse(JSON.stringify(this.friendlist))
             }
             else{
               this.searchlist=[]
@@ -159,6 +171,34 @@ export default {
           }else{
             this.selected = false
             this.select = true
+          }
+        },
+        editFriend(id){
+          this.count++
+          for(var i = 0;i<this.friendlist.length;i++){
+            if(this.friendlist[i].id === id){
+              if(this.friendlist[i].selected){
+                this.friendlist[i].id = false
+                for(var j = 0;j<this.selectedlist.length;j++){
+                  if(this.selectedlist[j].id === id){
+                    this.selectedlist.splice(j,1)
+                    break
+                  }
+                }
+                break
+              }else{
+                this.friendlist[i].id = true
+                var check = true
+                for(var j = 0;j<this.selectedlist.length;j++){
+                  if(this.selectedlist[j].id === id){
+                    check = false
+                    console.log('duplicate')
+                    break
+                  }
+                }
+                if(check) this.selectedlist.push(this.friendlist[i])
+              }
+            }
           }
         }
     }
