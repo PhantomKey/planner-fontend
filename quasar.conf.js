@@ -57,7 +57,13 @@ module.exports = function (ctx) {
         'QBtnDropdown',
         'QRadio',
         'QScrollArea',
+<<<<<<< HEAD
+        'QCarousel',
+        'QCarouselControl',
+        'QCarouselSlide'
+=======
         'QCheckbox'
+>>>>>>> 7ce968f6edebd016026d5649746a68d3d55de4ab
       ],
 
       directives: [

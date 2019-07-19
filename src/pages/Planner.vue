@@ -4,11 +4,12 @@
     <div v-if="loadingfinish" style="height:100%;">
       <div v-if="checkplanner&&isLogin" style="height:100%">
         <div class="row" style="height:100%;margin-left:33.59px;margin-right:33.59px">
-          <div class="col-sm-4" style="background-color: white;;border-right:5px solid #ddd">
+          <div class="col-sm-4" style="background-color: white;;border-right:3px solid #ffeeef">
             <schedule :scheduleData="refreshToken"></schedule>
           </div>
           <div class="col-sm-8" style="background-color: white;">
-            <TravelMap class="travel-map" style="height:100%"/>
+            <rightSideInPlanner></rightSideInPlanner>
+            <!-- <TravelMap class="travel-map" style="height:100%"/> -->
           </div>
         </div>
         <createactivity @refreshSchedule="refreshPage"></createactivity>
@@ -32,6 +33,7 @@ import Schedule from '../components/Schedule.vue'
 import CreateActivity from '../components/CreateActivity.vue'
 import CreateService from '../components/CreateService.vue'
 import TravelMap from "../components/TravelMap.vue";
+import rightSideInPlanner from "../components/rightSideInPlanner.vue"
 
 export default {
   name: 'Planner',
@@ -40,7 +42,8 @@ export default {
     'schedule': Schedule,
     'createactivity':CreateActivity,
     'create-service':CreateService,
-    TravelMap
+    TravelMap,
+    'rightSideInPlanner':rightSideInPlanner
   },
   checkplannerbeforecreate: false,
   loadingfinishbeforecreate: false,
