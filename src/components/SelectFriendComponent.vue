@@ -20,7 +20,7 @@
   <q-card-section>
     <q-scroll-area style="min-height:200px;height:200px">
       <q-list>
-          <q-item multiline tag="label" v-for="contact in searchlist" :key="contact.id" class="q-my-sm" clickable v-ripple @click="editFriend(contact.id),contact.selected=!contact.selected">
+          <q-item multiline tag="label" v-for="contact in searchlist" :key="contact.id" class="q-my-sm" clickable v-ripple @click="editFriend(contact.id,contact),contact.selected = !contact.selected">
             <q-item-section avatar top>
               <q-avatar color="primary" text-color="white" class="text-uppercase">{{contact.letter}}</q-avatar>
             </q-item-section>
@@ -31,7 +31,7 @@
             <q-item-section avatar>
                <q-checkbox 
                v-model="contact.selected"
-               @click="editFriend(contact.id)"
+               
                color="accent"/>
             </q-item-section>
           </q-item>
@@ -77,13 +77,15 @@ export default {
       selectedlist:{
         deep:true,
         handler(){
+          console.log('watch')
           if(this.count === this.update){
             for(var i = 0;i<this.selectedlist.length;i++){
                 if(!this.selectedlist[i].selected){
                   this.select = true
                   this.selected = false
                   for(var j = 0;j<this.friendlist.length;j++){
-                    if(this.friendlist[j].name == this.selectedlist[i].name){
+                    if(this.friendlist[j].id == this.selectedlist[i].id){
+                      this.searchlist[j].selected = false
                       this.friendlist[j].selected = false
                       break
                     }
@@ -103,6 +105,7 @@ export default {
               this.friendlist[i].selected = true
           }
           this.selectedlist = JSON.parse(JSON.stringify(this.friendlist))
+          this.searchlist = JSON.parse(JSON.stringify(this.friendlist))
         }
       },
       selected: function(){
@@ -110,6 +113,7 @@ export default {
            for(var i = 0;i<this.friendlist.length;i++){
               this.friendlist[i].selected = false
             }
+            this.searchlist = JSON.parse(JSON.stringify(this.friendlist))
             this.selectedlist = []
         }
       },
@@ -147,7 +151,7 @@ export default {
             let headers = {'Authorization': 'JWT '+localStorage.token}
             let value = await this.$http.get('/api/v1/member',{headers})
             this.renderFriends(value)
-            this.searchlist=this.friendlist
+            this.searchlist=JSON.parse(JSON.stringify(this.friendlist))
         },
         renderFriends (value) {
             for(var i = 0;i < value['data']['id'].length;i++){
@@ -173,21 +177,41 @@ export default {
             this.select = true
           }
         },
-        editFriend(id){
+        editFriend(id,c){
           this.count++
+          for(var i = 0;i<this.searchlist.length;i++){
+            if(this.searchlist[i].id === id){
+              console.log('this is search list :')
+              console.log(this.searchlist[i])
+              if(this.searchlist[i].selected){
+                console.log('true')
+                this.searchlist[i].selected = false
+              } 
+              else this.searchlist[i].selected = true
+              console.log(this.searchlist[i])
+            }
+          }
           for(var i = 0;i<this.friendlist.length;i++){
             if(this.friendlist[i].id === id){
+              console.log('friend:')
+              console.log(this.friendlist[i])
               if(this.friendlist[i].selected){
-                this.friendlist[i].id = false
+                this.friendlist[i].selected = false
                 for(var j = 0;j<this.selectedlist.length;j++){
                   if(this.selectedlist[j].id === id){
                     this.selectedlist.splice(j,1)
                     break
                   }
                 }
+                for(var j = 0; j < this.selectedlist.length; j++){
+                  if(this.searchlist[j].id == id){
+                    this.searchlist[j].selected = false
+                    break
+                  }
+                }
                 break
               }else{
-                this.friendlist[i].id = true
+                this.friendlist[i].selected = true
                 var check = true
                 for(var j = 0;j<this.selectedlist.length;j++){
                   if(this.selectedlist[j].id === id){
@@ -196,9 +220,17 @@ export default {
                     break
                   }
                 }
-                if(check) this.selectedlist.push(this.friendlist[i])
+                if(check){
+                  console.log('push')
+                  this.selectedlist.push(this.friendlist[i])
+                  console.log(this.selectedlist)
+                } 
               }
             }
+          }
+          if(this.selectedlist.length != this.friendlist.length){
+            this.select = true
+            this.selected = false
           }
         }
     }
