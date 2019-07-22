@@ -13,7 +13,7 @@
           { label: 'Details', value: 'details' },
           { label: 'Route', value: 'route' },
         ]"
-        style="position:absolute;z-index:9999;margin-left:25.5%;margin-top:35%;"
+        style="position:absolute;z-index:9999;margin-left:25.5%;margin-top:34%;border: 1px solid #fa928f"
       />
     <q-carousel
       v-model="slide"
