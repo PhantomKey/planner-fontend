@@ -9,6 +9,14 @@
           </div>
           <div class="col-sm-8" style="background-color: white;">
             <div v-if="SpecificActivityRightSide" style="height:100%;">
+              <q-btn
+                flat round
+                color="primary"
+                :size="'md'"
+                :icon="'arrow_back'"
+                style="position:absolute;bottom:50%;"
+                @click="closeActivityRightSide"
+              />
               <create-service></create-service>
             </div>
             <div v-else style="height:100%;">
@@ -93,6 +101,9 @@ export default {
     this.authenfunction()
   },
   methods: {
+    closeActivityRightSide() {
+      this.SpecificActivityRightSide = false
+    },
     openActivityRightSide(value) {
       this.SpecificActivityRightSide = true
       console.log(value)
