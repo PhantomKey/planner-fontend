@@ -14,6 +14,7 @@
               :side="'right'"
               style="cursor: pointer"
               color="warning"
+              @click="openspecificactivity(activity.id)"
             >
               <div>
                 {{activity.description}}
@@ -69,11 +70,9 @@ export default {
     this.showAllActivity()
   },
   methods: {
-    // openSpecificActivityPopup(activity){
-    //   this.doesntmatterkey = this.doesntmatterkey + 1
-    //   this.openactivity = activity
-    //   this.icon=true
-    // },
+    openspecificactivity(activityid) {
+      this.$emit('openSpeficActivity', activityid)
+    },
     convertToMonthString(inputdate) {
       var splittedDateString = inputdate.split("/")
       var DateString = splittedDateString[0]

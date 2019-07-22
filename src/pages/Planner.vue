@@ -5,14 +5,18 @@
       <div v-if="checkplanner&&isLogin" style="height:100%">
         <div class="row" style="height:100%;margin-left:33.59px;margin-right:33.59px">
           <div class="col-sm-4" style="background-color: white;;border-right:3px solid #ffeeef">
-            <schedule :scheduleData="refreshToken"></schedule>
+            <schedule :scheduleData="refreshToken" @openSpeficActivity="openActivityRightSide"></schedule>
           </div>
           <div class="col-sm-8" style="background-color: white;">
-            <rightSideInPlanner></rightSideInPlanner>
+            <div v-if="SpecificActivityRightSide" style="height:100%;">
+              <create-service></create-service>
+            </div>
+            <div v-else style="height:100%;">
+              <rightSideInPlanner></rightSideInPlanner>
+            </div>
           </div>
         </div>
         <createactivity @refreshSchedule="refreshPage"></createactivity>
-        <create-service></create-service>
       </div>
       <div v-else>
         <error-404></error-404>
@@ -52,7 +56,8 @@ export default {
             ],
             checkplanner: this.$options.checkplannerbeforecreate,
             loadingfinish: this.$options.loadingfinishbeforecreate,
-            refreshToken: 1
+            refreshToken: 1,
+            SpecificActivityRightSide: false
           }
   },
   beforeMount(){
@@ -88,6 +93,10 @@ export default {
     this.authenfunction()
   },
   methods: {
+    openActivityRightSide(value) {
+      this.SpecificActivityRightSide = true
+      console.log(value)
+    },
     async authenfunction() {
       this.isYourPlanner()
     },
