@@ -8,7 +8,7 @@
           <br>
         </div>
       <q-list v-model="friendlist" v-for="i in friendlist" :key="i.id">
-        <q-item>
+        <q-item v-if="!i.isowner" style="width:900px;left:17%">
           <q-item-section style="background-color:bisque">
             <q-item-label class="centered2">{{i.name}}</q-item-label>
           </q-item-section>
@@ -81,7 +81,7 @@ export default {
   },
   renderFriends (value) {
     for(var i = 0;i < value['data']['id'].length;i++)
-      this.friendlist.push({id:value['data']['id'][i],name:value['data']['members'][i]})
+      this.friendlist.push({id:value['data']['id'][i],name:value['data']['members'][i],isowner:value['data']['owner'][i]})
     console.log(this.friendlist)
   },
   async deleteMember (x) {
