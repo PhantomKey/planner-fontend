@@ -21,8 +21,11 @@
     <q-scroll-area style="min-height:200px;height:200px">
       <q-list>
           <q-item multiline tag="label" v-for="contact in searchlist" :key="contact.id" class="q-my-sm" clickable v-ripple>
-            <q-item-section avatar top>
+            <q-item-section avatar top v-if="contact.owner == '0'">
               <q-avatar color="primary" text-color="white" class="text-uppercase">{{contact.letter}}</q-avatar>
+            </q-item-section>
+            <q-item-section avatar top v-if="contact.owner == '1'">
+              <q-avatar icon="person" color="grey-4"></q-avatar>
             </q-item-section>
             <q-item-section>
               <q-item-label class="text-capitalize">{{ contact.name }}  {{contact.lastname}}</q-item-label>
@@ -42,7 +45,8 @@
       <div>
         <div v-for="contact in selectedlist" :key="contact.id" style="display:contents;" class="q-gutter-md">
         <q-chip dense removable v-model="contact.selected">
-          <q-avatar color="primary" text-color="white" class="text-uppercase">{{contact.letter}}</q-avatar> <span class="text-capitalize">{{contact.name}}</span>
+          <q-avatar  v-if="contact.owner == '0'" color="primary" text-color="white" class="text-uppercase">{{contact.letter}}</q-avatar> <span v-if="contact.owner == '0'" class="text-capitalize">{{contact.name}}</span>
+          <q-avatar  v-if="contact.owner == '1'" color="grey-4" icon="person" ></q-avatar> <span  v-if="contact.owner == '1'" class="text-capitalize">{{contact.name}}</span>
        </q-chip>
         </div>
       </div>
@@ -57,6 +61,7 @@
 import { Notify } from 'quasar'
 import { timeout } from 'q';
 export default {
+  props:['needdata'],
     mounted(){
       this.showAllFriends()
     },
@@ -74,16 +79,15 @@ export default {
         }
     },
     watch:{
-      searchlist:{
-        deep:true,
-        handler(){
-          console.log('searchlist change')
-        }
+      'needdata':function(){
+        console.log('this is seleted list')
+        console.log(this.selectedlist)
+        if(this.selectedlist.length != 0) this.$emit('thisisdata',this.selectedlist)
+        else this.$emit('thisisdata',false)
       },
       selectedlist:{
         deep:true,
         handler(){
-          console.log('watch')
           if(this.count === this.update){
             for(var i = 0;i<this.selectedlist.length;i++){
                 if(!this.selectedlist[i].selected){
@@ -169,14 +173,27 @@ export default {
             for(var i = 0;i < value['data']['id'].length;i++){
               let str = value['data']['members'][i]
               let letter = str.toString().substring(0,1)
-              if(value['data']['gender'][i] == 'm'){
+
+              if(value['data']['gender'][i] == 'M'){
                 var gender = 'Male'
               }else{
                 var gender = 'Female'
               }
-              this.friendlist.push({id:value['data']['id'][i],name:value['data']['members'][i],
-              lastname:value['data']['lastname'][i],gender:gender,letter:letter,age:value['data']['age'][i],
-              selected:false})
+
+              if(value['data']['id'][i] == '1'){
+                this.friendlist.push({id:value['data']['id'][i],name:value['data']['members'][i],
+                lastname:value['data']['lastname'][i],gender:gender,letter:letter,age:value['data']['age'][i],
+                selected:true,owner:value['data']['owner'][i]})
+
+                this.selectedlist.push({id:value['data']['id'][i],name:value['data']['members'][i],
+                lastname:value['data']['lastname'][i],gender:gender,letter:letter,age:value['data']['age'][i],
+                selected:true,owner:value['data']['owner'][i]})
+
+              }else{
+                this.friendlist.push({id:value['data']['id'][i],name:value['data']['members'][i],
+                lastname:value['data']['lastname'][i],gender:gender,letter:letter,age:value['data']['age'][i],
+                selected:false,owner:value['data']['owner'][i]})
+              }
             }
         },
         selectedall(){
@@ -197,7 +214,6 @@ export default {
               console.log(this.searchlist[i])
               console.log(this.searchlist[i].selected)
               console.log(this.friendlist[1])
-              console.log('friend status: ' +this.friendlist[1].selected)
               if(this.searchlist[i].selected == true){
                 console.log('this stage is true')
                 this.searchlist[i].selected = false
@@ -206,7 +222,6 @@ export default {
                 this.searchlist[i].selected = true
               }
               console.log('after change state: ' +this.searchlist[i].name+' have stage '+this.searchlist[i].selected)
-              console.log(this.friendlist[1].selected)
             }
           }
           for(var i = 0;i<this.friendlist.length;i++){

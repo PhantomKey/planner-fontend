@@ -52,7 +52,8 @@
                   <q-card-section class="row items-center" style="padding-bottom:0px">
                       <div class="text-h5" style="margin:0 auto;color:#fa928f;padding-bottom:0px">SELECT FRIEND</div>
                   </q-card-section>
-                  <friend-component></friend-component>
+                  <friend-component :needdata="needfriendlist" @thisisdata="preparedata"></friend-component>
+
               </q-step>
 
               <template v-slot:navigation>
@@ -66,7 +67,7 @@
                   <q-stepper-navigation style="padding-top:0px" v-if="step === 2">
                     <div class="q-gutter-sm">
                       <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
-                      <q-btn color="primary" class="no-shadow" label="Create" style="text-align:right" @click="clickAddPlanner()"></q-btn>
+                      <q-btn color="primary" class="no-shadow" label="Create" style="text-align:right" @click="sentdata()"></q-btn>
                     </div>
                   </q-stepper-navigation>
                 </q-card-section>
@@ -80,6 +81,7 @@
 <script>
 import { Notify } from 'quasar'
 import FriendComponent from './SelectFriendComponent'
+import { constants } from 'crypto';
 export default{
   components:{
     'friend-component':FriendComponent
@@ -95,22 +97,45 @@ export default{
       done1:false,    
       done2:false,
       done3:false,
+      needfriendlist:false,
+      selected:[]
+    }
+  },
+  watch:{
+    selected:function(){
+      this.clickAddPlanner()
     }
   },
   methods:{
+    preparedata(value){
+      console.log('preparedata')
+      console.log(value)
+      if(!value){
+        console.log('no data')
+      }else{
+        this.selected = value
+        console.log(this.selected)
+      }
+    },
     resetData() {
       Object.assign(this.$data, this.$options.data.apply(this))
     },
     emitToHome(){
       this.$emit('refreshPlanner')
     },
+    sentdata(){
+      this.needfriendlist = !this.needfriendlist
+    },
     async clickAddPlanner() {
       let headers = {'Authorization': 'JWT '+localStorage.token}
-      await this.$http.post('/planner/create_planner', { planner_name: this.name,
-        first_date: this.startdate, last_date: this.enddate,
-        description: this.description}, {headers})
-        .then(request => this.AddPlannerSuccessfulwithPOST(request))
-        .catch((err) => this.AddPlannerFailedwithoutPOST(err))
+      if(this.selected.length !=0){
+        await this.$http.post('/planner/create_planner', { planner_name: this.name,
+          first_date: this.startdate, last_date: this.enddate,
+          description: this.description,friendlist:this.selected}, {headers})
+          .then(request => this.AddPlannerSuccessfulwithPOST(request))
+          .catch((err) => this.AddPlannerFailedwithoutPOST(err))
+      }
+     
     },
     AddPlannerSuccessfulwithPOST (req) {
       if (req.data.code === 201) {
