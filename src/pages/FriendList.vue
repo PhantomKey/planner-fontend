@@ -10,7 +10,7 @@
       <q-list v-model="friendlist" v-for="i in friendlist" :key="i.id">
         <q-item v-if="!i.isowner" style="width:900px;left:17%">
           <q-item-section style="background-color:bisque">
-            <q-item-label class="centered2">{{i.name}}</q-item-label>
+            <q-item-label class="centered2"><q-icon name="person" />   {{i.name}}</q-item-label>
           </q-item-section>
           <q-btn class="centered3" @click="deleteMember(i.id)">remove</q-btn>
         </q-item>

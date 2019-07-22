@@ -42,7 +42,8 @@
           </q-item-section>
           <q-item-section>
             <q-item-label>{{i.name}}</q-item-label>
-            <q-item-label caption>Your friend</q-item-label>
+            <q-item-label v-if="!i.isowner" caption>Your friend</q-item-label>
+            <q-item-label v-else caption>You</q-item-label>
           </q-item-section>
           <q-btn @click="deleteMember(i.id)">
             remove
@@ -120,7 +121,7 @@ export default {
   },
   renderFriends (value) {
     for(var i = 0;i < value['data']['id'].length;i++)
-      this.friendlist.push({id:value['data']['id'][i],name:value['data']['members'][i]})
+      this.friendlist.push({id:value['data']['id'][i],name:value['data']['members'][i],isowner:value['data']['owner'][i]})
     console.log(this.friendlist)
   },
   isLogin () {
