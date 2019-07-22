@@ -61,6 +61,7 @@
 import { Notify } from 'quasar'
 import { timeout } from 'q';
 export default {
+  props:['needdata'],
     mounted(){
       this.showAllFriends()
     },
@@ -78,16 +79,15 @@ export default {
         }
     },
     watch:{
-      searchlist:{
-        deep:true,
-        handler(){
-          console.log('searchlist change')
-        }
+      'needdata':function(){
+        console.log('this is seleted list')
+        console.log(this.selectedlist)
+        if(this.selectedlist.length != 0) this.$emit('thisisdata',this.selectedlist)
+        else this.$emit('thisisdata',false)
       },
       selectedlist:{
         deep:true,
         handler(){
-          console.log('watch')
           if(this.count === this.update){
             for(var i = 0;i<this.selectedlist.length;i++){
                 if(!this.selectedlist[i].selected){
