@@ -1,20 +1,45 @@
 <template>
-      <div>
-        <div class="centered">
-          <div style="display:inline-block">
-            <add-friend class="shadow-2" style="display:inline-block;margin-left:1rem" ></add-friend>
-          </div>
-          <br>
-          <br>
+      <div class="q-pa-md center" style="margin:auto;" >
+        <div style="text-align:center">
+          <div class="text-h4 center" style="margin:auto;display:inline-block">FRIEND LIST</div>
         </div>
-      <q-list v-model="friendlist" v-for="i in friendlist" :key="i.id">
+        <div class="q-pa-md center">
+          <div style="display:absolute;right:250px;bottom:100px" class="fixed-bottom-right">
+            <add-friend style="display:inline-block;margin-left:1rem" ></add-friend>
+          </div>
+        </div>
+      <!-- <q-list v-model="friendlist" v-for="i in friendlist" :key="i.id">
         <q-item v-if="!i.isowner" style="width:1000px;left:17%">
           <q-item-section style="background-color:bisque">
             <q-item-label class="centered2"><q-icon name="person" />   {{i.name}}</q-item-label>
           </q-item-section>
-          <q-btn style="background-color:#ffeeef" class="centered3" @click="deleteMember(i.id)">remove</q-btn>
+          
         </q-item>
-      </q-list>
+      </q-list> -->
+      <div class="q-pa-md center" style="max-width:900px;width:900px;margin:auto">
+        <q-scroll-area style="min-height:500px;height:500px;margin:auto;">
+          <q-list padding>
+            <div v-for="contact in friendlist" :key="contact.id" >
+              <q-item multiline tag="label" class="q-my-sm" clickable v-ripple>
+                <q-item-section avatar top v-if="contact.owner == '0'">
+                  <q-avatar color="primary" text-color="white" class="text-uppercase">{{contact.letter}}</q-avatar>
+                </q-item-section>
+                <q-item-section avatar top v-if="contact.owner == '1'">
+                  <q-avatar icon="person" color="grey-4"></q-avatar>
+                </q-item-section>
+                <q-item-section>
+                  <q-item-label class="text-capitalize">{{ contact.name }}  {{contact.lastname}}</q-item-label>
+                  <q-item-label caption lines="1"><span class="text-weight-bold">Gender:</span> {{contact.gender}}  <span class="text-weight-bold">Age:</span> {{contact.age}}</q-item-label>
+                </q-item-section>
+                <q-item-section avatar v-if="contact.owner != 1">
+                  <q-btn unelevated round class="centered3" icon='delete' @click="deleteMember(contact.id)"></q-btn>
+                </q-item-section>
+              </q-item>
+              <q-separator spaced inset="item" />
+            </div>
+          </q-list>
+        </q-scroll-area>
+      </div>
       </div>
 </template>
 
@@ -80,9 +105,26 @@ export default {
     console.log('very good')
   },
   renderFriends (value) {
-    for(var i = 0;i < value['data']['id'].length;i++)
-      this.friendlist.push({id:value['data']['id'][i],name:value['data']['members'][i],isowner:value['data']['owner'][i]})
-    console.log(this.friendlist)
+   for(var i = 0;i < value['data']['id'].length;i++){
+              let str = value['data']['members'][i]
+              let letter = str.toString().substring(0,1)
+
+              if(value['data']['gender'][i] == 'M'){
+                var gender = 'Male'
+              }else{
+                var gender = 'Female'
+              }
+
+              if(value['data']['id'][i] == '1'){
+                this.friendlist.push({id:value['data']['id'][i],name:value['data']['members'][i],
+                lastname:value['data']['lastname'][i],gender:gender,letter:letter,age:value['data']['age'][i],
+                owner:value['data']['owner'][i]})
+              }else{
+                this.friendlist.push({id:value['data']['id'][i],name:value['data']['members'][i],
+                lastname:value['data']['lastname'][i],gender:gender,letter:letter,age:value['data']['age'][i],
+                owner:value['data']['owner'][i]})
+              }
+            }
   },
   async deleteMember (x) {
     await this.$http.delete('/api/v1/delete_member/'+x)
