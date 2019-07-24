@@ -85,18 +85,6 @@
                   </q-card-section>
                   <friend-component :needdata="needfriendlist" @thisisdata="preparedata"></friend-component>
                 </q-step>
-
-                <q-step
-                    :name="3"
-                    title="Total price"
-                    icon="attach_money"
-                    :done="done3"
-                    style="min-height: 485px;max-height:485px"
-                >
-                    Try out different ad text to see what brings in the most customers, and learn how to
-                    enhance your ads using features like ad extensions. If you run into any problems with
-                    your ads, find out how to tell if they're running and how to resolve approval issues.
-                </q-step>n
                 
                 <template v-slot:navigation>
                      <q-card-section position="bottom-right" style="text-align:right;padding-top:8px;right:0px;bottom:0px">
@@ -109,12 +97,6 @@
                         <q-stepper-navigation v-if="step == 2">
                             <div class="q-gutter-sm">
                                 <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
-                                <q-btn @click="() => { done2 = true; step = 3 }" color="primary" label="Continue" />
-                            </div>
-                        </q-stepper-navigation>
-                        <q-stepper-navigation v-if="step == 3">
-                            <div class="q-gutter-sm">
-                                <q-btn flat @click="step = 2" color="primary" label="Back" class="q-ml-sm" />
                                 <q-btn color="primary" v-close-popup @click="done3 = true, resetData()" label="Finish" />
                             </div>
                         </q-stepper-navigation>
@@ -157,7 +139,7 @@ export default{
   },
   watch:{
     selected:function(){
-      this.clickAddPlanner()
+      this.clickAddService()
     }
   },
   computed:{
@@ -172,6 +154,27 @@ export default{
     }
   },
   methods:{
+    async clickAddService() {
+      let headers = {'Authorization': 'JWT '+localStorage.token}
+      let planner_id = this.getParameterByName('plannerid')
+      if(this.selected.length !=0){
+        await this.$http.post('/service/'+planner_id+'/'+createservice, { planner_name: this.name,
+          first_date: this.startdate, last_date: this.enddate,
+          description: this.description,friendlist:this.selected}, {headers})
+          .then(request => this.AddPlannerSuccessfulwithPOST(request))
+          .catch((err) => this.AddPlannerFailedwithoutPOST(err))
+      }
+     
+    },
+    getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    },
     checknumber(item){
         if(item){
             var checkNumber = Number(item)
@@ -192,6 +195,9 @@ export default{
               this.calcaption = 'Calculation price as a person spilt by age'
           }
       },
+      sentdata(){
+        this.needfriendlist = !this.needfriendlist
+    },
       preparedata(value){
       console.log('preparedata')
       console.log(value)
