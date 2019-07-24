@@ -14,7 +14,7 @@
                 color="primary"
                 :size="'md'"
                 :icon="'arrow_back'"
-                style="position:absolute;bottom:45%;z-index:11"
+                style="position:absolute;bottom:50%;margin-left:10px;z-index:11"
                 @click="closeActivityRightSide"
               />
               <create-service></create-service>
