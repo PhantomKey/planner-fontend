@@ -13,7 +13,7 @@
           { label: 'Details', value: 'details' },
           { label: 'Route', value: 'route' },
         ]"
-        style="position:absolute;z-index:1;margin-left:25.5%;margin-top:36%;border: 1px solid #fa928f"
+        style="position:absolute;z-index:1;margin-left:25.5%;margin-top:37%;border: 1px solid #fa928f"
       />
     <q-carousel
       v-model="slide"
@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     changeOptions(){
-      this.option = this.uniqDate
+      this.options = this.uniqDate
     }
   }
 }

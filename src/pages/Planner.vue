@@ -102,7 +102,6 @@ export default {
   methods: {
     senduniqDate(value){
       this.uniqDate = value
-      console.log(value)
     },
     closeActivityRightSide() {
       this.SpecificActivityRightSide = false
