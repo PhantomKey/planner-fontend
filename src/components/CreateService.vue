@@ -97,7 +97,7 @@
                         <q-stepper-navigation v-if="step == 2">
                             <div class="q-gutter-sm">
                                 <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
-                                <q-btn color="primary" v-close-popup @click="done3 = true, resetData()" label="Finish" />
+                                <q-btn color="primary" v-close-popup @click="done3 = true, sentdata()" label="Finish" />
                             </div>
                         </q-stepper-navigation>
                      </q-card-section>
@@ -115,8 +115,10 @@ export default{
     components:{
     'friend-component':FriendComponent
     },
+    props:['activityID'],
     data: function () {
     return {
+        id:'',
         serviceW: false,
         sname:'',
         PriceType:'Single',
@@ -137,11 +139,6 @@ export default{
         selected:[]
     }
   },
-  watch:{
-    selected:function(){
-      this.clickAddService()
-    }
-  },
   computed:{
     numberK(){
         return this.checknumber(this.siglePrice.kid)
@@ -154,15 +151,18 @@ export default{
     }
   },
   methods:{
-    async clickAddService() {
+    async clickAddService() {  
       let headers = {'Authorization': 'JWT '+localStorage.token}
       let planner_id = this.getParameterByName('plannerid')
-      if(this.selected.length !=0){
-        await this.$http.post('/service/'+planner_id+'/'+createservice, { planner_name: this.name,
-          first_date: this.startdate, last_date: this.enddate,
-          description: this.description,friendlist:this.selected}, {headers})
-          .then(request => this.AddPlannerSuccessfulwithPOST(request))
-          .catch((err) => this.AddPlannerFailedwithoutPOST(err))
+      console.log('planner_id: '+planner_id+' activity_id: '+this.activityID)
+      console.log(this.selected)
+      if(this.selected.length !=0 && this.activityID != null){
+        console.log('sent to backend')
+        await this.$http.post('/service/'+planner_id+'/'+this.activityID+'/'+'createservice', {name: this.sname,
+          calType:this.calType,kidPrice:this.siglePrice.kid,adutePrice:this.siglePrice.adult
+          ,elderlyPrice:this.siglePrice.elderly,price:this.groupPrice,user:this.selected}, {headers})
+          .then(request => console.log(request))
+          .catch((err) => console.log(err))
       }
      
     },
@@ -205,14 +205,24 @@ export default{
         console.log('no data')
       }else{
         this.selected = value
+        console.log('change selected')
         console.log(this.selected)
       }
-    }
+    },
+    checkid(){
+        console.log(this.activityID)
+
+    },
   },
+  
   watch:{
       'calType': function () {
           this.caltypename()
-      }
+      },
+      selected:function(){
+        console.log('change')
+        this.clickAddService()
+    }
   }
 
 }

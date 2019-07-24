@@ -17,7 +17,7 @@
                 style="position:absolute;bottom:50%;margin-left:10px;z-index:11"
                 @click="closeActivityRightSide"
               />
-              <create-service ></create-service>
+              <create-service :activityID="activityID"></create-service>
             </div>
             <div v-else style="height:100%;">
               <rightSideInPlanner :uniqDate="uniqDate"></rightSideInPlanner>
