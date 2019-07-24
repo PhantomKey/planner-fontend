@@ -128,7 +128,7 @@
 </template>
 
 <script>
-import FriendComponent from './SelectFriendComponent'
+import FriendComponent from './SelectFriendsInService.vue'
 export default{
     components:{
     'friend-component':FriendComponent
