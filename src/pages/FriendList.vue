@@ -8,14 +8,6 @@
             <add-friend style="display:inline-block;margin-left:1rem" ></add-friend>
           </div>
         </div>
-      <!-- <q-list v-model="friendlist" v-for="i in friendlist" :key="i.id">
-        <q-item v-if="!i.isowner" style="width:1000px;left:17%">
-          <q-item-section style="background-color:bisque">
-            <q-item-label class="centered2"><q-icon name="person" />   {{i.name}}</q-item-label>
-          </q-item-section>
-          
-        </q-item>
-      </q-list> -->
       <div class="q-pa-md center" style="max-width:900px;width:900px;margin:auto">
         <q-scroll-area style="min-height:500px;height:500px;margin:auto;">
           <q-list padding>

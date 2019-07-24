@@ -17,7 +17,7 @@
                 style="position:absolute;bottom:45%;z-index:11"
                 @click="closeActivityRightSide"
               />
-              <create-service></create-service>
+              <create-service ></create-service>
             </div>
             <div v-else style="height:100%;">
               <rightSideInPlanner :uniqDate="uniqDate"></rightSideInPlanner>
@@ -64,7 +64,8 @@ export default {
             loadingfinish: this.$options.loadingfinishbeforecreate,
             refreshToken: 1,
             SpecificActivityRightSide: false,
-            uniqDate: null
+            uniqDate: null,
+            activityID:null
           }
   },
   beforeMount(){
@@ -108,6 +109,7 @@ export default {
       this.SpecificActivityRightSide = false
     },
     openActivityRightSide(value) {
+      this.activityID = value
       this.SpecificActivityRightSide = true
       console.log(value)
     },
