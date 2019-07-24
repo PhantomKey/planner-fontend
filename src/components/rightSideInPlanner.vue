@@ -31,16 +31,16 @@
         </div>
       </q-carousel-slide>
       <q-carousel-slide name="route" class="no-wrap flex-center">
-        <TravelMap class="travel-map" style="height:100%"/>
+        <Directions style="height:100%"/>
       </q-carousel-slide>
     </q-carousel>
   </div>
 </template>
 <script>
-import TravelMap from "../components/TravelMap.vue";
+import Directions from "../components/Directions.vue"
 export default {
   components: {
-    TravelMap,
+    Directions,
   },
   data () {
     return {

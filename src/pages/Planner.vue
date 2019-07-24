@@ -18,7 +18,6 @@
                 @click="closeActivityRightSide"
               />
               <create-service></create-service>
-              <Directions style="height:100%"/>
             </div>
             <div v-else style="height:100%;">
               <rightSideInPlanner></rightSideInPlanner>
@@ -44,9 +43,7 @@ import Error404 from './Error404.vue'
 import Schedule from '../components/Schedule.vue'
 import CreateActivity from '../components/CreateActivity.vue'
 import CreateService from '../components/CreateService.vue'
-import TravelMap from "../components/TravelMap.vue";
 import rightSideInPlanner from "../components/rightSideInPlanner.vue"
-import Directions from "../components/Directions.vue"
 
 export default {
   name: 'Planner',
@@ -55,9 +52,7 @@ export default {
     'schedule': Schedule,
     'createactivity':CreateActivity,
     'create-service':CreateService,
-    TravelMap,
     'rightSideInPlanner':rightSideInPlanner,
-    'Directions':Directions
   },
   checkplannerbeforecreate: false,
   loadingfinishbeforecreate: false,

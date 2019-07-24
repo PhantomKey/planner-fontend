@@ -7,7 +7,7 @@
           <span style="font-size:40px">{{convertToMonthString(date)}}</span>
         </q-timeline-entry>
         <div v-for="(activity,index) in activities">
-          <div v-if="activity.startDate==date" >
+          <div v-if="activity.startDate==date">
             <q-timeline-entry
               :title="activity.name"
               :subtitle="activity.startTime.concat(' - ',activity.endTime)"
@@ -145,7 +145,6 @@ export default {
         var endMinute = returnenddatetime.getUTCMinutes().toString()
         endMinute = ("0" + endMinute).slice(-2)
         var dateDiff = (returnenddatetime.getUTCDate()-returnstartdatetime.getUTCDate())
-        console.log(dateDiff)
         if(dateDiff == 0) {
           this.activities.push({
             name: value['data']['name'][i],

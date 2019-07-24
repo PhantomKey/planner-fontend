@@ -7,7 +7,6 @@
 </template>
 <script>
 import DirectionsRenderer from './DirectionsRenderer.js'
-
 import axios from 'axios'
 import { request } from 'http';
 import { stat } from 'fs';
@@ -20,7 +19,7 @@ export default {
   components: {DirectionsRenderer},
   data() {
     return {
-      center: { lat: -37.81223, lng:144.96254 },
+      center: { lat: 13.7563, lng:100.5018 },
       direction:{},
       bound:null,
       hasDirectionsResult: false
@@ -35,19 +34,39 @@ export default {
   	this.$gmapApiPromiseLazy()
     	.then((gmap) => {
       	this.$directionsService = new gmap.maps.DirectionsService()
-        
+
         return new Promise((resolve) => {
         	this.$directionsService.route(
           	{
             	destination: 'Bedok, Singapore',
               origin: 'Clementi, Singapore',
+              waypoints: [
+                {
+                  location: 'Joplin, MO',
+                  stopover: true
+                },{
+                  location: 'Oklahoma City, OK',
+                  stopover: true
+                }],
               travelMode: 'DRIVING',
             }, resolve)
         })
       })
       .then((result) => {
       	this.$directionsResult = result
-        this.hasDirectionsResult = true
+        if(result.status=="ZERO_RESULTS"){
+          Notify.create({
+            message: 'Sorry, we could not calculate routing directions',
+            color: 'primary',
+            textColor: 'white',
+            timeout: 3000,
+            position: 'top-right',
+            icon: 'check_circle_outline'
+          })
+        }
+        else {
+          this.hasDirectionsResult = true
+        }
       })
   },
   methods:{
