@@ -3,10 +3,10 @@
     <q-btn rounded
     color="primary"
     label="Create Service"
-    style="right:4%;bottom:13%;position:absolute;z-index:11"
+    style="right:4%;bottom:10%;position:absolute"
     icon="add"
     @click="serviceW = true"/>
-    <q-dialog v-model="serviceW">
+    <q-dialog v-model="serviceW"> 
         <q-card flat style="width:600px;max-width:600px;height:650px;max-height:650px">
             <q-stepper
             v-model="step"
@@ -34,9 +34,9 @@
                                     <q-item-label caption>{{calcaption}}</q-item-label>
                                 </q-item-section>
                                 <q-item-section avatar>
-                                    <q-toggle color="blue"
-                                    v-model="calType"
-                                    val="battery"
+                                    <q-toggle color="blue" 
+                                    v-model="calType" 
+                                    val="battery" 
                                     checked-icon="group"
                                     unchecked-icon="person"
                                     keep-color
@@ -58,7 +58,7 @@
                                     <q-input dense filled label="Adult Price" v-model="siglePrice.adult"
                                     error-message="Require number only"
                                     :error="!numberA"/>
-                                    <q-input dense filled label="Elderly Price" v-model="siglePrice.elderly"
+                                    <q-input dense filled label="Elderly Price" v-model="siglePrice.elderly" 
                                     error-message="Require number only"
                                     :error="!numberE"/>
                                 </q-card-section>
@@ -80,21 +80,12 @@
                     :done="done2"
                     style="min-height: 485px;max-height:485px"
                 >
-                    An ad group contains one or more ads which target a shared set of keywords.
+                    <q-card-section class="row items-center" style="padding-bottom:0px">
+                      <div class="text-h5" style="margin:0 auto;color:#fa928f;padding-bottom:0px">SELECT FRIEND</div>
+                  </q-card-section>
+                  <friend-component :needdata="needfriendlist" @thisisdata="preparedata"></friend-component>
                 </q-step>
-
-                <q-step
-                    :name="3"
-                    title="Total price"
-                    icon="attach_money"
-                    :done="done3"
-                    style="min-height: 485px;max-height:485px"
-                >
-                    Try out different ad text to see what brings in the most customers, and learn how to
-                    enhance your ads using features like ad extensions. If you run into any problems with
-                    your ads, find out how to tell if they're running and how to resolve approval issues.
-                </q-step>n
-
+                
                 <template v-slot:navigation>
                      <q-card-section position="bottom-right" style="text-align:right;padding-top:8px;right:0px;bottom:0px">
                         <q-stepper-navigation style="text-align:right" v-if="step === 1">
@@ -106,12 +97,6 @@
                         <q-stepper-navigation v-if="step == 2">
                             <div class="q-gutter-sm">
                                 <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
-                                <q-btn @click="() => { done2 = true; step = 3 }" color="primary" label="Continue" />
-                            </div>
-                        </q-stepper-navigation>
-                        <q-stepper-navigation v-if="step == 3">
-                            <div class="q-gutter-sm">
-                                <q-btn flat @click="step = 2" color="primary" label="Back" class="q-ml-sm" />
                                 <q-btn color="primary" v-close-popup @click="done3 = true, resetData()" label="Finish" />
                             </div>
                         </q-stepper-navigation>
@@ -125,7 +110,11 @@
 </template>
 
 <script>
+import FriendComponent from './SelectFriendsInService.vue'
 export default{
+    components:{
+    'friend-component':FriendComponent
+    },
     data: function () {
     return {
         serviceW: false,
@@ -141,9 +130,16 @@ export default{
         },
         groupPrice:'',
         step:1,
-        done1:false,
+        done1:false,    
         done2:false,
         done3:false,
+        needfriendlist:false,
+        selected:[]
+    }
+  },
+  watch:{
+    selected:function(){
+      this.clickAddService()
     }
   },
   computed:{
@@ -158,6 +154,27 @@ export default{
     }
   },
   methods:{
+    async clickAddService() {
+      let headers = {'Authorization': 'JWT '+localStorage.token}
+      let planner_id = this.getParameterByName('plannerid')
+      if(this.selected.length !=0){
+        await this.$http.post('/service/'+planner_id+'/'+createservice, { planner_name: this.name,
+          first_date: this.startdate, last_date: this.enddate,
+          description: this.description,friendlist:this.selected}, {headers})
+          .then(request => this.AddPlannerSuccessfulwithPOST(request))
+          .catch((err) => this.AddPlannerFailedwithoutPOST(err))
+      }
+     
+    },
+    getParameterByName(name, url) {
+            if (!url) url = window.location.href;
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+            results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+    },
     checknumber(item){
         if(item){
             var checkNumber = Number(item)
@@ -177,7 +194,20 @@ export default{
               this.calname = 'person'
               this.calcaption = 'Calculation price as a person spilt by age'
           }
+      },
+      sentdata(){
+        this.needfriendlist = !this.needfriendlist
+    },
+      preparedata(value){
+      console.log('preparedata')
+      console.log(value)
+      if(!value){
+        console.log('no data')
+      }else{
+        this.selected = value
+        console.log(this.selected)
       }
+    }
   },
   watch:{
       'calType': function () {
