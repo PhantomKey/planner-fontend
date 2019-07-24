@@ -5,7 +5,7 @@
       <div v-if="checkplanner&&isLogin" style="height:100%">
         <div class="row" style="height:100%;margin-left:33.59px;margin-right:33.59px">
           <div class="col-sm-4" style="background-color: white;;border-right:3px solid #ffeeef">
-            <schedule :scheduleData="refreshToken" @openSpeficActivity="openActivityRightSide"></schedule>
+            <schedule :scheduleData="refreshToken" @openSpeficActivity="openActivityRightSide" @uniqDate="senduniqDate"></schedule>
           </div>
           <div class="col-sm-8" style="background-color: white;">
             <div v-if="SpecificActivityRightSide" style="height:100%;">
@@ -20,7 +20,7 @@
               <create-service></create-service>
             </div>
             <div v-else style="height:100%;">
-              <rightSideInPlanner></rightSideInPlanner>
+              <rightSideInPlanner :uniqDate="uniqDate"></rightSideInPlanner>
             </div>
           </div>
         </div>
@@ -63,7 +63,8 @@ export default {
             checkplanner: this.$options.checkplannerbeforecreate,
             loadingfinish: this.$options.loadingfinishbeforecreate,
             refreshToken: 1,
-            SpecificActivityRightSide: false
+            SpecificActivityRightSide: false,
+            uniqDate: null
           }
   },
   beforeMount(){
@@ -99,6 +100,10 @@ export default {
     this.authenfunction()
   },
   methods: {
+    senduniqDate(value){
+      this.uniqDate = value
+      console.log(value)
+    },
     closeActivityRightSide() {
       this.SpecificActivityRightSide = false
     },

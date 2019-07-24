@@ -63,6 +63,7 @@ export default {
     },
     uniqDate () {
       var uniqDate = uniq(this.activities.map(p => p.startDate))
+      this.$emit('uniqDate', uniqDate)
       return uniqDate
     },
   },
