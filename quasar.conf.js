@@ -61,7 +61,8 @@ module.exports = function (ctx) {
         'QCarouselControl',
         'QCarouselSlide',
         'QCheckbox',
-        'QBtnToggle'
+        'QBtnToggle',
+         'QSeparator'
       ],
 
       directives: [

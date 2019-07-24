@@ -4,7 +4,7 @@
         flat
         :style="style"
         color="#9D9A9A"
-        @click="logout"
+        @click="friend"
         @mouseover="changeStage"
         @mouseout="clear"
       >Friend
@@ -20,7 +20,7 @@ export default {
     }
   },
   methods: {
-    logout () {
+    friend () {
       this.$router.push('/Friends')
     },
     changeStage(){

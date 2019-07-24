@@ -1,15 +1,16 @@
 <template>
   <div>
-    <q-btn outline
+    <q-btn round
           color="primary"
-          style="width:150px;"
-          label="Add member"
+          icon="person_add"
+          unelevated
+          class="shadow-5"
           @click="openRegisterDialog = true">
     </q-btn>
     <q-dialog v-model="openRegisterDialog">
       <q-card class="dialog" dense style="min-width:40%;max-width:40%;min-height:65%;,max-height:65%;">
         <q-card-section class="row justify-center">
-          <p style="font-size:25px;color:#fa928f">Add new Member</p>
+          <p style="font-size:25px;color:#fa928f">ADD NEW MEMBER</p>
           <q-input dense bg-color="secondary" filled v-model="Firstname" label="Firstname" style="min-width:90%;max-width:90%;"
           lazy-rules
           :rules="[ val => val && val.length > 0 || '']">
