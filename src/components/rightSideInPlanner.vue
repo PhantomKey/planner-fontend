@@ -13,7 +13,7 @@
           { label: 'Details', value: 'details' },
           { label: 'Route', value: 'route' },
         ]"
-        style="position:absolute;z-index:1;margin-left:25.5%;margin-top:34%;border: 1px solid #fa928f"
+        style="position:absolute;z-index:1;margin-left:25.5%;margin-top:37%;border: 1px solid #fa928f"
       />
     <q-carousel
       v-model="slide"
@@ -33,7 +33,7 @@
       <q-carousel-slide name="route" class="no-wrap flex-center">
         <Directions style="height:100%"/>
         <q-select bg-color="white" v-model="model" :options="options" :dense="dense" :options-dense="denseOpts"
-        style="position:absolute;top:5%;right:8%;z-index:11;width:150px">
+        style="position:absolute;top:4.5%;right:8%;z-index:11;width:150px">
            <template v-slot:prepend>
              <q-icon name="event" style="margin-left:7px"/>
            </template>
@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     changeOptions(){
-      this.option = this.uniqDate
+      this.options = this.uniqDate
     }
   }
 }
