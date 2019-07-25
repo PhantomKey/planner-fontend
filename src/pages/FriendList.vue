@@ -12,7 +12,7 @@
         <q-scroll-area style="min-height:500px;height:500px;margin:auto;">
           <q-list padding>
             <div v-for="contact in friendlist" :key="contact.id" >
-              <q-item multiline tag="label" class="q-my-sm" clickable v-ripple>
+              <q-item multiline tag="label" class="q-my-sm" v-ripple>
                 <q-item-section avatar top v-if="contact.owner == '0'">
                   <q-avatar color="primary" text-color="white" class="text-uppercase">{{contact.letter}}</q-avatar>
                 </q-item-section>
