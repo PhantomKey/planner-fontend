@@ -25,9 +25,8 @@
       height="100%"
     >
       <q-carousel-slide name="details" class="column no-wrap flex-center">
-        <q-icon name="style" color="primary" size="56px" />
-        <div class="q-mt-md text-center">
-          {{ lorem }}
+        <div class="q-mt-md" style="height:100%;width:100%">
+          <result style="height:100%"/>
         </div>
       </q-carousel-slide>
       <q-carousel-slide name="route" class="no-wrap flex-center">
@@ -44,9 +43,11 @@
 </template>
 <script>
 import Directions from "../components/Directions.vue"
+import Result from '../components/Result.vue'
 export default {
   components: {
-    Directions
+    Directions,
+    Result
   },
   props:['uniqDate'],
   watch: {
