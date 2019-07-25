@@ -72,7 +72,7 @@
               <q-radio dark v-model="user.gender" val="F" color="primary" label="Female" style="margin-left: 10px" />
             </div>
           </div>
-          <q-btn label="Sign Up" style="min-width:90%;max-width:90%;background:#fa928f;color:white" @click="signupClicked()"></q-btn>
+          <q-btn label="Sign Up" style="min-width:90%;max-width:90%;background:#fa928f;color:white" @click="showLoading();signupClicked()"></q-btn>
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -99,6 +99,7 @@ export default{
   },
   methods: {
     signupClicked() {
+      setTimeout(()=>{
       console.log(this.user)
       if (this.checkpassword()) {
         this.$http.post('/register/', { username: this.user.username, firstname: this.user.firstname, lastname: this.user.lastname, password: this.user.password, email: this.user.email, dob: this.user.dob, gender: this.user.gender })
@@ -106,6 +107,8 @@ export default{
           .catch((error) => this.registerFailedwithoutPOST(error))
       }
       console.log(this.user)
+      },2000
+      )
     },
     registerSuccessfulwithPOST (req) {
       if (req.data.code === 201) {
@@ -155,6 +158,21 @@ export default{
         return false
       }
       return true
+    },
+    showLoading () {
+      this.$q.loading.show()
+
+      // hiding in 2s
+      this.timer = setTimeout(() => {
+        this.$q.loading.hide()
+        this.timer = void 0
+      }, 2000)
+    }
+  },
+  beforeDestroy () {
+    if (this.timer !== void 0) {
+      clearTimeout(this.timer)
+      this.$q.loading.hide()
     }
   }
 }
