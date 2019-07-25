@@ -60,6 +60,14 @@ export default{
       localStorage.token = req.data.JWTToken
       console.log('storing token into local storage')
       this.$router.replace(this.$route.query.redirect || '/Home')
+      Notify.create({
+        message: 'Invalid username/password',
+        color: 'positive',
+        textColor: 'black',
+        timeout: 3000,
+        position: 'top-right',
+        icon: 'check_circle'
+      })
     },
     loginFailed (err) {
       console.log('login unsuccess',err)
