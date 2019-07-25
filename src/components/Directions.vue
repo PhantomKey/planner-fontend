@@ -1,7 +1,7 @@
 <template>
   <GmapMap :zoom="13" :center="center">
     <directions-renderer v-if="hasDirectionsResult"
-       :directions="directionsResult">
+       :directions="directionsResult2">
     </directions-renderer>
   </GmapMap>
 </template>
@@ -17,7 +17,7 @@ import { Notify } from 'quasar'
 export default {
   name: 'GoogleMapDirect',
   components: {DirectionsRenderer},
-  props:['listoflocation'],
+  props:['listoflocation', 'updateGMAPData'],
   watch: {
     'listoflocation': function() {
       this.updateRoute()
@@ -28,7 +28,8 @@ export default {
       center: { lat: 13.7563, lng:100.5018 },
       direction:{},
       bound:null,
-      hasDirectionsResult: false
+      hasDirectionsResult: false,
+      directionsResult2: null
     }
   },
   computed: {
@@ -42,17 +43,14 @@ export default {
       var origin = '';
       var waypoints = [];
       if(this.listoflocation.length==1){
-        console.log('1activity')
         origin = this.listoflocation[0][2].toString().concat(", ", this.listoflocation[0][3].toString())
         destination = this.listoflocation[0][2].toString().concat(", ", this.listoflocation[0][3].toString())
       }
       else if(this.listoflocation.length==2){
-        console.log('2activity')
         origin = this.listoflocation[0][2].toString().concat(", ", this.listoflocation[0][3].toString())
         destination = this.listoflocation[1][2].toString().concat(", ", this.listoflocation[1][3].toString())
       }
       else{
-        console.log('2+activity')
         origin = this.listoflocation[0][2].toString().concat(", ", this.listoflocation[0][3].toString())
         destination = this.listoflocation[this.listoflocation.length-1][2].toString()
         .concat(", ", this.listoflocation[this.listoflocation.length-1][3].toString())
@@ -80,7 +78,7 @@ export default {
         })
         .then((result) => {
           this.$directionsResult = result
-          console.log(this.$directionsResult)
+          this.directionsResult2 = result
           if(result.status=="ZERO_RESULTS"){
             Notify.create({
               message: 'Sorry, we could not calculate routing directions',

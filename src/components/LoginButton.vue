@@ -7,7 +7,7 @@
           @click="openLoginDialog = true">
     </q-btn>
     <q-dialog v-model="openLoginDialog" @keyup.enter="loginClicked">
-      <img src="~assets/userprofileicon.png" style="max-width:150px; margin-top:-15%;z-index:9999;position:absolute">
+      <img src="~assets/userprofileicon.png" style="max-width:150px; margin-top:-17%;z-index:9999;position:absolute">
       <q-card class="dialog" dense style="min-width:40%;max-width:40%;min-height:65%;,max-height:65%;">
         <q-card-section class="row justify-center">
           <h4 style="padding-top:25px;color:#fa928f;">LOGIN TO TRIP PLANNER</h4>

@@ -20,7 +20,7 @@
               <create-service :activityID="activityID"></create-service>
             </div>
             <div v-else style="height:100%;">
-              <rightSideInPlanner :uniqDate="uniqDate"></rightSideInPlanner>
+              <rightSideInPlanner :uniqDate="uniqDate" :updateGMAPData="refreshToken"></rightSideInPlanner>
             </div>
           </div>
         </div>

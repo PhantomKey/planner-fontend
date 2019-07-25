@@ -212,12 +212,11 @@ export default{
         else{
           var datas = this.jsonbodyetc(type)
         }
-        console.log(datas)
         this.$http.post('/planner/plannerid='+planner_id+'/create_activity',datas,{headers})
         .then((request) => this.AddActivitySuccessfulwithPOST(request))
         .catch((err) => this.AddActivityFailedwithoutPOST(err))
         },2000)
-        
+
       },
       AddActivitySuccessfulwithPOST(req){
         if (req.data.code === 201) {
@@ -309,7 +308,7 @@ export default{
           }
         })
         .catch(e => {
-        console.log(e)
+          // console.log(e)
         })
       },
       showLoading () {
