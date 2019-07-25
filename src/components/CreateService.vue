@@ -227,7 +227,7 @@ export default{
       }, 2000)
     },
     AddServiceSuccessfulwithPOST(req){
-        if (req.data.code === 201) {
+        if (req.data.code === 200) {
           Notify.create({
             message: 'Service created successfully',
             color: 'positive',
@@ -237,7 +237,6 @@ export default{
             icon: 'check_circle'
           })
           this.createActivityPopup = false
-          this.emitToPlanner()
           Object.assign(this.$data, this.$options.data.apply(this))
         } else {
           this.AddServiceFailedwithPOST(req)
