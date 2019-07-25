@@ -31,7 +31,7 @@
         </div>
       </q-carousel-slide>
       <q-carousel-slide name="route" class="no-wrap flex-center">
-        <Directions :listoflocation="listoflocation" style="height:100%"/>
+        <Directions :listoflocation="listoflocation" :updateGMAPData="updateGMAPData" style="height:100%"/>
         <q-select bg-color="white" v-model="model" :options="options" :dense="dense" :options-dense="denseOpts"
         label="Date" style="position:absolute;top:4.1%;right:8%;z-index:11;width:150px"
          @input="val => { onValueChange(val) }">
@@ -52,10 +52,15 @@ export default {
   components: {
     Directions
   },
-  props:['uniqDate'],
+  props:['uniqDate', 'updateGMAPData'],
   watch: {
     'uniqDate': function() {
       this.changeOptions()
+    },
+    'updateGMAPData': function(){
+      if(this.model!=null){
+        this.onValueChange(this.model)
+      }
     }
   },
   data () {
@@ -75,7 +80,6 @@ export default {
   },
   methods: {
     async onValueChange(val) {
-      console.log(val)
       var planner_id = this.getParameterByName('plannerid')
       let headers = {'Authorization': 'JWT '+localStorage.token}
       const data = await this.$http.post('/planner/plannerid='+planner_id+'/view_location_in_specific_date', {headers, request_date: val})

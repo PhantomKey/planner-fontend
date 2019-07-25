@@ -211,7 +211,6 @@ export default{
         else{
           var datas = this.jsonbodyetc(type)
         }
-        console.log(datas)
         await this.$http.post('/planner/plannerid='+planner_id+'/create_activity',datas,{headers})
         .then((request) => this.AddActivitySuccessfulwithPOST(request))
         .catch((err) => this.AddActivityFailedwithoutPOST(err))
@@ -306,7 +305,7 @@ export default{
           }
         })
         .catch(e => {
-        console.log(e)
+          // console.log(e)
         })
       }
   }
