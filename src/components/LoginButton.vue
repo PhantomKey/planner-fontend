@@ -25,7 +25,7 @@
               <q-icon name="lock" />
             </template>
           </q-input>
-          <q-btn label="Login" style="min-width:90%;max-width:90%;background:#fa928f;color:white" @click="loginClicked()"></q-btn>
+          <q-btn label="Login" style="min-width:90%;max-width:90%;background:#fa928f;color:white" @click="loginClicked();showLoading()"></q-btn>
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -44,10 +44,13 @@ export default{
   },
   methods: {
     loginClicked() {
-      console.log(this.username)
+      setTimeout(()=>{
+        console.log(this.username)
       this.$http.post('/api/v1/login', { username: this.username, password: this.password })
         .then((request) => this.loginSuccessful(request))
         .catch((err) => this.loginFailed(err))
+      },2000)
+      
     },
     loginSuccessful (req) {
       if (!req.data || !req.data.JWTToken) {
@@ -61,7 +64,7 @@ export default{
       console.log('storing token into local storage')
       this.$router.replace(this.$route.query.redirect || '/Home')
       Notify.create({
-        message: 'Invalid username/password',
+        message: 'Login successful',
         color: 'positive',
         textColor: 'black',
         timeout: 3000,
@@ -92,6 +95,21 @@ export default{
       const dialog = Dialog.create({
       onDismiss: () => { window.removeEventListener('keyup', catchEnterKey) }
       })
+    },
+    showLoading () {
+      this.$q.loading.show()
+
+      // hiding in 2s
+      this.timer = setTimeout(() => {
+        this.$q.loading.hide()
+        this.timer = void 0
+      }, 2000)
+    }
+  },
+  beforeDestroy () {
+    if (this.timer !== void 0) {
+      clearTimeout(this.timer)
+      this.$q.loading.hide()
     }
   }
 }

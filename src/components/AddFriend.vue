@@ -40,7 +40,7 @@
               <q-radio dark v-model="Gender" val="F" color="primary" label="Female" style="margin-left: 10px" />
             </div>
           </div>
-          <q-btn label="Create" style="min-width:90%;max-width:90%;background:#fa928f;color:white" @click="ClickAddMember()"></q-btn>
+          <q-btn label="Create" style="min-width:90%;max-width:90%;background:#fa928f;color:white" @click="ClickAddMember();showLoading()"></q-btn>
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -60,13 +60,16 @@ export default{
     }
   },
   methods: {
-    async ClickAddMember () {
-      console.log(this.$data)
-      let value = await this.$http.post('/api/v1/create_member', {firstname: this.Firstname,
+    ClickAddMember () {
+      setTimeout(()=>{
+          console.log(this.$data)
+      let value = this.$http.post('/api/v1/create_member', {firstname: this.Firstname,
       lastname: this.Lastname,dob:this.Birthday,gender:this.Gender})
           .then(request => this.registerSuccessfulwithPOST(request))
           .catch((error) => this.registerFailedwithoutPOST(error))
       this.$root.$emit('component1')  
+      },2000)
+      
     },
     registerSuccessfulwithPOST (req) {
       if (req.data.code === 201) {
@@ -102,6 +105,21 @@ export default{
         position: 'top-right',
         icon: 'error'
       })
+    },
+    showLoading () {
+      this.$q.loading.show()
+
+      // hiding in 2s
+      this.timer = setTimeout(() => {
+        this.$q.loading.hide()
+        this.timer = void 0
+      }, 2000)
+    }
+  },
+  beforeDestroy () {
+    if (this.timer !== void 0) {
+      clearTimeout(this.timer)
+      this.$q.loading.hide()
     }
   }
 }
