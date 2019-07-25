@@ -141,11 +141,11 @@ export default{
       if (req.data.code === 201) {
         Notify.create({
           message: 'Planner created successfully',
-          color: 'primary',
-          textColor: 'white',
+          color: 'positive',
+          textColor: 'black',
           timeout: 3000,
           position: 'top-right',
-          icon: 'check_circle_outline'
+          icon: 'check_circle'
         })
         this.openCreatePlanner = false
         this.emitToHome()
@@ -168,7 +168,7 @@ export default{
     AddPlannerFailedwithoutPOST(err) {
       Notify.create({
         message: 'Failed to create planner, '+err,
-        color: 'primary',
+        color: 'accent',
         textColor: 'white',
         timeout: 3000,
         position: 'top-right',

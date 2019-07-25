@@ -111,11 +111,11 @@ export default{
       if (req.data.code === 201) {
         Notify.create({
           message: 'Account created successfully',
-          color: 'primary',
-          textColor: 'white',
+          color: 'positive',
+          textColor: 'black',
           timeout: 3000,
           position: 'top-right',
-          icon: 'check_circle_outline'
+          icon: 'check_circle'
         })
         this.openRegisterDialog = false
       } else {

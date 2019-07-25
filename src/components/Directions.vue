@@ -36,6 +36,48 @@ export default {
     	return this.hasDirectionsResult && this.$directionsResult
     }
   },
+<<<<<<< HEAD
+=======
+  created () {
+  	this.$gmapApiPromiseLazy()
+    	.then((gmap) => {
+      	this.$directionsService = new gmap.maps.DirectionsService()
+
+        return new Promise((resolve) => {
+        	this.$directionsService.route(
+          	{
+            	destination: 'Bedok, Singapore',
+              origin: 'Clementi, Singapore',
+              waypoints: [
+                {
+                  location: 'Joplin, MO',
+                  stopover: true
+                },{
+                  location: 'Oklahoma City, OK',
+                  stopover: true
+                }],
+              travelMode: 'DRIVING',
+            }, resolve)
+        })
+      })
+      .then((result) => {
+      	this.$directionsResult = result
+        if(result.status=="ZERO_RESULTS"){
+          Notify.create({
+            message: 'Sorry, we could not calculate routing directions',
+            color: 'primary',
+            textColor: 'white',
+            timeout: 3000,
+            position: 'top-right',
+            icon: 'error'
+          })
+        }
+        else {
+          this.hasDirectionsResult = true
+        }
+      })
+  },
+>>>>>>> ffcc3ba630d3460783e2d0acbd48fe26ef1e286b
   methods:{
     updateRoute(){
       var destination = '';
