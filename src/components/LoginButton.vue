@@ -25,7 +25,7 @@
               <q-icon name="lock" />
             </template>
           </q-input>
-          <q-btn label="Login" style="min-width:90%;max-width:90%;background:#fa928f;color:white" @click="loginClicked();showLoading()"></q-btn>
+          <q-btn label="Login" style="min-width:90%;max-width:90%;background:#fa928f;color:white" @click="loginClicked()"></q-btn>
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -50,7 +50,7 @@ export default{
         .then((request) => this.loginSuccessful(request))
         .catch((err) => this.loginFailed(err))
       },2000)
-      
+      this.showLoading()
     },
     loginSuccessful (req) {
       if (!req.data || !req.data.JWTToken) {
