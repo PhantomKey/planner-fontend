@@ -220,11 +220,11 @@ export default{
         if (req.data.code === 201) {
           Notify.create({
             message: 'Activity created successfully',
-            color: 'primary',
-            textColor: 'white',
+            color: 'positive',
+            textColor: 'black',
             timeout: 3000,
             position: 'top-right',
-            icon: 'check_circle_outline'
+            icon: 'check_circle'
           })
           this.createActivityPopup = false
           this.emitToPlanner()
