@@ -7,7 +7,7 @@
           @click="openLoginDialog = true">
     </q-btn>
     <q-dialog v-model="openLoginDialog" @keyup.enter="loginClicked">
-      <img src="~assets/userprofileicon.png" style="max-width:150px; margin-top:-15%;z-index:9999;position:absolute">
+      <img src="~assets/userprofileicon.png" style="max-width:150px; margin-top:-17%;z-index:9999;position:absolute">
       <q-card class="dialog" dense style="min-width:40%;max-width:40%;min-height:65%;,max-height:65%;">
         <q-card-section class="row justify-center">
           <h4 style="padding-top:25px;color:#fa928f;">LOGIN TO TRIP PLANNER</h4>
@@ -44,10 +44,13 @@ export default{
   },
   methods: {
     loginClicked() {
-      console.log(this.username)
+      setTimeout(()=>{
+        console.log(this.username)
       this.$http.post('/api/v1/login', { username: this.username, password: this.password })
         .then((request) => this.loginSuccessful(request))
         .catch((err) => this.loginFailed(err))
+      },2000)
+      this.showLoading()
     },
     loginSuccessful (req) {
       if (!req.data || !req.data.JWTToken) {
@@ -61,7 +64,7 @@ export default{
       console.log('storing token into local storage')
       this.$router.replace(this.$route.query.redirect || '/Home')
       Notify.create({
-        message: 'Invalid username/password',
+        message: 'Login successful',
         color: 'positive',
         textColor: 'black',
         timeout: 3000,
@@ -92,6 +95,21 @@ export default{
       const dialog = Dialog.create({
       onDismiss: () => { window.removeEventListener('keyup', catchEnterKey) }
       })
+    },
+    showLoading () {
+      this.$q.loading.show()
+
+      // hiding in 2s
+      this.timer = setTimeout(() => {
+        this.$q.loading.hide()
+        this.timer = void 0
+      }, 2000)
+    }
+  },
+  beforeDestroy () {
+    if (this.timer !== void 0) {
+      clearTimeout(this.timer)
+      this.$q.loading.hide()
     }
   }
 }

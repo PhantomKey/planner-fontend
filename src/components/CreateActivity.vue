@@ -72,7 +72,7 @@
                 <q-card-section style="text-align:right;padding-top:50px;right:0px;bottom:0px;margin-right:15px;position:absolute">
                   <div class="q-gutter-sm">
                     <q-btn v-close-popup label="Cancel" flat color="primary" style="text-align:right;" @click="resetData()"></q-btn>
-                    <q-btn color="primary" label="Create" style="text-align:right" @click="clickAddActivity()"></q-btn>
+                    <q-btn color="primary" label="Create" style="text-align:right" @click="clickAddActivity();showLoading()"></q-btn>
                   </div>
                 </q-card-section>
             </q-card>
@@ -199,8 +199,9 @@ export default{
         })
         return datas
       },
-       async clickAddActivity (){
-        var planner_id = this.getParameterByName('plannerid')
+       clickAddActivity (){
+        setTimeout(()=>{
+          var planner_id = this.getParameterByName('plannerid')
         let headers = {'Authorization': 'JWT '+localStorage.token,
                         'Content-Type': 'application/json'}
         var dtype = this.stype
@@ -211,10 +212,11 @@ export default{
         else{
           var datas = this.jsonbodyetc(type)
         }
-        console.log(datas)
-        await this.$http.post('/planner/plannerid='+planner_id+'/create_activity',datas,{headers})
+        this.$http.post('/planner/plannerid='+planner_id+'/create_activity',datas,{headers})
         .then((request) => this.AddActivitySuccessfulwithPOST(request))
         .catch((err) => this.AddActivityFailedwithoutPOST(err))
+        },2000)
+
       },
       AddActivitySuccessfulwithPOST(req){
         if (req.data.code === 201) {
@@ -306,9 +308,24 @@ export default{
           }
         })
         .catch(e => {
-        console.log(e)
+          // console.log(e)
         })
-      }
+      },
+      showLoading () {
+      this.$q.loading.show()
+
+      // hiding in 2s
+      this.timer = setTimeout(() => {
+        this.$q.loading.hide()
+        this.timer = void 0
+      }, 2000)
+    }
+  },
+  beforeDestroy () {
+    if (this.timer !== void 0) {
+      clearTimeout(this.timer)
+      this.$q.loading.hide()
+    }
   }
 }
 </script>

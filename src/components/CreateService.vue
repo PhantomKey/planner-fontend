@@ -97,7 +97,7 @@
                         <q-stepper-navigation v-if="step == 2">
                             <div class="q-gutter-sm">
                                 <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
-                                <q-btn color="primary" v-close-popup @click="done3 = true, sentdata()" label="Finish" />
+                                <q-btn color="primary" v-close-popup @click="done3 = true, sentdata();showLoading()" label="Finish" />
                             </div>
                         </q-stepper-navigation>
                      </q-card-section>
@@ -111,6 +111,7 @@
 
 <script>
 import FriendComponent from './SelectFriendsInService.vue'
+import { Notify } from 'quasar'
 export default{
     components:{
     'friend-component':FriendComponent
@@ -151,19 +152,22 @@ export default{
     }
   },
   methods:{
-    async clickAddService() {  
-      let headers = {'Authorization': 'JWT '+localStorage.token}
-      let planner_id = this.getParameterByName('plannerid')
-      console.log('planner_id: '+planner_id+' activity_id: '+this.activityID)
-      console.log(this.selected)
-      if(this.selected.length !=0 && this.activityID != null){
-        console.log('sent to backend')
-        await this.$http.post('/service/'+planner_id+'/'+this.activityID+'/'+'createservice', {name: this.sname,
-          calType:this.calType,kidPrice:this.siglePrice.kid,adutePrice:this.siglePrice.adult
-          ,elderlyPrice:this.siglePrice.elderly,price:this.groupPrice,user:this.selected}, {headers})
-          .then(request => console.log(request))
-          .catch((err) => console.log(err))
-      }
+    clickAddService() {  
+        setTimeout(()=>{
+            let headers = {'Authorization': 'JWT '+localStorage.token}
+            let planner_id = this.getParameterByName('plannerid')
+            console.log('planner_id: '+planner_id+' activity_id: '+this.activityID)
+            console.log(this.selected)
+            if(this.selected.length !=0 && this.activityID != null){
+            console.log('sent to backend')
+            this.$http.post('/service/'+planner_id+'/'+this.activityID+'/'+'createservice', {name: this.sname,
+            calType:this.calType,kidPrice:this.siglePrice.kid,adutePrice:this.siglePrice.adult
+            ,elderlyPrice:this.siglePrice.elderly,price:this.groupPrice,user:this.selected}, {headers})
+            .then(request => this.AddServiceSuccessfulwithPOST(request))
+            .catch((err) => this.AddServiceFailedwithoutPOST(err))
+        }
+        },2000)
+      
      
     },
     getParameterByName(name, url) {
@@ -213,6 +217,51 @@ export default{
         console.log(this.activityID)
 
     },
+    showLoading () {
+      this.$q.loading.show()
+
+      // hiding in 2s
+      this.timer = setTimeout(() => {
+        this.$q.loading.hide()
+        this.timer = void 0
+      }, 2000)
+    },
+    AddServiceSuccessfulwithPOST(req){
+        if (req.data.code === 200) {
+          Notify.create({
+            message: 'Service created successfully',
+            color: 'positive',
+            textColor: 'black',
+            timeout: 3000,
+            position: 'top-right',
+            icon: 'check_circle'
+          })
+          this.createActivityPopup = false
+          Object.assign(this.$data, this.$options.data.apply(this))
+        } else {
+          this.AddServiceFailedwithPOST(req)
+        }
+      },
+      AddServiceFailedwithPOST(req){
+        Notify.create({
+          message: 'Failed to create Service, Reason: '+req.data.message,
+          color: 'primary',
+          textColor: 'white',
+          timeout: 3000,
+          position: 'top-right',
+          icon: 'error'
+        })
+      },
+      AddServiceFailedwithoutPOST(err){
+        Notify.create({
+          message: 'Failed to create Service, '+err,
+          color: 'primary',
+          textColor: 'white',
+          timeout: 3000,
+          position: 'top-right',
+          icon: 'error'
+        })
+      }
   },
   
   watch:{
@@ -222,6 +271,12 @@ export default{
       selected:function(){
         console.log('change')
         this.clickAddService()
+    }
+  },
+  beforeDestroy () {
+    if (this.timer !== void 0) {
+      clearTimeout(this.timer)
+      this.$q.loading.hide()
     }
   }
 

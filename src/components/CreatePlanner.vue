@@ -67,7 +67,7 @@
                   <q-stepper-navigation style="padding-top:0px" v-if="step === 2">
                     <div class="q-gutter-sm">
                       <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
-                      <q-btn color="primary" class="no-shadow" label="Create" style="text-align:right" @click="sentdata()"></q-btn>
+                      <q-btn color="primary" class="no-shadow" label="Create" style="text-align:right" @click="sentdata();showLoading()"></q-btn>
                     </div>
                   </q-stepper-navigation>
                 </q-card-section>
@@ -126,15 +126,17 @@ export default{
     sentdata(){
       this.needfriendlist = !this.needfriendlist
     },
-    async clickAddPlanner() {
+    clickAddPlanner() {
+      setTimeout(()=>{
       let headers = {'Authorization': 'JWT '+localStorage.token}
       if(this.selected.length !=0){
-        await this.$http.post('/planner/create_planner', { planner_name: this.name,
+        this.$http.post('/planner/create_planner', { planner_name: this.name,
           first_date: this.startdate, last_date: this.enddate,
           description: this.description,friendlist:this.selected}, {headers})
           .then(request => this.AddPlannerSuccessfulwithPOST(request))
           .catch((err) => this.AddPlannerFailedwithoutPOST(err))
       }
+      },2000)
      
     },
     AddPlannerSuccessfulwithPOST (req) {
@@ -174,6 +176,21 @@ export default{
         position: 'top-right',
         icon: 'error'
       })
+    },
+    showLoading () {
+      this.$q.loading.show()
+
+      // hiding in 2s
+      this.timer = setTimeout(() => {
+        this.$q.loading.hide()
+        this.timer = void 0
+      }, 2000)
+    }
+  },
+  beforeDestroy () {
+    if (this.timer !== void 0) {
+      clearTimeout(this.timer)
+      this.$q.loading.hide()
     }
   }
 }
