@@ -6,7 +6,7 @@
           label="Register"
           @click="openRegisterDialog = true">
     </q-btn>
-    <q-dialog v-model="openRegisterDialog">
+    <q-dialog v-model="openRegisterDialog" @keyup.enter="signupClicked">
       <q-card class="dialog" dense style="min-width:40%;max-width:40%;min-height:65%;,max-height:65%;">
         <q-card-section class="row justify-center">
           <p style="font-size:25px;color:#fa928f">SIGN UP TO TRIP PLANNER</p>
@@ -72,7 +72,7 @@
               <q-radio dark v-model="user.gender" val="F" color="primary" label="Female" style="margin-left: 10px" />
             </div>
           </div>
-          <q-btn label="Sign Up" style="min-width:90%;max-width:90%;background:#fa928f;color:white" @click="showLoading();signupClicked()"></q-btn>
+          <q-btn label="Sign Up" style="min-width:90%;max-width:90%;background:#fa928f;color:white" @click="signupClicked()"></q-btn>
         </q-card-section>
       </q-card>
     </q-dialog>
@@ -109,6 +109,7 @@ export default{
       console.log(this.user)
       },2000
       )
+      this.showLoading()
     },
     registerSuccessfulwithPOST (req) {
       if (req.data.code === 201) {
