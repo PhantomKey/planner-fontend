@@ -48,7 +48,7 @@
                 icon="person_add"
                 :done="done2"
                 style="min-height: 485px;max-height:485px"
-                > 
+                >
                   <q-card-section class="row items-center" style="padding-bottom:0px">
                       <div class="text-h5" style="margin:0 auto;color:#fa928f;padding-bottom:0px">SELECT FRIEND</div>
                   </q-card-section>
@@ -94,7 +94,7 @@ export default{
       enddate: '',
       description: '',
       step:1,
-      done1:false,    
+      done1:false,
       done2:false,
       done3:false,
       needfriendlist:false,
@@ -108,13 +108,9 @@ export default{
   },
   methods:{
     preparedata(value){
-      console.log('preparedata')
-      console.log(value)
       if(!value){
-        console.log('no data')
       }else{
         this.selected = value
-        console.log(this.selected)
       }
     },
     resetData() {
@@ -158,7 +154,6 @@ export default{
       }
     },
     AddPlannerFailedwithPOST (req) {
-      console.log(req)
       Notify.create({
         message: 'Failed to create planner, Reason: '+req.data.message,
         color: 'primary',

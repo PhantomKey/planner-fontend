@@ -14,7 +14,7 @@
                     </q-item-label>
                 </q-item-section>
 
-                <q-item-section avatar top style="margin-left:-55%;margin-top:-10px">
+                <q-item-section avatar top style="margin-left:-22%;margin-top:-10px">
                      <q-icon name="fas fa-plane" size="2.5rem" color="primary"/>
                 </q-item-section>
             </q-item>
@@ -98,9 +98,6 @@ export default{
             var planner_id = this.getParameterByName('plannerid')
             await this.$http.get('/service/planner_id='+planner_id+'/member',{headers})
             .then((request) => data = request['data']['data'])
-            .catch((err) => console.log(err))
-            console.log(data)
-            console.log(data[1])
             return data
         },
         getParameterByName(name, url) {

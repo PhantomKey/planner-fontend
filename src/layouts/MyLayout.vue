@@ -117,15 +117,15 @@ export default {
     let headers = {'Authorization': 'JWT '+localStorage.token}
     let value = await this.$http.get('/api/v1/member',{headers})
     this.renderFriends(value)
-    console.log('very good')
+    // console.log('very good')
   },
   renderFriends (value) {
     for(var i = 0;i < value['data']['id'].length;i++)
       this.friendlist.push({id:value['data']['id'][i],name:value['data']['members'][i],isowner:value['data']['owner'][i]})
-    console.log(this.friendlist)
+    // console.log(this.friendlist)
   },
   isLogin () {
-    console.log(localStorage.token)
+    // console.log(localStorage.token)
     if (localStorage.token) {
       this.showUserName()
       return true
@@ -140,8 +140,8 @@ export default {
   },
   async showUserName(){
     let user_id= VueJwtDecode.decode(localStorage.token).user_id
-    console.log('mounted')
-    console.log(user_id)
+    // console.log('mounted')
+    // console.log(user_id)
     let response = await this.$http.get('/api/v1/user/'+user_id)
     let username = response.data.user.name
     this.username = username

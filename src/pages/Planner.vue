@@ -9,7 +9,7 @@
           </div>
           <div class="col-sm-8" style="background-color: white;">
             <div v-if="SpecificActivityRightSide" style="height:100%;">
-              <specificactivity :activityID="activityID" :activityname="activityname" style="height:100%"></specificactivity>
+              <specificactivity :activityID="activityID" :activityname="activityname" :updateSpecificActivity="SpecificActivityRefreshToken" style="height:100%"></specificactivity>
               <q-btn
                 round
                 color="primary"
@@ -18,7 +18,7 @@
                 style="position:absolute;bottom:50%;margin-left:1px;z-index:11"
                 @click="closeActivityRightSide"
               />
-              <create-service :activityID="activityID"></create-service>
+              <create-service :activityID="activityID" @updateService="refreshSpecificActivity"></create-service>
             </div>
             <div v-else style="height:100%;">
               <rightSideInPlanner :uniqDate="uniqDate" :updateGMAPData="refreshToken"></rightSideInPlanner>
@@ -66,6 +66,7 @@ export default {
             checkplanner: this.$options.checkplannerbeforecreate,
             loadingfinish: this.$options.loadingfinishbeforecreate,
             refreshToken: 1,
+            SpecificActivityRefreshToken: 1,
             SpecificActivityRightSide: false,
             uniqDate: null,
             activityID: null,
@@ -95,11 +96,11 @@ export default {
         }
     })
     this.$options.loadingfinishbeforecreate = true
-    console.log(this.$options.loadingfinishbeforecreate)
+    // console.log(this.$options.loadingfinishbeforecreate)
     if(res) {
       this.$options.checkplannerbeforecreate = true
     }
-    console.log(this.$options.checkplannerbeforecreate)
+    // console.log(this.$options.checkplannerbeforecreate)
   },
   created(){
     this.authenfunction()
@@ -114,13 +115,17 @@ export default {
     openActivityRightSide(value) {
       this.activityID = value
       this.SpecificActivityRightSide = true
-      console.log(value)
+      // console.log(value)
     },
     async authenfunction() {
       this.isYourPlanner()
     },
     refreshPage () {
       this.refreshToken = this.refreshToken+1
+    },
+    refreshSpecificActivity () {
+      console.log('refreshingatPlanner')
+      this.SpecificActivityRefreshToken = this.SpecificActivityRefreshToken+1
     },
     isLogin() {
       if (localStorage.token) {

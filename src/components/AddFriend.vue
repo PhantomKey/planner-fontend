@@ -62,12 +62,11 @@ export default{
   methods: {
     ClickAddMember () {
       setTimeout(()=>{
-          console.log(this.$data)
       let value = this.$http.post('/api/v1/create_member', {firstname: this.Firstname,
       lastname: this.Lastname,dob:this.Birthday,gender:this.Gender})
           .then(request => this.registerSuccessfulwithPOST(request))
           .catch((error) => this.registerFailedwithoutPOST(error))
-      this.$root.$emit('component1')  
+      this.$root.$emit('component1')
       },2000)
       this.showLoading()
     },
@@ -133,4 +132,3 @@ export default{
     background-color: #ffffff;
   }
 </style>
-

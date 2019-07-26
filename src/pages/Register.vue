@@ -91,30 +91,30 @@ export default {
   methods: {
     submit () {
       if (this.checkpassword()) {
-        console.log(this.user.username)
+        // console.log(this.user.username)
         this.$http.post('/register/', { username: this.user.username, firstname: this.user.firstname, lastname: this.user.lastname, password: this.user.password, email: this.user.email, dob: this.user.birthday, gender: this.user.gender })
           .then(request => this.registersucess(request))
           .catch(() => this.registerFailed())
       }
-      console.log(this.user)
+      // console.log(this.user)
     },
     registersucess (req) {
-      console.log('woohoo')
-      console.log(req.data)
+      // console.log('woohoo')
+      // console.log(req.data)
       if (req.data.code === 201) {
-        console.log('success')
+        // console.log('success')
         alert('success')
         this.$router.replace(this.$route.query.redirect || '/')
       } else {
-        console.log('wtf')
+        // console.log('wtf')
         this.registerFailed()
       }
     },
     registerFailed () {
-      console.log('Register Fail')
+      // console.log('Register Fail')
     },
     checkpassword () {
-      console.log('haha')
+      // console.log('haha')
       if (this.user.password !== this.user.cpassword) {
         alert('password not match')
         return false

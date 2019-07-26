@@ -6,7 +6,7 @@
     style="right:4%;bottom:10%;position:absolute"
     icon="add"
     @click="serviceW = true"/>
-    <q-dialog v-model="serviceW"> 
+    <q-dialog v-model="serviceW">
         <q-card flat style="width:600px;max-width:600px;height:650px;max-height:650px">
             <q-stepper
             v-model="step"
@@ -34,9 +34,9 @@
                                     <q-item-label caption>{{calcaption}}</q-item-label>
                                 </q-item-section>
                                 <q-item-section avatar>
-                                    <q-toggle color="blue" 
-                                    v-model="calType" 
-                                    val="battery" 
+                                    <q-toggle color="blue"
+                                    v-model="calType"
+                                    val="battery"
                                     checked-icon="group"
                                     unchecked-icon="person"
                                     keep-color
@@ -58,7 +58,7 @@
                                     <q-input dense filled label="Adult Price" v-model="siglePrice.adult"
                                     error-message="Require number only"
                                     :error="!numberA"/>
-                                    <q-input dense filled label="Elderly Price" v-model="siglePrice.elderly" 
+                                    <q-input dense filled label="Elderly Price" v-model="siglePrice.elderly"
                                     error-message="Require number only"
                                     :error="!numberE"/>
                                 </q-card-section>
@@ -85,7 +85,7 @@
                   </q-card-section>
                   <friend-component :needdata="needfriendlist" @thisisdata="preparedata"></friend-component>
                 </q-step>
-                
+
                 <template v-slot:navigation>
                      <q-card-section position="bottom-right" style="text-align:right;padding-top:8px;right:0px;bottom:0px">
                         <q-stepper-navigation style="text-align:right" v-if="step === 1">
@@ -133,7 +133,7 @@ export default{
         },
         groupPrice:'',
         step:1,
-        done1:false,    
+        done1:false,
         done2:false,
         done3:false,
         needfriendlist:false,
@@ -152,14 +152,14 @@ export default{
     }
   },
   methods:{
-    clickAddService() {  
-        setTimeout(()=>{
+    async clickAddService() {
+        await setTimeout(()=>{
             let headers = {'Authorization': 'JWT '+localStorage.token}
             let planner_id = this.getParameterByName('plannerid')
-            console.log('planner_id: '+planner_id+' activity_id: '+this.activityID)
-            console.log(this.selected)
+            // console.log('planner_id: '+planner_id+' activity_id: '+this.activityID)
+            // console.log(this.selected)
             if(this.selected.length !=0 && this.activityID != null){
-            console.log('sent to backend')
+            // console.log('sent to backend')
             this.$http.post('/service/'+planner_id+'/'+this.activityID+'/'+'createservice', {name: this.sname,
             calType:this.calType,kidPrice:this.siglePrice.kid,adutePrice:this.siglePrice.adult
             ,elderlyPrice:this.siglePrice.elderly,price:this.groupPrice,user:this.selected}, {headers})
@@ -167,8 +167,8 @@ export default{
             .catch((err) => this.AddServiceFailedwithoutPOST(err))
         }
         },2000)
-      
-     
+
+
     },
     getParameterByName(name, url) {
             if (!url) url = window.location.href;
@@ -201,20 +201,21 @@ export default{
       },
       sentdata(){
         this.needfriendlist = !this.needfriendlist
+        this.$emit('updateService')
     },
       preparedata(value){
-      console.log('preparedata')
-      console.log(value)
+      // console.log('preparedata')
+      // console.log(value)
       if(!value){
-        console.log('no data')
+        // console.log('no data')
       }else{
         this.selected = value
-        console.log('change selected')
-        console.log(this.selected)
+        // console.log('change selected')
+        // console.log(this.selected)
       }
     },
     checkid(){
-        console.log(this.activityID)
+        // console.log(this.activityID)
 
     },
     showLoading () {
@@ -266,13 +267,13 @@ export default{
         })
       }
   },
-  
+
   watch:{
       'calType': function () {
           this.caltypename()
       },
       selected:function(){
-        console.log('change')
+        // console.log('change')
         this.clickAddService()
     }
   },

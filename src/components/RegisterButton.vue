@@ -100,13 +100,13 @@ export default{
   methods: {
     signupClicked() {
       setTimeout(()=>{
-      console.log(this.user)
+      // console.log(this.user)
       if (this.checkpassword()) {
         this.$http.post('/register/', { username: this.user.username, firstname: this.user.firstname, lastname: this.user.lastname, password: this.user.password, email: this.user.email, dob: this.user.dob, gender: this.user.gender })
           .then(request => this.registerSuccessfulwithPOST(request))
           .catch((error) => this.registerFailedwithoutPOST(error))
       }
-      console.log(this.user)
+      // console.log(this.user)
       },2000
       )
       this.showLoading()

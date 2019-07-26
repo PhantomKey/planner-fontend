@@ -260,8 +260,8 @@ export default {
 		periodChanged(range, eventSource) {
 			// Demo does nothing with this information, just including the method to demonstrate how
 			// you can listen for changes to the displayed range and react to them (by loading events, etc.)
-			console.log(eventSource)
-			console.log(range)
+			// console.log(eventSource)
+			// console.log(range)
 		},
 		thisMonth(d, h, m) {
 			const t = new Date()

@@ -34,7 +34,7 @@ export default{
     },
     methods:{
         logout () {
-            console.log('logout')
+            // console.log('logout')
             delete localStorage.token
             this.$router.push('/')
         }

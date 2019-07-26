@@ -70,6 +70,14 @@ export default{
     activityID: {
       type: Number,
       default: 0
+    },
+    updateSpecificActivity: {
+      type: Number
+    }
+  },
+  watch: {
+    'updateSpecificActivity': function() {
+      this.initialrun();
     }
   },
   created() {
@@ -77,12 +85,10 @@ export default{
   },
   methods:{
     async initialrun(){
+      console.log('initialrun')
       let headers = {'Authorization': 'JWT '+localStorage.token}
       await this.$http.get ('/service/'+this.activityID+'/service', {headers})
       .then(value => this.runServiceActivityFunctionwithvalue(value))
-    },
-    async updateServiceList(){
-
     },
     runServiceActivityFunctionwithvalue(value){
       console.log(value)

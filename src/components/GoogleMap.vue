@@ -56,7 +56,7 @@ export default {
     // receives a place object via the autocomplete component
     setType (val) {
       this.type = val
-      console.log('type: '+val)
+      // console.log('type: '+val)
     },
     onAddClick() {
       var val = {

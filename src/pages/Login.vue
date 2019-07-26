@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     login () {
-      console.log(this.username)
+      // console.log(this.username)
       this.$http.post('/api/v1/login', { username: this.username, password: this.password })
         .then((request) => this.loginSuccessful(request))
         .catch((err) => this.loginFailed(err))
@@ -49,18 +49,18 @@ export default {
     loginSuccessful (req) {
       if (!req.data || !req.data.JWTToken) {
         this.loginFailed()
-        console.log('cannot find token login failed')
+        // console.log('cannot find token login failed')
         return
       }
-      console.log('login success with',req.data)
+      // console.log('login success with',req.data)
 
       localStorage.token = req.data.JWTToken
       this.error = false
-      console.log('storing token into local storage')
+      // console.log('storing token into local storage')
       this.$router.replace(this.$route.query.redirect || '/Home')
     },
     loginFailed (err) {
-      console.log('login unsuccess',err)
+      // console.log('login unsuccess',err)
       this.error = 'Username or password incorrect'
       delete localStorage.token
     }

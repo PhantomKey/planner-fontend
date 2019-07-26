@@ -80,8 +80,8 @@ export default {
     },
     watch:{
       'needdata':function(){
-        console.log('this is seleted list')
-        console.log(this.selectedlist)
+        // console.log('this is seleted list')
+        // console.log(this.selectedlist)
         if(this.selectedlist.length != 0) this.$emit('thisisdata',this.selectedlist)
         else this.$emit('thisisdata',false)
       },
@@ -111,7 +111,7 @@ export default {
       },
       select : function(){
         if(!this.select){
-          console.log('this is select function')
+          // console.log('this is select function')
           for(var i = 0;i<this.friendlist.length;i++){
               this.friendlist[i].selected = true
           }
@@ -121,7 +121,7 @@ export default {
       },
       selected: function(){
         if((!this.selected && this.selectedlist.length == 0) || (!this.selected && this.selectedlist.length == this.friendlist.length)){
-          console.log('this is selected watcher')
+          // console.log('this is selected watcher')
            for(var i = 0;i<this.friendlist.length;i++){
               this.friendlist[i].selected = false
             }
@@ -146,16 +146,16 @@ export default {
               this.searchlist=JSON.parse(JSON.stringify(this.friendlist))
             }
             else{
-              console.log('search')
+              // console.log('search')
               this.searchlist=[]
-              console.log(this.searchlist)
+              // console.log(this.searchlist)
               for(var i = 0;i<this.friendlist.length;i++){
                 var name = (this.friendlist[i].name).toString().toLowerCase()
                 var lastname = (this.friendlist[i].lastname).toString().toLowerCase()
                 if(name.search(this.searchf.toLowerCase()) != -1 || lastname.search(this.searchf.toLowerCase()) != -1){
-                  console.log(this.friendlist[i])
+                  // console.log(this.friendlist[i])
                   this.searchlist.push(this.friendlist[i])
-                  console.log(this.searchlist)
+                  // console.log(this.searchlist)
                 }
               }
             }
@@ -199,7 +199,7 @@ export default {
             }
         },
         selectedall(){
-          console.log('select')
+          // console.log('select')
           if(this.select){
             this.select = false
             this.selected = true
@@ -221,27 +221,27 @@ export default {
           this.count++
           for(var i = 0;i<this.searchlist.length;i++){
             if(this.searchlist[i].id === id){
-              console.log('found searchlist.id = id')
-              console.log(this.searchlist[i])
-              console.log(this.searchlist[i].selected)
-              console.log(this.friendlist[1])
+              // console.log('found searchlist.id = id')
+              // console.log(this.searchlist[i])
+              // console.log(this.searchlist[i].selected)
+              // console.log(this.friendlist[1])
               if(this.searchlist[i].selected == true){
-                console.log('this stage is true')
+                // console.log('this stage is true')
                 this.searchlist[i].selected = false
               }else if(this.searchlist[i].selected == false){ 
-                console.log('change stage to True')
+                // console.log('change stage to True')
                 this.searchlist[i].selected = true
               }
-              console.log('after change state: ' +this.searchlist[i].name+' have stage '+this.searchlist[i].selected)
+              // console.log('after change state: ' +this.searchlist[i].name+' have stage '+this.searchlist[i].selected)
             }
           }
           for(var i = 0;i<this.friendlist.length;i++){
-            console.log('name: '+ this.friendlist[i].name+' status: '+this.friendlist[i].selected)
+            // console.log('name: '+ this.friendlist[i].name+' status: '+this.friendlist[i].selected)
             if(this.friendlist[i].id === id){
-              console.log('friend:')
-              console.log(this.friendlist[i].selected)
+              // console.log('friend:')
+              // console.log(this.friendlist[i].selected)
               if(this.friendlist[i].selected){
-                console.log('set false')
+                // console.log('set false')
                 for(var j = 0; j < this.selectedlist.length; j++){
                   if(this.searchlist[j].id == id){
                     this.searchlist[j].selected = false
@@ -257,28 +257,28 @@ export default {
                 }
                 break
               }else{
-                console.log('set friend true')
+                // console.log('set friend true')
                 this.searchlist[i].selected = true
                 this.friendlist[i].selected = true
                 var check = true
                 for(var j = 0;j<this.selectedlist.length;j++){
                   if(this.selectedlist[j].id === id){
                     check = false
-                    console.log('duplicate')
+                    // console.log('duplicate')
                     break
                   }
                 }
                 if(check){
-                  console.log('push')
+                  // console.log('push')
                   this.selectedlist.push(this.friendlist[i])
-                  console.log(this.selectedlist)
+                  // console.log(this.selectedlist)
                   break
                 } 
               }
             }
           }
           if(this.selectedlist.length != this.friendlist.length){
-            console.log('not selected all')
+            // console.log('not selected all')
             this.select = true
             this.selected = false
           }

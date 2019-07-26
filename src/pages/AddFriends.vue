@@ -46,21 +46,21 @@ export default {
   },
   methods: {
     async ClickAddMember () {
-      console.log(this.$data)
+      // console.log(this.$data)
       let value = await this.$http.post('/api/v1/create_member', {firstname: this.Firstname,
       lastname: this.Lastname,dob:this.Birthday,gender:this.Gender})
       this.test()
       this.check(value)
     },
     check (req) {
-      console.log(req.data)
+      // console.log(req.data)
     },
     isLogin () {
-      console.log(localStorage.token)
+      // console.log(localStorage.token)
       if (localStorage.token) {
         return true
       } else {
-        console.log('not log in')
+        // console.log('not log in')
         return false
       }
     },
