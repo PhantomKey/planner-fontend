@@ -124,7 +124,6 @@ export default {
       this.refreshToken = this.refreshToken+1
     },
     refreshSpecificActivity () {
-      console.log('refreshingatPlanner')
       this.SpecificActivityRefreshToken = this.SpecificActivityRefreshToken+1
     },
     isLogin() {

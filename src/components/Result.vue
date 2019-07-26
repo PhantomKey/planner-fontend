@@ -9,8 +9,7 @@
                         <span style="text-color:#161413" class="text-uppercase text-weight-bold">{{this.planner_name}} TRIP___</span>
                         </div>
                     </q-item-label>
-                    <q-item-label caption style="width:100%"><div style="width:100%;word-break:break-word">{{this.result[0].desc}}asdiiuadgaksdhkjashdkjhaskjdhjaskkdfkf;kals;dkl;askd;lask;ldk;laskd;lkas;ldk;laskd;lkas;ldk;laskdk;laskl;dkasl;ddjas
-                        hkjdashjasdasdhjkasd</div>
+                    <q-item-label caption style="width:100%"><div style="width:100%;word-break:break-word">{{this.result[0].desc}}</div>
                     </q-item-label>
                 </q-item-section>
 

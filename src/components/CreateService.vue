@@ -167,8 +167,7 @@ export default{
             .catch((err) => this.AddServiceFailedwithoutPOST(err))
         }
         },2000)
-
-
+        this.$emit('updateService')
     },
     getParameterByName(name, url) {
             if (!url) url = window.location.href;
@@ -201,7 +200,6 @@ export default{
       },
       sentdata(){
         this.needfriendlist = !this.needfriendlist
-        this.$emit('updateService')
     },
       preparedata(value){
       // console.log('preparedata')
