@@ -1,10 +1,36 @@
 <template>
     <q-scroll-area>
-        <div>
-            <div class="text-h4" style="text-align:center;">RESULT</div>
-           
-        </div>
         <div class="q-pa-md row items-start q-gutter-md">
+        <q-card flat>
+            <q-item>
+                <q-item-section>
+                    <div class="text-h4">{{this.result[-1].name}}</div>
+                </q-item-section>
+            </q-item>
+        </q-card>
+        <q-card flat bordered>
+            <q-card-section>
+            <q-item>
+                <q-item-section avatar>
+                    <q-avatar icon="fas fa-coins" color="primary" size="4rem"/>
+                </q-item-section>
+
+                <q-item-section>
+                     <div class="text-h4" style="display:inline-block">Your: money</div>
+                </q-item-section>
+            </q-item>
+            </q-card-section>
+            <q-card-section>
+                <div>member in planner</div>
+                <q-separator/>
+                <!-- <div v-for="contact in selectedlist" :key="contact.id" style="display:contents;" class="q-gutter-md">
+                    <q-chip dense removable v-model="contact.selected">
+                        <q-avatar  v-if="contact.owner == '0'" color="primary" text-color="white" class="text-uppercase">{{contact.letter}}</q-avatar> <span v-if="contact.owner == '0'" class="text-capitalize">{{contact.name}}</span>
+                        <q-avatar  v-if="contact.owner == '1'" color="grey-4" icon="person" ></q-avatar> <span  v-if="contact.owner == '1'" class="text-capitalize">{{contact.name}}</span>
+                    </q-chip>
+                </div> -->
+            </q-card-section>
+        </q-card>
         <q-card class="my-card">
             <q-item>
                 <q-item-section avatar>
@@ -29,20 +55,26 @@
 export default{
     data(){
         return{
-
+            result:null
         }
     },
-    mounted() {
-        this.getResult()
+    mounted:function(){
+        this.getResult().then(data=>{
+            this.result = data
+        })
+       
     },
     methods:{
         async getResult(){
+            let data
             let headers = {'Authorization': 'JWT '+localStorage.token,
                         'Content-Type': 'application/json'}
             var planner_id = this.getParameterByName('plannerid')
             await this.$http.get('/service/planner_id='+planner_id+'/member',{headers})
-            .then((request) => console.log(request))
+            .then((request) => data = request['data']['data'])
             .catch((err) => console.log(err))
+            console.log(data)
+            return data
         },
         getParameterByName(name, url) {
         if (!url) url = window.location.href;
