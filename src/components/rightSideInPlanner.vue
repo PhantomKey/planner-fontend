@@ -25,7 +25,7 @@
       height="100%"
     >
       <q-carousel-slide name="details" class="column no-wrap flex-center">
-        <div class="q-mt-md" style="height:100%;width:100%">
+        <div class="q-mt-md" style="height:100%;width:100%;padding-top:0px;margin-top:0px">
           <result style="height:100%"/>
         </div>
       </q-carousel-slide>
