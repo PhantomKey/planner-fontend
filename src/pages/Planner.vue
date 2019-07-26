@@ -9,6 +9,7 @@
           </div>
           <div class="col-sm-8" style="background-color: white;">
             <div v-if="SpecificActivityRightSide" style="height:100%;">
+              <specificactivity :activityID="activityID" style="height:50%"></specificactivity>
               <q-btn
                 round
                 color="primary"
@@ -44,6 +45,7 @@ import Schedule from '../components/Schedule.vue'
 import CreateActivity from '../components/CreateActivity.vue'
 import CreateService from '../components/CreateService.vue'
 import rightSideInPlanner from "../components/rightSideInPlanner.vue"
+import SpecificActivity from "../components/SpecificActivity.vue"
 
 export default {
   name: 'Planner',
@@ -53,6 +55,7 @@ export default {
     'createactivity':CreateActivity,
     'create-service':CreateService,
     'rightSideInPlanner':rightSideInPlanner,
+    'specificactivity' : SpecificActivity
   },
   checkplannerbeforecreate: false,
   loadingfinishbeforecreate: false,
@@ -65,7 +68,7 @@ export default {
             refreshToken: 1,
             SpecificActivityRightSide: false,
             uniqDate: null,
-            activityID:null
+            activityID: null
           }
   },
   beforeMount(){
