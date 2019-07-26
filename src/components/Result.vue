@@ -42,11 +42,16 @@
             </q-card-section>
             <q-card-section>
                 <div class="q-pa-md row items-start q-gutter-md">
-                    <div v-for="member in result" :key="member[0]">
-                        <q-card v-if="member.length == 6" >
+                    <div v-for="member in memberlist" :key="member[0]" style="width:30%;padding:0px">
+                        <q-card v-if="member.length == 7">
                             <q-item>
                                 <q-item-section avatar>
-                                    <q-avatar color="primary" text-color="white" class="text-uppercase">{{member[1][1]}}</q-avatar>
+                                    <q-avatar color="primary" text-color="white" class="text-uppercase">{{member[1][0]}}</q-avatar>
+                                </q-item-section>
+                                <q-item-section>
+                                    <q-item-label class="text-capitalize">{{ member[1] }}  {{ member[2] }}</q-item-label>
+                                    <q-item-label caption lines="1" v-if="member[3] == 'M'"><span class="text-weight-bold">Gender:</span> Male  </q-item-label>
+                                    <q-item-label caption lines="1" v-if="member[3] == 'F'"><span class="text-weight-bold">Gender:</span> Female  </q-item-label>
                                 </q-item-section>
                             </q-item>
                         </q-card>
@@ -79,13 +84,16 @@ export default{
     data(){
         return{
             result:null,
-            planner_name:null
+            planner_name:null,
+            memberlist:null
         }
     },
     created:function(){
         this.getResult().then(data=>{
             this.result = data
             this.planner_name = this.result[0].planner_name
+            this.memberlist = JSON.parse(JSON.stringify(this.result))
+            delete this.memberlist[0]
         })
 
     },
@@ -99,6 +107,7 @@ export default{
             .then((request) => data = request['data']['data'])
             .catch((err) => console.log(err))
             console.log(data)
+            console.log(data[1])
             return data
         },
         getParameterByName(name, url) {
