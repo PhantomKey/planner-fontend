@@ -1,7 +1,7 @@
 <template>
     <q-scroll-area v-if="result">
         <div class="q-pa-md  items-start q-gutter-md">
-        <q-card flat style="width:60%;max-width:60%;height:auto">
+        <q-card flat style="width:60%;max-width:60%;height:auto;">
             <q-item style="padding-top:0px">
                 <q-item-section>
                     <q-item-label>
@@ -19,13 +19,16 @@
                 </q-item-section>
             </q-item>
         </q-card>
-        <q-card flat style="width:60%">
+        <q-card flat style="background: linear-gradient(90deg, rgba(255,230,230,1) 0%, rgba(255,255,255,1) 100%);width:70%">
             <q-card-section style="padding-left:6px">
-            <q-item style="padding-left:0px">
-                <q-item-section avatar>
-                    <q-icon name="attach_money" size="3rem"></q-icon>
-                </q-item-section>
+            <q-item style="padding-left:0px;">
                 <q-item-section>
+                     <div class="text-h4" style="display:inline-block;padding-left:8px">TOTAL PRICE IN TRIP :</div>
+                </q-item-section>
+                <q-item-section avatar style="padding-left:0px">
+                    <q-avatar size="4rem">฿</q-avatar>
+                </q-item-section>
+                <q-item-section style="max-width:100px">
                      <div class="text-h4" style="display:inline-block">{{this.result[0].allprice}}</div>
                 </q-item-section>
             </q-item>
@@ -42,11 +45,12 @@
             </q-card-section>
             <q-card-section>
                 <div class="q-pa-md row items-start q-gutter-md">
-                    <div v-for="member in memberlist" :key="member[0]" style="width:30%;padding:0px">
+                    <div v-for="member in memberlist" :key="member[0]" style="width:45%;padding:0px">
                         <q-card v-if="member.length == 7">
-                            <q-item>
+                            <q-item style="background: linear-gradient(140deg, rgba(255,230,230,1) 0%, rgba(255,194,192,1) 100%);">
                                 <q-item-section avatar>
-                                    <q-avatar color="primary" text-color="white" class="text-uppercase">{{member[1][0]}}</q-avatar>
+                                    <q-avatar color="grey-4" text-color="black-2" class="text-uppercase" v-if="member[4] == true">{{member[1][0]}}</q-avatar>
+                                    <q-avatar color="primary" text-color="white" class="text-uppercase" v-if="member[4] == false">{{member[1][0]}}</q-avatar>
                                 </q-item-section>
                                 <q-item-section>
                                     <q-item-label class="text-capitalize">{{ member[1] }}  {{ member[2] }}</q-item-label>
@@ -54,26 +58,15 @@
                                     <q-item-label caption lines="1" v-if="member[3] == 'F'"><span class="text-weight-bold">Gender:</span> Female  </q-item-label>
                                 </q-item-section>
                             </q-item>
+                            <q-item>
+                                <q-item-section>
+                                    <div class="text-body2">Total price in trip: {{member[5]}} ฿</div>
+                                </q-item-section>
+                            </q-item>
                         </q-card>
                     </div>
                 </div>
             </q-card-section>
-        </q-card>
-        <q-card class="my-card">
-            <q-item>
-                <q-item-section avatar>
-                <q-avatar>
-                    <img src="https://cdn.quasar.dev/img/avatar2.jpg">
-                </q-avatar>
-                </q-item-section>
-
-                <q-item-section>
-                <q-item-label>Title</q-item-label>
-                <q-item-label caption>Subhead</q-item-label>
-                </q-item-section>
-            </q-item>
-
-            <img src="https://cdn.quasar.dev/img/parallax2.jpg">
         </q-card>
         </div>
     </q-scroll-area>
