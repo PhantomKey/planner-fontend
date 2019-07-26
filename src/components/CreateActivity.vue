@@ -226,7 +226,8 @@ export default{
             textColor: 'black',
             timeout: 3000,
             position: 'top-right',
-            icon: 'check_circle'
+            icon: 'check_circle',
+            actions: [{label:'Dismiss',color:'black'}]
           })
           this.createActivityPopup = false
           this.emitToPlanner()
@@ -242,7 +243,8 @@ export default{
           textColor: 'white',
           timeout: 3000,
           position: 'top-right',
-          icon: 'error'
+          icon: 'error',
+          actions: [{label:'Dismiss',color:'white'}]
         })
       },
       AddActivityFailedwithoutPOST(err){
@@ -252,7 +254,8 @@ export default{
           textColor: 'white',
           timeout: 3000,
           position: 'top-right',
-          icon: 'error'
+          icon: 'error',
+          actions: [{label:'Dismiss',color:'white'}]
         })
       },
       handlelocationAdd(val) {

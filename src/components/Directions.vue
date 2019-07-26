@@ -86,7 +86,8 @@ export default {
               textColor: 'white',
               timeout: 3000,
               position: 'top-right',
-              icon: 'check_circle_outline'
+              icon: 'check_circle_outline',
+              actions: [{label:'Dismiss',color:'white'}]
             })
           }
           else {

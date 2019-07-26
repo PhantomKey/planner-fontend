@@ -138,7 +138,8 @@ export default {
             textColor: 'white',
             timeout: 3000,
             position: 'top-right',
-            icon: 'error'
+            icon: 'error',
+            actions: [{label:'Dismiss',color:'white'}]
           })
           }else{
             if(this.searchf ===''){

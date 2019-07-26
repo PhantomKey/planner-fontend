@@ -69,7 +69,8 @@ export default{
         textColor: 'black',
         timeout: 3000,
         position: 'top-right',
-        icon: 'check_circle'
+        icon: 'check_circle',
+        actions: [{label:'Dismiss',color:'black'}]
       })
     },
     loginFailed (err) {
@@ -80,7 +81,8 @@ export default{
         textColor: 'white',
         timeout: 3000,
         position: 'top-right',
-        icon: 'error'
+        icon: 'error',
+        actions: [{label:'Dismiss',color:'white'}]
       })
       delete localStorage.token
     },
