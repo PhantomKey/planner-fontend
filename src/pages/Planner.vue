@@ -9,13 +9,13 @@
           </div>
           <div class="col-sm-8" style="background-color: white;">
             <div v-if="SpecificActivityRightSide" style="height:100%;">
-              <specificactivity :activityID="activityID" style="height:50%"></specificactivity>
+              <specificactivity :activityID="activityID" :activityname="activityname" style="height:100%"></specificactivity>
               <q-btn
                 round
                 color="primary"
                 :size="'md'"
                 :icon="'arrow_back'"
-                style="position:absolute;bottom:50%;margin-left:10px;z-index:11"
+                style="position:absolute;bottom:50%;margin-left:1px;z-index:11"
                 @click="closeActivityRightSide"
               />
               <create-service :activityID="activityID"></create-service>
@@ -68,7 +68,8 @@ export default {
             refreshToken: 1,
             SpecificActivityRightSide: false,
             uniqDate: null,
-            activityID: null
+            activityID: null,
+            activityname: null
           }
   },
   beforeMount(){

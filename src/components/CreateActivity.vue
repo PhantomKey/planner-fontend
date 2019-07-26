@@ -6,7 +6,7 @@
         style="left:22%;bottom:13%;position:absolute"
         @click="createActivityPopup = true">
         </q-btn>
-        <q-dialog v-model="createActivityPopup">
+        <q-dialog v-model="createActivityPopup" @keyup.enter="clickAddActivity">
             <q-card dense flat style="width:45%;max-width:45%;height:80%;max-height:80%">
               <q-card-section class="row justify-center">
                   <div class="text-h5" style="margin:0 auto;font-size:25px;">CREATE NEW ACTIVITY</div>
@@ -72,7 +72,7 @@
                 <q-card-section style="text-align:right;padding-top:50px;right:0px;bottom:0px;margin-right:15px;position:absolute">
                   <div class="q-gutter-sm">
                     <q-btn v-close-popup label="Cancel" flat color="primary" style="text-align:right;" @click="resetData()"></q-btn>
-                    <q-btn color="primary" label="Create" style="text-align:right" @click="clickAddActivity();showLoading()"></q-btn>
+                    <q-btn color="primary" label="Create" style="text-align:right" @click="clickAddActivity()"></q-btn>
                   </div>
                 </q-card-section>
             </q-card>
@@ -216,7 +216,7 @@ export default{
         .then((request) => this.AddActivitySuccessfulwithPOST(request))
         .catch((err) => this.AddActivityFailedwithoutPOST(err))
         },2000)
-
+        this.showLoading()
       },
       AddActivitySuccessfulwithPOST(req){
         if (req.data.code === 201) {

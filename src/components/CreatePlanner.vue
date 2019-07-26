@@ -18,7 +18,7 @@
                 >
                   <q-step
                   :name="1"
-                  title="Create Activity"
+                  title="Create Planner"
                   icon="local_activity"
                   :done="done1"
                   style="min-height: 485px;max-height:485px"
@@ -67,7 +67,7 @@
                   <q-stepper-navigation style="padding-top:0px" v-if="step === 2">
                     <div class="q-gutter-sm">
                       <q-btn flat @click="step = 1" color="primary" label="Back" class="q-ml-sm" />
-                      <q-btn color="primary" class="no-shadow" label="Create" style="text-align:right" @click="sentdata();showLoading()"></q-btn>
+                      <q-btn color="primary" class="no-shadow" label="Create" style="text-align:right" @click="sentdata()"></q-btn>
                     </div>
                   </q-stepper-navigation>
                 </q-card-section>
@@ -137,7 +137,7 @@ export default{
           .catch((err) => this.AddPlannerFailedwithoutPOST(err))
       }
       },2000)
-     
+      this.showLoading()
     },
     AddPlannerSuccessfulwithPOST (req) {
       if (req.data.code === 201) {
