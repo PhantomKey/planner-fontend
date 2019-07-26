@@ -1,10 +1,12 @@
 <template>
-    <q-scroll-area>
+    <q-scroll-area v-if="result">
         <div class="q-pa-md row items-start q-gutter-md">
         <q-card flat>
             <q-item>
                 <q-item-section>
-                    <div class="text-h4">{{this.result[-1].name}}</div>
+                    <div class="text-h4">
+                      {{this.planner_name}}
+                    </div>
                 </q-item-section>
             </q-item>
         </q-card>
@@ -55,14 +57,16 @@
 export default{
     data(){
         return{
-            result:null
+            result:null,
+            planner_name:null
         }
     },
-    mounted:function(){
+    created:function(){
         this.getResult().then(data=>{
             this.result = data
+            this.planner_name = this.result[0].planner_name
         })
-       
+
     },
     methods:{
         async getResult(){
@@ -86,7 +90,7 @@ export default{
       return decodeURIComponent(results[2].replace(/\+/g, ' '));
       },
     },
-    
+
 }
 </script>
 
