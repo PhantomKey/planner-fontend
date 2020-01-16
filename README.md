@@ -1,3 +1,3 @@
 # Quasar App
 
-> WIP
+This is the frontend of the planner application.
